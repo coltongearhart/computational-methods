@@ -1,0 +1,11 @@
+# Project {#sec-project}
+
+```{r}
+#| label: load-prereqs
+#| echo: false
+#| message: false
+
+# knitr options
+source("_common.R")
+
+```

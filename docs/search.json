@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "course-notes.html",
+    "href": "course-notes.html",
+    "title": "Course Notes",
+    "section": "",
+    "text": "This section contains the notes from the course.",
+    "crumbs": [
+      "Course Notes"
+    ]
+  },
+  {
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "This section contains the assignments from the course.",
+    "crumbs": [
+      "Assignments"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Methods in R",
+    "section": "",
+    "text": "Overview\n&lt; insert table with links to each chapters and brief descriptions from the schedule &gt;\n\n\n\n\n\n\nQuarto blog publish details\n\n\n\nThis book was created using Quarto and published with Github Pages.\n\n\n\n\n\n\n\n\nGithub repository for code\n\n\n\nYou can find the code to reproduce this project at coltongearhart/climate-dataviz.",
+    "crumbs": [
+      "Overview"
+    ]
+  }
+]

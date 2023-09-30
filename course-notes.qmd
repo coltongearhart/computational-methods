@@ -1,0 +1,3 @@
+# Course Notes {#sec-course-notes .unnumbered}
+
+This section contains the notes from the course.

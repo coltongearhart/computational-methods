@@ -1,0 +1,12 @@
+# Beyond Dataframes {#sec-beyond-dataframes}
+
+```{r}
+#| label: load-prereqs
+#| echo: false
+#| message: false
+
+# knitr options
+source("_common.R")
+
+```
+

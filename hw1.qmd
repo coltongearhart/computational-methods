@@ -1,0 +1,11 @@
+# Homework 1 {#sec-hw1}
+
+```{r}
+#| label: load-prereqs
+#| echo: false
+#| message: false
+
+# knitr options
+source("_common.R")
+
+```

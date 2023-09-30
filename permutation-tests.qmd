@@ -1,0 +1,12 @@
+# Permutation Tests 1 {#sec-permutation-tests}
+
+```{r}
+#| label: load-prereqs
+#| echo: false
+#| message: false
+
+# knitr options
+source("_common.R")
+
+```
+

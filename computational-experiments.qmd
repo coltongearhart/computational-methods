@@ -1,0 +1,12 @@
+# Computational Experiments {#sec-computational-experiments}
+
+```{r}
+#| label: load-prereqs
+#| echo: false
+#| message: false
+
+# knitr options
+source("_common.R")
+
+```
+

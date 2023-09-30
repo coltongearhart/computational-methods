@@ -1,0 +1,12 @@
+# Using naandd Building Functions 1 {#sec-using-and-building-functions}
+
+```{r}
+#| label: load-prereqs
+#| echo: false
+#| message: false
+
+# knitr options
+source("_common.R")
+
+```
+
