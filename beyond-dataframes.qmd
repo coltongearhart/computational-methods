@@ -231,16 +231,16 @@ as.vector(my_matrix)
 # build an array here
 vec_to_array <- 1:30
 
- # to convert the vector into an array: R went down the columns, across the rows, and then onto different layers
+# to convert the vector into an array: R went down the columns, across the rows, and then onto different layers
 dim(vec_to_array) <- c(3,5,2)
 vec_to_array
 
 # we can pull off a value by using bracket indexing
 vec_to_array[1,3,2]
 
-# this can be very useful when the layers have characteristics (e.g. for simulations)
-
 ```
+
+This can be very useful when the layers have characteristics (e.g. for simulations).
 
 Why is this helpful? Suppose we are collecting the resulting values for simulating $n = 100$ observations, from normals with means in $\{-3,0,3\}$ and standard deviations in $\{2,10\}$
 

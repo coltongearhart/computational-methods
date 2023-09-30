@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assignments.html" rel="next">
+<link href="./using-and-building-functions.html" rel="next">
 <link href="./course-notes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -161,6 +161,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Beyond Dataframes</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./using-and-building-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using and Building Functions</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -175,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -455,11 +461,11 @@ mean of x
 <ul>
 <li>An array allows us to add an indexing structure (so we can subset these with square brackets), also allows sorting.</li>
 </ul>
-<div class="cell" data-hash="beyond-dataframes_cache/html/array_example_1abf199c78f0c1f53d85cc29c74f8737">
+<div class="cell" data-hash="beyond-dataframes_cache/html/array_example_4617bcbb1cc3f9bb54b1af99e1146b5d">
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build an array here</span></span>
 <span><span class="va">vec_to_array</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">30</span></span>
 <span></span>
-<span> <span class="co"># to convert the vector into an array: R went down the columns, across the rows, and then onto different layers</span></span>
+<span><span class="co"># to convert the vector into an array: R went down the columns, across the rows, and then onto different layers</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">vec_to_array</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">vec_to_array</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -482,14 +488,14 @@ mean of x
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22</code></pre>
 </div>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># this can be very useful when the layers have characteristics (e.g. for simulations)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>This can be very useful when the layers have characteristics (e.g.&nbsp;for simulations).</p>
 <p>Why is this helpful? Suppose we are collecting the resulting values for simulating <span class="math inline">\(n = 100\)</span> observations, from normals with means in <span class="math inline">\(\{-3,0,3\}\)</span> and standard deviations in <span class="math inline">\(\{2,10\}\)</span></p>
 <p>Use an array to store the observation index in the first dimension, the means in the second dimension, and standard deviations in the third dimension. Thus we create a 100 by 3 by 2 array to store the data. This allows us to easily access the data we want using the indexing.</p>
-<div class="cell" data-hash="beyond-dataframes_cache/html/simulation_array_b9356b51aacedfb77cc61776725450e3">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initialize simulation settings</span></span>
+<div class="cell" data-hash="beyond-dataframes_cache/html/simulation_array_4ee2fe9517f4f5e3d1dc440f16081876">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initialize simulation settings</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
-<span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>,<span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">sds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># initialize an empty array</span></span>
@@ -504,20 +510,43 @@ mean of x
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># explore values from second mean and second sd N(0,10)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sim_data_array</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , 1
+
+           [,1]       [,2]      [,3]
+[1,]  -8.828942 -2.8722914 11.255930
+[2,]  -8.581068 -1.2585193 10.004288
+[3,] -10.218607  0.4870435 10.568755
+[4,] -10.906994  2.1167245  7.996442
+[5,]  -8.788225  1.6626976  8.765556
+[6,] -13.635912  0.2104236 11.656388
+
+, , 2
+
+           [,1]       [,2]        [,3]
+[1,]  -7.760746  5.2228217  -4.2032386
+[2,] -21.562233  0.0979376 -14.6693865
+[3,]  -5.775815 -4.4052620  14.8471584
+[4,] -23.247553 11.9948953   0.6202769
+[5,]  -8.589157 -1.1746849  43.3073331
+[6,] -15.360480  0.3820979   8.3705454</code></pre>
+</div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># explore values from second mean and second sd N(0,10)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">sim_data_array</span><span class="op">[</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 -25.819  -3.191   3.466   2.153   6.968  22.679 </code></pre>
 </div>
 </div>
-<p>We can set up an array that is matches our simulation structure so that we can compactly store the results. Arrays like this are very efficient.</p>
-<p>Kinda have to think about how assigning, and the values in the array in order to understand where the results go. Probably wouldn’t want to go more than 3 (maybe 4?) dimensions.</p>
+<p>We can set up an array that matches our simulation structure so that we can compactly store the results to the right locations. Results can be organized like subscripts in mathematical notation. For example, if rows <span class="math inline">\(i = 1, \ldots, 100\)</span>, columns <span class="math inline">\(\mu = (mu_1, \mu_2, \mu_3)\)</span> and layers <span class="math inline">\(\sigma = (\sigma_1, \sigma_2)\)</span>, we can have observation <span class="math inline">\(x_{i,j,k}\)</span> that is the<span class="math inline">\(i\)</span>th iteration from mean <span class="math inline">\(\mu_j\)</span> and standard deviation <span class="math inline">\(\sigma_k\)</span>. This aligns what we are computing (/ how the results are stored) to how we assign the parameter.</p>
+<p>Arrays like this are very efficient (because the index structure is very fast in terms of extracting the numbers). Probably wouldn’t want to go more than 3 (maybe 4?) dimensions. Lists are then more readable (less abstract that 10-dimensional hypercube), user friendly ways to store high dimensional data, which can also be indexed easily.</p>
 </section><section id="lists" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="lists">
 <span class="header-section-number">1.4.2</span> Lists</h3>
 <p>A <strong>list</strong> in R is an <em>indexed</em> set of other R objects that can be <em>named</em>. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.</p>
+<p>These are great for storing results that are contextually related to each other. Examples include results from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> objects.</p>
 <div class="cell" data-hash="beyond-dataframes_cache/html/list_example1_3b067c2573c5b9177c24fb2a82c5c432">
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build a list with several different object types</span></span>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build a list with several different object types</span></span>
 <span><span class="va">my_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  num_vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,</span>
 <span>  letters <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,</span>
@@ -536,29 +565,33 @@ mean of x
   ..$ y: num [1:5] -1.637 0.212 -0.465 -0.662 -0.133
  $ my_array: int [1:3, 1:2, 1:2] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
 </div>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># demonstrate indexing</span></span>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># demonstrate indexing</span></span>
 <span><span class="va">my_list</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Hi Mom!"</code></pre>
 </div>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  2  4  6  8 10</code></pre>
 </div>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span> ,<span class="fl">2</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span> ,<span class="fl">2</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.6366291  0.2115626 -0.4648317 -0.6623572 -0.1329536</code></pre>
 </div>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># demonstrate nested naming</span></span>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># demonstrate nested naming</span></span>
 <span><span class="va">my_list</span><span class="op">$</span><span class="va">hi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Hi Mom!"</code></pre>
 </div>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list</span><span class="op">$</span><span class="va">my_df</span><span class="op">$</span><span class="va">y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list</span><span class="op">$</span><span class="va">my_df</span><span class="op">$</span><span class="va">y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.6366291  0.2115626 -0.4648317 -0.6623572 -0.1329536</code></pre>
 </div>
 </div>
+<p>Accessing items in the list naming convention:</p>
+<ul>
+<li>For the top layer qualitative information, use <code>list$name</code> notation, then switch to <code>list$name[[index]]</code> for quantitative information that is maybe performed iteritively, like an index.</li>
+</ul>
 
 
 <!-- -->
@@ -963,315 +996,323 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./assignments.html" class="pagination-link">
-        <span class="nav-page-text">Assignments</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./using-and-building-functions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using and Building Functions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb59" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Beyond Dataframes {#sec-beyond-dataframes}</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview </span></span>
-<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>In this mini courese we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. </span>
-<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>Readings come from the <span class="co">[</span><span class="ot">Advanced R</span><span class="co">](https://adv-r.hadley.nz/)</span> textbook by Hadley Wickham.</span>
-<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;``To understand computations in R, two slogans are helpful: Everything that exists is an object. Everything that happens is a function call.''</span></span>
-<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="at">  — John Chambers</span></span>
-<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a>You already know the basics from your previous coursework. Here we will briefly discuss the following:</span>
-<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Documenting Code</span>
-<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Naming objects, functions, variables</span>
-<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Descriptive comments</span>
-<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Structural organization</span>
-<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Objects</span>
-<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-34"><a href="#cb59-34" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Vectors, atomic types, attributes</span>
-<span id="cb59-35"><a href="#cb59-35" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Dataframes</span>
-<span id="cb59-36"><a href="#cb59-36" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Matrices</span>
-<span id="cb59-37"><a href="#cb59-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb59-38"><a href="#cb59-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Functions</span>
-<span id="cb59-39"><a href="#cb59-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb59-40"><a href="#cb59-40" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Using existing functions</span>
-<span id="cb59-41"><a href="#cb59-41" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Finding and reading help documentation</span>
-<span id="cb59-42"><a href="#cb59-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-43"><a href="#cb59-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Coding in R - Documenting with Quarto </span></span>
-<span id="cb59-44"><a href="#cb59-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-45"><a href="#cb59-45" aria-hidden="true" tabindex="-1"></a>In this mini-course, we will be coding and programming using the **R** language. We will be leveraging the benefits of the open source structure of R by using some of the excellent software packages developed by members of the R community. We will also be exploring the efficient data structures and functions available in Base R. We will be interacting with the R language using the **R Studio** Interactive Development Environment (IDE).</span>
-<span id="cb59-46"><a href="#cb59-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-47"><a href="#cb59-47" aria-hidden="true" tabindex="-1"></a>We will be using **Quarto** to document our work because it is capable of integrating the process of writing in both programming and natural languages. It is great to be able to transition back and forth between paragraphs expressing what we are trying to accomplish statistically  to the computational evidence to support our results.  Each course notes will be put together as a Quarto document.</span>
-<span id="cb59-48"><a href="#cb59-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-49"><a href="#cb59-49" aria-hidden="true" tabindex="-1"></a>Supplementary Resources for R Markdown: </span>
-<span id="cb59-50"><a href="#cb59-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-51"><a href="#cb59-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quarto Website</span><span class="co">](https://quarto.org/)</span></span>
-<span id="cb59-52"><a href="#cb59-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quarto computations in R</span><span class="co">](https://quarto.org/docs/computations/r.html)</span></span>
-<span id="cb59-53"><a href="#cb59-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R Markdown Reference Guide</span><span class="co">](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)</span></span>
-<span id="cb59-54"><a href="#cb59-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-55"><a href="#cb59-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## R Basics </span></span>
-<span id="cb59-56"><a href="#cb59-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-57"><a href="#cb59-57" aria-hidden="true" tabindex="-1"></a>Data structures</span>
-<span id="cb59-58"><a href="#cb59-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-59"><a href="#cb59-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Vectors are the atomic vectors of type: numeric, character, logical</span>
-<span id="cb59-60"><a href="#cb59-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-61"><a href="#cb59-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Essentially every data structure we use is one of these vectors, but with additional attributes or several vectors added together.</span>
-<span id="cb59-62"><a href="#cb59-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-63"><a href="#cb59-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A fundamental aspect of good computing is understanding how R saves the information.</span>
-<span id="cb59-64"><a href="#cb59-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-65"><a href="#cb59-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We can also concatenate vectors of different types. However, atomic vectors cannot contain more than one type of data, so it coerces values into a easier way.</span>
-<span id="cb59-66"><a href="#cb59-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-67"><a href="#cb59-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We are starting to think about these vector / dataframes. A vector is a one dimensional, matrix is two dimensions, arrays are three dimensional.</span>
-<span id="cb59-68"><a href="#cb59-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-69"><a href="#cb59-69" aria-hidden="true" tabindex="-1"></a>Example below for demonstrating different aspects of R such as packages, objects, functions, etc. and for improving code readability.</span>
-<span id="cb59-70"><a href="#cb59-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-71"><a href="#cb59-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The assignment arrow is pronounced "gets", so the name gets the thing on the right.</span>
-<span id="cb59-72"><a href="#cb59-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-75"><a href="#cb59-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-76"><a href="#cb59-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ugly-code</span></span>
-<span id="cb59-77"><a href="#cb59-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
-<span id="cb59-78"><a href="#cb59-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-79"><a href="#cb59-79" aria-hidden="true" tabindex="-1"></a><span class="co"># poor formatting makes cord hard to read </span></span>
-<span id="cb59-80"><a href="#cb59-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb59-81"><a href="#cb59-81" aria-hidden="true" tabindex="-1"></a>realestate<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
-<span id="cb59-82"><a href="#cb59-82" aria-hidden="true" tabindex="-1"></a>price_means<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>);price_medians<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>)</span>
-<span id="cb59-83"><a href="#cb59-83" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="ot">&lt;-</span><span class="fu">sample_n</span>(realestate  ,<span class="fu">nrow</span>(realestate)  ,T)</span>
-<span id="cb59-84"><a href="#cb59-84" aria-hidden="true" tabindex="-1"></a>price_means[b]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price   )</span>
-<span id="cb59-85"><a href="#cb59-85" aria-hidden="true" tabindex="-1"></a>price_medians[b]<span class="ot">&lt;-</span><span class="fu">median</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price    )}</span>
-<span id="cb59-86"><a href="#cb59-86" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">quantile</span>(price_medians   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
-<span id="cb59-87"><a href="#cb59-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-88"><a href="#cb59-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-89"><a href="#cb59-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-90"><a href="#cb59-90" aria-hidden="true" tabindex="-1"></a>Reformat R scripts</span>
-<span id="cb59-91"><a href="#cb59-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-92"><a href="#cb59-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use the following shortcuts in RStudio to reformat your code in the qmd file:</span>
-<span id="cb59-93"><a href="#cb59-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-94"><a href="#cb59-94" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`Cmd + I`</span>: Fixes line indentations.</span>
-<span id="cb59-95"><a href="#cb59-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-96"><a href="#cb59-96" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`Cmd + Shift + A`</span>: Does a complete reformat of the selected part of a code.</span>
-<span id="cb59-97"><a href="#cb59-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-100"><a href="#cb59-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-101"><a href="#cb59-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: less-ugly-code</span></span>
-<span id="cb59-102"><a href="#cb59-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
-<span id="cb59-103"><a href="#cb59-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-104"><a href="#cb59-104" aria-hidden="true" tabindex="-1"></a><span class="co"># use keyboard shortcut for quick fixes</span></span>
-<span id="cb59-105"><a href="#cb59-105" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb59-106"><a href="#cb59-106" aria-hidden="true" tabindex="-1"></a>realestate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>); price_means <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>   , <span class="dv">1000</span>)</span>
-<span id="cb59-107"><a href="#cb59-107" aria-hidden="true" tabindex="-1"></a>price_medians <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>   , <span class="dv">1000</span>)</span>
-<span id="cb59-108"><a href="#cb59-108" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
-<span id="cb59-109"><a href="#cb59-109" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(realestate  , <span class="fu">nrow</span>(realestate)  , T)</span>
-<span id="cb59-110"><a href="#cb59-110" aria-hidden="true" tabindex="-1"></a>  price_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price)</span>
-<span id="cb59-111"><a href="#cb59-111" aria-hidden="true" tabindex="-1"></a>  price_medians[b] <span class="ot">&lt;-</span> <span class="fu">median</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price)</span>
-<span id="cb59-112"><a href="#cb59-112" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb59-113"><a href="#cb59-113" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means   , <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
-<span id="cb59-114"><a href="#cb59-114" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_medians   , <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
-<span id="cb59-115"><a href="#cb59-115" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
-<span id="cb59-116"><a href="#cb59-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-117"><a href="#cb59-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-118"><a href="#cb59-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-119"><a href="#cb59-119" aria-hidden="true" tabindex="-1"></a>Use automated code parsing and then copy result into qmd file.</span>
-<span id="cb59-120"><a href="#cb59-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-121"><a href="#cb59-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use <span class="in">`knitr`</span> chunk options with <span class="in">`formatR`</span> installed: <span class="in">`tidy: formatR`</span>. This parses the code with <span class="in">`tidy_source()`</span> behind the scenes.</span>
-<span id="cb59-122"><a href="#cb59-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-123"><a href="#cb59-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Can specify additional options with <span class="in">`#| tidy-opts: #|   -`</span>. View available ones in the help documentation <span class="in">`?tidy_source`</span> or <span class="co">[</span><span class="ot">this r markdown cookbook section</span><span class="co">](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html)</span>.</span>
-<span id="cb59-124"><a href="#cb59-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-127"><a href="#cb59-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-128"><a href="#cb59-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: automated-code-parse</span></span>
-<span id="cb59-129"><a href="#cb59-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
-<span id="cb59-130"><a href="#cb59-130" aria-hidden="true" tabindex="-1"></a><span class="co">#| tidy: formatR</span></span>
-<span id="cb59-131"><a href="#cb59-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-132"><a href="#cb59-132" aria-hidden="true" tabindex="-1"></a><span class="co"># automated code parsing</span></span>
-<span id="cb59-133"><a href="#cb59-133" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; this has the same source as the first ugly code, but echos nicely</span></span>
-<span id="cb59-134"><a href="#cb59-134" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb59-135"><a href="#cb59-135" aria-hidden="true" tabindex="-1"></a>realestate<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
-<span id="cb59-136"><a href="#cb59-136" aria-hidden="true" tabindex="-1"></a>price_means<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>);price_medians<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>)</span>
-<span id="cb59-137"><a href="#cb59-137" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="ot">&lt;-</span><span class="fu">sample_n</span>(realestate  ,<span class="fu">nrow</span>(realestate)  ,T)</span>
-<span id="cb59-138"><a href="#cb59-138" aria-hidden="true" tabindex="-1"></a>price_means[b]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price   )</span>
-<span id="cb59-139"><a href="#cb59-139" aria-hidden="true" tabindex="-1"></a>price_medians[b]<span class="ot">&lt;-</span><span class="fu">median</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price    )}</span>
-<span id="cb59-140"><a href="#cb59-140" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">quantile</span>(price_medians   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
-<span id="cb59-141"><a href="#cb59-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-142"><a href="#cb59-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-143"><a href="#cb59-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-144"><a href="#cb59-144" aria-hidden="true" tabindex="-1"></a>Rebuilding code for readability (with comments)</span>
-<span id="cb59-145"><a href="#cb59-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-148"><a href="#cb59-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-149"><a href="#cb59-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: readable-code</span></span>
-<span id="cb59-150"><a href="#cb59-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-151"><a href="#cb59-151" aria-hidden="true" tabindex="-1"></a><span class="co"># now we can add comments and space out the code for better readability</span></span>
-<span id="cb59-152"><a href="#cb59-152" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb59-153"><a href="#cb59-153" aria-hidden="true" tabindex="-1"></a>realestate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
-<span id="cb59-154"><a href="#cb59-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-155"><a href="#cb59-155" aria-hidden="true" tabindex="-1"></a><span class="co"># initializing the storage space for the bootstrap means and medians</span></span>
-<span id="cb59-156"><a href="#cb59-156" aria-hidden="true" tabindex="-1"></a>price_means <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb59-157"><a href="#cb59-157" aria-hidden="true" tabindex="-1"></a>price_medians <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb59-158"><a href="#cb59-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-159"><a href="#cb59-159" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over 1000 repeated bootstrap samples, saving the means and medians</span></span>
-<span id="cb59-160"><a href="#cb59-160" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
-<span id="cb59-161"><a href="#cb59-161" aria-hidden="true" tabindex="-1"></a>  bootstrap_sample <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(realestate, <span class="fu">nrow</span>(realestate), T)</span>
-<span id="cb59-162"><a href="#cb59-162" aria-hidden="true" tabindex="-1"></a>  price_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(bootstrap_sample<span class="sc">$</span>price)</span>
-<span id="cb59-163"><a href="#cb59-163" aria-hidden="true" tabindex="-1"></a>  price_medians[b] <span class="ot">&lt;-</span> <span class="fu">median</span>(bootstrap_sample<span class="sc">$</span>price)</span>
-<span id="cb59-164"><a href="#cb59-164" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb59-165"><a href="#cb59-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-166"><a href="#cb59-166" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the quantiles of the collected means and medians</span></span>
-<span id="cb59-167"><a href="#cb59-167" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
-<span id="cb59-168"><a href="#cb59-168" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_medians, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
-<span id="cb59-169"><a href="#cb59-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-170"><a href="#cb59-170" aria-hidden="true" tabindex="-1"></a><span class="co"># do these intervals match will with confidence intervals using central limit theorem?</span></span>
-<span id="cb59-171"><a href="#cb59-171" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; compare interval to t-interval</span></span>
-<span id="cb59-172"><a href="#cb59-172" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
-<span id="cb59-173"><a href="#cb59-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-174"><a href="#cb59-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-175"><a href="#cb59-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-176"><a href="#cb59-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advanced Programming</span></span>
-<span id="cb59-177"><a href="#cb59-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-178"><a href="#cb59-178" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;``We are adventurers! We do not play on the playgrounds. We roam in the jungles!''</span></span>
-<span id="cb59-179"><a href="#cb59-179" aria-hidden="true" tabindex="-1"></a><span class="at">  — Jie Li (Dr. Maurer's Grad Classmate)</span></span>
-<span id="cb59-180"><a href="#cb59-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-181"><a href="#cb59-181" aria-hidden="true" tabindex="-1"></a>As we move through this mini-course, we will focus on challenging our programming skills with methods that require heavier statistical computation than typically used in our other courses. For this, we may need to use some more advanced types of objects in R, to use functions in more sophisticated ways and to build our own functions. This section will focus on more advanced data objects than vectors and data frames. </span>
-<span id="cb59-182"><a href="#cb59-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-183"><a href="#cb59-183" aria-hidden="true" tabindex="-1"></a>We will focus on two particularly helpful data structures:</span>
-<span id="cb59-184"><a href="#cb59-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-185"><a href="#cb59-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Arrays</span>
-<span id="cb59-186"><a href="#cb59-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-187"><a href="#cb59-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lists</span>
-<span id="cb59-188"><a href="#cb59-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-189"><a href="#cb59-189" aria-hidden="true" tabindex="-1"></a><span class="fu">### Arrays</span></span>
-<span id="cb59-190"><a href="#cb59-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-191"><a href="#cb59-191" aria-hidden="true" tabindex="-1"></a>Vectors don't have attributes, but we can add attributes that can change how the data is organized.</span>
-<span id="cb59-192"><a href="#cb59-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-193"><a href="#cb59-193" aria-hidden="true" tabindex="-1"></a>An **array** in R, is a vector for a  $p$-dimensional index set. This dimension attribute allows the vector to be searched and subsetted very efficiently. Technically we have already seen a 2-dimensional vector; an R matrix. Because an array is a special kind of vector, all values stored inside an array must be the same atomic type. </span>
-<span id="cb59-194"><a href="#cb59-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-195"><a href="#cb59-195" aria-hidden="true" tabindex="-1"></a>When doing computation things, if we are only guessing how R handles everything, we cannot leverage how R works to have more efficient code. Note that <span class="in">`str()`</span> is *structure*, not *string*.</span>
-<span id="cb59-196"><a href="#cb59-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-199"><a href="#cb59-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-200"><a href="#cb59-200" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: matrix_example</span></span>
-<span id="cb59-201"><a href="#cb59-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-202"><a href="#cb59-202" aria-hidden="true" tabindex="-1"></a><span class="co"># show that a matrix is a vector with dimension attributes</span></span>
-<span id="cb59-203"><a href="#cb59-203" aria-hidden="true" tabindex="-1"></a>some_values <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb59-204"><a href="#cb59-204" aria-hidden="true" tabindex="-1"></a>some_values</span>
-<span id="cb59-205"><a href="#cb59-205" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(some_values)</span>
-<span id="cb59-206"><a href="#cb59-206" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(some_values)</span>
-<span id="cb59-207"><a href="#cb59-207" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(some_values)</span>
-<span id="cb59-208"><a href="#cb59-208" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(some_values)</span>
-<span id="cb59-209"><a href="#cb59-209" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(some_values)</span>
-<span id="cb59-210"><a href="#cb59-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-211"><a href="#cb59-211" aria-hidden="true" tabindex="-1"></a><span class="co"># add attributes, turning this into a matrix</span></span>
-<span id="cb59-212"><a href="#cb59-212" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(some_values) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb59-213"><a href="#cb59-213" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(some_values)</span>
-<span id="cb59-214"><a href="#cb59-214" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(some_values)</span>
-<span id="cb59-215"><a href="#cb59-215" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(some_values)</span>
-<span id="cb59-216"><a href="#cb59-216" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(some_values)</span>
-<span id="cb59-217"><a href="#cb59-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-218"><a href="#cb59-218" aria-hidden="true" tabindex="-1"></a><span class="co"># we can define matrix with the matrix() function</span></span>
-<span id="cb59-219"><a href="#cb59-219" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(some_values, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb59-220"><a href="#cb59-220" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(my_matrix)</span>
-<span id="cb59-221"><a href="#cb59-221" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(my_matrix)</span>
-<span id="cb59-222"><a href="#cb59-222" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(my_matrix)</span>
-<span id="cb59-223"><a href="#cb59-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-224"><a href="#cb59-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-225"><a href="#cb59-225" aria-hidden="true" tabindex="-1"></a>Demonstrating Higher Dimensional Arrays:</span>
-<span id="cb59-226"><a href="#cb59-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-227"><a href="#cb59-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>When unpacking a matrix (i.e. converting it back to a vector), R goes down the columns rather than across the rows.</span>
-<span id="cb59-228"><a href="#cb59-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-231"><a href="#cb59-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-232"><a href="#cb59-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: matrix_example2</span></span>
-<span id="cb59-233"><a href="#cb59-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-234"><a href="#cb59-234" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack matrix</span></span>
-<span id="cb59-235"><a href="#cb59-235" aria-hidden="true" tabindex="-1"></a>my_matrix</span>
-<span id="cb59-236"><a href="#cb59-236" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>(my_matrix) </span>
-<span id="cb59-237"><a href="#cb59-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-238"><a href="#cb59-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-239"><a href="#cb59-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-240"><a href="#cb59-240" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An array allows us to add an indexing structure (so we can subset these with square brackets), also allows sorting.</span>
-<span id="cb59-241"><a href="#cb59-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-244"><a href="#cb59-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-245"><a href="#cb59-245" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: array_example</span></span>
-<span id="cb59-246"><a href="#cb59-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-247"><a href="#cb59-247" aria-hidden="true" tabindex="-1"></a><span class="co"># build an array here</span></span>
-<span id="cb59-248"><a href="#cb59-248" aria-hidden="true" tabindex="-1"></a>vec_to_array <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span></span>
-<span id="cb59-249"><a href="#cb59-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-250"><a href="#cb59-250" aria-hidden="true" tabindex="-1"></a> <span class="co"># to convert the vector into an array: R went down the columns, across the rows, and then onto different layers</span></span>
-<span id="cb59-251"><a href="#cb59-251" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vec_to_array) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>)</span>
-<span id="cb59-252"><a href="#cb59-252" aria-hidden="true" tabindex="-1"></a>vec_to_array</span>
-<span id="cb59-253"><a href="#cb59-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-254"><a href="#cb59-254" aria-hidden="true" tabindex="-1"></a><span class="co"># we can pull off a value by using bracket indexing</span></span>
-<span id="cb59-255"><a href="#cb59-255" aria-hidden="true" tabindex="-1"></a>vec_to_array[<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>]</span>
-<span id="cb59-256"><a href="#cb59-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-257"><a href="#cb59-257" aria-hidden="true" tabindex="-1"></a><span class="co"># this can be very useful when the layers have characteristics (e.g. for simulations)</span></span>
-<span id="cb59-258"><a href="#cb59-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-259"><a href="#cb59-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-260"><a href="#cb59-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-261"><a href="#cb59-261" aria-hidden="true" tabindex="-1"></a>Why is this helpful? Suppose we are collecting the resulting values for simulating $n = 100$ observations, from normals with means in $<span class="sc">\{</span>-3,0,3<span class="sc">\}</span>$ and standard deviations in $<span class="sc">\{</span>2,10<span class="sc">\}</span>$</span>
-<span id="cb59-262"><a href="#cb59-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-263"><a href="#cb59-263" aria-hidden="true" tabindex="-1"></a>Use an array to store the observation index in the first dimension, the means in the second dimension, and standard deviations in the third dimension. Thus we create a 100 by 3 by 2 array to store the data. This allows us to easily access the data we want using the indexing. </span>
-<span id="cb59-264"><a href="#cb59-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-267"><a href="#cb59-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-268"><a href="#cb59-268" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: simulation_array</span></span>
-<span id="cb59-269"><a href="#cb59-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-270"><a href="#cb59-270" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize simulation settings</span></span>
-<span id="cb59-271"><a href="#cb59-271" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb59-272"><a href="#cb59-272" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">3</span>)</span>
-<span id="cb59-273"><a href="#cb59-273" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">10</span>)</span>
-<span id="cb59-274"><a href="#cb59-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-275"><a href="#cb59-275" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize an empty array</span></span>
-<span id="cb59-276"><a href="#cb59-276" aria-hidden="true" tabindex="-1"></a>sim_data_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span><span class="fu">length</span>(means) <span class="sc">*</span> <span class="fu">length</span>(sds)),</span>
-<span id="cb59-277"><a href="#cb59-277" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dim =</span> <span class="fu">c</span>(n, <span class="fu">length</span>(means), <span class="fu">length</span>(sds)))</span>
-<span id="cb59-278"><a href="#cb59-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-279"><a href="#cb59-279" aria-hidden="true" tabindex="-1"></a><span class="co"># save the 100 simulated values into the array with corresponding mean and sd positions</span></span>
-<span id="cb59-280"><a href="#cb59-280" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb59-281"><a href="#cb59-281" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(means)){</span>
-<span id="cb59-282"><a href="#cb59-282" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sds)){</span>
-<span id="cb59-283"><a href="#cb59-283" aria-hidden="true" tabindex="-1"></a>    sim_data_array[ ,j, k] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> means[j], <span class="at">sd =</span> sds[k])</span>
-<span id="cb59-284"><a href="#cb59-284" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb59-285"><a href="#cb59-285" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb59-286"><a href="#cb59-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-287"><a href="#cb59-287" aria-hidden="true" tabindex="-1"></a><span class="co"># explore values from second mean and second sd N(0,10)</span></span>
-<span id="cb59-288"><a href="#cb59-288" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sim_data_array[,<span class="dv">2</span>,<span class="dv">2</span>])</span>
-<span id="cb59-289"><a href="#cb59-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-290"><a href="#cb59-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb59-291"><a href="#cb59-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-292"><a href="#cb59-292" aria-hidden="true" tabindex="-1"></a>We can set up an array that is matches our simulation structure so that we can compactly store the results. Arrays like this are very efficient.</span>
-<span id="cb59-293"><a href="#cb59-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-294"><a href="#cb59-294" aria-hidden="true" tabindex="-1"></a>Kinda have to think about how assigning, and the values in the array in order to understand where the results go. Probably wouldn't want to go more than 3 (maybe 4?) dimensions.</span>
-<span id="cb59-295"><a href="#cb59-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-296"><a href="#cb59-296" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lists</span></span>
-<span id="cb59-297"><a href="#cb59-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-298"><a href="#cb59-298" aria-hidden="true" tabindex="-1"></a>A **list** in R is an *indexed* set of other R objects that can be *named*. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.  </span>
-<span id="cb59-299"><a href="#cb59-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-302"><a href="#cb59-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-303"><a href="#cb59-303" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: list_example1</span></span>
-<span id="cb59-304"><a href="#cb59-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-305"><a href="#cb59-305" aria-hidden="true" tabindex="-1"></a><span class="co"># build a list with several different object types</span></span>
-<span id="cb59-306"><a href="#cb59-306" aria-hidden="true" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb59-307"><a href="#cb59-307" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_vec =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb59-308"><a href="#cb59-308" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],</span>
-<span id="cb59-309"><a href="#cb59-309" aria-hidden="true" tabindex="-1"></a>  <span class="at">hi =</span> <span class="st">"Hi Mom!"</span>,</span>
-<span id="cb59-310"><a href="#cb59-310" aria-hidden="true" tabindex="-1"></a>  <span class="at">my_df =</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">y=</span><span class="fu">rnorm</span>(<span class="dv">5</span>)),</span>
-<span id="cb59-311"><a href="#cb59-311" aria-hidden="true" tabindex="-1"></a>  <span class="at">my_array =</span> <span class="fu">array</span>(<span class="at">data=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,<span class="at">dim=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb59-312"><a href="#cb59-312" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb59-313"><a href="#cb59-313" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(my_list)</span>
-<span id="cb59-314"><a href="#cb59-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-315"><a href="#cb59-315" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate indexing</span></span>
-<span id="cb59-316"><a href="#cb59-316" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">3</span>]]</span>
-<span id="cb59-317"><a href="#cb59-317" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">1</span>]] <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb59-318"><a href="#cb59-318" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">4</span>]][ ,<span class="dv">2</span>]</span>
-<span id="cb59-319"><a href="#cb59-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-320"><a href="#cb59-320" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate nested naming</span></span>
-<span id="cb59-321"><a href="#cb59-321" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>hi</span>
-<span id="cb59-322"><a href="#cb59-322" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>my_df<span class="sc">$</span>y</span>
-<span id="cb59-323"><a href="#cb59-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-324"><a href="#cb59-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb60" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Beyond Dataframes {#sec-beyond-dataframes}</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview </span></span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>In this mini courese we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. </span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>Readings come from the <span class="co">[</span><span class="ot">Advanced R</span><span class="co">](https://adv-r.hadley.nz/)</span> textbook by Hadley Wickham.</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;``To understand computations in R, two slogans are helpful: Everything that exists is an object. Everything that happens is a function call.''</span></span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a><span class="at">  — John Chambers</span></span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>You already know the basics from your previous coursework. Here we will briefly discuss the following:</span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Documenting Code</span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Naming objects, functions, variables</span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Descriptive comments</span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Structural organization</span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Objects</span>
+<span id="cb60-33"><a href="#cb60-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-34"><a href="#cb60-34" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Vectors, atomic types, attributes</span>
+<span id="cb60-35"><a href="#cb60-35" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Dataframes</span>
+<span id="cb60-36"><a href="#cb60-36" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Matrices</span>
+<span id="cb60-37"><a href="#cb60-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb60-38"><a href="#cb60-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Functions</span>
+<span id="cb60-39"><a href="#cb60-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-40"><a href="#cb60-40" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Using existing functions</span>
+<span id="cb60-41"><a href="#cb60-41" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Finding and reading help documentation</span>
+<span id="cb60-42"><a href="#cb60-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-43"><a href="#cb60-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Coding in R - Documenting with Quarto </span></span>
+<span id="cb60-44"><a href="#cb60-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-45"><a href="#cb60-45" aria-hidden="true" tabindex="-1"></a>In this mini-course, we will be coding and programming using the **R** language. We will be leveraging the benefits of the open source structure of R by using some of the excellent software packages developed by members of the R community. We will also be exploring the efficient data structures and functions available in Base R. We will be interacting with the R language using the **R Studio** Interactive Development Environment (IDE).</span>
+<span id="cb60-46"><a href="#cb60-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-47"><a href="#cb60-47" aria-hidden="true" tabindex="-1"></a>We will be using **Quarto** to document our work because it is capable of integrating the process of writing in both programming and natural languages. It is great to be able to transition back and forth between paragraphs expressing what we are trying to accomplish statistically  to the computational evidence to support our results.  Each course notes will be put together as a Quarto document.</span>
+<span id="cb60-48"><a href="#cb60-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-49"><a href="#cb60-49" aria-hidden="true" tabindex="-1"></a>Supplementary Resources for R Markdown: </span>
+<span id="cb60-50"><a href="#cb60-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-51"><a href="#cb60-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quarto Website</span><span class="co">](https://quarto.org/)</span></span>
+<span id="cb60-52"><a href="#cb60-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quarto computations in R</span><span class="co">](https://quarto.org/docs/computations/r.html)</span></span>
+<span id="cb60-53"><a href="#cb60-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">R Markdown Reference Guide</span><span class="co">](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)</span></span>
+<span id="cb60-54"><a href="#cb60-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-55"><a href="#cb60-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## R Basics </span></span>
+<span id="cb60-56"><a href="#cb60-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-57"><a href="#cb60-57" aria-hidden="true" tabindex="-1"></a>Data structures</span>
+<span id="cb60-58"><a href="#cb60-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-59"><a href="#cb60-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Vectors are the atomic vectors of type: numeric, character, logical</span>
+<span id="cb60-60"><a href="#cb60-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-61"><a href="#cb60-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Essentially every data structure we use is one of these vectors, but with additional attributes or several vectors added together.</span>
+<span id="cb60-62"><a href="#cb60-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-63"><a href="#cb60-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A fundamental aspect of good computing is understanding how R saves the information.</span>
+<span id="cb60-64"><a href="#cb60-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-65"><a href="#cb60-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We can also concatenate vectors of different types. However, atomic vectors cannot contain more than one type of data, so it coerces values into a easier way.</span>
+<span id="cb60-66"><a href="#cb60-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-67"><a href="#cb60-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We are starting to think about these vector / dataframes. A vector is a one dimensional, matrix is two dimensions, arrays are three dimensional.</span>
+<span id="cb60-68"><a href="#cb60-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-69"><a href="#cb60-69" aria-hidden="true" tabindex="-1"></a>Example below for demonstrating different aspects of R such as packages, objects, functions, etc. and for improving code readability.</span>
+<span id="cb60-70"><a href="#cb60-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-71"><a href="#cb60-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The assignment arrow is pronounced "gets", so the name gets the thing on the right.</span>
+<span id="cb60-72"><a href="#cb60-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-75"><a href="#cb60-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-76"><a href="#cb60-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ugly-code</span></span>
+<span id="cb60-77"><a href="#cb60-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
+<span id="cb60-78"><a href="#cb60-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-79"><a href="#cb60-79" aria-hidden="true" tabindex="-1"></a><span class="co"># poor formatting makes cord hard to read </span></span>
+<span id="cb60-80"><a href="#cb60-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb60-81"><a href="#cb60-81" aria-hidden="true" tabindex="-1"></a>realestate<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
+<span id="cb60-82"><a href="#cb60-82" aria-hidden="true" tabindex="-1"></a>price_means<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>);price_medians<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>)</span>
+<span id="cb60-83"><a href="#cb60-83" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="ot">&lt;-</span><span class="fu">sample_n</span>(realestate  ,<span class="fu">nrow</span>(realestate)  ,T)</span>
+<span id="cb60-84"><a href="#cb60-84" aria-hidden="true" tabindex="-1"></a>price_means[b]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price   )</span>
+<span id="cb60-85"><a href="#cb60-85" aria-hidden="true" tabindex="-1"></a>price_medians[b]<span class="ot">&lt;-</span><span class="fu">median</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price    )}</span>
+<span id="cb60-86"><a href="#cb60-86" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">quantile</span>(price_medians   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
+<span id="cb60-87"><a href="#cb60-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-88"><a href="#cb60-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-89"><a href="#cb60-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-90"><a href="#cb60-90" aria-hidden="true" tabindex="-1"></a>Reformat R scripts</span>
+<span id="cb60-91"><a href="#cb60-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-92"><a href="#cb60-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use the following shortcuts in RStudio to reformat your code in the qmd file:</span>
+<span id="cb60-93"><a href="#cb60-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-94"><a href="#cb60-94" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`Cmd + I`</span>: Fixes line indentations.</span>
+<span id="cb60-95"><a href="#cb60-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-96"><a href="#cb60-96" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`Cmd + Shift + A`</span>: Does a complete reformat of the selected part of a code.</span>
+<span id="cb60-97"><a href="#cb60-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-100"><a href="#cb60-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-101"><a href="#cb60-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: less-ugly-code</span></span>
+<span id="cb60-102"><a href="#cb60-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
+<span id="cb60-103"><a href="#cb60-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-104"><a href="#cb60-104" aria-hidden="true" tabindex="-1"></a><span class="co"># use keyboard shortcut for quick fixes</span></span>
+<span id="cb60-105"><a href="#cb60-105" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb60-106"><a href="#cb60-106" aria-hidden="true" tabindex="-1"></a>realestate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>); price_means <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>   , <span class="dv">1000</span>)</span>
+<span id="cb60-107"><a href="#cb60-107" aria-hidden="true" tabindex="-1"></a>price_medians <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>   , <span class="dv">1000</span>)</span>
+<span id="cb60-108"><a href="#cb60-108" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb60-109"><a href="#cb60-109" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(realestate  , <span class="fu">nrow</span>(realestate)  , T)</span>
+<span id="cb60-110"><a href="#cb60-110" aria-hidden="true" tabindex="-1"></a>  price_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price)</span>
+<span id="cb60-111"><a href="#cb60-111" aria-hidden="true" tabindex="-1"></a>  price_medians[b] <span class="ot">&lt;-</span> <span class="fu">median</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price)</span>
+<span id="cb60-112"><a href="#cb60-112" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-113"><a href="#cb60-113" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means   , <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb60-114"><a href="#cb60-114" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_medians   , <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb60-115"><a href="#cb60-115" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
+<span id="cb60-116"><a href="#cb60-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-117"><a href="#cb60-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-118"><a href="#cb60-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-119"><a href="#cb60-119" aria-hidden="true" tabindex="-1"></a>Use automated code parsing and then copy result into qmd file.</span>
+<span id="cb60-120"><a href="#cb60-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-121"><a href="#cb60-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use <span class="in">`knitr`</span> chunk options with <span class="in">`formatR`</span> installed: <span class="in">`tidy: formatR`</span>. This parses the code with <span class="in">`tidy_source()`</span> behind the scenes.</span>
+<span id="cb60-122"><a href="#cb60-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-123"><a href="#cb60-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Can specify additional options with <span class="in">`#| tidy-opts: #|   -`</span>. View available ones in the help documentation <span class="in">`?tidy_source`</span> or <span class="co">[</span><span class="ot">this r markdown cookbook section</span><span class="co">](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html)</span>.</span>
+<span id="cb60-124"><a href="#cb60-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-127"><a href="#cb60-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-128"><a href="#cb60-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: automated-code-parse</span></span>
+<span id="cb60-129"><a href="#cb60-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: FALSE</span></span>
+<span id="cb60-130"><a href="#cb60-130" aria-hidden="true" tabindex="-1"></a><span class="co">#| tidy: formatR</span></span>
+<span id="cb60-131"><a href="#cb60-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-132"><a href="#cb60-132" aria-hidden="true" tabindex="-1"></a><span class="co"># automated code parsing</span></span>
+<span id="cb60-133"><a href="#cb60-133" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; this has the same source as the first ugly code, but echos nicely</span></span>
+<span id="cb60-134"><a href="#cb60-134" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb60-135"><a href="#cb60-135" aria-hidden="true" tabindex="-1"></a>realestate<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
+<span id="cb60-136"><a href="#cb60-136" aria-hidden="true" tabindex="-1"></a>price_means<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>);price_medians<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>   ,<span class="dv">1000</span>)</span>
+<span id="cb60-137"><a href="#cb60-137" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="ot">&lt;-</span><span class="fu">sample_n</span>(realestate  ,<span class="fu">nrow</span>(realestate)  ,T)</span>
+<span id="cb60-138"><a href="#cb60-138" aria-hidden="true" tabindex="-1"></a>price_means[b]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price   )</span>
+<span id="cb60-139"><a href="#cb60-139" aria-hidden="true" tabindex="-1"></a>price_medians[b]<span class="ot">&lt;-</span><span class="fu">median</span>(<span class="st">`</span><span class="at">bootstrap sample</span><span class="st">`</span><span class="sc">$</span>price    )}</span>
+<span id="cb60-140"><a href="#cb60-140" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">quantile</span>(price_medians   ,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>));<span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
+<span id="cb60-141"><a href="#cb60-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-142"><a href="#cb60-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-143"><a href="#cb60-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-144"><a href="#cb60-144" aria-hidden="true" tabindex="-1"></a>Rebuilding code for readability (with comments)</span>
+<span id="cb60-145"><a href="#cb60-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-148"><a href="#cb60-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-149"><a href="#cb60-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: readable-code</span></span>
+<span id="cb60-150"><a href="#cb60-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-151"><a href="#cb60-151" aria-hidden="true" tabindex="-1"></a><span class="co"># now we can add comments and space out the code for better readability</span></span>
+<span id="cb60-152"><a href="#cb60-152" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb60-153"><a href="#cb60-153" aria-hidden="true" tabindex="-1"></a>realestate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
+<span id="cb60-154"><a href="#cb60-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-155"><a href="#cb60-155" aria-hidden="true" tabindex="-1"></a><span class="co"># initializing the storage space for the bootstrap means and medians</span></span>
+<span id="cb60-156"><a href="#cb60-156" aria-hidden="true" tabindex="-1"></a>price_means <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
+<span id="cb60-157"><a href="#cb60-157" aria-hidden="true" tabindex="-1"></a>price_medians <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
+<span id="cb60-158"><a href="#cb60-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-159"><a href="#cb60-159" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over 1000 repeated bootstrap samples, saving the means and medians</span></span>
+<span id="cb60-160"><a href="#cb60-160" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb60-161"><a href="#cb60-161" aria-hidden="true" tabindex="-1"></a>  bootstrap_sample <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(realestate, <span class="fu">nrow</span>(realestate), T)</span>
+<span id="cb60-162"><a href="#cb60-162" aria-hidden="true" tabindex="-1"></a>  price_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(bootstrap_sample<span class="sc">$</span>price)</span>
+<span id="cb60-163"><a href="#cb60-163" aria-hidden="true" tabindex="-1"></a>  price_medians[b] <span class="ot">&lt;-</span> <span class="fu">median</span>(bootstrap_sample<span class="sc">$</span>price)</span>
+<span id="cb60-164"><a href="#cb60-164" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-165"><a href="#cb60-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-166"><a href="#cb60-166" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the quantiles of the collected means and medians</span></span>
+<span id="cb60-167"><a href="#cb60-167" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_means, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb60-168"><a href="#cb60-168" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(price_medians, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb60-169"><a href="#cb60-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-170"><a href="#cb60-170" aria-hidden="true" tabindex="-1"></a><span class="co"># do these intervals match will with confidence intervals using central limit theorem?</span></span>
+<span id="cb60-171"><a href="#cb60-171" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; compare interval to t-interval</span></span>
+<span id="cb60-172"><a href="#cb60-172" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(realestate<span class="sc">$</span>price)</span>
+<span id="cb60-173"><a href="#cb60-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-174"><a href="#cb60-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-175"><a href="#cb60-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-176"><a href="#cb60-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advanced Programming</span></span>
+<span id="cb60-177"><a href="#cb60-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-178"><a href="#cb60-178" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;``We are adventurers! We do not play on the playgrounds. We roam in the jungles!''</span></span>
+<span id="cb60-179"><a href="#cb60-179" aria-hidden="true" tabindex="-1"></a><span class="at">  — Jie Li (Dr. Maurer's Grad Classmate)</span></span>
+<span id="cb60-180"><a href="#cb60-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-181"><a href="#cb60-181" aria-hidden="true" tabindex="-1"></a>As we move through this mini-course, we will focus on challenging our programming skills with methods that require heavier statistical computation than typically used in our other courses. For this, we may need to use some more advanced types of objects in R, to use functions in more sophisticated ways and to build our own functions. This section will focus on more advanced data objects than vectors and data frames. </span>
+<span id="cb60-182"><a href="#cb60-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-183"><a href="#cb60-183" aria-hidden="true" tabindex="-1"></a>We will focus on two particularly helpful data structures:</span>
+<span id="cb60-184"><a href="#cb60-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-185"><a href="#cb60-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Arrays</span>
+<span id="cb60-186"><a href="#cb60-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-187"><a href="#cb60-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lists</span>
+<span id="cb60-188"><a href="#cb60-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-189"><a href="#cb60-189" aria-hidden="true" tabindex="-1"></a><span class="fu">### Arrays</span></span>
+<span id="cb60-190"><a href="#cb60-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-191"><a href="#cb60-191" aria-hidden="true" tabindex="-1"></a>Vectors don't have attributes, but we can add attributes that can change how the data is organized.</span>
+<span id="cb60-192"><a href="#cb60-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-193"><a href="#cb60-193" aria-hidden="true" tabindex="-1"></a>An **array** in R, is a vector for a  $p$-dimensional index set. This dimension attribute allows the vector to be searched and subsetted very efficiently. Technically we have already seen a 2-dimensional vector; an R matrix. Because an array is a special kind of vector, all values stored inside an array must be the same atomic type. </span>
+<span id="cb60-194"><a href="#cb60-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-195"><a href="#cb60-195" aria-hidden="true" tabindex="-1"></a>When doing computation things, if we are only guessing how R handles everything, we cannot leverage how R works to have more efficient code. Note that <span class="in">`str()`</span> is *structure*, not *string*.</span>
+<span id="cb60-196"><a href="#cb60-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-199"><a href="#cb60-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-200"><a href="#cb60-200" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: matrix_example</span></span>
+<span id="cb60-201"><a href="#cb60-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-202"><a href="#cb60-202" aria-hidden="true" tabindex="-1"></a><span class="co"># show that a matrix is a vector with dimension attributes</span></span>
+<span id="cb60-203"><a href="#cb60-203" aria-hidden="true" tabindex="-1"></a>some_values <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb60-204"><a href="#cb60-204" aria-hidden="true" tabindex="-1"></a>some_values</span>
+<span id="cb60-205"><a href="#cb60-205" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(some_values)</span>
+<span id="cb60-206"><a href="#cb60-206" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(some_values)</span>
+<span id="cb60-207"><a href="#cb60-207" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(some_values)</span>
+<span id="cb60-208"><a href="#cb60-208" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(some_values)</span>
+<span id="cb60-209"><a href="#cb60-209" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(some_values)</span>
+<span id="cb60-210"><a href="#cb60-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-211"><a href="#cb60-211" aria-hidden="true" tabindex="-1"></a><span class="co"># add attributes, turning this into a matrix</span></span>
+<span id="cb60-212"><a href="#cb60-212" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(some_values) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb60-213"><a href="#cb60-213" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(some_values)</span>
+<span id="cb60-214"><a href="#cb60-214" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(some_values)</span>
+<span id="cb60-215"><a href="#cb60-215" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(some_values)</span>
+<span id="cb60-216"><a href="#cb60-216" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(some_values)</span>
+<span id="cb60-217"><a href="#cb60-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-218"><a href="#cb60-218" aria-hidden="true" tabindex="-1"></a><span class="co"># we can define matrix with the matrix() function</span></span>
+<span id="cb60-219"><a href="#cb60-219" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(some_values, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb60-220"><a href="#cb60-220" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(my_matrix)</span>
+<span id="cb60-221"><a href="#cb60-221" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(my_matrix)</span>
+<span id="cb60-222"><a href="#cb60-222" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(my_matrix)</span>
+<span id="cb60-223"><a href="#cb60-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-224"><a href="#cb60-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-225"><a href="#cb60-225" aria-hidden="true" tabindex="-1"></a>Demonstrating Higher Dimensional Arrays:</span>
+<span id="cb60-226"><a href="#cb60-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-227"><a href="#cb60-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>When unpacking a matrix (i.e. converting it back to a vector), R goes down the columns rather than across the rows.</span>
+<span id="cb60-228"><a href="#cb60-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-231"><a href="#cb60-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-232"><a href="#cb60-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: matrix_example2</span></span>
+<span id="cb60-233"><a href="#cb60-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-234"><a href="#cb60-234" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack matrix</span></span>
+<span id="cb60-235"><a href="#cb60-235" aria-hidden="true" tabindex="-1"></a>my_matrix</span>
+<span id="cb60-236"><a href="#cb60-236" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>(my_matrix) </span>
+<span id="cb60-237"><a href="#cb60-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-238"><a href="#cb60-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-239"><a href="#cb60-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-240"><a href="#cb60-240" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An array allows us to add an indexing structure (so we can subset these with square brackets), also allows sorting.</span>
+<span id="cb60-241"><a href="#cb60-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-244"><a href="#cb60-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-245"><a href="#cb60-245" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: array_example</span></span>
+<span id="cb60-246"><a href="#cb60-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-247"><a href="#cb60-247" aria-hidden="true" tabindex="-1"></a><span class="co"># build an array here</span></span>
+<span id="cb60-248"><a href="#cb60-248" aria-hidden="true" tabindex="-1"></a>vec_to_array <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb60-249"><a href="#cb60-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-250"><a href="#cb60-250" aria-hidden="true" tabindex="-1"></a><span class="co"># to convert the vector into an array: R went down the columns, across the rows, and then onto different layers</span></span>
+<span id="cb60-251"><a href="#cb60-251" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vec_to_array) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">2</span>)</span>
+<span id="cb60-252"><a href="#cb60-252" aria-hidden="true" tabindex="-1"></a>vec_to_array</span>
+<span id="cb60-253"><a href="#cb60-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-254"><a href="#cb60-254" aria-hidden="true" tabindex="-1"></a><span class="co"># we can pull off a value by using bracket indexing</span></span>
+<span id="cb60-255"><a href="#cb60-255" aria-hidden="true" tabindex="-1"></a>vec_to_array[<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>]</span>
+<span id="cb60-256"><a href="#cb60-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-257"><a href="#cb60-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-258"><a href="#cb60-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-259"><a href="#cb60-259" aria-hidden="true" tabindex="-1"></a>This can be very useful when the layers have characteristics (e.g. for simulations).</span>
+<span id="cb60-260"><a href="#cb60-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-261"><a href="#cb60-261" aria-hidden="true" tabindex="-1"></a>Why is this helpful? Suppose we are collecting the resulting values for simulating $n = 100$ observations, from normals with means in $<span class="sc">\{</span>-3,0,3<span class="sc">\}</span>$ and standard deviations in $<span class="sc">\{</span>2,10<span class="sc">\}</span>$</span>
+<span id="cb60-262"><a href="#cb60-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-263"><a href="#cb60-263" aria-hidden="true" tabindex="-1"></a>Use an array to store the observation index in the first dimension, the means in the second dimension, and standard deviations in the third dimension. Thus we create a 100 by 3 by 2 array to store the data. This allows us to easily access the data we want using the indexing. </span>
+<span id="cb60-264"><a href="#cb60-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-267"><a href="#cb60-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-268"><a href="#cb60-268" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: simulation_array</span></span>
+<span id="cb60-269"><a href="#cb60-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-270"><a href="#cb60-270" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize simulation settings</span></span>
+<span id="cb60-271"><a href="#cb60-271" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb60-272"><a href="#cb60-272" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">10</span>)</span>
+<span id="cb60-273"><a href="#cb60-273" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">10</span>)</span>
+<span id="cb60-274"><a href="#cb60-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-275"><a href="#cb60-275" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize an empty array</span></span>
+<span id="cb60-276"><a href="#cb60-276" aria-hidden="true" tabindex="-1"></a>sim_data_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span><span class="fu">length</span>(means) <span class="sc">*</span> <span class="fu">length</span>(sds)),</span>
+<span id="cb60-277"><a href="#cb60-277" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dim =</span> <span class="fu">c</span>(n, <span class="fu">length</span>(means), <span class="fu">length</span>(sds)))</span>
+<span id="cb60-278"><a href="#cb60-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-279"><a href="#cb60-279" aria-hidden="true" tabindex="-1"></a><span class="co"># save the 100 simulated values into the array with corresponding mean and sd positions</span></span>
+<span id="cb60-280"><a href="#cb60-280" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb60-281"><a href="#cb60-281" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(means)){</span>
+<span id="cb60-282"><a href="#cb60-282" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sds)){</span>
+<span id="cb60-283"><a href="#cb60-283" aria-hidden="true" tabindex="-1"></a>    sim_data_array[ ,j, k] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> means[j], <span class="at">sd =</span> sds[k])</span>
+<span id="cb60-284"><a href="#cb60-284" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb60-285"><a href="#cb60-285" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-286"><a href="#cb60-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-287"><a href="#cb60-287" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim_data_array)</span>
+<span id="cb60-288"><a href="#cb60-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-289"><a href="#cb60-289" aria-hidden="true" tabindex="-1"></a><span class="co"># explore values from second mean and second sd N(0,10)</span></span>
+<span id="cb60-290"><a href="#cb60-290" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sim_data_array[,<span class="dv">2</span>,<span class="dv">2</span>])</span>
+<span id="cb60-291"><a href="#cb60-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-292"><a href="#cb60-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-293"><a href="#cb60-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-294"><a href="#cb60-294" aria-hidden="true" tabindex="-1"></a>We can set up an array that matches our simulation structure so that we can compactly store the results to the right locations. Results can be organized like subscripts in mathematical notation. For example, if rows $i = 1, \ldots, 100$, columns $\mu = (mu_1, \mu_2, \mu_3)$ and layers $\sigma = (\sigma_1, \sigma_2)$, we can have observation $x_{i,j,k}$ that is the$i$th iteration from mean $\mu_j$ and standard deviation $\sigma_k$. This aligns what we are computing (/ how the results are stored) to how we assign the parameter.</span>
+<span id="cb60-295"><a href="#cb60-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-296"><a href="#cb60-296" aria-hidden="true" tabindex="-1"></a>Arrays like this are very efficient (because the index structure is very fast in terms of extracting the numbers). Probably wouldn't want to go more than 3 (maybe 4?) dimensions. Lists are then more readable (less abstract that 10-dimensional hypercube), user friendly ways to store high dimensional data, which can also be indexed easily.</span>
+<span id="cb60-297"><a href="#cb60-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-298"><a href="#cb60-298" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lists</span></span>
+<span id="cb60-299"><a href="#cb60-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-300"><a href="#cb60-300" aria-hidden="true" tabindex="-1"></a>A **list** in R is an *indexed* set of other R objects that can be *named*. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.</span>
+<span id="cb60-301"><a href="#cb60-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-302"><a href="#cb60-302" aria-hidden="true" tabindex="-1"></a>These are great for storing results that are contextually related to each other. Examples include results from <span class="in">`lm()`</span> objects.</span>
+<span id="cb60-303"><a href="#cb60-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-306"><a href="#cb60-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-307"><a href="#cb60-307" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: list_example1</span></span>
+<span id="cb60-308"><a href="#cb60-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-309"><a href="#cb60-309" aria-hidden="true" tabindex="-1"></a><span class="co"># build a list with several different object types</span></span>
+<span id="cb60-310"><a href="#cb60-310" aria-hidden="true" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb60-311"><a href="#cb60-311" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_vec =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb60-312"><a href="#cb60-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],</span>
+<span id="cb60-313"><a href="#cb60-313" aria-hidden="true" tabindex="-1"></a>  <span class="at">hi =</span> <span class="st">"Hi Mom!"</span>,</span>
+<span id="cb60-314"><a href="#cb60-314" aria-hidden="true" tabindex="-1"></a>  <span class="at">my_df =</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">y=</span><span class="fu">rnorm</span>(<span class="dv">5</span>)),</span>
+<span id="cb60-315"><a href="#cb60-315" aria-hidden="true" tabindex="-1"></a>  <span class="at">my_array =</span> <span class="fu">array</span>(<span class="at">data=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,<span class="at">dim=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb60-316"><a href="#cb60-316" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb60-317"><a href="#cb60-317" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(my_list)</span>
+<span id="cb60-318"><a href="#cb60-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-319"><a href="#cb60-319" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate indexing</span></span>
+<span id="cb60-320"><a href="#cb60-320" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">3</span>]]</span>
+<span id="cb60-321"><a href="#cb60-321" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">1</span>]] <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb60-322"><a href="#cb60-322" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">4</span>]][ ,<span class="dv">2</span>]</span>
+<span id="cb60-323"><a href="#cb60-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-324"><a href="#cb60-324" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate nested naming</span></span>
+<span id="cb60-325"><a href="#cb60-325" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>hi</span>
+<span id="cb60-326"><a href="#cb60-326" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>my_df<span class="sc">$</span>y</span>
+<span id="cb60-327"><a href="#cb60-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-328"><a href="#cb60-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-329"><a href="#cb60-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-330"><a href="#cb60-330" aria-hidden="true" tabindex="-1"></a>Accessing items in the list naming convention:</span>
+<span id="cb60-331"><a href="#cb60-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-332"><a href="#cb60-332" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For the top layer qualitative information, use <span class="in">`list$name`</span> notation, then switch to <span class="in">`list$name[[index]]`</span> for quantitative information that is maybe performed iteritively, like an index.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

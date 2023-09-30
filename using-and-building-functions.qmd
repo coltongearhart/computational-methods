@@ -360,11 +360,12 @@ Possible convention: Implicitly give the function data values first, then use ex
 The following example demonstrates code that would be better served by constructing a function to accomplish the task.
 
 ```{r}
-#| label: example-change-to-functions
+#| label: example-change-to-functions-manual
 
 # take the following olive oil data and standardize the columns
 library(pdfCluster) # for the data
 data(oliveoil) # ?oliveoil
+head(oliveoil)
 
 # start with a dataframe where create the z-scores for palmitic acid, then add the rest 
 oo_standardized <- data.frame(
@@ -372,21 +373,461 @@ oo_standardized <- data.frame(
 )
 head(oo_standardized)
 
-
-# do this better with a function, rather than copy and paste and change column names
-oo_standardized2 <- data.frame(
-  oleic = (oliveoil[,"oleic"]-mean(oliveoil[,"oleic"]))/sd(oliveoil[,"oleic"])
+# if wanted to do this manually for all columns we would do this
+oo_standardized <- data.frame(
+  palmitic = (oliveoil[,"palmitic"]-mean(oliveoil[,"palmitic"]))/sd(oliveoil[,"palmitic"]),
+  palmitoleic = (oliveoil[,"palmitoleic"]-mean(oliveoil[,"palmitoleic"]))/sd(oliveoil[,"palmitoleic"]),
+  stearic = (oliveoil[,"stearic"]-mean(oliveoil[,"stearic"]))/sd(oliveoil[,"stearic"]),
+  oleic = (oliveoil[,"oleic"]-mean(oliveoil[,"oleic"]))/sd(oliveoil[,"oleic"]),
+  linoleic = (oliveoil[,"linoleic"]-mean(oliveoil[,"linoleic"]))/sd(oliveoil[,"linoleic"]),
+  linolenic = (oliveoil[,"linolenic"]-mean(oliveoil[,"linolenic"]))/sd(oliveoil[,"linolenic"]),
+  arachidic = (oliveoil[,"arachidic"]-mean(oliveoil[,"arachidic"]))/sd(oliveoil[,"arachidic"]),
+  eicosenoic = (oliveoil[,"eicosenoic"]-mean(oliveoil[,"eicosenoic"]))/sd(oliveoil[,"eicosenoic"])
 )
-head(oo_standardized2)
+head(oo_standardized)
+
+```
+
+Could do this (slighlty) better with a function, rather than copy and paste and change column names.
+
+```{r}
+#| label: example-change-to-functions-function
 
 # write function to take a variable name and return the standardized column
 oo_stand <- function(varname) {
   (oliveoil[,varname]-mean(oliveoil[,varname]))/sd(oliveoil[,varname])
 }
-head(oo_stand("palmitic"))
+oo_stand("palmitic")[1:10]
+
+# building the standardized data almost as repetitive as previous approach
+oo_standardized2 <- data.frame(
+  palmitic =  oo_stand("palmitic"),
+  palmitoleic =  oo_stand("palmitoleic"),
+  stearic =  oo_stand("stearic"),
+  oleic =  oo_stand("oleic"),
+  linoleic =  oo_stand("linoleic"),
+  linolenic =  oo_stand("linolenic"),
+  arachidic =  oo_stand("arachidic"),
+  eicosenoic =  oo_stand("eicosenoic")
+)
+head(oo_standardized2)
+
+```
+
+Next, can do this iteratively with for-loops to first print the result (for demonstration) and then to store the result.
+
+```{r}
+#| label: example-change-to-functions-for-loops
+
+# intitialize names
+acids <- names(oliveoil[3:10])
+
+# loop over names and print first few standardized observations
+for (acid_name in acids){
+  print(oo_stand(acid_name)[1:5])
+}
+
+# initialization storage space for transformed values
+oo_standardized3 <- matrix(data = rep(NA, nrow(oliveoil) * 8), 
+                           nrow = nrow(oliveoil)) %>% 
+  as.data.frame
+names(oo_standardized3) <- names(oliveoil)[3:10]
+
+# loop over the acid names
+for (acid_name in acids){
+  oo_standardized3[,acid_name] <- oo_stand(acid_name)
+}
+# check the outcome
+head(oo_standardized3)
+
+```
+
+Best solution is to vectorize the procedure and use the APPLY type statements.
+
+- `apply()` used to apply functions over the indices of an array.
+
+- `lapply()` used to apply functions over the values in a list, outputs to a list.
+
+- `sapply()` used to apply functions over the values in a list, outputs to a simplified array.
+
+    - `lapply()` and `sapply(simplify = FALSE)` are the same thing, kinda how `paste()` and `paste0()` are the same except `paste0()` has a default separator (which is very useful, so they just gave it a shorthand function).
+
+- `vapply()` used to apply functions over the values in a list, outputs to specified object type.
+
+- `mapply()` used to apply functions over the corresponding values in multiple lists.
+
+Karsten's Personal Use (with orders of magnitude >): `sapply` $>$ `lapply` $>>$ `mapply` $>>$ `vapply` $>>$ `apply`
+
+```{r}
+#| label: example-change-to-functions-apply
 
 # loop over all column names with sapply()
-oo_standardized3 <- sapply(X = names(oliveoil)[3:10], FUN = oo_stand)
+# -> typically in practice the formals are given implicitly and just know that the object to be looped over is first and the function being applied is second
+oo_better <- sapply(X = acids, FUN = oo_stand) %>% as.data.frame
+head(better_oo)
+
+# same thing, but return object is a list
+oo_better_list <- lapply(X = acids, FUN = oo_stand)
+str(oo_better_list)
+
+```
+
+Can use tidyverse equivalents from the `purrr` package ([documentation](http://purrr.tidyverse.org)), specifically `map()`.
+
+- `map()` always returns a list, so this would be equivalent `lapply()`.
+
+- Other variants include:
+
+    - `map_vec()` must return a single value from each operation. If you know the output type, it is more efficient to use the corresponding variant such as `map_dbl()`, `map_chr()`, etc.
+    
+    - indexed map `imap()` applies a function to each element of a vector, and its index (which is shorthand for a particular use of `map2()` which iterates over 2 arguments at a time).
+    
+    - `lmap()` applies a function to list-elements of a list, useful for applying functions that take lists as arguments.
+    
+    - `pmap()` extends `map2()` to iterate over multiple arguments simultaneously.
+
+```{r}
+#| label: example-change-to-functions-map
+#| error: true
+
+# loop over all column names with sapply()
+library(purrr)
+#  
+# help(package="purrr")
+# ?map
+
+# apply same function over names of columns using purrr equivalent function to lapply
+oo_purrr_list <- map(.x = acids, .f = oo_stand)
+str(oo_purrr_list)
+
+# same thing, but now simplify the result
+map_vec(.x = acids, .f = oo_stand)
+
+# modify function to just return the st dev of the standardized columns
+oo_stand_sd <- function(varname) {
+  sd((oliveoil[,varname]-mean(oliveoil[,varname]))/sd(oliveoil[,varname]))
+}
+map_vec(.x = acids, .f = oo_stand_sd)
+
+# know returning a double, so use map_dbl()
+map_dbl(.x = acids, .f = oo_stand_sd)
+
+```
+
+Mini timing study to see which method of looping is most efficient.
+
+- APPLY statements are quicker than for because they are run in C rather than R.
+
+```{r}
+#| label: timing
+
+# create lots of lm from different random samples and store the slope of a particular variable
+n <- 1000
+betas <- rep(NA, n)
+
+# initialize timing study and use for loop
+timer_for <- Sys.time()
+for(i in 1:n){
+  betas[i] <- lm(palmitic ~ . , data = slice_sample(oliveoil, n = 100))$coefficients["oleic"]
+}
+Sys.time() - timer_for
+
+# now use sapply()
+# -> again not really using X = 1:n in the function that sapply() calls, it is just for the iterations to do the thing that many times
+betas <- rep(NA, n)
+timer_sapply <- Sys.time()
+betas <- sapply(1:n, function(x) {
+    lm(palmitic ~ . , data = slice_sample(oliveoil, n = 100))$coefficients["oleic"]
+})
+Sys.time() - timer_sapply
+
+# now use map()
+betas <- rep(NA, n)
+timer_map <- Sys.time()
+betas <- map(1:n, \(x) lm(palmitic ~ . , data = slice_sample(oliveoil, n = 100))$coefficients["oleic"])
+Sys.time() - timer_map
+
+# now use map_dbl()
+betas <- rep(NA, n)
+timer_dbl <- Sys.time()
+betas <- map_dbl(1:n, \(x) lm(palmitic ~ . , data = slice_sample(oliveoil, n = 100))$coefficients["oleic"])
+Sys.time() - timer_dbl
+
+```
+
+## Applying functions over multiple sets of parameters
+
+### Simulate data 
+
+In some cases we may wish to apply a complex function by putting in multiple sets of arguments and collecting the results. In the example below we explore a simple case where we want to gather simulated values from a beta distribution with several different shape parameter ($\alpha$, $\beta$) pairs.
+
+```{r}
+#| label: multiple-param-beta
+
+# let's check what the rbeta() function does first in the help menu
+# ?rbeta
+# simulate n observations from a specific beta distribution
+rbeta(5, shape1 = 1, shape2 = 1)
+
+# want to apply the rbeta() function over all 100 unique combinations
+# of shape1 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}
+# and shape2 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}
+param_combinations <- expand.grid(shape1 = seq(0.5, 5, by = 0.5),
+                                  shape2 = seq(0.5, 5, by = 0.5))
+head(param_combinations)
+
+```
+
+Could create two nested for loops to iterate over these pairs and store as it loops, but that is messy. Instead we will iterate over each pair using `mapply()` and `map2()`.
+
+```{r}
+#| label: iterate-multiple-args
+
+# run simulation to generate 5 values beta values from each parameter combo
+# use mapply() and simplify the result
+set.seed(12345)
+my_beta_sims <- mapply(FUN = rbeta, 
+                       shape1 = param_combinations$shape1,
+                       shape2 = param_combinations$shape2,
+                       MoreArgs = list(n = 5),
+                       SIMPLIFY = "array")
+
+# map way shown at end
+
+# rows in parameter storage correspond to the columns in the simulation array
+param_combinations[1:10,]
+my_beta_sims[,1:10]
+
+# use map2()
+# -> returns a list, so have to reduce it to turn into a matrix and then set the colnames to be readable
+my_beta_sims <- param_combinations %>% 
+  {map2(.$shape1, .$shape2,
+       \(shape1, shape2) rbeta(n = 5, shape1 = shape1, shape2 = shape2))} %>% 
+  reduce(cbind)
+colnames(my_beta_sims) <- paste("sim", 1:nrow(param_combinations))
+
+```
+
+Or even better organization is to turn this into an 3-dimensional array where the index `[i,j,k]` represent the $i$th simulation, $j$th `shape1`, and $k$-th `shape2`.
+
+```{r}
+#| label: array
+
+# convert copy of matrix to array (remember )
+my_beta_sims_array <- my_beta_sims
+dim(my_beta_sims_array) <- c(5,10,10)
+
+# remember R goes down the columns first to fill the first layer
+# -> then starts the next layer down the columns....
+my_beta_sims_array[ , , 1] == my_beta_sims[, 1:10]
+
+# display all simulations from the first shape 2 (columns = simulation and rows = iteration)
+my_beta_sims_array[ , , 1]
+
+```
+
+### Summarize simulation 
+
+Now suppose we want the mean for the simulation outcomes array. Use `apply()` to iterate over indices of the array.
+
+```{r}
+#| label: functions-on-array
+
+# calc mean of a particular iteration
+mean(my_beta_sims_array[ ,1 , 1])
+
+# loop over each column in each layer (thus averaging over the rows) with apply()
+beta_means <- apply(X = my_beta_sims_array,
+                    MARGIN = c(2,3),
+                    FUN = mean)
+str(beta_means)
+
+# map way requires different functions
+# -> need to convert the array to a list first with array_tree() (a hierarchical list), and then map at the second level
+# -> then simplify
+beta_means2 <- my_beta_sims_array %>% 
+  array_tree(margin = c(3, 2)) %>% # first level list will be the layers, then the columns result$layer[[column]]
+  map_depth(.depth = 2, .f = mean) %>% 
+  reduce(cbind)
+rownames(beta_means2) <- paste0("shape1_", unique(param_combinations$shape1))
+colnames(beta_means2) <- paste0("shape2_", unique(param_combinations$shape2))
+
+# compare two different methods
+beta_means2 == beta_means
+
+```
+
+Now we can check our simulated means against a theoretical mean: $X \sim \text{beta}(\alpha, \beta) \Longrightarrow E(X) = \frac{\alpha}{\alpha + \beta}$.
+
+```{r}
+#| label: compute-means
+
+# define function to calculate theoretical beta mean
+theoretical_beta_mean <- function(alpha, beta){
+  alpha / (alpha + beta)
+}
+
+# create a 10 x 10 matrix of the theoretical means for the beta distribution using the function above
+theoretical_means <- mapply(FUN = theoretical_beta_mean,
+                            alpha = param_combinations$shape1,
+                            beta = param_combinations$shape2,
+                            SIMPLIFY = "array")
+dim(theoretical_means) <- c(10, 10)
+theoretical_means
+
+# now use map2, then simplify to vector and convert to matrix
+theoretical_means2 <- param_combinations %>% 
+  {map2(.$shape1, .$shape2, \(alpha, beta) theoretical_beta_mean(alpha, beta))} %>% 
+  as_vector
+dim(theoretical_means2) <- c(10, 10)
+
+theoretical_means == theoretical_means2
+
+# compare a few means
+# -> note that for some reason beta_means2 is stored as a list but displaying like a matrix? but it is correct
+theoretical_means[2,7] - beta_means2[2,7][[1]]
+theoretical_means[1,10] - beta_means2[1,10][[1]]
+
+```
+
+### Entire workflow 
+
+To confirm the simulated data is correct, we can do a bigger simulation (more iterations) and then compare to the theoretical means.
+
+```{r}
+#| label: entire-workflow
+
+# steps of simulation
+# -> simulate data based on parameter combinations
+# -> keep in list form where each list all the iterations for a parameter pair
+# -> then unpack and convert to 10 x 10 matrix
+beta_simulation <- param_combinations %>% 
+  {map2(.$shape1, .$shape2, \(shape1, shape2) rbeta(n = 1000, shape1 = shape1, shape2 = shape2))} %>% 
+  map(mean) %>% 
+  reduce(rbind)
+dim(beta_simulation) <- c(10,10)
+
+# compare simulated and theoretical means
+theoretical_means - beta_simulation
+
+```
+
+## Writing Modular Functions
+
+When you are writing functions to do a complex task, try to identify the system of simple tasks that are needed to accomplish it step-by-step. For example we might consider building functions to help us to automate the process of running stepwise selection based on AIC, then outputting a model object that we can use for prediction, or inference. 
+
+We might initially think of one big function that can take a model matrix, X, and does a bunch of linear algebra to get beta estimates, calculates an AIC for the fitted model, then removes a columns from X to reduce the model... and repeat... a lot. Is that what we find inside the `step()` function? Run `body(step)` to see.
+
+It isn't doing any of the linear algebra and AIC calculations we expected! The body of the step function is filled with, well more functions! It is function pinata!
+
+What we find is that the `step()` function calls many other functions to do the individual smaller tasks that make up the complex procedure. If we search closely, there is a function for dropping a row, `drop1()`, within a `while` loop that keeps dropping rows until a condition is met. There is a function for updating the fit of the model, `update()`, and calculating the AIC, `extractAIC()`. There is even a function created at the start of the body that are used to help organize and return a helpful print statement about the stepwise procedure: `step.results()`. 
+
+These functions are often times called "helper functions", completing the sub-tasks of the primary function. This modular format allows each function to complete a single simple task, and when used in combination, achieve a complex task. 
+
+Thus, when modularizing code, the end goal to have one "overall" function that just has some helper functions within. On the way to having modularized code, is it better to start with an overall function and add modules sequentially (so e.g. if we call the overall, it will call module 1, so we check if that works; then add module 2 and call the overall which runs mod 1 and mod 2).... etc.
+
+Below is an example (NOT RUN) to demostrate how helper functions can be used so that the overall function is body is relatively simple, all the work is being done by other functions. The overall function should be readable step by step.
+
+```{r}
+#| label: helper-functions
+#| eval: false
+
+# main data simulation function
+# write a function to simulate a dataset for an n x p dataset for a regression model where q of the variables are inactive (signal variables)
+make_sim_data <- function(n = 100, p = 20, q = 10, b = 0.1, sd_y = 1, sd_x = 1){
+  
+  # generate a n(iteration in sample) x p(sample) matrix from rnorm(0, sd_X)
+  X = sapply(1:p, function(i) rnorm(n, 0, sd = sd_x))
+  colnames(X) <- paste0("x",1:p)
+  
+  # specify population coefficients
+  betas = c(rep(b, q), rep(0, p-q))
+  
+  # generate responses
+  y = (X %*% betas)[,1] + rnorm(n,0, sd_y)
+  
+  # combine data
+  sim_data <- data.frame(y,X)
+  
+  return(sim_data)
+
+}
+
+# helper functions for running the experiment with variable selection
+
+# function for choosing with stepwise and fitting a regression
+step_var_mod <- function(df){
+  step_selected <- step(lm(y ~ . , data = df), trace = FALSE)
+  return(step_selected)
+}
+
+# function for choosing with lasso and fitting regression
+lasso_var_mod <- function(df){
+  
+  cv.out = cv.glmnet(x = as.matrix(x = df[ ,-which(names(df) == "y")]),
+                      y = df$y, alpha = 1, type.measure = "deviance")
+  
+  lasso_mod = glmnet(x = as.matrix(x = df[, -which(names(df) == "y")]),
+                      y = df$y, alpha=1, lambda = cv.out$lambda.1se)
+  
+  lasso_vars = names(lasso_mod$beta[,1])[which(lasso_mod$beta[,1] != 0)]
+  
+  if (length(lasso_vars) == 0) lasso_vars <- names(lasso_mod$beta[,1])[1]
+  
+  lasso_selected = lm(formula(paste0("y ~ 1 + ", paste(lasso_vars, collapse = " + "))), data = df)
+  
+  return(lasso_selected)
+  
+}
+
+# function for finding number of variables included
+select_var_count <- function(lin_mod){
+  length(coef(lin_mod))-1
+}
+
+# function for finding 10-fold cross validated RMSE
+select_cv_rmse <- function(lin_mod){
+  
+  cv_result = train(formula(lin_mod), 
+    data = lin_mod$model,
+    method = "lm",
+    trControl = caret::trainControl(method = "cv", number = 10),
+    tuneGrid = data.frame(intercept=TRUE))
+  
+  return(cv_result$results$RMSE)
+  
+}
+
+# function to run trial 
+run_trial <- function(selection_alg, df){
+  
+  start_time = Sys.time()
+  
+  tmp_mod = selection_alg(df) # not sure where this function comes from
+  
+  end_time = Sys.time()
+  
+  return(data.frame(var_count = select_var_count(tmp_mod),
+                    rmse = select_cv_rmse(tmp_mod), # nor this function
+                    time = difftime(end_time, start_time, units = "secs")))
+  
+}
+
+# make into a function of n_sims, n, p and q
+sim_var_select <- function(n_sim = 10, n = 100, p = 10, q = 5, var_select_ftn = step_var_mod){
+  
+  results = NULL
+  
+  for(i in 1:n_sim){
+    
+    sim_data <- make_sim_data(n = n, p = p,q = q)
+    
+    results <- rbind(results, run_trial(var_select_ftn, sim_data))
+    
+  }
+  
+  return(results)
+}
 
 ```
 
