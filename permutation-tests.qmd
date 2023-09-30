@@ -9,3 +9,288 @@
 source("_common.R")
 
 ```
+
+## Fisher's Exact Test
+
+The idea of permutation testing grows out of Fisher's Exact test; part of the experimental design work by R.A. Fisher at Rothemstad in the 1920's. The canonical example of Fisher's exact test is the "Lady Tasting Tea" experiment. As the story goes, Muriel Bristol was a lady who worked with Fisher at Rothemstad. She claimed to be able to tell if a cup of tea was made with milk first then tea added, or tea first then milk added. Fisher was suspicious and devised an experiment to test her skills. 8 cups of tea were made: 4 milk first, 4 tea first. The eight cups were randomized in order, an Muriel was asked to sort them through a blinded taste test.
+
+If she was guessing, then the number of correct guesses would follow a Hypergeometric distribution. (Contemporaneous accounts say that she got all 8 correct -- thus a p-value = `r round(dhyper(x = 4, m = 4, n = 4, k = 4), 4)`). This problem is essentially just a combinatorics problem. It is the same as choosing colored balls from an urn, for example 4 white and 4 black. What is the chance you reach in and get all the same color?
+
+With Fishers exact test, if the null hypothesis is true that we are just guessing, we know the number exact number of ways to be correct based on the theoretical hypergeometric distribution. This means that the hypergeometric is effectively a combinatoric problem, looking through the number of possible ways to see a certain set of outcomes out of the number of possible ways total.
+
+- Using R notation: $\displaystyle P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m + n\choose k}}$, where $m$ = number of objects of interest, $n$ = number of objects not of interest, $k$ = number that we are selecting, and $x$ is the number of objects of interest selected.
+
+- Using alternate notation: $\displaystyle P(X = x) = \frac{{M \choose x} {N - M \choose K - x}}{{N \choose K}}$, where $N$ = population size and $M$ = objects of interest (others are the same).
+
+In the tea problem $m$ is the number of cups of milk first, $n$ is the number of cups of tea first, and $k$ is the number of cups for guessing "tea first". For the 8 cups, this would mean that there was only one way to guess them all correctly out of the ${(4 + 4) \choose 4}$ = `r choose(8,4)` possible ways to guess 4 cups; thus 1 / `r choose(8,4)` = `r round(1 / choose(8,4), 4)` p-value stated earlier.
+
+## Extending to non-binary outcomes
+
+But how well does this generalize to non-binary outcome (e.g. comparison of means, where we aren't just concerned about correct or not correct)? Do the theoretically properties always stay simple with nice closed form combinatoric solutions? 
+
+Consider the simple case where we have 50 people randomly assigned to two different drug groups and we want to test if the average blood pressure from Drug 1 is *higher* the average from Drug 2. We will have data with blood pressures $Y_{ij}$ for person $i \in {1, 2, \ldots, 50}$ for drug $j \in {1,2}$. If the difference in means was $\bar{Y_1} - \bar{Y_2} = 20$ mmHG how would we determine a p-value?
+
+### Parametric (typical approach)
+
+- Run a t-test with the two samples to compare the means (after checking the assumptions of course).
+
+- In order to get a p-value, we need a test statistic. Specifically we need the sampling distribution of the test statistic, found via theoretical statistics.
+
+- Assumptions: $\bar{Y} \sim \text{Normal}$ by CLT ($n = 50$), maybe equal variances $\sigma_1^2 = \sigma_2^2$. 
+
+- If assumptions are met $\Longrightarrow$ Then can get difference in means $\bar{Y_1} - \bar{Y_2} \sim t_{98}$ and can then get the p-value. This is all based on how means behave sample to sample evaluated with theoretical results.
+
+### Permutation Testing
+
+- Instead of assuming theoretical properties of the distribution of differences, an alternative approach that is closer to Fisher's exact test is called permutation testing.
+
+- If we assume the null is true, then the random assignment of people to treatment groups is the source of the randomness in the results (the only distinguishing factor is the group label then).
+
+- To rework the difference in means hypothesis test, we could:
+
+1. Figure out what should happen if the NULL of no difference is true. The difference in blood pressure averages of 20 mmHg occurred by random chance due to the random assignment of 50 people to each group; this is the null.
+
+2. Figure out how many possible outcomes there are? ${100 \choose 50}$ = `r choose(100,50)`.
+
+3. Yikes, that is a lot of possible outcomes! How many would lead to an outcome that is as extreme or more extreme than we observed (difference $\ge$ 20 mmHg)?
+
+- Unknown, so we just need to compute for all `r choose(100,50)` combinations of people... (but obviously we do not have that kind of computing power / time). This would entail reassigning labels in ALL possible ways and calculating the sample means of each new group and looking at the difference in means.
+
+### Monte Carlo Testing
+
+- As a compromise, we can use Monte Carlo to check a random subset of the total number of ways (for example, randomly order 10,000 times). If we do this enough times, it should mimic a permutation test where we exhaustively check all possible ways.
+
+- Then in the simulation, look how often get a test statistic more extreme than what was observed? This is at it's core a p-value if we convert it to a probability.
+
+More formal steps:
+
+1. Figure out what should happen if the NULL of no difference is true (from context experts). The difference in blood pressure averages of 20 mmHg occurred by random chance due to the random assignment of 50 people to each group. 
+
+2. How many would lead to an outcome that is as extreme or more extreme than we observed (difference $\ge$ 20 mmHg)? Simulate the random assignment of people to treatments by permuting the drug labels in your data set. Record the difference in averages. Then repeat this process a reasonable number of times. Perhaps M=10000 times. Calculate the p-value as the number of random permutations out of your trials where the average difference exceeded 20 mmHg.
+
+- So in summary, Monte Carlo approach estimates a permutation test with simulation and computation to get a p-value, rather than theoretically finding the results by using an exhaustive list of options.
+
+- How many simulations are sufficient? The number of permutations that is sufficient is determined by your time frame (this is the main way in practice). Also it depends on how much precision we want when estimating the p-value (i.e. if only have 100 simulations, we can only estimate the p-value to the hundredths place; so if wanted to the thousandths place, would need 1000 simulations, and so on). Just want to be confident that we have captured the long term behavior of the scenario and still get the inference in a reasobable amount of time. This is a function of how much variability you expect from sample-to-sample.
+
+### Comparison of methods
+
+- Is there a preference in terms of parametric vs permutation tests in which is better? Pros and cons
+
+- ANSWER: Permutation testing i when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.
+
+### Permutation Test Example:
+
+Using data from the student sleep data. The following is directly taken from the help file for the sleep data in Base R:
+
+A data frame with 20 observations on 3 variables.
+
+[, 1]	extra	numeric	increase in hours of sleep
+
+[, 2]	group	factor drug given
+
+[, 3]	ID factor patient ID
+
+We could do a t-test, but it is a small scenario. So, let's see if we can exhaustively serve possible permutations.
+
+- Even with only 20 observations, still a very large number of possible permutations. Probably won't be able to run an exhaustive permutation test if the number is over a million or so
+
+```{r}
+#| label: permutations
+sleep
+
+# calculate the number of possible permutations from random assignment
+# -> exact permutation tests become scary realzzz fast
+choose(20,10)
+
+```
+
+Use `utils::combn()` function to define matrix of all sets of indices; the result is a 
+$k \times {n \choose k}$ matrix where each column is the indices of the selected objects for that permutation.
+
+```{r}
+#| label: group-assignments
+
+# build a permutation matrix
+# ?combn
+sleep_sets <- combn(1:20, m = 10)
+dim(sleep_sets)
+
+# preview matrix
+# -> a column of this sleep_sets is a vector of length 10 for the indices of the observations (from the original data) that are in the first treatment group for this permutation 
+sleep_sets[, 1:3]
+
+```
+
+Now we can calculate group means using `with()`.
+
+- This function  acts like using a dollar sign to access columns (i.e. nested naming such as `df$col`).
+
+- It creates a temporary environment and attaches all columns names to the data that is given so we don't have to have the nested names each time.
+
+```{r}
+#| label: calc-means
+
+# demo with
+# -> extract just the first groups' `extra` column values
+# -> response is `extra` column, and `group` is the labels
+with(sleep, extra[group == 1]) # equivalent to sleep$extra[sleep$group == 1]
+
+# calculate difference in means of two groups
+# -> psuedocode: for sleep matrix, calculate the of mean of extra column for group 1 and subtract the mean of group two
+with(sleep, mean(extra[group == 1]) - mean(extra[group == 2]))
+
+```
+
+Is this value significant? We could use parameterics. This difference would be be used to calculate the t-stat or be center of a t-interval and could determine significance from that.
+
+```{r}
+#| label: t-test
+
+# check assuptions 
+hist(sleep$extra[sleep$group == 1])
+hist(sleep$extra[sleep$group == 2])
+# -> decent enough
+
+# run two-sample t test
+t.test(x = sleep$extra[sleep$group == 1], y = sleep$extra[sleep$group == 2])
+
+```
+
+Or we can do a permutation test. To do this, we need a function can take a vector of indices, and return the average difference in sleep in the two groups.
+
+Function writing strategy: Start with a specific call that we want (using `with()`), then generalize by making it work for non-hardcoded names.
+
+```{r}
+#| label: perm-test
+
+# hardcoded what we want
+with(sleep, mean(extra[1:10] - mean(extra[-(1:10)])))
+
+# convert to function indices of a matrix
+sleep_compare <- function(idx_vec) {
+  with(sleep, mean(extra[idx_vec] - mean(extra[-(idx_vec)])))
+}
+
+# loop over indices of a matrix
+# -> sleep_sets has the labels down the columns (column = the sets of indices), this is what we want to traverse (iterate, loop over)
+# -> so give each column of sleep_sets to the function sleep_compare
+perm_diffs <- apply(X = sleep_sets, MARGIN = 2, FUN = sleep_compare)
+
+# look at results
+head(perm_diffs)
+hist(perm_diffs)
+round(quantile(perm_diffs, seq(from = 0.1, to = 0.9, by = 0.1)), 3) # see if distribution is balanced around zero actually
+# finer quantiles (trying to get closer to the observed difference)
+round(quantile(perm_diffs, seq(from = 0.025, to = 0.975, by = 0.05)), 3)
+
+```
+
+This tells us if the null hypothesis is true and we are randomly assigning group labels, then the difference in sleep should be zero (no difference). Let's calculate a p-value by using the permuted differences compared to the real difference that the study found. Specifically we can count the number of permutations further out in the tail than the real difference and get that proportion.
+
+```{r}
+#| label: p-value
+
+# save real difference
+real_diff <- with(sleep, mean(extra[group == 1] - extra[group == 2]))
+
+# calculate a p-value
+# -> proportion of values where condition is true -> mean(condition)
+# this is a one tail p-value
+sum(perm_diffs <= real_diff) / length(perm_diffs)
+mean(perm_diffs <= real_diff)
+
+# two tailed
+mean(abs(perm_diffs) >= abs(real_diff))
+
+```
+
+Assumptions / basic building blocks of this permutation test (what did we have to do?):
+
+- Had count the number of permutations, and keep track of them (not much of an assumption)
+
+- Need a way to summarize the data (not much of an assumption), some summary statistic.
+
+- Need to have the structure of hypothesis test ahead of time: one-tailed, two-tailed, significance level to compare the p-value to.
+
+- Only fundmental assumption was that there is a summary statistic for which there is a meaningful compariosn to be made and that we can mimic the randomization by simulation.
+
+### Monte Carlo Simulated Permutation Test Example:
+
+Monte Carlo methods are the idea that if you can simulate data from the assumed model, you can simulate Monte Carlo samples (simulated outcomes from that model). And if there is some property that those samples should have, we can store and evaluate those in a Monte Carlo simulation and studying their behavior.
+
+Use bigger data set where exhaustive permutation wouldn't be possible. Try testing if the price of a high end home (at the 90th percentile) is higher for homes with or without swimming pools. Definitely can't use a t-distribution for comparing quantiles nor figure out how the sampling distribution behaves theoretically, so this is a benefit of the simulation approach: can compare a wider variety of statistics.
+
+Use the Ames homes data.
+
+```{r}
+#| label: homes-data
+
+# load the real estate data
+real_estate <- read.csv("Files/Data/realestate.csv")
+
+# check out the data
+head(real_estate)
+table(real_estate$pool)
+
+# difference in 90th percentiles
+# -> overall and then with / without swimming pool
+quantile(real_estate$price, 0.9)
+# another with statement
+with(real_estate, quantile(price[pool == "yes"], 0.9))
+with(real_estate, quantile(price[pool == "no"], 0.9))
+
+```
+
+Now make a function that randomly permutes the pool labels then compares quantiles.
+
+- Note that that there are different strategies for setting this up. In the first example, a UDF calculated the difference and `apply()` did the permuting. Now we will have the UDF do both jobs and we just need to loop over the number of simulations we are going to run.
+
+- For loops have been optimized in R, so we are not really losing efficieny in terms of computing time by not using APPLY statements. It just depends on how you want to read the code.
+
+```{r}
+#| label: monte-carlo-perm-test
+
+# we have no idea how the difference in 90th quantile of house prices behaves theoretically, but we can compute it
+with(real_estate, quantile(price[pool == "yes"], 0.9) - quantile(price[pool == "no"], 0.9))
+
+# now we need to permute the labels
+# -> to create a random order of the houses and keep the sample sizes for each group (of pool), we can sample without replacement
+head(real_estate$pool, n = 20)
+head(sample(real_estate$pool, size = length(real_estate$pool)), n = 20)
+
+# create a function to do both steps, permute first then calculate difference
+# -> this is different than the first example 
+compare_high_end_perm <- function(df) {
+  
+  # sample without replacement to permute pool labels (keeping structure of dataset, just different order)
+  df$pool = sample(df$pool, size = length(df$pool))
+  
+  # calculate 
+  with(df, quantile(price[pool == "yes"], 0.9) - quantile(price[pool == "no"], 0.9))
+
+}
+
+# initialize items and loop over iterations
+M <- 10000
+pool_diffs <- rep(NA, M) 
+for (i in 1:M) {
+  # rerandomize and compute every iteration
+  # could have done both permuting and calculating inside the for loop as well, but cleaner with functions
+  pool_diffs[i] = compare_high_end_perm(real_estate)
+}
+
+# equivalent to, just depends on how want to read code
+# -> ignore X entirely
+pool_diffs2 <- sapply(1:M, function(X) compare_high_end_perm(real_estate))
+pool_diffs3 <- purrr::map_dbl(1:M, function(X) compare_high_end_perm(real_estate))
+
+# now look at results and p-value
+# -> upper-tailed test based on context and order of subtraction in function
+real_diff <- with(real_estate, quantile(price[pool == "yes"], 0.9) - quantile(price[pool == "no"], 0.9))
+mean(pool_diffs >= real_diff)
+
+```
+
+Based on this p-value, there is insufficient evidence to suggest that the 90th quantile of house prices with pools is greater than that without pools.
+
+Can use Monte Carlo simulation in lots of scenarios. For example in regression, if know what the null model is, can simulate lots of datasets and models and study the behaviors of different aspects of the model such as coefficients or $R^2$ and compare that to what was observed with the real data. 

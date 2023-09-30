@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./bootstrap.html" rel="next">
+<link href="./assignments.html" rel="next">
 <link href="./using-and-building-functions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -95,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -104,14 +104,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-notes.html">Course Notes</a></li><li class="breadcrumb-item"><a href="./permutation-tests.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests 1</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-notes.html">Course Notes</a></li><li class="breadcrumb-item"><a href="./permutation-tests.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-notes.html">Course Notes</a></li><li class="breadcrumb-item"><a href="./permutation-tests.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests 1</span></a></li></ol></nav><div class="quarto-title-banner page-columns page-full">
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-notes.html">Course Notes</a></li><li class="breadcrumb-item"><a href="./permutation-tests.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></a></li></ol></nav><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <div class="quarto-title-block"><div><h1 class="title"><span id="sec-permutation-tests" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                       </div>
@@ -164,37 +164,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./using-and-building-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using naandd Building Functions 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using and Building Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./permutation-tests.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests 1</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./bootstrap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bootstrap</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./computational-experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation-studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation Studies 1</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./improving-code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Improving Code 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></span></a>
   </div>
 </li>
       </ul>
@@ -211,19 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./hw2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -233,15 +197,390 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link active" data-scroll-target="#fishers-exact-test"><span class="header-section-number">3.1</span> Fisher’s Exact Test</a></li>
+  <li>
+<a href="#extending-to-non-binary-outcomes" id="toc-extending-to-non-binary-outcomes" class="nav-link" data-scroll-target="#extending-to-non-binary-outcomes"><span class="header-section-number">3.2</span> Extending to non-binary outcomes</a>
+  <ul class="collapse">
+<li><a href="#parametric-typical-approach" id="toc-parametric-typical-approach" class="nav-link" data-scroll-target="#parametric-typical-approach"><span class="header-section-number">3.2.1</span> Parametric (typical approach)</a></li>
+  <li><a href="#permutation-testing" id="toc-permutation-testing" class="nav-link" data-scroll-target="#permutation-testing"><span class="header-section-number">3.2.2</span> Permutation Testing</a></li>
+  <li><a href="#monte-carlo-testing" id="toc-monte-carlo-testing" class="nav-link" data-scroll-target="#monte-carlo-testing"><span class="header-section-number">3.2.3</span> Monte Carlo Testing</a></li>
+  <li><a href="#comparison-of-methods" id="toc-comparison-of-methods" class="nav-link" data-scroll-target="#comparison-of-methods"><span class="header-section-number">3.2.4</span> Comparison of methods</a></li>
+  <li><a href="#permutation-test-example" id="toc-permutation-test-example" class="nav-link" data-scroll-target="#permutation-test-example"><span class="header-section-number">3.2.5</span> Permutation Test Example:</a></li>
+  <li><a href="#monte-carlo-simulated-permutation-test-example" id="toc-monte-carlo-simulated-permutation-test-example" class="nav-link" data-scroll-target="#monte-carlo-simulated-permutation-test-example"><span class="header-section-number">3.2.6</span> Monte Carlo Simulated Permutation Test Example:</a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="fishers-exact-test" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="fishers-exact-test">
+<span class="header-section-number">3.1</span> Fisher’s Exact Test</h2>
+<p>The idea of permutation testing grows out of Fisher’s Exact test; part of the experimental design work by R.A. Fisher at Rothemstad in the 1920’s. The canonical example of Fisher’s exact test is the “Lady Tasting Tea” experiment. As the story goes, Muriel Bristol was a lady who worked with Fisher at Rothemstad. She claimed to be able to tell if a cup of tea was made with milk first then tea added, or tea first then milk added. Fisher was suspicious and devised an experiment to test her skills. 8 cups of tea were made: 4 milk first, 4 tea first. The eight cups were randomized in order, an Muriel was asked to sort them through a blinded taste test.</p>
+<p>If she was guessing, then the number of correct guesses would follow a Hypergeometric distribution. (Contemporaneous accounts say that she got all 8 correct – thus a p-value = 0.0143). This problem is essentially just a combinatorics problem. It is the same as choosing colored balls from an urn, for example 4 white and 4 black. What is the chance you reach in and get all the same color?</p>
+<p>With Fishers exact test, if the null hypothesis is true that we are just guessing, we know the number exact number of ways to be correct based on the theoretical hypergeometric distribution. This means that the hypergeometric is effectively a combinatoric problem, looking through the number of possible ways to see a certain set of outcomes out of the number of possible ways total.</p>
+<ul>
+<li><p>Using R notation: <span class="math inline">\(\displaystyle P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m + n\choose k}}\)</span>, where <span class="math inline">\(m\)</span> = number of objects of interest and <span class="math inline">\(n\)</span> = number of objects not of interest and <span class="math inline">\(k\)</span> = number that we are selecting, <span class="math inline">\(X\)</span> is the number of objects of interest selected.</p></li>
+<li><p>Using alternate notation: <span class="math inline">\(\displaystyle P(X = x) = \frac{{M \choose x} {N - M \choose K - x}}{{N \choose K}}\)</span>, where <span class="math inline">\(N\)</span> = population size and <span class="math inline">\(M\)</span> = objects of interest (others are the same).</p></li>
+</ul>
+<p>In the tea problem <span class="math inline">\(m\)</span> is the number of cups of milk first, <span class="math inline">\(n\)</span> is the number of cups of tea first, and <span class="math inline">\(k\)</span> is the number of cups for guessing “tea first”. For the 8 cups, this would mean that there was only one way to guess them all correctly out of the <span class="math inline">\({(4 + 4) \choose 4}\)</span> = 70 possible ways to guess 4 cups; thus 1 / 70 = 0.0143 p-value stated earlier.</p>
+</section><section id="extending-to-non-binary-outcomes" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="extending-to-non-binary-outcomes">
+<span class="header-section-number">3.2</span> Extending to non-binary outcomes</h2>
+<p>But how well does this generalize to non-binary outcome (e.g.&nbsp;comparison of means, where we aren’t just concerned about correct or not correct)? Do the theoretically properties always stay simple with nice closed form combinatoric solutions?</p>
+<p>Consider the simple case where we have 50 people randomly assigned to two different drug groups and we want to test if the average blood pressure from Drug 1 is <em>higher</em> the average from Drug 2. We will have data with blood pressures <span class="math inline">\(Y_{ij}\)</span> for person <span class="math inline">\(i \in {1, 2, \ldots, 50}\)</span> for drug <span class="math inline">\(j \in {1,2}\)</span>. If the difference in means was <span class="math inline">\(\bar{Y_1} - \bar{Y_2} = 20\)</span> mmHG how would we determine a p-value?</p>
+<section id="parametric-typical-approach" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="parametric-typical-approach">
+<span class="header-section-number">3.2.1</span> Parametric (typical approach)</h3>
+<ul>
+<li><p>Run a t-test with the two samples to compare the means (after checking the assumptions of course).</p></li>
+<li><p>In order to get a p-value, we need a test statistic. Specifically we need the sampling distribution of the test statistic, found via theoretical statistics.</p></li>
+<li><p>Assumptions: <span class="math inline">\(\bar{Y} \sim \text{Normal}\)</span> by CLT (<span class="math inline">\(n = 50\)</span>), maybe equal variances <span class="math inline">\(\sigma_1^2 = \sigma_2^2\)</span>.</p></li>
+<li><p>If assumptions are met <span class="math inline">\(\Longrightarrow\)</span> Then can get difference in means <span class="math inline">\(\bar{Y_1} - \bar{Y_2} \sim t_{98}\)</span> and can then get the p-value. This is all based on how means behave sample to sample evaluated with theoretical results.</p></li>
+</ul></section><section id="permutation-testing" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="permutation-testing">
+<span class="header-section-number">3.2.2</span> Permutation Testing</h3>
+<ul>
+<li><p>Instead of assuming theoretical properties of the distribution of differences, an alternative approach that is closer to Fisher’s exact test is called permutation testing.</p></li>
+<li><p>If we assume the null is true, then the random assignment of people to treatment groups is the source of the randomness in the results (the only distinguishing factor is the group label then).</p></li>
+<li><p>To rework the difference in means hypothesis test, we could:</p></li>
+</ul>
+<ol type="1">
+<li><p>Figure out what should happen if the NULL of no difference is true. The difference in blood pressure averages of 20 mmHg occurred by random chance due to the random assignment of 50 people to each group; this is the null.</p></li>
+<li><p>Figure out how many possible outcomes there are? <span class="math inline">\({100 \choose 50}\)</span> = 1.0089134^{29}.</p></li>
+<li><p>Yikes, that is a lot of possible outcomes! How many would lead to an outcome that is as extreme or more extreme than we observed (difference <span class="math inline">\(\ge\)</span> 20 mmHg)?</p></li>
+</ol>
+<ul>
+<li>Unknown, so we just need to compute for all 1.0089134^{29} combinations of people… (but obviously we do not have that kind of computing power / time). This would entail reassigning labels in ALL possible ways and calculating the sample means of each new group and looking at the difference in means.</li>
+</ul></section><section id="monte-carlo-testing" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="monte-carlo-testing">
+<span class="header-section-number">3.2.3</span> Monte Carlo Testing</h3>
+<ul>
+<li><p>As a compromise, we can use Monte Carlo to check a random subset of the total number of ways (for example, randomly order 10,000 times). If we do this enough times, it should mimic a permutation test where we exhaustively check all possible ways.</p></li>
+<li><p>Then in the simulation, look how often get a test statistic more extreme than what was observed? This is at it’s core a p-value if we convert it to a probability.</p></li>
+</ul>
+<p>More formal steps:</p>
+<ol type="1">
+<li><p>Figure out what should happen if the NULL of no difference is true (from context experts). The difference in blood pressure averages of 20 mmHg occurred by random chance due to the random assignment of 50 people to each group.</p></li>
+<li><p>How many would lead to an outcome that is as extreme or more extreme than we observed (difference <span class="math inline">\(\ge\)</span> 20 mmHg)? Simulate the random assignment of people to treatments by permuting the drug labels in your data set. Record the difference in averages. Then repeat this process a reasonable number of times. Perhaps M=10000 times. Calculate the p-value as the number of random permutations out of your trials where the average difference exceeded 20 mmHg.</p></li>
+</ol>
+<ul>
+<li><p>So in summary, Monte Carlo approach estimates a permutation test with simulation and computation to get a p-value, rather than theoretically finding the results by using an exhaustive list of options.</p></li>
+<li><p>How many simulations are sufficient? The number of permutations that is sufficient is determined by your time frame (this is the main way in practice). Also it depends on how much precision we want when estimating the p-value (i.e.&nbsp;if only have 100 simulations, we can only estimate the p-value to the hundredths place; so if wanted to the thousandths place, would need 1000 simulations, and so on). Just want to be confident that we have captured the long term behavior of the scenario and still get the inference in a reasobable amount of time. This is a function of how much variability you expect from sample-to-sample.</p></li>
+</ul></section><section id="comparison-of-methods" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="comparison-of-methods">
+<span class="header-section-number">3.2.4</span> Comparison of methods</h3>
+<ul>
+<li><p>Is there a preference in terms of parametric vs permutation tests in which is better? Pros and cons</p></li>
+<li><p>ANSWER: Permutation testing i when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.</p></li>
+</ul></section><section id="permutation-test-example" class="level3" data-number="3.2.5"><h3 data-number="3.2.5" class="anchored" data-anchor-id="permutation-test-example">
+<span class="header-section-number">3.2.5</span> Permutation Test Example:</h3>
+<p>Using data from the student sleep data. The following is directly taken from the help file for the sleep data in Base R:</p>
+<p>A data frame with 20 observations on 3 variables.</p>
+<p>[, 1] extra numeric increase in hours of sleep</p>
+<p>[, 2] group factor drug given</p>
+<p>[, 3] ID factor patient ID</p>
+<p>We could do a t-test, but it is a small scenario. So, let’s see if we can exhaustively serve possible permutations.</p>
+<ul>
+<li>Even with only 20 observations, still a very large number of possible permutations. Probably won’t be able to run an exhaustive permutation test if the number is over a million or so</li>
+</ul>
+<div class="cell" data-hash="permutation-tests_cache/html/permutations_f5242cab6c7cf74eefd139b66bd390f4">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sleep</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   extra group ID
+1    0.7     1  1
+2   -1.6     1  2
+3   -0.2     1  3
+4   -1.2     1  4
+5   -0.1     1  5
+6    3.4     1  6
+7    3.7     1  7
+8    0.8     1  8
+9    0.0     1  9
+10   2.0     1 10
+11   1.9     2  1
+12   0.8     2  2
+13   1.1     2  3
+14   0.1     2  4
+15  -0.1     2  5
+16   4.4     2  6
+17   5.5     2  7
+18   1.6     2  8
+19   4.6     2  9
+20   3.4     2 10</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calculate the number of possible permutations from random assignment</span></span>
+<span><span class="co"># -&gt; exact permutation tests become scary realzzz fast</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 184756</code></pre>
+</div>
+</div>
+<p>Use <code><a href="https://rdrr.io/r/utils/combn.html">utils::combn()</a></code> function to define matrix of all sets of indices; the result is a <span class="math inline">\(k \times {n \choose k}\)</span> matrix where each column is the indices of the selected objects for that permutation.</p>
+<div class="cell" data-hash="permutation-tests_cache/html/group-assignments_d8ac6dd868b233e426f1cc2031849a36">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build a permutation matrix</span></span>
+<span><span class="co"># ?combn</span></span>
+<span><span class="va">sleep_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, m <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sleep_sets</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]     10 184756</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># preview matrix</span></span>
+<span><span class="co"># -&gt; a column of this sleep_sets is a vector of length 10 for the indices of the observations (from the original data) that are in the first treatment group for this permutation </span></span>
+<span><span class="va">sleep_sets</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1] [,2] [,3]
+ [1,]    1    1    1
+ [2,]    2    2    2
+ [3,]    3    3    3
+ [4,]    4    4    4
+ [5,]    5    5    5
+ [6,]    6    6    6
+ [7,]    7    7    7
+ [8,]    8    8    8
+ [9,]    9    9    9
+[10,]   10   11   12</code></pre>
+</div>
+</div>
+<p>Now we can calculate group means using <code><a href="https://rdrr.io/r/base/with.html">with()</a></code>.</p>
+<ul>
+<li><p>This function acts like using a dollar sign to access columns (i.e.&nbsp;nested naming such as <code>df$col</code>).</p></li>
+<li><p>It creates a temporary environment and attaches all columns names to the data that is given so we don’t have to have the nested names each time.</p></li>
+</ul>
+<div class="cell" data-hash="permutation-tests_cache/html/calc-means_e8ea7830d363fd11c60b5f76fc9c2328">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># demo with</span></span>
+<span><span class="co"># -&gt; extract just the first groups' `extra` column values</span></span>
+<span><span class="co"># -&gt; response is `extra` column, and `group` is the labels</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co"># equivalent to sleep$extra[sleep$group == 1]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calculate difference in means of two groups</span></span>
+<span><span class="co"># -&gt; psuedocode: for sleep matrix, calculate the of mean of extra column for group 1 and subtract the mean of group two</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.58</code></pre>
+</div>
+</div>
+<p>Is this value significant? We could use parameterics. This difference would be be used to calculate the t-stat or be center of a t-interval and could determine significance from that.</p>
+<div class="cell" data-hash="permutation-tests_cache/html/t-test_552352dd0769b28cbf7f653dc06ce55a">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># check assuptions </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<figure class="quarto-float quarto-float-fig figure"><div>
+<img src="permutation-tests_files/figure-html/t-test-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" data-fig-pos="hold" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<figure class="quarto-float quarto-float-fig figure"><div>
+<img src="permutation-tests_files/figure-html/t-test-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img" data-fig-pos="hold" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># -&gt; decent enough</span></span>
+<span></span>
+<span><span class="co"># run two-sample t test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  sleep$extra[sleep$group == 1] and sleep$extra[sleep$group == 2]
+t = -1.8608, df = 17.776, p-value = 0.07939
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.3654832  0.2054832
+sample estimates:
+mean of x mean of y 
+     0.75      2.33 </code></pre>
+</div>
+</div>
+<p>Or we can do a permutation test. To do this, we need a function can take a vector of indices, and return the average difference in sleep in the two groups.</p>
+<p>Function writing strategy: Start with a specific call that we want (using <code><a href="https://rdrr.io/r/base/with.html">with()</a></code>), then generalize by making it work for non-hardcoded names.</p>
+<div class="cell" data-hash="permutation-tests_cache/html/perm-test_3967ff1593b432d5bacaa100299ce16d">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># hardcoded what we want</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.58</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># convert to function indices of a matrix</span></span>
+<span><span class="va">sleep_compare</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">idx_vec</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="va">idx_vec</span><span class="op">]</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="va">idx_vec</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># loop over indices of a matrix</span></span>
+<span><span class="co"># -&gt; sleep_sets has the labels down the columns (column = the sets of indices), this is what we want to traverse (iterate, loop over)</span></span>
+<span><span class="co"># -&gt; so give each column of sleep_sets to the function sleep_compare</span></span>
+<span><span class="va">perm_diffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">sleep_sets</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">sleep_compare</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># look at results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">perm_diffs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.58 -1.60 -1.82 -1.76 -1.96 -2.00</code></pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">perm_diffs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<figure class="quarto-float quarto-float-fig figure"><div>
+<img src="permutation-tests_files/figure-html/perm-test-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" data-fig-pos="hold" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">perm_diffs</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0.1</span>, to <span class="op">=</span> <span class="fl">0.9</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span> <span class="co"># see if distribution is balanced around zero actually</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  10%   20%   30%   40%   50%   60%   70%   80%   90% 
+-1.18 -0.78 -0.48 -0.24  0.00  0.24  0.48  0.78  1.18 </code></pre>
+</div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># finer quantiles (trying to get closer to the observed difference)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">perm_diffs</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0.025</span>, to <span class="op">=</span> <span class="fl">0.975</span>, by <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 2.5%  7.5% 12.5% 17.5% 22.5% 27.5% 32.5% 37.5% 42.5% 47.5% 52.5% 57.5% 62.5% 
+-1.76 -1.32 -1.06 -0.86 -0.70 -0.56 -0.42 -0.30 -0.18 -0.06  0.06  0.18  0.30 
+67.5% 72.5% 77.5% 82.5% 87.5% 92.5% 97.5% 
+ 0.42  0.56  0.70  0.86  1.06  1.32  1.76 </code></pre>
+</div>
+</div>
+<p>This tells us if the null hypothesis is true and we are randomly assigning group labels, then the difference in sleep should be zero (no difference). Let’s calculate a p-value by using the permuted differences compared to the real difference that the study found. Specifically we can count the number of permutations further out in the tail than the real difference and get that proportion.</p>
+<div class="cell" data-hash="permutation-tests_cache/html/p-value_28d7523b26ff16c8cc944ee7fc3b737d">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># save real difference</span></span>
+<span><span class="va">real_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate a p-value</span></span>
+<span><span class="co"># -&gt; proportion of values where condition is true -&gt; mean(condition)</span></span>
+<span><span class="co"># this is a one tail p-value</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">perm_diffs</span> <span class="op">&lt;=</span> <span class="va">real_diff</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">perm_diffs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04072398</code></pre>
+</div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">perm_diffs</span> <span class="op">&lt;=</span> <span class="va">real_diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04072398</code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># two tailed</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">perm_diffs</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">real_diff</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.08141008</code></pre>
+</div>
+</div>
+<p>Assumptions / basic building blocks of this permutation test (what did we have to do?):</p>
+<ul>
+<li><p>Had count the number of permutations, and keep track of them (not much of an assumption)</p></li>
+<li><p>Need a way to summarize the data (not much of an assumption), some summary statistic.</p></li>
+<li><p>Need to have the structure of hypothesis test ahead of time: one-tailed, two-tailed, significance level to compare the p-value to.</p></li>
+<li><p>Only fundmental assumption was that there is a summary statistic for which there is a meaningful compariosn to be made and that we can mimic the randomization by simulation.</p></li>
+</ul></section><section id="monte-carlo-simulated-permutation-test-example" class="level3" data-number="3.2.6"><h3 data-number="3.2.6" class="anchored" data-anchor-id="monte-carlo-simulated-permutation-test-example">
+<span class="header-section-number">3.2.6</span> Monte Carlo Simulated Permutation Test Example:</h3>
+<p>Monte Carlo methods are the idea that if you can simulate data from the assumed model, you can simulate Monte Carlo samples (simulated outcomes from that model). And if there is some property that those samples should have, we can store and evaluate those in a Monte Carlo simulation and studying their behavior.</p>
+<p>Use bigger data set where exhaustive permutation wouldn’t be possible. Try testing if the price of a high end home (at the 90th percentile) is higher for homes with or without swimming pools. Definitely can’t use a t-distribution for comparing quantiles nor figure out how the sampling distribution behaves theoretically, so this is a benefit of the simulation approach: can compare a wider variety of statistics.</p>
+<p>Use the Ames homes data.</p>
+<div class="cell" data-hash="permutation-tests_cache/html/homes-data_bfdf4954728dbace8fc28a540b0ed4b6">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load the real estate data</span></span>
+<span><span class="va">real_estate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Files/Data/realestate.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># check out the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   price sqft bed bath  ac cars pool built quality style   lot highway
+1 360000 3032   4    4 yes    2   no  1972  medium     1 22221      no
+2 340000 2058   4    2 yes    2   no  1976  medium     1 22912      no
+3 250000 1780   4    3 yes    2   no  1980  medium     1 21345      no
+4 205500 1638   4    2 yes    2   no  1963  medium     1 17342      no
+5 275500 2196   4    3 yes    2   no  1968  medium     7 21786      no
+6 248000 1966   4    3 yes    5  yes  1972  medium     1 18902      no</code></pre>
+</div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ no yes 
+486  36 </code></pre>
+</div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># difference in 90th percentiles</span></span>
+<span><span class="co"># -&gt; overall and then with / without swimming pool</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">price</span>, <span class="fl">0.9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   90% 
+489003 </code></pre>
+</div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># another with statement</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   90% 
+549950 </code></pre>
+</div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   90% 
+478500 </code></pre>
+</div>
+</div>
+<p>Now make a function that randomly permutes the pool labels then compares quantiles.</p>
+<ul>
+<li><p>Note that that there are different strategies for setting this up. In the first example, a UDF calculated the difference and <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> did the permuting. Now we will have the UDF do both jobs and we just need to loop over the number of simulations we are going to run.</p></li>
+<li><p>For loops have been optimized in R, so we are not really losing efficieny in terms of computing time by not using APPLY statements. It just depends on how you want to read the code.</p></li>
+</ul>
+<div class="cell" data-hash="permutation-tests_cache/html/monte-carlo-perm-test_67c98db60b1534984c84596e44660f0b">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># we have no idea how the difference in 90th quantile of house prices behaves theoretically, but we can compute it</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  90% 
+71450 </code></pre>
+</div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># now we need to permute the labels</span></span>
+<span><span class="co"># -&gt; to create a random order of the houses and keep the sample sizes for each group (of pool), we can sample without replacement</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "no"  "no"  "no"  "no"  "no"  "yes" "no"  "no"  "no"  "no"  "yes" "no" 
+[13] "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no" </code></pre>
+</div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span><span class="op">)</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "no"  "no"  "no"  "no"  "yes" "no"  "no"  "no"  "no"  "no"  "no"  "no" 
+[13] "no"  "no"  "no"  "no"  "yes" "no"  "no"  "no" </code></pre>
+</div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create a function to do both steps, permute first then calculate difference</span></span>
+<span><span class="co"># -&gt; this is different than the first example </span></span>
+<span><span class="va">compare_high_end_perm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># sample without replacement to permute pool labels (keeping structure of dataset, just different order)</span></span>
+<span>  <span class="va">df</span><span class="op">$</span><span class="va">pool</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">pool</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">pool</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># calculate </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># initialize items and loop over iterations</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="va">pool_diffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">M</span><span class="op">)</span> </span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">M</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># rerandomize and compute every iteration</span></span>
+<span>  <span class="co"># could have done both permuting and calculating inside the for loop as well, but cleaner with functions</span></span>
+<span>  <span class="va">pool_diffs</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fu">compare_high_end_perm</span><span class="op">(</span><span class="va">real_estate</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># equivalent to, just depends on how want to read code</span></span>
+<span><span class="co"># -&gt; ignore X entirely</span></span>
+<span><span class="va">pool_diffs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">M</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">compare_high_end_perm</span><span class="op">(</span><span class="va">real_estate</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pool_diffs3</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">M</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">compare_high_end_perm</span><span class="op">(</span><span class="va">real_estate</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># now look at results and p-value</span></span>
+<span><span class="co"># -&gt; upper-tailed test based on context and order of subtraction in function</span></span>
+<span><span class="va">real_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pool_diffs</span> <span class="op">&gt;=</span> <span class="va">real_diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0853</code></pre>
+</div>
+</div>
+<p>Based on this p-value, there is insufficient evidence to suggest that the 90th quantile of house prices with pools is greater than that without pools.</p>
+<p>Can use Monte Carlo simulation in lots of scenarios. For example in regression, if know what the null model is, can simulate lots of datasets and models and study the behaviors of different aspects of the model such as coefficients or <span class="math inline">\(R^2\)</span> and compare that to what was observed with the real data.</p>
+
 
 <!-- -->
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -637,26 +976,311 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./using-and-building-functions.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using naandd Building Functions 1</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using and Building Functions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./bootstrap.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bootstrap</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./assignments.html" class="pagination-link">
+        <span class="nav-page-text">Assignments</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Permutation Tests {#sec-permutation-tests}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb50" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Permutation Tests {#sec-permutation-tests}</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fisher's Exact Test</span></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>The idea of permutation testing grows out of Fisher's Exact test; part of the experimental design work by R.A. Fisher at Rothemstad in the 1920's. The canonical example of Fisher's exact test is the "Lady Tasting Tea" experiment. As the story goes, Muriel Bristol was a lady who worked with Fisher at Rothemstad. She claimed to be able to tell if a cup of tea was made with milk first then tea added, or tea first then milk added. Fisher was suspicious and devised an experiment to test her skills. 8 cups of tea were made: 4 milk first, 4 tea first. The eight cups were randomized in order, an Muriel was asked to sort them through a blinded taste test.</span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>If she was guessing, then the number of correct guesses would follow a Hypergeometric distribution. (Contemporaneous accounts say that she got all 8 correct -- thus a p-value = <span class="in">`r round(dhyper(x = 4, m = 4, n = 4, k = 4), 4)`</span>). This problem is essentially just a combinatorics problem. It is the same as choosing colored balls from an urn, for example 4 white and 4 black. What is the chance you reach in and get all the same color?</span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>With Fishers exact test, if the null hypothesis is true that we are just guessing, we know the number exact number of ways to be correct based on the theoretical hypergeometric distribution. This means that the hypergeometric is effectively a combinatoric problem, looking through the number of possible ways to see a certain set of outcomes out of the number of possible ways total.</span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using R notation: $\displaystyle P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m + n\choose k}}$, where $m$ = number of objects of interest and $n$ = number of objects not of interest and $k$ = number that we are selecting, $X$ is the number of objects of interest selected.</span>
+<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using alternate notation: $\displaystyle P(X = x) = \frac{{M \choose x} {N - M \choose K - x}}{{N \choose K}}$, where $N$ = population size and $M$ = objects of interest (others are the same).</span>
+<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a>In the tea problem $m$ is the number of cups of milk first, $n$ is the number of cups of tea first, and $k$ is the number of cups for guessing "tea first". For the 8 cups, this would mean that there was only one way to guess them all correctly out of the ${(4 + 4) \choose 4}$ = <span class="in">`r choose(8,4)`</span> possible ways to guess 4 cups; thus 1 / <span class="in">`r choose(8,4)`</span> = <span class="in">`r round(1 / choose(8,4), 4)`</span> p-value stated earlier.</span>
+<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extending to non-binary outcomes</span></span>
+<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a>But how well does this generalize to non-binary outcome (e.g. comparison of means, where we aren't just concerned about correct or not correct)? Do the theoretically properties always stay simple with nice closed form combinatoric solutions? </span>
+<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a>Consider the simple case where we have 50 people randomly assigned to two different drug groups and we want to test if the average blood pressure from Drug 1 is *higher* the average from Drug 2. We will have data with blood pressures $Y_{ij}$ for person $i \in {1, 2, \ldots, 50}$ for drug $j \in {1,2}$. If the difference in means was $\bar{Y_1} - \bar{Y_2} = 20$ mmHG how would we determine a p-value?</span>
+<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### Parametric (typical approach)</span></span>
+<span id="cb50-36"><a href="#cb50-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-37"><a href="#cb50-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Run a t-test with the two samples to compare the means (after checking the assumptions of course).</span>
+<span id="cb50-38"><a href="#cb50-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-39"><a href="#cb50-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In order to get a p-value, we need a test statistic. Specifically we need the sampling distribution of the test statistic, found via theoretical statistics.</span>
+<span id="cb50-40"><a href="#cb50-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-41"><a href="#cb50-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Assumptions: $\bar{Y} \sim \text{Normal}$ by CLT ($n = 50$), maybe equal variances $\sigma_1^2 = \sigma_2^2$. </span>
+<span id="cb50-42"><a href="#cb50-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-43"><a href="#cb50-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If assumptions are met $\Longrightarrow$ Then can get difference in means $\bar{Y_1} - \bar{Y_2} \sim t_{98}$ and can then get the p-value. This is all based on how means behave sample to sample evaluated with theoretical results.</span>
+<span id="cb50-44"><a href="#cb50-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-45"><a href="#cb50-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### Permutation Testing</span></span>
+<span id="cb50-46"><a href="#cb50-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-47"><a href="#cb50-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Instead of assuming theoretical properties of the distribution of differences, an alternative approach that is closer to Fisher's exact test is called permutation testing.</span>
+<span id="cb50-48"><a href="#cb50-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-49"><a href="#cb50-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>If we assume the null is true, then the random assignment of people to treatment groups is the source of the randomness in the results (the only distinguishing factor is the group label then).</span>
+<span id="cb50-50"><a href="#cb50-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-51"><a href="#cb50-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>To rework the difference in means hypothesis test, we could:</span>
+<span id="cb50-52"><a href="#cb50-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-53"><a href="#cb50-53" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Figure out what should happen if the NULL of no difference is true. The difference in blood pressure averages of 20 mmHg occurred by random chance due to the random assignment of 50 people to each group; this is the null.</span>
+<span id="cb50-54"><a href="#cb50-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-55"><a href="#cb50-55" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Figure out how many possible outcomes there are? ${100 \choose 50}$ = <span class="in">`r choose(100,50)`</span>.</span>
+<span id="cb50-56"><a href="#cb50-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-57"><a href="#cb50-57" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Yikes, that is a lot of possible outcomes! How many would lead to an outcome that is as extreme or more extreme than we observed (difference $\ge$ 20 mmHg)?</span>
+<span id="cb50-58"><a href="#cb50-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-59"><a href="#cb50-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unknown, so we just need to compute for all <span class="in">`r choose(100,50)`</span> combinations of people... (but obviously we do not have that kind of computing power / time). This would entail reassigning labels in ALL possible ways and calculating the sample means of each new group and looking at the difference in means.</span>
+<span id="cb50-60"><a href="#cb50-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-61"><a href="#cb50-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### Monte Carlo Testing</span></span>
+<span id="cb50-62"><a href="#cb50-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-63"><a href="#cb50-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>As a compromise, we can use Monte Carlo to check a random subset of the total number of ways (for example, randomly order 10,000 times). If we do this enough times, it should mimic a permutation test where we exhaustively check all possible ways.</span>
+<span id="cb50-64"><a href="#cb50-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-65"><a href="#cb50-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Then in the simulation, look how often get a test statistic more extreme than what was observed? This is at it's core a p-value if we convert it to a probability.</span>
+<span id="cb50-66"><a href="#cb50-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-67"><a href="#cb50-67" aria-hidden="true" tabindex="-1"></a>More formal steps:</span>
+<span id="cb50-68"><a href="#cb50-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-69"><a href="#cb50-69" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Figure out what should happen if the NULL of no difference is true (from context experts). The difference in blood pressure averages of 20 mmHg occurred by random chance due to the random assignment of 50 people to each group. </span>
+<span id="cb50-70"><a href="#cb50-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-71"><a href="#cb50-71" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>How many would lead to an outcome that is as extreme or more extreme than we observed (difference $\ge$ 20 mmHg)? Simulate the random assignment of people to treatments by permuting the drug labels in your data set. Record the difference in averages. Then repeat this process a reasonable number of times. Perhaps M=10000 times. Calculate the p-value as the number of random permutations out of your trials where the average difference exceeded 20 mmHg.</span>
+<span id="cb50-72"><a href="#cb50-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-73"><a href="#cb50-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>So in summary, Monte Carlo approach estimates a permutation test with simulation and computation to get a p-value, rather than theoretically finding the results by using an exhaustive list of options.</span>
+<span id="cb50-74"><a href="#cb50-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-75"><a href="#cb50-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How many simulations are sufficient? The number of permutations that is sufficient is determined by your time frame (this is the main way in practice). Also it depends on how much precision we want when estimating the p-value (i.e. if only have 100 simulations, we can only estimate the p-value to the hundredths place; so if wanted to the thousandths place, would need 1000 simulations, and so on). Just want to be confident that we have captured the long term behavior of the scenario and still get the inference in a reasobable amount of time. This is a function of how much variability you expect from sample-to-sample.</span>
+<span id="cb50-76"><a href="#cb50-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-77"><a href="#cb50-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparison of methods</span></span>
+<span id="cb50-78"><a href="#cb50-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-79"><a href="#cb50-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Is there a preference in terms of parametric vs permutation tests in which is better? Pros and cons</span>
+<span id="cb50-80"><a href="#cb50-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-81"><a href="#cb50-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ANSWER: Permutation testing i when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.</span>
+<span id="cb50-82"><a href="#cb50-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-83"><a href="#cb50-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### Permutation Test Example:</span></span>
+<span id="cb50-84"><a href="#cb50-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-85"><a href="#cb50-85" aria-hidden="true" tabindex="-1"></a>Using data from the student sleep data. The following is directly taken from the help file for the sleep data in Base R:</span>
+<span id="cb50-86"><a href="#cb50-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-87"><a href="#cb50-87" aria-hidden="true" tabindex="-1"></a>A data frame with 20 observations on 3 variables.</span>
+<span id="cb50-88"><a href="#cb50-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-89"><a href="#cb50-89" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">, 1</span><span class="co">]</span>   extra   numeric increase in hours of sleep</span>
+<span id="cb50-90"><a href="#cb50-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-91"><a href="#cb50-91" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">, 2</span><span class="co">]</span>   group   factor drug given</span>
+<span id="cb50-92"><a href="#cb50-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-93"><a href="#cb50-93" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">, 3</span><span class="co">]</span>   ID factor patient ID</span>
+<span id="cb50-94"><a href="#cb50-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-95"><a href="#cb50-95" aria-hidden="true" tabindex="-1"></a>We could do a t-test, but it is a small scenario. So, let's see if we can exhaustively serve possible permutations.</span>
+<span id="cb50-96"><a href="#cb50-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-97"><a href="#cb50-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Even with only 20 observations, still a very large number of possible permutations. Probably won't be able to run an exhaustive permutation test if the number is over a million or so</span>
+<span id="cb50-98"><a href="#cb50-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-101"><a href="#cb50-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-102"><a href="#cb50-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: permutations</span></span>
+<span id="cb50-103"><a href="#cb50-103" aria-hidden="true" tabindex="-1"></a>sleep</span>
+<span id="cb50-104"><a href="#cb50-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-105"><a href="#cb50-105" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the number of possible permutations from random assignment</span></span>
+<span id="cb50-106"><a href="#cb50-106" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; exact permutation tests become scary realzzz fast</span></span>
+<span id="cb50-107"><a href="#cb50-107" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">20</span>,<span class="dv">10</span>)</span>
+<span id="cb50-108"><a href="#cb50-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-109"><a href="#cb50-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-110"><a href="#cb50-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-111"><a href="#cb50-111" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`utils::combn()`</span> function to define matrix of all sets of indices; the result is a </span>
+<span id="cb50-112"><a href="#cb50-112" aria-hidden="true" tabindex="-1"></a>$k \times {n \choose k}$ matrix where each column is the indices of the selected objects for that permutation.</span>
+<span id="cb50-113"><a href="#cb50-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-116"><a href="#cb50-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-117"><a href="#cb50-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: group-assignments</span></span>
+<span id="cb50-118"><a href="#cb50-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-119"><a href="#cb50-119" aria-hidden="true" tabindex="-1"></a><span class="co"># build a permutation matrix</span></span>
+<span id="cb50-120"><a href="#cb50-120" aria-hidden="true" tabindex="-1"></a><span class="co"># ?combn</span></span>
+<span id="cb50-121"><a href="#cb50-121" aria-hidden="true" tabindex="-1"></a>sleep_sets <span class="ot">&lt;-</span> <span class="fu">combn</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">m =</span> <span class="dv">10</span>)</span>
+<span id="cb50-122"><a href="#cb50-122" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sleep_sets)</span>
+<span id="cb50-123"><a href="#cb50-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-124"><a href="#cb50-124" aria-hidden="true" tabindex="-1"></a><span class="co"># preview matrix</span></span>
+<span id="cb50-125"><a href="#cb50-125" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; a column of this sleep_sets is a vector of length 10 for the indices of the observations (from the original data) that are in the first treatment group for this permutation </span></span>
+<span id="cb50-126"><a href="#cb50-126" aria-hidden="true" tabindex="-1"></a>sleep_sets[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb50-127"><a href="#cb50-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-128"><a href="#cb50-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-129"><a href="#cb50-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-130"><a href="#cb50-130" aria-hidden="true" tabindex="-1"></a>Now we can calculate group means using <span class="in">`with()`</span>.</span>
+<span id="cb50-131"><a href="#cb50-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-132"><a href="#cb50-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This function  acts like using a dollar sign to access columns (i.e. nested naming such as <span class="in">`df$col`</span>).</span>
+<span id="cb50-133"><a href="#cb50-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-134"><a href="#cb50-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>It creates a temporary environment and attaches all columns names to the data that is given so we don't have to have the nested names each time.</span>
+<span id="cb50-135"><a href="#cb50-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-138"><a href="#cb50-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-139"><a href="#cb50-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: calc-means</span></span>
+<span id="cb50-140"><a href="#cb50-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-141"><a href="#cb50-141" aria-hidden="true" tabindex="-1"></a><span class="co"># demo with</span></span>
+<span id="cb50-142"><a href="#cb50-142" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; extract just the first groups' `extra` column values</span></span>
+<span id="cb50-143"><a href="#cb50-143" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; response is `extra` column, and `group` is the labels</span></span>
+<span id="cb50-144"><a href="#cb50-144" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sleep, extra[group <span class="sc">==</span> <span class="dv">1</span>]) <span class="co"># equivalent to sleep$extra[sleep$group == 1]</span></span>
+<span id="cb50-145"><a href="#cb50-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-146"><a href="#cb50-146" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate difference in means of two groups</span></span>
+<span id="cb50-147"><a href="#cb50-147" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; psuedocode: for sleep matrix, calculate the of mean of extra column for group 1 and subtract the mean of group two</span></span>
+<span id="cb50-148"><a href="#cb50-148" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sleep, <span class="fu">mean</span>(extra[group <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(extra[group <span class="sc">==</span> <span class="dv">2</span>]))</span>
+<span id="cb50-149"><a href="#cb50-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-150"><a href="#cb50-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-151"><a href="#cb50-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-152"><a href="#cb50-152" aria-hidden="true" tabindex="-1"></a>Is this value significant? We could use parameterics. This difference would be be used to calculate the t-stat or be center of a t-interval and could determine significance from that.</span>
+<span id="cb50-153"><a href="#cb50-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-156"><a href="#cb50-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-157"><a href="#cb50-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: t-test</span></span>
+<span id="cb50-158"><a href="#cb50-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-159"><a href="#cb50-159" aria-hidden="true" tabindex="-1"></a><span class="co"># check assuptions </span></span>
+<span id="cb50-160"><a href="#cb50-160" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sleep<span class="sc">$</span>extra[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">1</span>])</span>
+<span id="cb50-161"><a href="#cb50-161" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sleep<span class="sc">$</span>extra[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">2</span>])</span>
+<span id="cb50-162"><a href="#cb50-162" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; decent enough</span></span>
+<span id="cb50-163"><a href="#cb50-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-164"><a href="#cb50-164" aria-hidden="true" tabindex="-1"></a><span class="co"># run two-sample t test</span></span>
+<span id="cb50-165"><a href="#cb50-165" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> sleep<span class="sc">$</span>extra[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">1</span>], <span class="at">y =</span> sleep<span class="sc">$</span>extra[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">2</span>])</span>
+<span id="cb50-166"><a href="#cb50-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-167"><a href="#cb50-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-168"><a href="#cb50-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-169"><a href="#cb50-169" aria-hidden="true" tabindex="-1"></a>Or we can do a permutation test. To do this, we need a function can take a vector of indices, and return the average difference in sleep in the two groups.</span>
+<span id="cb50-170"><a href="#cb50-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-171"><a href="#cb50-171" aria-hidden="true" tabindex="-1"></a>Function writing strategy: Start with a specific call that we want (using <span class="in">`with()`</span>), then generalize by making it work for non-hardcoded names.</span>
+<span id="cb50-172"><a href="#cb50-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-175"><a href="#cb50-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-176"><a href="#cb50-176" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: perm-test</span></span>
+<span id="cb50-177"><a href="#cb50-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-178"><a href="#cb50-178" aria-hidden="true" tabindex="-1"></a><span class="co"># hardcoded what we want</span></span>
+<span id="cb50-179"><a href="#cb50-179" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sleep, <span class="fu">mean</span>(extra[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="sc">-</span> <span class="fu">mean</span>(extra[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)])))</span>
+<span id="cb50-180"><a href="#cb50-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-181"><a href="#cb50-181" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to function indices of a matrix</span></span>
+<span id="cb50-182"><a href="#cb50-182" aria-hidden="true" tabindex="-1"></a>sleep_compare <span class="ot">&lt;-</span> <span class="cf">function</span>(idx_vec) {</span>
+<span id="cb50-183"><a href="#cb50-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(sleep, <span class="fu">mean</span>(extra[idx_vec] <span class="sc">-</span> <span class="fu">mean</span>(extra[<span class="sc">-</span>(idx_vec)])))</span>
+<span id="cb50-184"><a href="#cb50-184" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-185"><a href="#cb50-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-186"><a href="#cb50-186" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over indices of a matrix</span></span>
+<span id="cb50-187"><a href="#cb50-187" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; sleep_sets has the labels down the columns (column = the sets of indices), this is what we want to traverse (iterate, loop over)</span></span>
+<span id="cb50-188"><a href="#cb50-188" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; so give each column of sleep_sets to the function sleep_compare</span></span>
+<span id="cb50-189"><a href="#cb50-189" aria-hidden="true" tabindex="-1"></a>perm_diffs <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> sleep_sets, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> sleep_compare)</span>
+<span id="cb50-190"><a href="#cb50-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-191"><a href="#cb50-191" aria-hidden="true" tabindex="-1"></a><span class="co"># look at results</span></span>
+<span id="cb50-192"><a href="#cb50-192" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(perm_diffs)</span>
+<span id="cb50-193"><a href="#cb50-193" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(perm_diffs)</span>
+<span id="cb50-194"><a href="#cb50-194" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">quantile</span>(perm_diffs, <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>)), <span class="dv">3</span>) <span class="co"># see if distribution is balanced around zero actually</span></span>
+<span id="cb50-195"><a href="#cb50-195" aria-hidden="true" tabindex="-1"></a><span class="co"># finer quantiles (trying to get closer to the observed difference)</span></span>
+<span id="cb50-196"><a href="#cb50-196" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">quantile</span>(perm_diffs, <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.025</span>, <span class="at">to =</span> <span class="fl">0.975</span>, <span class="at">by =</span> <span class="fl">0.05</span>)), <span class="dv">3</span>)</span>
+<span id="cb50-197"><a href="#cb50-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-198"><a href="#cb50-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-199"><a href="#cb50-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-200"><a href="#cb50-200" aria-hidden="true" tabindex="-1"></a>This tells us if the null hypothesis is true and we are randomly assigning group labels, then the difference in sleep should be zero (no difference). Let's calculate a p-value by using the permuted differences compared to the real difference that the study found. Specifically we can count the number of permutations further out in the tail than the real difference and get that proportion.</span>
+<span id="cb50-201"><a href="#cb50-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-204"><a href="#cb50-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-205"><a href="#cb50-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: p-value</span></span>
+<span id="cb50-206"><a href="#cb50-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-207"><a href="#cb50-207" aria-hidden="true" tabindex="-1"></a><span class="co"># save real difference</span></span>
+<span id="cb50-208"><a href="#cb50-208" aria-hidden="true" tabindex="-1"></a>real_diff <span class="ot">&lt;-</span> <span class="fu">with</span>(sleep, <span class="fu">mean</span>(extra[group <span class="sc">==</span> <span class="dv">1</span>] <span class="sc">-</span> extra[group <span class="sc">==</span> <span class="dv">2</span>]))</span>
+<span id="cb50-209"><a href="#cb50-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-210"><a href="#cb50-210" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate a p-value</span></span>
+<span id="cb50-211"><a href="#cb50-211" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; proportion of values where condition is true -&gt; mean(condition)</span></span>
+<span id="cb50-212"><a href="#cb50-212" aria-hidden="true" tabindex="-1"></a><span class="co"># this is a one tail p-value</span></span>
+<span id="cb50-213"><a href="#cb50-213" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(perm_diffs <span class="sc">&lt;=</span> real_diff) <span class="sc">/</span> <span class="fu">length</span>(perm_diffs)</span>
+<span id="cb50-214"><a href="#cb50-214" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(perm_diffs <span class="sc">&lt;=</span> real_diff)</span>
+<span id="cb50-215"><a href="#cb50-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-216"><a href="#cb50-216" aria-hidden="true" tabindex="-1"></a><span class="co"># two tailed</span></span>
+<span id="cb50-217"><a href="#cb50-217" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(perm_diffs) <span class="sc">&gt;=</span> <span class="fu">abs</span>(real_diff))</span>
+<span id="cb50-218"><a href="#cb50-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-219"><a href="#cb50-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-220"><a href="#cb50-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-221"><a href="#cb50-221" aria-hidden="true" tabindex="-1"></a>Assumptions / basic building blocks of this permutation test (what did we have to do?):</span>
+<span id="cb50-222"><a href="#cb50-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-223"><a href="#cb50-223" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Had count the number of permutations, and keep track of them (not much of an assumption)</span>
+<span id="cb50-224"><a href="#cb50-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-225"><a href="#cb50-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Need a way to summarize the data (not much of an assumption), some summary statistic.</span>
+<span id="cb50-226"><a href="#cb50-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-227"><a href="#cb50-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Need to have the structure of hypothesis test ahead of time: one-tailed, two-tailed, significance level to compare the p-value to.</span>
+<span id="cb50-228"><a href="#cb50-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-229"><a href="#cb50-229" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Only fundmental assumption was that there is a summary statistic for which there is a meaningful compariosn to be made and that we can mimic the randomization by simulation.</span>
+<span id="cb50-230"><a href="#cb50-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-231"><a href="#cb50-231" aria-hidden="true" tabindex="-1"></a><span class="fu">### Monte Carlo Simulated Permutation Test Example:</span></span>
+<span id="cb50-232"><a href="#cb50-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-233"><a href="#cb50-233" aria-hidden="true" tabindex="-1"></a>Monte Carlo methods are the idea that if you can simulate data from the assumed model, you can simulate Monte Carlo samples (simulated outcomes from that model). And if there is some property that those samples should have, we can store and evaluate those in a Monte Carlo simulation and studying their behavior.</span>
+<span id="cb50-234"><a href="#cb50-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-235"><a href="#cb50-235" aria-hidden="true" tabindex="-1"></a>Use bigger data set where exhaustive permutation wouldn't be possible. Try testing if the price of a high end home (at the 90th percentile) is higher for homes with or without swimming pools. Definitely can't use a t-distribution for comparing quantiles nor figure out how the sampling distribution behaves theoretically, so this is a benefit of the simulation approach: can compare a wider variety of statistics.</span>
+<span id="cb50-236"><a href="#cb50-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-237"><a href="#cb50-237" aria-hidden="true" tabindex="-1"></a>Use the Ames homes data.</span>
+<span id="cb50-238"><a href="#cb50-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-241"><a href="#cb50-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-242"><a href="#cb50-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: homes-data</span></span>
+<span id="cb50-243"><a href="#cb50-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-244"><a href="#cb50-244" aria-hidden="true" tabindex="-1"></a><span class="co"># load the real estate data</span></span>
+<span id="cb50-245"><a href="#cb50-245" aria-hidden="true" tabindex="-1"></a>real_estate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Files/Data/realestate.csv"</span>)</span>
+<span id="cb50-246"><a href="#cb50-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-247"><a href="#cb50-247" aria-hidden="true" tabindex="-1"></a><span class="co"># check out the data</span></span>
+<span id="cb50-248"><a href="#cb50-248" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(real_estate)</span>
+<span id="cb50-249"><a href="#cb50-249" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(real_estate<span class="sc">$</span>pool)</span>
+<span id="cb50-250"><a href="#cb50-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-251"><a href="#cb50-251" aria-hidden="true" tabindex="-1"></a><span class="co"># difference in 90th percentiles</span></span>
+<span id="cb50-252"><a href="#cb50-252" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; overall and then with / without swimming pool</span></span>
+<span id="cb50-253"><a href="#cb50-253" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(real_estate<span class="sc">$</span>price, <span class="fl">0.9</span>)</span>
+<span id="cb50-254"><a href="#cb50-254" aria-hidden="true" tabindex="-1"></a><span class="co"># another with statement</span></span>
+<span id="cb50-255"><a href="#cb50-255" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(real_estate, <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"yes"</span>], <span class="fl">0.9</span>))</span>
+<span id="cb50-256"><a href="#cb50-256" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(real_estate, <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"no"</span>], <span class="fl">0.9</span>))</span>
+<span id="cb50-257"><a href="#cb50-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-258"><a href="#cb50-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-259"><a href="#cb50-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-260"><a href="#cb50-260" aria-hidden="true" tabindex="-1"></a>Now make a function that randomly permutes the pool labels then compares quantiles.</span>
+<span id="cb50-261"><a href="#cb50-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-262"><a href="#cb50-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Note that that there are different strategies for setting this up. In the first example, a UDF calculated the difference and <span class="in">`apply()`</span> did the permuting. Now we will have the UDF do both jobs and we just need to loop over the number of simulations we are going to run.</span>
+<span id="cb50-263"><a href="#cb50-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-264"><a href="#cb50-264" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For loops have been optimized in R, so we are not really losing efficieny in terms of computing time by not using APPLY statements. It just depends on how you want to read the code.</span>
+<span id="cb50-265"><a href="#cb50-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-268"><a href="#cb50-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb50-269"><a href="#cb50-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: monte-carlo-perm-test</span></span>
+<span id="cb50-270"><a href="#cb50-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-271"><a href="#cb50-271" aria-hidden="true" tabindex="-1"></a><span class="co"># we have no idea how the difference in 90th quantile of house prices behaves theoretically, but we can compute it</span></span>
+<span id="cb50-272"><a href="#cb50-272" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(real_estate, <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"yes"</span>], <span class="fl">0.9</span>) <span class="sc">-</span> <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"no"</span>], <span class="fl">0.9</span>))</span>
+<span id="cb50-273"><a href="#cb50-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-274"><a href="#cb50-274" aria-hidden="true" tabindex="-1"></a><span class="co"># now we need to permute the labels</span></span>
+<span id="cb50-275"><a href="#cb50-275" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; to create a random order of the houses and keep the sample sizes for each group (of pool), we can sample without replacement</span></span>
+<span id="cb50-276"><a href="#cb50-276" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(real_estate<span class="sc">$</span>pool, <span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb50-277"><a href="#cb50-277" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sample</span>(real_estate<span class="sc">$</span>pool, <span class="at">size =</span> <span class="fu">length</span>(real_estate<span class="sc">$</span>pool)), <span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb50-278"><a href="#cb50-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-279"><a href="#cb50-279" aria-hidden="true" tabindex="-1"></a><span class="co"># create a function to do both steps, permute first then calculate difference</span></span>
+<span id="cb50-280"><a href="#cb50-280" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; this is different than the first example </span></span>
+<span id="cb50-281"><a href="#cb50-281" aria-hidden="true" tabindex="-1"></a>compare_high_end_perm <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb50-282"><a href="#cb50-282" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-283"><a href="#cb50-283" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample without replacement to permute pool labels (keeping structure of dataset, just different order)</span></span>
+<span id="cb50-284"><a href="#cb50-284" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>pool <span class="ot">=</span> <span class="fu">sample</span>(df<span class="sc">$</span>pool, <span class="at">size =</span> <span class="fu">length</span>(df<span class="sc">$</span>pool))</span>
+<span id="cb50-285"><a href="#cb50-285" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-286"><a href="#cb50-286" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate </span></span>
+<span id="cb50-287"><a href="#cb50-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(df, <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"yes"</span>], <span class="fl">0.9</span>) <span class="sc">-</span> <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"no"</span>], <span class="fl">0.9</span>))</span>
+<span id="cb50-288"><a href="#cb50-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-289"><a href="#cb50-289" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-290"><a href="#cb50-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-291"><a href="#cb50-291" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize items and loop over iterations</span></span>
+<span id="cb50-292"><a href="#cb50-292" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb50-293"><a href="#cb50-293" aria-hidden="true" tabindex="-1"></a>pool_diffs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, M) </span>
+<span id="cb50-294"><a href="#cb50-294" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb50-295"><a href="#cb50-295" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rerandomize and compute every iteration</span></span>
+<span id="cb50-296"><a href="#cb50-296" aria-hidden="true" tabindex="-1"></a>  <span class="co"># could have done both permuting and calculating inside the for loop as well, but cleaner with functions</span></span>
+<span id="cb50-297"><a href="#cb50-297" aria-hidden="true" tabindex="-1"></a>  pool_diffs[i] <span class="ot">=</span> <span class="fu">compare_high_end_perm</span>(real_estate)</span>
+<span id="cb50-298"><a href="#cb50-298" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-299"><a href="#cb50-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-300"><a href="#cb50-300" aria-hidden="true" tabindex="-1"></a><span class="co"># equivalent to, just depends on how want to read code</span></span>
+<span id="cb50-301"><a href="#cb50-301" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; ignore X entirely</span></span>
+<span id="cb50-302"><a href="#cb50-302" aria-hidden="true" tabindex="-1"></a>pool_diffs2 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>M, <span class="cf">function</span>(X) <span class="fu">compare_high_end_perm</span>(real_estate))</span>
+<span id="cb50-303"><a href="#cb50-303" aria-hidden="true" tabindex="-1"></a>pool_diffs3 <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>M, <span class="cf">function</span>(X) <span class="fu">compare_high_end_perm</span>(real_estate))</span>
+<span id="cb50-304"><a href="#cb50-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-305"><a href="#cb50-305" aria-hidden="true" tabindex="-1"></a><span class="co"># now look at results and p-value</span></span>
+<span id="cb50-306"><a href="#cb50-306" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; upper-tailed test based on context and order of subtraction in function</span></span>
+<span id="cb50-307"><a href="#cb50-307" aria-hidden="true" tabindex="-1"></a>real_diff <span class="ot">&lt;-</span> <span class="fu">with</span>(real_estate, <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"yes"</span>], <span class="fl">0.9</span>) <span class="sc">-</span> <span class="fu">quantile</span>(price[pool <span class="sc">==</span> <span class="st">"no"</span>], <span class="fl">0.9</span>))</span>
+<span id="cb50-308"><a href="#cb50-308" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pool_diffs <span class="sc">&gt;=</span> real_diff)</span>
+<span id="cb50-309"><a href="#cb50-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-310"><a href="#cb50-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb50-311"><a href="#cb50-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-312"><a href="#cb50-312" aria-hidden="true" tabindex="-1"></a>Based on this p-value, there is insufficient evidence to suggest that the 90th quantile of house prices with pools is greater than that without pools.</span>
+<span id="cb50-313"><a href="#cb50-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-314"><a href="#cb50-314" aria-hidden="true" tabindex="-1"></a>Can use Monte Carlo simulation in lots of scenarios. For example in regression, if know what the null model is, can simulate lots of datasets and models and study the behaviors of different aspects of the model such as coefficients or $R^2$ and compare that to what was observed with the real data. </span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

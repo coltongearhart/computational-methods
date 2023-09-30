@@ -14,7 +14,7 @@ book:
       chapters:
         - beyond-dataframes.qmd
         - using-and-building-functions.qmd
-        #- permutation-tests.qmd
+        - permutation-tests.qmd
         #- bootstrap.qmd
         #- computational-experiments.qmd
         #- simulation-studies.qmd
