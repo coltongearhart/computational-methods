@@ -1,4 +1,4 @@
-# Simulation Studies 1 {#sec-simulation-studies}
+# Simulation Studies {#sec-simulation-studies}
 
 ```{r}
 #| label: load-prereqs
@@ -9,4 +9,3 @@
 source("_common.R")
 
 ```
-

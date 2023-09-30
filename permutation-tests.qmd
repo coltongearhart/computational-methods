@@ -1,4 +1,4 @@
-# Permutation Tests 1 {#sec-permutation-tests}
+# Permutation Tests {#sec-permutation-tests}
 
 ```{r}
 #| label: load-prereqs
@@ -9,4 +9,3 @@
 source("_common.R")
 
 ```
-

@@ -1,4 +1,4 @@
-# Using naandd Building Functions 1 {#sec-using-and-building-functions}
+# Using and Building Functions {#sec-using-and-building-functions}
 
 ```{r}
 #| label: load-prereqs
@@ -9,4 +9,3 @@
 source("_common.R")
 
 ```
-

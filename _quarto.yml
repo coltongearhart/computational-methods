@@ -13,24 +13,24 @@ book:
     - part: course-notes.qmd
       chapters:
         - beyond-dataframes.qmd
-        - using-and-building-functions.qmd
-        - permutation-tests.qmd
-        - bootstrap.qmd
-        - computational-experiments.qmd
-        - simulation-studies.qmd
-        - improving-code.qmd
+        #- using-and-building-functions.qmd
+        #- permutation-tests.qmd
+        #- bootstrap.qmd
+        #- computational-experiments.qmd
+        #- simulation-studies.qmd
+        #- improving-code.qmd
 
     - part: assignments.qmd
       chapters:
         - hw1.qmd
-        - hw2.qmd
-        - project.qmd
+        #- hw2.qmd
+        #- project.qmd
     
 format:
   html:
     theme: flatly
     code-link: true
-    code-fold: show
+    #code-fold: show
     code-tools: true
     code-block-border-left: "#2C3E50"
     highlight-style: github

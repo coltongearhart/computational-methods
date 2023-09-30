@@ -10,3 +10,295 @@ source("_common.R")
 
 ```
 
+## Overview 
+
+In this mini courese we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. 
+
+Readings come from the [Advanced R](https://adv-r.hadley.nz/) textbook by Hadley Wickham.
+
+>``To understand computations in R, two slogans are helpful: Everything that exists is an object. Everything that happens is a function call.''
+  — John Chambers
+
+You already know the basics from your previous coursework. Here we will briefly discuss the following:
+    
+- Documenting Code
+  
+    - Naming objects, functions, variables
+    - Descriptive comments
+    - Structural organization
+    
+- Objects
+
+    - Vectors, atomic types, attributes
+    - Dataframes
+    - Matrices
+    
+- Functions
+  
+    - Using existing functions
+    - Finding and reading help documentation
+
+## Coding in R - Documenting with Quarto 
+
+In this mini-course, we will be coding and programming using the **R** language. We will be leveraging the benefits of the open source structure of R by using some of the excellent software packages developed by members of the R community. We will also be exploring the efficient data structures and functions available in Base R. We will be interacting with the R language using the **R Studio** Interactive Development Environment (IDE).
+
+We will be using **Quarto** to document our work because it is capable of integrating the process of writing in both programming and natural languages. It is great to be able to transition back and forth between paragraphs expressing what we are trying to accomplish statistically  to the computational evidence to support our results.  Each course notes will be put together as a Quarto document.
+
+Supplementary Resources for R Markdown: 
+
+- [Quarto Website](https://quarto.org/)
+- [Quarto computations in R](https://quarto.org/docs/computations/r.html)
+- [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+## R Basics 
+
+Data structures
+
+- Vectors are the atomic vectors of type: numeric, character, logical
+
+- Essentially every data structure we use is one of these vectors, but with additional attributes or several vectors added together.
+
+- A fundamental aspect of good computing is understanding how R saves the information.
+
+- We can also concatenate vectors of different types. However, atomic vectors cannot contain more than one type of data, so it coerces values into a easier way.
+
+- We are starting to think about these vector / dataframes. A vector is a one dimensional, matrix is two dimensions, arrays are three dimensional.
+
+Example below for demonstrating different aspects of R such as packages, objects, functions, etc. and for improving code readability.
+
+- The assignment arrow is pronounced "gets", so the name gets the thing on the right.
+
+```{r}
+#| label: ugly-code
+#| eval: FALSE
+
+# poor formatting makes cord hard to read 
+library(tidyverse)
+realestate<-read.csv("Files/Data/realestate.csv")
+price_means<-rep(NA   ,1000);price_medians<-rep(NA   ,1000)
+for(b in 1:1000){`bootstrap sample`<-sample_n(realestate  ,nrow(realestate)  ,T)
+price_means[b]<-mean(`bootstrap sample`$price   )
+price_medians[b]<-median(`bootstrap sample`$price    )}
+quantile(price_means   ,c(0.025,0.975));quantile(price_medians   ,c(0.025,0.975));t.test(realestate$price)
+
+```
+
+Reformat R scripts
+
+- Use the following shortcuts in RStudio to reformat your code in the qmd file:
+
+    - `Cmd + I`: Fixes line indentations.
+
+    - `Cmd + Shift + A`: Does a complete reformat of the selected part of a code.
+
+```{r}
+#| label: less-ugly-code
+#| eval: FALSE
+
+# use keyboard shortcut for quick fixes
+library(tidyverse)
+realestate <- read.csv("Files/Data/realestate.csv"); price_means <- rep(NA   , 1000)
+price_medians <- rep(NA   , 1000)
+for (b in 1:1000) {
+  `bootstrap sample` <- sample_n(realestate  , nrow(realestate)  , T)
+  price_means[b] <- mean(`bootstrap sample`$price)
+  price_medians[b] <- median(`bootstrap sample`$price)
+}
+quantile(price_means   , c(0.025, 0.975))
+quantile(price_medians   , c(0.025, 0.975))
+t.test(realestate$price)
+
+```
+
+Use automated code parsing and then copy result into qmd file.
+
+- Use `knitr` chunk options with `formatR` installed: `tidy: formatR`. This parses the code with `tidy_source()` behind the scenes.
+
+- Can specify additional options with `#| tidy-opts: #|   -`. View available ones in the help documentation `?tidy_source` or [this r markdown cookbook section](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html).
+
+```{r}
+#| label: automated-code-parse
+#| eval: FALSE
+#| tidy: formatR
+
+# automated code parsing
+# -> this has the same source as the first ugly code, but echos nicely
+library(tidyverse)
+realestate<-read.csv("Files/Data/realestate.csv")
+price_means<-rep(NA   ,1000);price_medians<-rep(NA   ,1000)
+for(b in 1:1000){`bootstrap sample`<-sample_n(realestate  ,nrow(realestate)  ,T)
+price_means[b]<-mean(`bootstrap sample`$price   )
+price_medians[b]<-median(`bootstrap sample`$price    )}
+quantile(price_means   ,c(0.025,0.975));quantile(price_medians   ,c(0.025,0.975));t.test(realestate$price)
+
+```
+
+Rebuilding code for readability (with comments)
+
+```{r}
+#| label: readable-code
+
+# now we can add comments and space out the code for better readability
+library(tidyverse)
+realestate <- read.csv("Files/Data/realestate.csv")
+
+# initializing the storage space for the bootstrap means and medians
+price_means <- rep(NA, 1000)
+price_medians <- rep(NA, 1000)
+
+# loop over 1000 repeated bootstrap samples, saving the means and medians
+for (b in 1:1000) {
+  bootstrap_sample <- sample_n(realestate, nrow(realestate), T)
+  price_means[b] <- mean(bootstrap_sample$price)
+  price_medians[b] <- median(bootstrap_sample$price)
+}
+
+# calculate the quantiles of the collected means and medians
+quantile(price_means, c(0.025, 0.975))
+quantile(price_medians, c(0.025, 0.975))
+
+# do these intervals match will with confidence intervals using central limit theorem?
+# -> compare interval to t-interval
+t.test(realestate$price)
+
+```
+
+## Advanced Programming
+
+>``We are adventurers! We do not play on the playgrounds. We roam in the jungles!''
+  — Jie Li (Dr. Maurer's Grad Classmate)
+
+As we move through this mini-course, we will focus on challenging our programming skills with methods that require heavier statistical computation than typically used in our other courses. For this, we may need to use some more advanced types of objects in R, to use functions in more sophisticated ways and to build our own functions. This section will focus on more advanced data objects than vectors and data frames. 
+
+We will focus on two particularly helpful data structures:
+
+- Arrays
+
+- Lists
+
+### Arrays
+
+Vectors don't have attributes, but we can add attributes that can change how the data is organized.
+
+An **array** in R, is a vector for a  $p$-dimensional index set. This dimension attribute allows the vector to be searched and subsetted very efficiently. Technically we have already seen a 2-dimensional vector; an R matrix. Because an array is a special kind of vector, all values stored inside an array must be the same atomic type. 
+
+When doing computation things, if we are only guessing how R handles everything, we cannot leverage how R works to have more efficient code. Note that `str()` is *structure*, not *string*.
+
+```{r}
+#| label: matrix_example
+
+# show that a matrix is a vector with dimension attributes
+some_values <- 1:20
+some_values
+str(some_values)
+attributes(some_values)
+is.vector(some_values)
+is.matrix(some_values)
+is.array(some_values)
+
+# add attributes, turning this into a matrix
+dim(some_values) <- c(4,5)
+attributes(some_values)
+is.vector(some_values)
+is.matrix(some_values)
+is.array(some_values)
+
+# we can define matrix with the matrix() function
+my_matrix <- matrix(some_values, nrow = 4, byrow = TRUE)
+is.vector(my_matrix)
+is.matrix(my_matrix)
+is.array(my_matrix)
+```
+
+Demonstrating Higher Dimensional Arrays:
+
+- When unpacking a matrix (i.e. converting it back to a vector), R goes down the columns rather than across the rows.
+
+```{r}
+#| label: matrix_example2
+
+# unpack matrix
+my_matrix
+as.vector(my_matrix) 
+
+```
+
+- An array allows us to add an indexing structure (so we can subset these with square brackets), also allows sorting.
+
+```{r}
+#| label: array_example
+
+# build an array here
+vec_to_array <- 1:30
+
+ # to convert the vector into an array: R went down the columns, across the rows, and then onto different layers
+dim(vec_to_array) <- c(3,5,2)
+vec_to_array
+
+# we can pull off a value by using bracket indexing
+vec_to_array[1,3,2]
+
+# this can be very useful when the layers have characteristics (e.g. for simulations)
+
+```
+
+Why is this helpful? Suppose we are collecting the resulting values for simulating $n = 100$ observations, from normals with means in $\{-3,0,3\}$ and standard deviations in $\{2,10\}$
+
+Use an array to store the observation index in the first dimension, the means in the second dimension, and standard deviations in the third dimension. Thus we create a 100 by 3 by 2 array to store the data. This allows us to easily access the data we want using the indexing. 
+
+```{r}
+#| label: simulation_array
+
+# initialize simulation settings
+n <- 100
+means <- c(-3,0,3)
+sds <- c(2,10)
+
+# initialize an empty array
+sim_data_array <- array(rep(NA, n *length(means) * length(sds)),
+                        dim = c(n, length(means), length(sds)))
+
+# save the 100 simulated values into the array with corresponding mean and sd positions
+set.seed(12345)
+for (j in 1:length(means)){
+  for (k in 1:length(sds)){
+    sim_data_array[ ,j, k] <- rnorm(n, mean = means[j], sd = sds[k])
+  }
+}
+
+# explore values from second mean and second sd N(0,10)
+summary(sim_data_array[,2,2])
+
+```
+
+We can set up an array that is matches our simulation structure so that we can compactly store the results. Arrays like this are very efficient.
+
+Kinda have to think about how assigning, and the values in the array in order to understand where the results go. Probably wouldn't want to go more than 3 (maybe 4?) dimensions.
+
+### Lists
+
+A **list** in R is an *indexed* set of other R objects that can be *named*. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.  
+
+```{r}
+#| label: list_example1
+
+# build a list with several different object types
+my_list <- list(
+  num_vec = c(1,2,3,4,5),
+  letters = LETTERS[1:10],
+  hi = "Hi Mom!",
+  my_df = data.frame(x=1:5,y=rnorm(5)),
+  my_array = array(data=1:12,dim=c(3,2,2))
+)
+str(my_list)
+
+# demonstrate indexing
+my_list[[3]]
+my_list[[1]] * 2
+my_list[[4]][ ,2]
+
+# demonstrate nested naming
+my_list$hi
+my_list$my_df$y
+
+```
