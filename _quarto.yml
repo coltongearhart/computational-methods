@@ -13,7 +13,7 @@ book:
     - part: course-notes.qmd
       chapters:
         - beyond-dataframes.qmd
-        #- using-and-building-functions.qmd
+        - using-and-building-functions.qmd
         #- permutation-tests.qmd
         #- bootstrap.qmd
         #- computational-experiments.qmd

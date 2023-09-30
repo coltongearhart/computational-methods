@@ -251,7 +251,7 @@ Use an array to store the observation index in the first dimension, the means in
 
 # initialize simulation settings
 n <- 100
-means <- c(-3,0,3)
+means <- c(-10,0,10)
 sds <- c(2,10)
 
 # initialize an empty array
@@ -266,18 +266,22 @@ for (j in 1:length(means)){
   }
 }
 
+head(sim_data_array)
+
 # explore values from second mean and second sd N(0,10)
 summary(sim_data_array[,2,2])
 
 ```
 
-We can set up an array that is matches our simulation structure so that we can compactly store the results. Arrays like this are very efficient.
+We can set up an array that matches our simulation structure so that we can compactly store the results to the right locations. Results can be organized like subscripts in mathematical notation. For example, if rows $i = 1, \ldots, 100$, columns $\mu = (mu_1, \mu_2, \mu_3)$ and layers $\sigma = (\sigma_1, \sigma_2)$, we can have observation $x_{i,j,k}$ that is the$i$th iteration from mean $\mu_j$ and standard deviation $\sigma_k$. This aligns what we are computing (/ how the results are stored) to how we assign the parameter.
 
-Kinda have to think about how assigning, and the values in the array in order to understand where the results go. Probably wouldn't want to go more than 3 (maybe 4?) dimensions.
+Arrays like this are very efficient (because the index structure is very fast in terms of extracting the numbers). Probably wouldn't want to go more than 3 (maybe 4?) dimensions. Lists are then more readable (less abstract that 10-dimensional hypercube), user friendly ways to store high dimensional data, which can also be indexed easily.
 
 ### Lists
 
-A **list** in R is an *indexed* set of other R objects that can be *named*. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.  
+A **list** in R is an *indexed* set of other R objects that can be *named*. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.
+
+These are great for storing results that are contextually related to each other. Examples include results from `lm()` objects.
 
 ```{r}
 #| label: list_example1
@@ -302,3 +306,7 @@ my_list$hi
 my_list$my_df$y
 
 ```
+
+Accessing items in the list naming convention:
+
+- For the top layer qualitative information, use `list$name` notation, then switch to `list$name[[index]]` for quantitative information that is maybe performed iteritively, like an index.

@@ -9,3 +9,384 @@
 source("_common.R")
 
 ```
+
+## Overview 
+
+This section will discuss R functions. Functions are the engines that define how to DO things with your data objects in R. If data objects are the "nouns", then functions are the "verbs" of the R language. 
+
+Why build functions?
+
+1. Because it is fun (for us nerdy people).
+
+2. Because we find ourselves doing the same task multiple times throughout our code, and realize that each iteration is mostly the same process using slightly different values or variables. 
+
+3. Because we want to avoid copy/paste related errors.
+
+4. Because we want to make our code more readable.
+
+This will discuss the basic structure and components of a function, how a function is created, passing parameters implicitly versus explicitly in a function call, name masking in nested environments, and infix operators.
+
+Below are links to supplementary resources about building functions in R: 
+
+- [Advanced R Functions Chapter](http://adv-r.had.co.nz/Functions.html)
+- [Additional Functions Reading from R for Data Science E-book](https://r4ds.hadley.nz/functions)
+
+## R Function Basics - Components 
+
+>``To understand computations in R, two slogans are helpful: Everything that exists is an object. Everything that happens is a function call.''
+  — John Chambers
+
+Formals: The defined parameters of a function. Think of these as the set of data objects and options that can be defined by the programmer when a function is used.
+
+For these exercises we will consider the following functions:
+
+- `mean()` from base R
+- `ggplot()` from the ggplot2 package
+- `%>%` piping symbol from the dplyr package
+
+```{r}
+#| label: function-calls 
+
+library(tidyverse)
+
+# a function without parentheses prints what it is
+# -> with the parenthesis, it tells R to run it
+mean
+ggplot
+
+```
+
+Pipe
+
+- This is actually quite a complex function (yes, a function) (things like this are called infix operator). Infix operators go in between arguments.
+
+- Can surround an infix operator with tick marks to see what this function is actually doing.
+
+```{r}
+#| label: pipe
+
+# infix operator: pipe
+`%>%`
+
+```
+
+- Another example is `+`. This is a primitive function, which just means that R doesn't evaluate it. It sends it down and is evaluated in C (because it is more efficient).
+
+```{r}
+#| label: addition
+
+# infix operator as function
+`+`(2, 3)
+
+```
+
+### Formals
+
+What are the formals for these functions?
+
+- `?formals()`: Formals are things that we define to change the behavior of the outcome.
+
+```{r}
+#| label: formals
+
+# view formals
+formals(`%>%`)
+formals(mean)
+
+```
+
+- `...` are a special (very flexible, catch all) type of formal argument that we can put non-necessary arguments.
+
+- For example, with mean `mean(x, na.rm = TRUE)`, this saves the value `TRUE` to na.rm  argument and saves that value as the function is run.
+
+### Body 
+
+The lines of code that will be run when the function is called. The body uses the formals and usually returns a result of some kind.
+
+```{r}
+#| label: body
+
+# body()
+body(`+`)
+
+# -> returns null because the function isn't run in R
+
+body(ggplot)
+
+```
+
+- Note that the code in the body is never commented because R strips away the comments when running to make its more compact. When we write functions, we add comments so the humans know what it does, but when it is stored they are removed to take up less space.
+
+### Environment 
+
+The environment is the group of named objects which functions have access to. In other words, it is where the function will retrieve named objects used to execute the code from the body.
+
+- The global environment is everything that we have loaded in, created ourselves or in base R.
+
+- `ls()` tells you what you have created / assigned in the global environment (to get, set, test for and create environments, use `environment()`).
+
+```{r}
+#| label: global-environment
+
+# ?environment()
+ls()
+y <- 1:5
+ls()
+
+```
+
+- When calling functions, they have access to the names of objects in the namespace. It can map the name to where the object is stored. So it retrieves values through the names, so names are very powerful and why we can do computation work that is readable. 
+
+```{r}
+#| label: namespaces
+
+# y is now in the namespace, so we have access to it
+# -> the name gets mapped to its value
+y*2
+
+head(iris)
+
+# -> we were able to find this because head and iris are a namespace in the global environment
+
+```
+
+- When we load a library, we are loading a namespace that has access to all the function names and dataset names in the library (package). Everything is a named object (objects, functions, etc.) and they are saved somewhere. The environment is where R finds the object.
+
+Local namespaces
+
+- When a function is called, a local namespace is created within the global environment (like a subspace of the global environment).
+
+- When code is run in this local environment, R has access to all objects contained in the global environment.
+
+- The primary difference is that when the local namespace is created, the formal argument names and their defined values are written into the local namespace. If these objects already exist in the global environment, they are overwritten locally while the function code is running. This is referred to as **name masking**.
+
+- After the function code has completed running, the local environment is deleted. Thus, the local environment of a function is both nested in the global environment and is temporary.
+
+```{r}
+#| label: local-arguments
+
+# when we call the mean function, x is defined locally but not globally
+mean(x = y)
+
+```
+
+## Creating Functions
+
+To create a function you must define the formals and body in using the `function()` function, and assign the definition to a name.
+
+- Below we are giving a function as a value to the function name.
+
+- Functions are first class objects (they store expressions, rather than data values).
+
+- If there is a set of things we want to do, we can wrap a bunch of code into an expression by wrapping in curly brackets, then R thinks about it as one thing.
+
+```{r}
+#| label: defining-functions
+
+# writing functions
+function_name <- function(formal_arguments_go_here) {
+  # code body expression goes here
+}
+
+formals(function_name)
+body(function_name)
+environment(function_name)
+
+```
+
+Also note, `function()` is a very weird function, since the body argument goes outside the parentheses! Technically even the example above is a real function (albeit a boring one).
+
+Better example of simple function for adding up two numbers.
+
+- Give functions a name that indicate what it does (intuitive names help a great deal with readable code).
+
+- Style guide: Can use the assignment arrow `<-` for anytime something will be saved to the global environment (data values and functions), but within a function we can use `=` because it is only found locally and is temporary.
+
+    - `<<-` Assigns values from a local environment (like a function call) and saves it in the global environment (this is a really bad idea because it could overwrite something that you already have in the global environment)
+    
+- Returning values: Functions implicitly return the last thing computed. So it is often a good idea to be explicit about what to return.
+
+```{r}
+#| label: defining-functions-assignment
+
+# write function add two numbers
+my_sum <- function(x, y){
+  val = x + y
+  return(val)
+}
+my_sum(1,2)
+
+# bad idea
+my_sum <- function(x, y){
+  val <<- x + y
+  return(val)
+}
+# val isn't in the global environment
+my_sum(1, 2)
+
+```
+
+More complex functions: In a legitimate function, to have our function behave differently, we can use some if and else statements that are usually triggered by a yes / no or true / false.
+
+`sapply()` is a function that calls other functions in an iterative way (really efficient for loop).
+
+```{r}
+# label: defining-functions-ifs
+
+# now trying to do something cool (and / or breaking it)
+# -> on rare occasions, add some random error to the sum
+my_sum <- function(x, y, mischief = TRUE){
+  if(mischief == FALSE){
+    val = x + y
+  } else {
+    val = x + y + sample(c(-1,0,1), size = 1, prob = c(.02,.96,.02))
+  }
+  return(val)
+}
+
+# run the function 100 times using specified values for the arguments
+# -> not using the X in our function call
+sapply(X = 1:100, my_sum, x = 1, y = 2)
+
+# equivalent to
+for (i in 1:10) {
+  print(my_sum(1, 2))
+}
+
+```
+
+Can return something more complex than just a data value by returning lists. Functions that output lists are kinda the next step of complex computing ideas.
+
+```{r}
+# label: defining-functions-return-list
+
+# modify function to return a list with multiple objects in it
+my_sum <- function(x, y, mischief = TRUE){
+  if(mischief == FALSE){
+    val = x + y
+  } else {
+    val = x + y + sample(c(-1,0,1), size = 1, prob = c(.02,.96,.02))
+  }
+  return(list(value = val,
+              mischief = mischief))
+}
+
+my_sum(1, 2)
+
+```
+
+### Calling a Function
+
+To call a function, you simply use its name and define any required formal arguments. Typically this is done within a set of parentheses directly following the function name. Only a few special cases break from that pattern. 
+
+What is more important to focus on is **if** and **how** we define the arguments. We may choose to define nothing in the arguments and the function might still work. 
+
+```{r}
+#| label: args-null
+#| error: true
+
+# write function that has no arguments to simply return this hardcoded value
+no_arg <- function(){
+  x = 10
+  return(x)
+}
+no_arg()
+
+# -> so it will generate an error if we tried to give it an argument that isn't defined in the function
+no_arg(x = 20)
+
+```
+
+Typically these are made more flexible using dots `...`. All this does is put the values into the local namespace and continues running the function. These are optional arguments.
+
+```{r}
+#| label: args-dots
+
+# define function wtih ... formal
+no_arg2 <- function(...){
+  x = 10
+  return(x)
+}
+
+# functions works with no arguments
+no_arg2() 
+
+# and now with arguments
+# -> it initializes the value of x, but then  overwrites the value of x internally
+no_arg2(x = 20)
+
+```
+
+For "optional" arguments (arguments that sometimes matters and sometimes don't matter), we should define them as formal parameters with some default values. This way we can override them if we wanted to.
+
+```{r}
+#| label: args-defaults
+
+# add default value to argument
+# -> now it behaves typically how we want, but can change them if we want
+no_arg3 <- function(x = 10){
+  return(x)
+}
+
+# this is the behavior we typically will want
+no_arg3()
+no_arg3(x = 20)
+
+```
+
+The more important characteristics of function calls are related to how we define our arguments: implicitly and explicitly. If we rely on the default ordering of the arguements, then we are calling the arguments *implicitly*. If we refer to the argument by it's name while defining the values, then we are calling the argument *explicitly*. Often we use a mix of these methods, but it is important to be aware of how and why we choose to define our arguments.
+
+A function runs through all of the named arguments, then goes in order for the unnamed arguments.
+
+```{r}
+#| label: arg_exp_implicit
+#| error: true
+
+# all of the following are equivalent
+mean(x = 1:5, na.rm = TRUE)
+mean(1:5, na.rm = TRUE)
+mean(na.rm = TRUE, x = 1:5)
+
+# the following is NOT equivalent
+# -> it is expecting a numeric first
+mean(TRUE, 1:5)
+
+```
+
+Possible convention: Implicitly give the function data values first, then use explicit calling for the options (this will still be readable because the function name will indicate what it's going to do with the data values).
+
+### Automating procedures
+
+The following example demonstrates code that would be better served by constructing a function to accomplish the task.
+
+```{r}
+#| label: example-change-to-functions
+
+# take the following olive oil data and standardize the columns
+library(pdfCluster) # for the data
+data(oliveoil) # ?oliveoil
+
+# start with a dataframe where create the z-scores for palmitic acid, then add the rest 
+oo_standardized <- data.frame(
+  palmitic = (oliveoil[,"palmitic"]-mean(oliveoil[,"palmitic"]))/sd(oliveoil[,"palmitic"])
+)
+head(oo_standardized)
+
+
+# do this better with a function, rather than copy and paste and change column names
+oo_standardized2 <- data.frame(
+  oleic = (oliveoil[,"oleic"]-mean(oliveoil[,"oleic"]))/sd(oliveoil[,"oleic"])
+)
+head(oo_standardized2)
+
+# write function to take a variable name and return the standardized column
+oo_stand <- function(varname) {
+  (oliveoil[,varname]-mean(oliveoil[,varname]))/sd(oliveoil[,varname])
+}
+head(oo_stand("palmitic"))
+
+# loop over all column names with sapply()
+oo_standardized3 <- sapply(X = names(oliveoil)[3:10], FUN = oo_stand)
+
+```
+
