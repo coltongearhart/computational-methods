@@ -9,3 +9,256 @@
 source("_common.R")
 
 ```
+
+## Assignment
+
+Your task for this week is simple in concept but challenging to code efficiently. You need to simulate samples from gamma distributions using different sample sizes, different shape parameters and different scale parameters. You will then use these simulated values to compute sample means and 95% Confidence Intervals (for the population mean) for each of the samples that you simulated. You ***must*** do so by building the set of functions and set of data objects that match the details in the steps below.
+
+### Gather simulated gamma data
+
+First part:
+
+Build a function named `sim_gam` that has formal arguments for sample size (n), the vector of shapes (length M), the vector of scales (length L). Also include an argument that will allow the user to add a random seed number for reproducible simulation, but ignore if not specified. The body of you function must use these arguments to generate a 3-dimensional array of simulated values from a gamma distribution. The size and indexing in each dimension in this array should be (n) by (M) by (L).
+
+Your array should also have the "dimnames" attribute of the array added for the shape and scale dimensions that contain labels related to the parameter values that those dimensions represent.
+
+Second part:
+
+Use your gamma simulation function to create a list of arrays called `gam_arrays_list` with the following attributes:
+
+- All arrays should include results for `shape_vec = c(0.1, 1, 10, 100)` and `scale_vec = c(0.1, 1, 10, 100)`
+
+- Each array will represent a different sample size: `n = c(25, 50, 75, 100, 500,1000)`
+
+### Compute means and confidence intervals
+
+First part:
+
+Next build the following two functions that the output array from the gamma data simulator above, as their inputs:
+1. A function named `gam_means` that returns an (M) by (L) matrix of means from the simulated values from each shape and scale parameter pair.
+
+2. A function named `gam_CIs` that returns a (2) by (M) by (L) array containing the lower and upper confidence bounds for the 95% confidence intervals for the means of each simulated gamma sample.
+
+Hints
+
+- Check out the `apply()` function help documentatio.n
+
+- You will likely need a helper function within your `gam_CIs` function that can take in a sample vector and return the 95% Confidence Interval as a vector of c(lower.val, upper.val). I suggest looking at the results of the `t.test()` function for some prebuilt access to 95% CI for means.
+
+Second part:
+
+Apply your `gam_means()` function to your simulated data in `gam_arrays_list`. Store the results as list of means matrices
+
+Also, apply your `gam_CIs()` function to your simulated data in `gam_arrays_list`. Store the results an additional list of Confidence Interval arrays.
+
+## Practice 
+
+Here are some demos of working with simple examples to see how APPLY statements and MAP statements work on data types (matrix vs dataframe).
+
+```{r}
+#| label: apply-maps
+
+library(tidyverse)
+
+# investigate data types and vectorized results
+
+# example 2D dataset as different data structure
+data_mat <- matrix(data = rnorm(1000), nrow = 200, ncol = 5)
+data_df <- data.frame(data_mat)
+
+# loop over columns to find means
+
+# BEST WAY
+# -> should be zeros, works for both types
+apply(X = data_mat, MARGIN = 2, FUN = mean)
+sapply(data_df, mean) # works because each column in a dataframe is like a list and simplifies result
+data_df %>% map_dbl(mean)
+
+# OTHER CORRECT WAYS
+sapply(X = 1:ncol(data_mat), function(X) mean(data_mat[,X]))
+apply(X = data_df, MARGIN = 2, FUN = mean)
+sapply(X = 1:ncol(data_df), function(X) mean(data_df[,X]))
+lapply(data_df, mean)
+data_df %>% map_vec(mean) # know returning data type, so should use _dbl
+data_df %>% map(mean) %>% reduce(c) # reduce cause map() returns a list
+
+# INCORRECT WAYS
+head(sapply(data_mat, mean), n = 20) # this takes each individual value and returns the mean (so the same value)
+head(sapply(data_mat, mean), n = 10) == data_mat[1:10,1]
+head(data_mat %>% map(mean)) # same thing
+
+```
+
+Now investigate structure of data holder.
+
+```{r}
+#| label: check structure
+
+# this is just to make that we can correctly summarize over columns and layers of an array and keep index names for the result
+
+# fill example 2D dataset as a matrix
+data_mat <- matrix(data = rnorm(100), nrow = 20, ncol = 5)
+
+# change dimensions and add dimension label
+dim(data_mat) <- c(10, 5, 2)
+dimnames(data_mat) <- list(paste0("x", 1:10), paste0("y = ", 1:5), paste0("z = ", 1:2))
+
+# summarize over rows: this averages over x for each combination of y and z
+# check result
+data_means <- apply(data_mat, MARGIN = c(2, 3), mean)
+data_means["y = 1", "z = 1"] == mean(data_mat[ , "y = 1", "z = 1"])
+
+```
+
+Now apply confirmed results from above to a real scenario.
+
+```{r}
+#| label: example-simulation
+
+# initial vectors
+# -> i = obs ID, mu = mean and sigma = sd
+i <- 1:10 # not using n = 10 so that can set row names below
+mu <- c(0, 5, 10, 100, 500)
+sigma <- c(0.5, 5)
+
+# initialize an empty array (dim = i by mu by sigma) and change dimension labels
+data_sim <- array(rep(NA, length(i) * length(mu) * length(sigma)),
+                  dim = c(length(i), length(mu), length(sigma)))
+dimnames(data_sim) <- list(paste0("i", i), paste0("mu = ", mu), paste0("sigma = ", sigma))
+
+# to generate the data in the best way, need to be saving just the results from the iterations i, and double for loop to access the different columns (mean) and layers (sd) like in the notes for beyond dataframe
+
+# vectorize over the means to create a matrix of obs from each mean
+# then use a for loop to loop over the different standard deviation (as the third dimension)
+# (use the holding structure 'data' that is create at beginning of this section)
+for (k in 1:length(sigma)) {
+  for (j in 1:length(mu)) {
+    data_sim[ , j, k] <- rnorm(n = length(i), mean = mu[j], sd = sigma[k])
+  }
+}
+
+# now confirm that the summaries match the parameters
+data_means <- apply(data_sim, MARGIN = c(2, 3), mean)
+data_sd <- apply(data_sim, MARGIN = c(2, 3), sd)
+data_means
+data_sd
+
+```
+
+## Solution 
+
+### Gather simulated gamma data
+
+```{r}
+#| label: function
+
+# define function to create an array [sample size (n) x # of shapes (M) x # of scales (L)] of simulated data from a gamma distribution
+# -> arguments: n = sample size (integer), M = shape parameters (numeric vector), scale parameters (numeric vector), seed to set (integer)
+# -> returns: n x M x L array
+sim_gam <- function(sample_size = 10, shapes = 1, scales = 1, seed = NULL) {
+  
+  # conditionally set the random seed
+  if (!is.null(seed))
+    set.seed(seed)
+  
+  # initialize an empty array (dim = n by shape by scale) and change main dimension labels
+  data_sim = array(rep(NA, sample_size * length(shapes) * length(shapes)),
+                  dim = c(sample_size, length(shapes), length(shapes)))
+  dimnames(data_sim) = list(NULL, paste0("shape = ", shapes), paste0("scale = ", scales))
+  
+  # generate data from the specified shape and scale combination using nested for loops
+  # NOTE: there are different ways to do this with either two sapply() statements or a for loop with a sapply
+  # -> but this is makes the most logical sense: fill each layer column by column rather than fill one layer "in bulk"
+  for (k in 1:length(scales)) {
+    for (j in 1:length(shapes)) {
+      data_sim[ , j, k] = rgamma(n = sample_size, shape = shapes[j], scale = scales[k])
+    }
+  }
+  
+  return(data_sim)
+}
+
+```
+
+The body from the above implementation is where we generate the data is equivalent to the following if we wanted to use an APPLY statement.
+
+```{r}
+#| label: function2
+#| eval: false
+
+  # equivalent to:
+  # use an inner sapply() to fill the entire layer with one function call (sapply() then does it shape by shape column at a time) rather than column by column loop for changing layer
+  for (i in seq_along(scales)) {
+
+    # generate the random numbers according to the scales (changes by matrix) and the shapes (changes by column within matrix)
+    data_sim[ , , i] <- sapply(X = shapes, function(X) rgamma(n = sample_size, shape = X, scale = scales[i]))
+  }
+
+```
+
+Now with the function defined, we can generate the data.
+
+```{r}
+#| label: generate-data
+
+# initial vectors of the changing parameters for generating data
+sample_sizes <- c(25, 50, 75, 100, 500, 1000)
+shape_vec <- c(0.1, 1, 10, 100)
+scale_vec <- c(0.1, 1, 10, 100)
+
+# generate data
+# add dimension labels for the sample sizes
+gam_arrays_list <- sapply(X = sample_sizes, function(X) sim_gam(sample_size = X, shapes = shape_vec, scales = scale_vec))
+names(gam_arrays_list) <- paste0("n = ", sample_sizes)
+
+# view results
+str(gam_arrays_list)
+round(gam_arrays_list$`n = 25`[, , 1], 3)
+
+```
+
+### Compute means and confidence intervals 
+
+```{r}
+#| label: summarize-data
+
+# define function to calculate the mean of the simulated observations for each combination of shape and scale
+# -> argument: n x M x L array of simulated values
+# -> returns: M x L matrix of column means from each layer
+gam_means <- function(gam_array){
+  apply(gam_array, MARGIN = c(2, 3), mean)
+}
+
+# function to get CIs for each combination of shape and scale parameters
+# -> argument: n x M x L array of simulated values
+# -> returns: 2 x M x L array of confidence interval bounds for each column of each layer
+gam_CIs <- function(gam_array){
+  
+  # run a t-test for each combination of shape and scale values
+  t_tests = apply(X = gam_array, MARGIN = c(2, 3), FUN = t.test)
+  
+  # extract the CI bounds for the mean of the samples
+  ci_bounds = apply(X = t_tests, MARGIN = c(1, 2), function(t) t[[1]]$conf.int)
+  
+  # add rownames for each matrix to indicate which CI bound it is
+  dimnames(ci_bounds)[[1]] <- c("lower bound", "upper bound")
+  
+  # return array
+  return(ci_bounds)
+}
+
+# (multiple ways to) create a list of arrays containing the means for each sample of the generated data
+# use lapply to keep as list and not simplify to matrix
+gam_x_bars <- lapply(gam_arrays_list, gam_means) # equivalent to: lapply(X = gam_arrays_list, FUN = function(X) gam_means(X))
+gam_x_bars <- map(gam_arrays_list, \(array) gam_means(array)) # more readable
+
+# create a list of arrays containing the confidence interval bounds for the mean of each sample of the generated data
+gam_ci_bounds <- map(gam_arrays_list, \(array) gam_CIs(array))
+
+# view results
+str(gam_x_bars)
+gam_x_bars$`n = 25`
+str(gam_ci_bounds)
+gam_ci_bounds$`n = 25`
+
+```

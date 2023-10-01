@@ -645,6 +645,7 @@ str(beta_means)
 # map way requires different functions
 # -> need to convert the array to a list first with array_tree() (a hierarchical list), and then map at the second level
 # -> then simplify
+# NOTE -> changing the order of dimensions in MARGIN transposes the result (i.e. order matters)
 beta_means2 <- my_beta_sims_array %>% 
   array_tree(margin = c(3, 2)) %>% # first level list will be the layers, then the columns result$layer[[column]]
   map_depth(.depth = 2, .f = mean) %>% 

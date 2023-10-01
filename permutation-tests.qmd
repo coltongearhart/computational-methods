@@ -24,6 +24,16 @@ With Fishers exact test, if the null hypothesis is true that we are just guessin
 
 In the tea problem $m$ is the number of cups of milk first, $n$ is the number of cups of tea first, and $k$ is the number of cups for guessing "tea first". For the 8 cups, this would mean that there was only one way to guess them all correctly out of the ${(4 + 4) \choose 4}$ = `r choose(8,4)` possible ways to guess 4 cups; thus 1 / `r choose(8,4)` = `r round(1 / choose(8,4), 4)` p-value stated earlier.
 
+The exact test assumes there is a closed-form distribution (shape) that we can get the p-value from, so knowing what all possible outcomes looks like as a distribution. It exactly follows a hypergeometric. With means for example, we could assume some asymptotic properties of the CLT, but that is no longer an exact test.
+
+Psuedo ranking of tests:
+
+1. Exact test (cleanest, least practical): Nice when have situation that lends itself nicely to a closed-form solution. Don't need to check all possible combinations because can just calculate from the known theoretical distribution.
+
+2. Permutation test (less clean, more practical): We don't know the closed form of the statistic for all possible combinations, so it's not an exact test. But we know the empirical distribution from the exhaustive check of all possible combinations (group assignments), and this is how we get information is by comparing the summary for every assignment.
+
+3. Monte Carlo simulation (least clean, actually practical): Most realistic setting, very complicated scenarios in practice. Almost never going to be able to get a closed-form solution with complex summary statistics and datasets are usually too large to do full permutation tests.
+
 ## Extending to non-binary outcomes
 
 But how well does this generalize to non-binary outcome (e.g. comparison of means, where we aren't just concerned about correct or not correct)? Do the theoretically properties always stay simple with nice closed form combinatoric solutions? 

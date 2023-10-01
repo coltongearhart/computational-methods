@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assignments.html" rel="next">
+<link href="./permutation-tests.html" rel="next">
 <link href="./beyond-dataframes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -167,6 +167,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using and Building Functions</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./permutation-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bootstrap</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -181,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -1030,7 +1042,7 @@ $mischief
 </section><section id="summarize-simulation" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="summarize-simulation">
 <span class="header-section-number">2.4.2</span> Summarize simulation</h3>
 <p>Now suppose we want the mean for the simulation outcomes array. Use <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> to iterate over indices of the array.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/functions-on-array_927bb8a0b0b7e703e1857c1c602bc70d">
+<div class="cell" data-hash="using-and-building-functions_cache/html/functions-on-array_efe575b3a27163a0516c1ae631244759">
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calc mean of a particular iteration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">my_beta_sims_array</span><span class="op">[</span> ,<span class="fl">1</span> , <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1047,6 +1059,7 @@ $mischief
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># map way requires different functions</span></span>
 <span><span class="co"># -&gt; need to convert the array to a list first with array_tree() (a hierarchical list), and then map at the second level</span></span>
 <span><span class="co"># -&gt; then simplify</span></span>
+<span><span class="co"># NOTE -&gt; changing the order of dimensions in MARGIN transposes the result (i.e. order matters)</span></span>
 <span><span class="va">beta_means2</span> <span class="op">&lt;-</span> <span class="va">my_beta_sims_array</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/array-coercion.html">array_tree</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># first level list will be the layers, then the columns result$layer[[column]]</span></span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_depth.html">map_depth</a></span><span class="op">(</span>.depth <span class="op">=</span> <span class="fl">2</span>, .f <span class="op">=</span> <span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1702,8 +1715,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./assignments.html" class="pagination-link">
-        <span class="nav-page-text">Assignments</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./permutation-tests.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -2354,191 +2367,192 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb128-699"><a href="#cb128-699" aria-hidden="true" tabindex="-1"></a><span class="co"># map way requires different functions</span></span>
 <span id="cb128-700"><a href="#cb128-700" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; need to convert the array to a list first with array_tree() (a hierarchical list), and then map at the second level</span></span>
 <span id="cb128-701"><a href="#cb128-701" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then simplify</span></span>
-<span id="cb128-702"><a href="#cb128-702" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="ot">&lt;-</span> my_beta_sims_array <span class="sc">%&gt;%</span> </span>
-<span id="cb128-703"><a href="#cb128-703" aria-hidden="true" tabindex="-1"></a>  <span class="fu">array_tree</span>(<span class="at">margin =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="co"># first level list will be the layers, then the columns result$layer[[column]]</span></span>
-<span id="cb128-704"><a href="#cb128-704" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="at">.depth =</span> <span class="dv">2</span>, <span class="at">.f =</span> mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-705"><a href="#cb128-705" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(cbind)</span>
-<span id="cb128-706"><a href="#cb128-706" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape1_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape1))</span>
-<span id="cb128-707"><a href="#cb128-707" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape2_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape2))</span>
-<span id="cb128-708"><a href="#cb128-708" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-709"><a href="#cb128-709" aria-hidden="true" tabindex="-1"></a><span class="co"># compare two different methods</span></span>
-<span id="cb128-710"><a href="#cb128-710" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="sc">==</span> beta_means</span>
-<span id="cb128-711"><a href="#cb128-711" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-712"><a href="#cb128-712" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb128-713"><a href="#cb128-713" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-714"><a href="#cb128-714" aria-hidden="true" tabindex="-1"></a>Now we can check our simulated means against a theoretical mean: $X \sim \text{beta}(\alpha, \beta) \Longrightarrow E(X) = \frac{\alpha}{\alpha + \beta}$.</span>
-<span id="cb128-715"><a href="#cb128-715" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-718"><a href="#cb128-718" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-719"><a href="#cb128-719" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compute-means</span></span>
-<span id="cb128-720"><a href="#cb128-720" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-721"><a href="#cb128-721" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate theoretical beta mean</span></span>
-<span id="cb128-722"><a href="#cb128-722" aria-hidden="true" tabindex="-1"></a>theoretical_beta_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, beta){</span>
-<span id="cb128-723"><a href="#cb128-723" aria-hidden="true" tabindex="-1"></a>  alpha <span class="sc">/</span> (alpha <span class="sc">+</span> beta)</span>
-<span id="cb128-724"><a href="#cb128-724" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-725"><a href="#cb128-725" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-726"><a href="#cb128-726" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 10 x 10 matrix of the theoretical means for the beta distribution using the function above</span></span>
-<span id="cb128-727"><a href="#cb128-727" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> theoretical_beta_mean,</span>
-<span id="cb128-728"><a href="#cb128-728" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> param_combinations<span class="sc">$</span>shape1,</span>
-<span id="cb128-729"><a href="#cb128-729" aria-hidden="true" tabindex="-1"></a>                            <span class="at">beta =</span> param_combinations<span class="sc">$</span>shape2,</span>
-<span id="cb128-730"><a href="#cb128-730" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SIMPLIFY =</span> <span class="st">"array"</span>)</span>
-<span id="cb128-731"><a href="#cb128-731" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb128-732"><a href="#cb128-732" aria-hidden="true" tabindex="-1"></a>theoretical_means</span>
-<span id="cb128-733"><a href="#cb128-733" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-734"><a href="#cb128-734" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map2, then simplify to vector and convert to matrix</span></span>
-<span id="cb128-735"><a href="#cb128-735" aria-hidden="true" tabindex="-1"></a>theoretical_means2 <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
-<span id="cb128-736"><a href="#cb128-736" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(alpha, beta) <span class="fu">theoretical_beta_mean</span>(alpha, beta))} <span class="sc">%&gt;%</span> </span>
-<span id="cb128-737"><a href="#cb128-737" aria-hidden="true" tabindex="-1"></a>  as_vector</span>
-<span id="cb128-738"><a href="#cb128-738" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb128-739"><a href="#cb128-739" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-740"><a href="#cb128-740" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">==</span> theoretical_means2</span>
-<span id="cb128-741"><a href="#cb128-741" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-742"><a href="#cb128-742" aria-hidden="true" tabindex="-1"></a><span class="co"># compare a few means</span></span>
-<span id="cb128-743"><a href="#cb128-743" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; note that for some reason beta_means2 is stored as a list but displaying like a matrix? but it is correct</span></span>
-<span id="cb128-744"><a href="#cb128-744" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">2</span>,<span class="dv">7</span>] <span class="sc">-</span> beta_means2[<span class="dv">2</span>,<span class="dv">7</span>][[<span class="dv">1</span>]]</span>
-<span id="cb128-745"><a href="#cb128-745" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">1</span>,<span class="dv">10</span>] <span class="sc">-</span> beta_means2[<span class="dv">1</span>,<span class="dv">10</span>][[<span class="dv">1</span>]]</span>
-<span id="cb128-746"><a href="#cb128-746" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-747"><a href="#cb128-747" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb128-748"><a href="#cb128-748" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-749"><a href="#cb128-749" aria-hidden="true" tabindex="-1"></a><span class="fu">### Entire workflow </span></span>
-<span id="cb128-750"><a href="#cb128-750" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-751"><a href="#cb128-751" aria-hidden="true" tabindex="-1"></a>To confirm the simulated data is correct, we can do a bigger simulation (more iterations) and then compare to the theoretical means.</span>
-<span id="cb128-752"><a href="#cb128-752" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-755"><a href="#cb128-755" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-756"><a href="#cb128-756" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: entire-workflow</span></span>
-<span id="cb128-757"><a href="#cb128-757" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-758"><a href="#cb128-758" aria-hidden="true" tabindex="-1"></a><span class="co"># steps of simulation</span></span>
-<span id="cb128-759"><a href="#cb128-759" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; simulate data based on parameter combinations</span></span>
-<span id="cb128-760"><a href="#cb128-760" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; keep in list form where each list all the iterations for a parameter pair</span></span>
-<span id="cb128-761"><a href="#cb128-761" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then unpack and convert to 10 x 10 matrix</span></span>
-<span id="cb128-762"><a href="#cb128-762" aria-hidden="true" tabindex="-1"></a>beta_simulation <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
-<span id="cb128-763"><a href="#cb128-763" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(shape1, shape2) <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">shape1 =</span> shape1, <span class="at">shape2 =</span> shape2))} <span class="sc">%&gt;%</span> </span>
-<span id="cb128-764"><a href="#cb128-764" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-765"><a href="#cb128-765" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(rbind)</span>
-<span id="cb128-766"><a href="#cb128-766" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(beta_simulation) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>)</span>
-<span id="cb128-767"><a href="#cb128-767" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-768"><a href="#cb128-768" aria-hidden="true" tabindex="-1"></a><span class="co"># compare simulated and theoretical means</span></span>
-<span id="cb128-769"><a href="#cb128-769" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">-</span> beta_simulation</span>
-<span id="cb128-770"><a href="#cb128-770" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-771"><a href="#cb128-771" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb128-772"><a href="#cb128-772" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-773"><a href="#cb128-773" aria-hidden="true" tabindex="-1"></a><span class="fu">## Writing Modular Functions</span></span>
-<span id="cb128-774"><a href="#cb128-774" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-775"><a href="#cb128-775" aria-hidden="true" tabindex="-1"></a>When you are writing functions to do a complex task, try to identify the system of simple tasks that are needed to accomplish it step-by-step. For example we might consider building functions to help us to automate the process of running stepwise selection based on AIC, then outputting a model object that we can use for prediction, or inference. </span>
-<span id="cb128-776"><a href="#cb128-776" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-777"><a href="#cb128-777" aria-hidden="true" tabindex="-1"></a>We might initially think of one big function that can take a model matrix, X, and does a bunch of linear algebra to get beta estimates, calculates an AIC for the fitted model, then removes a columns from X to reduce the model... and repeat... a lot. Is that what we find inside the <span class="in">`step()`</span> function? Run <span class="in">`body(step)`</span> to see.</span>
-<span id="cb128-778"><a href="#cb128-778" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-779"><a href="#cb128-779" aria-hidden="true" tabindex="-1"></a>It isn't doing any of the linear algebra and AIC calculations we expected! The body of the step function is filled with, well more functions! It is function pinata!</span>
-<span id="cb128-780"><a href="#cb128-780" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-781"><a href="#cb128-781" aria-hidden="true" tabindex="-1"></a>What we find is that the <span class="in">`step()`</span> function calls many other functions to do the individual smaller tasks that make up the complex procedure. If we search closely, there is a function for dropping a row, <span class="in">`drop1()`</span>, within a <span class="in">`while`</span> loop that keeps dropping rows until a condition is met. There is a function for updating the fit of the model, <span class="in">`update()`</span>, and calculating the AIC, <span class="in">`extractAIC()`</span>. There is even a function created at the start of the body that are used to help organize and return a helpful print statement about the stepwise procedure: <span class="in">`step.results()`</span>. </span>
-<span id="cb128-782"><a href="#cb128-782" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-783"><a href="#cb128-783" aria-hidden="true" tabindex="-1"></a>These functions are often times called "helper functions", completing the sub-tasks of the primary function. This modular format allows each function to complete a single simple task, and when used in combination, achieve a complex task. </span>
-<span id="cb128-784"><a href="#cb128-784" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-785"><a href="#cb128-785" aria-hidden="true" tabindex="-1"></a>Thus, when modularizing code, the end goal to have one "overall" function that just has some helper functions within. On the way to having modularized code, is it better to start with an overall function and add modules sequentially (so e.g. if we call the overall, it will call module 1, so we check if that works; then add module 2 and call the overall which runs mod 1 and mod 2).... etc.</span>
-<span id="cb128-786"><a href="#cb128-786" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-787"><a href="#cb128-787" aria-hidden="true" tabindex="-1"></a>Below is an example (NOT RUN) to demostrate how helper functions can be used so that the overall function is body is relatively simple, all the work is being done by other functions. The overall function should be readable step by step.</span>
-<span id="cb128-788"><a href="#cb128-788" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-791"><a href="#cb128-791" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-792"><a href="#cb128-792" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: helper-functions</span></span>
-<span id="cb128-793"><a href="#cb128-793" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb128-794"><a href="#cb128-794" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-795"><a href="#cb128-795" aria-hidden="true" tabindex="-1"></a><span class="co"># main data simulation function</span></span>
-<span id="cb128-796"><a href="#cb128-796" aria-hidden="true" tabindex="-1"></a><span class="co"># write a function to simulate a dataset for an n x p dataset for a regression model where q of the variables are inactive (signal variables)</span></span>
-<span id="cb128-797"><a href="#cb128-797" aria-hidden="true" tabindex="-1"></a>make_sim_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">20</span>, <span class="at">q =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.1</span>, <span class="at">sd_y =</span> <span class="dv">1</span>, <span class="at">sd_x =</span> <span class="dv">1</span>){</span>
-<span id="cb128-798"><a href="#cb128-798" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-799"><a href="#cb128-799" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate a n(iteration in sample) x p(sample) matrix from rnorm(0, sd_X)</span></span>
-<span id="cb128-800"><a href="#cb128-800" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="at">sd =</span> sd_x))</span>
-<span id="cb128-801"><a href="#cb128-801" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,<span class="dv">1</span><span class="sc">:</span>p)</span>
-<span id="cb128-802"><a href="#cb128-802" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-803"><a href="#cb128-803" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify population coefficients</span></span>
-<span id="cb128-804"><a href="#cb128-804" aria-hidden="true" tabindex="-1"></a>  betas <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(b, q), <span class="fu">rep</span>(<span class="dv">0</span>, p<span class="sc">-</span>q))</span>
-<span id="cb128-805"><a href="#cb128-805" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-806"><a href="#cb128-806" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate responses</span></span>
-<span id="cb128-807"><a href="#cb128-807" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> (X <span class="sc">%*%</span> betas)[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>, sd_y)</span>
-<span id="cb128-808"><a href="#cb128-808" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-809"><a href="#cb128-809" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine data</span></span>
-<span id="cb128-810"><a href="#cb128-810" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y,X)</span>
-<span id="cb128-811"><a href="#cb128-811" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-812"><a href="#cb128-812" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sim_data)</span>
-<span id="cb128-813"><a href="#cb128-813" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-814"><a href="#cb128-814" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-815"><a href="#cb128-815" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-816"><a href="#cb128-816" aria-hidden="true" tabindex="-1"></a><span class="co"># helper functions for running the experiment with variable selection</span></span>
-<span id="cb128-817"><a href="#cb128-817" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-818"><a href="#cb128-818" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
-<span id="cb128-819"><a href="#cb128-819" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb128-820"><a href="#cb128-820" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb128-821"><a href="#cb128-821" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
-<span id="cb128-822"><a href="#cb128-822" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-823"><a href="#cb128-823" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-824"><a href="#cb128-824" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
-<span id="cb128-825"><a href="#cb128-825" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb128-826"><a href="#cb128-826" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-827"><a href="#cb128-827" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ ,<span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
-<span id="cb128-828"><a href="#cb128-828" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
-<span id="cb128-829"><a href="#cb128-829" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-830"><a href="#cb128-830" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">=</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[, <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
-<span id="cb128-831"><a href="#cb128-831" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
-<span id="cb128-832"><a href="#cb128-832" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-833"><a href="#cb128-833" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">=</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
-<span id="cb128-834"><a href="#cb128-834" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-835"><a href="#cb128-835" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lasso_vars) <span class="sc">==</span> <span class="dv">0</span>) lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="dv">1</span>]</span>
-<span id="cb128-836"><a href="#cb128-836" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-837"><a href="#cb128-837" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
-<span id="cb128-838"><a href="#cb128-838" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-839"><a href="#cb128-839" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
-<span id="cb128-840"><a href="#cb128-840" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-841"><a href="#cb128-841" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-842"><a href="#cb128-842" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-843"><a href="#cb128-843" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
-<span id="cb128-844"><a href="#cb128-844" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
-<span id="cb128-845"><a href="#cb128-845" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb128-846"><a href="#cb128-846" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-847"><a href="#cb128-847" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-848"><a href="#cb128-848" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE</span></span>
-<span id="cb128-849"><a href="#cb128-849" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
-<span id="cb128-850"><a href="#cb128-850" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-851"><a href="#cb128-851" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">=</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
-<span id="cb128-852"><a href="#cb128-852" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
-<span id="cb128-853"><a href="#cb128-853" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb128-854"><a href="#cb128-854" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
-<span id="cb128-855"><a href="#cb128-855" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept=</span><span class="cn">TRUE</span>))</span>
-<span id="cb128-856"><a href="#cb128-856" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-857"><a href="#cb128-857" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
-<span id="cb128-858"><a href="#cb128-858" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-859"><a href="#cb128-859" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-860"><a href="#cb128-860" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-861"><a href="#cb128-861" aria-hidden="true" tabindex="-1"></a><span class="co"># function to run trial </span></span>
-<span id="cb128-862"><a href="#cb128-862" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df){</span>
-<span id="cb128-863"><a href="#cb128-863" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-864"><a href="#cb128-864" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb128-865"><a href="#cb128-865" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-866"><a href="#cb128-866" aria-hidden="true" tabindex="-1"></a>  tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df) <span class="co"># not sure where this function comes from</span></span>
-<span id="cb128-867"><a href="#cb128-867" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-868"><a href="#cb128-868" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb128-869"><a href="#cb128-869" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-870"><a href="#cb128-870" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">var_count =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
-<span id="cb128-871"><a href="#cb128-871" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod), <span class="co"># nor this function</span></span>
-<span id="cb128-872"><a href="#cb128-872" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"secs"</span>)))</span>
-<span id="cb128-873"><a href="#cb128-873" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-874"><a href="#cb128-874" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-875"><a href="#cb128-875" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-876"><a href="#cb128-876" aria-hidden="true" tabindex="-1"></a><span class="co"># make into a function of n_sims, n, p and q</span></span>
-<span id="cb128-877"><a href="#cb128-877" aria-hidden="true" tabindex="-1"></a>sim_var_select <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_sim =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_ftn =</span> step_var_mod){</span>
-<span id="cb128-878"><a href="#cb128-878" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-879"><a href="#cb128-879" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb128-880"><a href="#cb128-880" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-881"><a href="#cb128-881" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim){</span>
-<span id="cb128-882"><a href="#cb128-882" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-883"><a href="#cb128-883" aria-hidden="true" tabindex="-1"></a>    sim_data <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> n, <span class="at">p =</span> p,<span class="at">q =</span> q)</span>
-<span id="cb128-884"><a href="#cb128-884" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-885"><a href="#cb128-885" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">run_trial</span>(var_select_ftn, sim_data))</span>
-<span id="cb128-886"><a href="#cb128-886" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-887"><a href="#cb128-887" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb128-888"><a href="#cb128-888" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-889"><a href="#cb128-889" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
-<span id="cb128-890"><a href="#cb128-890" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-891"><a href="#cb128-891" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-892"><a href="#cb128-892" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-702"><a href="#cb128-702" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> -&gt; changing the order of dimensions in MARGIN transposes the result (i.e. order matters)</span></span>
+<span id="cb128-703"><a href="#cb128-703" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="ot">&lt;-</span> my_beta_sims_array <span class="sc">%&gt;%</span> </span>
+<span id="cb128-704"><a href="#cb128-704" aria-hidden="true" tabindex="-1"></a>  <span class="fu">array_tree</span>(<span class="at">margin =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="co"># first level list will be the layers, then the columns result$layer[[column]]</span></span>
+<span id="cb128-705"><a href="#cb128-705" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="at">.depth =</span> <span class="dv">2</span>, <span class="at">.f =</span> mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-706"><a href="#cb128-706" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(cbind)</span>
+<span id="cb128-707"><a href="#cb128-707" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape1_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape1))</span>
+<span id="cb128-708"><a href="#cb128-708" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape2_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape2))</span>
+<span id="cb128-709"><a href="#cb128-709" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-710"><a href="#cb128-710" aria-hidden="true" tabindex="-1"></a><span class="co"># compare two different methods</span></span>
+<span id="cb128-711"><a href="#cb128-711" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="sc">==</span> beta_means</span>
+<span id="cb128-712"><a href="#cb128-712" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-713"><a href="#cb128-713" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-714"><a href="#cb128-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-715"><a href="#cb128-715" aria-hidden="true" tabindex="-1"></a>Now we can check our simulated means against a theoretical mean: $X \sim \text{beta}(\alpha, \beta) \Longrightarrow E(X) = \frac{\alpha}{\alpha + \beta}$.</span>
+<span id="cb128-716"><a href="#cb128-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-719"><a href="#cb128-719" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-720"><a href="#cb128-720" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compute-means</span></span>
+<span id="cb128-721"><a href="#cb128-721" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-722"><a href="#cb128-722" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate theoretical beta mean</span></span>
+<span id="cb128-723"><a href="#cb128-723" aria-hidden="true" tabindex="-1"></a>theoretical_beta_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, beta){</span>
+<span id="cb128-724"><a href="#cb128-724" aria-hidden="true" tabindex="-1"></a>  alpha <span class="sc">/</span> (alpha <span class="sc">+</span> beta)</span>
+<span id="cb128-725"><a href="#cb128-725" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-726"><a href="#cb128-726" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-727"><a href="#cb128-727" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 10 x 10 matrix of the theoretical means for the beta distribution using the function above</span></span>
+<span id="cb128-728"><a href="#cb128-728" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> theoretical_beta_mean,</span>
+<span id="cb128-729"><a href="#cb128-729" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> param_combinations<span class="sc">$</span>shape1,</span>
+<span id="cb128-730"><a href="#cb128-730" aria-hidden="true" tabindex="-1"></a>                            <span class="at">beta =</span> param_combinations<span class="sc">$</span>shape2,</span>
+<span id="cb128-731"><a href="#cb128-731" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SIMPLIFY =</span> <span class="st">"array"</span>)</span>
+<span id="cb128-732"><a href="#cb128-732" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb128-733"><a href="#cb128-733" aria-hidden="true" tabindex="-1"></a>theoretical_means</span>
+<span id="cb128-734"><a href="#cb128-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-735"><a href="#cb128-735" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map2, then simplify to vector and convert to matrix</span></span>
+<span id="cb128-736"><a href="#cb128-736" aria-hidden="true" tabindex="-1"></a>theoretical_means2 <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
+<span id="cb128-737"><a href="#cb128-737" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(alpha, beta) <span class="fu">theoretical_beta_mean</span>(alpha, beta))} <span class="sc">%&gt;%</span> </span>
+<span id="cb128-738"><a href="#cb128-738" aria-hidden="true" tabindex="-1"></a>  as_vector</span>
+<span id="cb128-739"><a href="#cb128-739" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb128-740"><a href="#cb128-740" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-741"><a href="#cb128-741" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">==</span> theoretical_means2</span>
+<span id="cb128-742"><a href="#cb128-742" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-743"><a href="#cb128-743" aria-hidden="true" tabindex="-1"></a><span class="co"># compare a few means</span></span>
+<span id="cb128-744"><a href="#cb128-744" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; note that for some reason beta_means2 is stored as a list but displaying like a matrix? but it is correct</span></span>
+<span id="cb128-745"><a href="#cb128-745" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">2</span>,<span class="dv">7</span>] <span class="sc">-</span> beta_means2[<span class="dv">2</span>,<span class="dv">7</span>][[<span class="dv">1</span>]]</span>
+<span id="cb128-746"><a href="#cb128-746" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">1</span>,<span class="dv">10</span>] <span class="sc">-</span> beta_means2[<span class="dv">1</span>,<span class="dv">10</span>][[<span class="dv">1</span>]]</span>
+<span id="cb128-747"><a href="#cb128-747" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-748"><a href="#cb128-748" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-749"><a href="#cb128-749" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-750"><a href="#cb128-750" aria-hidden="true" tabindex="-1"></a><span class="fu">### Entire workflow </span></span>
+<span id="cb128-751"><a href="#cb128-751" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-752"><a href="#cb128-752" aria-hidden="true" tabindex="-1"></a>To confirm the simulated data is correct, we can do a bigger simulation (more iterations) and then compare to the theoretical means.</span>
+<span id="cb128-753"><a href="#cb128-753" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-756"><a href="#cb128-756" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-757"><a href="#cb128-757" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: entire-workflow</span></span>
+<span id="cb128-758"><a href="#cb128-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-759"><a href="#cb128-759" aria-hidden="true" tabindex="-1"></a><span class="co"># steps of simulation</span></span>
+<span id="cb128-760"><a href="#cb128-760" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; simulate data based on parameter combinations</span></span>
+<span id="cb128-761"><a href="#cb128-761" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; keep in list form where each list all the iterations for a parameter pair</span></span>
+<span id="cb128-762"><a href="#cb128-762" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then unpack and convert to 10 x 10 matrix</span></span>
+<span id="cb128-763"><a href="#cb128-763" aria-hidden="true" tabindex="-1"></a>beta_simulation <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
+<span id="cb128-764"><a href="#cb128-764" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(shape1, shape2) <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">shape1 =</span> shape1, <span class="at">shape2 =</span> shape2))} <span class="sc">%&gt;%</span> </span>
+<span id="cb128-765"><a href="#cb128-765" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-766"><a href="#cb128-766" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(rbind)</span>
+<span id="cb128-767"><a href="#cb128-767" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(beta_simulation) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb128-768"><a href="#cb128-768" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-769"><a href="#cb128-769" aria-hidden="true" tabindex="-1"></a><span class="co"># compare simulated and theoretical means</span></span>
+<span id="cb128-770"><a href="#cb128-770" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">-</span> beta_simulation</span>
+<span id="cb128-771"><a href="#cb128-771" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-772"><a href="#cb128-772" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-773"><a href="#cb128-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-774"><a href="#cb128-774" aria-hidden="true" tabindex="-1"></a><span class="fu">## Writing Modular Functions</span></span>
+<span id="cb128-775"><a href="#cb128-775" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-776"><a href="#cb128-776" aria-hidden="true" tabindex="-1"></a>When you are writing functions to do a complex task, try to identify the system of simple tasks that are needed to accomplish it step-by-step. For example we might consider building functions to help us to automate the process of running stepwise selection based on AIC, then outputting a model object that we can use for prediction, or inference. </span>
+<span id="cb128-777"><a href="#cb128-777" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-778"><a href="#cb128-778" aria-hidden="true" tabindex="-1"></a>We might initially think of one big function that can take a model matrix, X, and does a bunch of linear algebra to get beta estimates, calculates an AIC for the fitted model, then removes a columns from X to reduce the model... and repeat... a lot. Is that what we find inside the <span class="in">`step()`</span> function? Run <span class="in">`body(step)`</span> to see.</span>
+<span id="cb128-779"><a href="#cb128-779" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-780"><a href="#cb128-780" aria-hidden="true" tabindex="-1"></a>It isn't doing any of the linear algebra and AIC calculations we expected! The body of the step function is filled with, well more functions! It is function pinata!</span>
+<span id="cb128-781"><a href="#cb128-781" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-782"><a href="#cb128-782" aria-hidden="true" tabindex="-1"></a>What we find is that the <span class="in">`step()`</span> function calls many other functions to do the individual smaller tasks that make up the complex procedure. If we search closely, there is a function for dropping a row, <span class="in">`drop1()`</span>, within a <span class="in">`while`</span> loop that keeps dropping rows until a condition is met. There is a function for updating the fit of the model, <span class="in">`update()`</span>, and calculating the AIC, <span class="in">`extractAIC()`</span>. There is even a function created at the start of the body that are used to help organize and return a helpful print statement about the stepwise procedure: <span class="in">`step.results()`</span>. </span>
+<span id="cb128-783"><a href="#cb128-783" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-784"><a href="#cb128-784" aria-hidden="true" tabindex="-1"></a>These functions are often times called "helper functions", completing the sub-tasks of the primary function. This modular format allows each function to complete a single simple task, and when used in combination, achieve a complex task. </span>
+<span id="cb128-785"><a href="#cb128-785" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-786"><a href="#cb128-786" aria-hidden="true" tabindex="-1"></a>Thus, when modularizing code, the end goal to have one "overall" function that just has some helper functions within. On the way to having modularized code, is it better to start with an overall function and add modules sequentially (so e.g. if we call the overall, it will call module 1, so we check if that works; then add module 2 and call the overall which runs mod 1 and mod 2).... etc.</span>
+<span id="cb128-787"><a href="#cb128-787" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-788"><a href="#cb128-788" aria-hidden="true" tabindex="-1"></a>Below is an example (NOT RUN) to demostrate how helper functions can be used so that the overall function is body is relatively simple, all the work is being done by other functions. The overall function should be readable step by step.</span>
+<span id="cb128-789"><a href="#cb128-789" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-792"><a href="#cb128-792" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-793"><a href="#cb128-793" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: helper-functions</span></span>
+<span id="cb128-794"><a href="#cb128-794" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb128-795"><a href="#cb128-795" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-796"><a href="#cb128-796" aria-hidden="true" tabindex="-1"></a><span class="co"># main data simulation function</span></span>
+<span id="cb128-797"><a href="#cb128-797" aria-hidden="true" tabindex="-1"></a><span class="co"># write a function to simulate a dataset for an n x p dataset for a regression model where q of the variables are inactive (signal variables)</span></span>
+<span id="cb128-798"><a href="#cb128-798" aria-hidden="true" tabindex="-1"></a>make_sim_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">20</span>, <span class="at">q =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.1</span>, <span class="at">sd_y =</span> <span class="dv">1</span>, <span class="at">sd_x =</span> <span class="dv">1</span>){</span>
+<span id="cb128-799"><a href="#cb128-799" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-800"><a href="#cb128-800" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate a n(iteration in sample) x p(sample) matrix from rnorm(0, sd_X)</span></span>
+<span id="cb128-801"><a href="#cb128-801" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="at">sd =</span> sd_x))</span>
+<span id="cb128-802"><a href="#cb128-802" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,<span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb128-803"><a href="#cb128-803" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-804"><a href="#cb128-804" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify population coefficients</span></span>
+<span id="cb128-805"><a href="#cb128-805" aria-hidden="true" tabindex="-1"></a>  betas <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(b, q), <span class="fu">rep</span>(<span class="dv">0</span>, p<span class="sc">-</span>q))</span>
+<span id="cb128-806"><a href="#cb128-806" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-807"><a href="#cb128-807" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate responses</span></span>
+<span id="cb128-808"><a href="#cb128-808" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> (X <span class="sc">%*%</span> betas)[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>, sd_y)</span>
+<span id="cb128-809"><a href="#cb128-809" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-810"><a href="#cb128-810" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine data</span></span>
+<span id="cb128-811"><a href="#cb128-811" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y,X)</span>
+<span id="cb128-812"><a href="#cb128-812" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-813"><a href="#cb128-813" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sim_data)</span>
+<span id="cb128-814"><a href="#cb128-814" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-815"><a href="#cb128-815" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-816"><a href="#cb128-816" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-817"><a href="#cb128-817" aria-hidden="true" tabindex="-1"></a><span class="co"># helper functions for running the experiment with variable selection</span></span>
+<span id="cb128-818"><a href="#cb128-818" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-819"><a href="#cb128-819" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
+<span id="cb128-820"><a href="#cb128-820" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb128-821"><a href="#cb128-821" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb128-822"><a href="#cb128-822" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
+<span id="cb128-823"><a href="#cb128-823" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-824"><a href="#cb128-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-825"><a href="#cb128-825" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
+<span id="cb128-826"><a href="#cb128-826" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb128-827"><a href="#cb128-827" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-828"><a href="#cb128-828" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ ,<span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb128-829"><a href="#cb128-829" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb128-830"><a href="#cb128-830" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-831"><a href="#cb128-831" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">=</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[, <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb128-832"><a href="#cb128-832" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb128-833"><a href="#cb128-833" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-834"><a href="#cb128-834" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">=</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb128-835"><a href="#cb128-835" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-836"><a href="#cb128-836" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lasso_vars) <span class="sc">==</span> <span class="dv">0</span>) lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="dv">1</span>]</span>
+<span id="cb128-837"><a href="#cb128-837" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-838"><a href="#cb128-838" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
+<span id="cb128-839"><a href="#cb128-839" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-840"><a href="#cb128-840" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
+<span id="cb128-841"><a href="#cb128-841" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-842"><a href="#cb128-842" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-843"><a href="#cb128-843" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-844"><a href="#cb128-844" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
+<span id="cb128-845"><a href="#cb128-845" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb128-846"><a href="#cb128-846" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb128-847"><a href="#cb128-847" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-848"><a href="#cb128-848" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-849"><a href="#cb128-849" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE</span></span>
+<span id="cb128-850"><a href="#cb128-850" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb128-851"><a href="#cb128-851" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-852"><a href="#cb128-852" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">=</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
+<span id="cb128-853"><a href="#cb128-853" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
+<span id="cb128-854"><a href="#cb128-854" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb128-855"><a href="#cb128-855" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb128-856"><a href="#cb128-856" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept=</span><span class="cn">TRUE</span>))</span>
+<span id="cb128-857"><a href="#cb128-857" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-858"><a href="#cb128-858" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
+<span id="cb128-859"><a href="#cb128-859" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-860"><a href="#cb128-860" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-861"><a href="#cb128-861" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-862"><a href="#cb128-862" aria-hidden="true" tabindex="-1"></a><span class="co"># function to run trial </span></span>
+<span id="cb128-863"><a href="#cb128-863" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df){</span>
+<span id="cb128-864"><a href="#cb128-864" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-865"><a href="#cb128-865" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-866"><a href="#cb128-866" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-867"><a href="#cb128-867" aria-hidden="true" tabindex="-1"></a>  tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df) <span class="co"># not sure where this function comes from</span></span>
+<span id="cb128-868"><a href="#cb128-868" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-869"><a href="#cb128-869" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-870"><a href="#cb128-870" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-871"><a href="#cb128-871" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">var_count =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
+<span id="cb128-872"><a href="#cb128-872" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod), <span class="co"># nor this function</span></span>
+<span id="cb128-873"><a href="#cb128-873" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"secs"</span>)))</span>
+<span id="cb128-874"><a href="#cb128-874" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-875"><a href="#cb128-875" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-876"><a href="#cb128-876" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-877"><a href="#cb128-877" aria-hidden="true" tabindex="-1"></a><span class="co"># make into a function of n_sims, n, p and q</span></span>
+<span id="cb128-878"><a href="#cb128-878" aria-hidden="true" tabindex="-1"></a>sim_var_select <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_sim =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_ftn =</span> step_var_mod){</span>
+<span id="cb128-879"><a href="#cb128-879" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-880"><a href="#cb128-880" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb128-881"><a href="#cb128-881" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-882"><a href="#cb128-882" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim){</span>
+<span id="cb128-883"><a href="#cb128-883" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb128-884"><a href="#cb128-884" aria-hidden="true" tabindex="-1"></a>    sim_data <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> n, <span class="at">p =</span> p,<span class="at">q =</span> q)</span>
+<span id="cb128-885"><a href="#cb128-885" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb128-886"><a href="#cb128-886" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">run_trial</span>(var_select_ftn, sim_data))</span>
+<span id="cb128-887"><a href="#cb128-887" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb128-888"><a href="#cb128-888" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb128-889"><a href="#cb128-889" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-890"><a href="#cb128-890" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb128-891"><a href="#cb128-891" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-892"><a href="#cb128-892" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-893"><a href="#cb128-893" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
