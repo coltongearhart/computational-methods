@@ -8,4 +8,474 @@
 # knitr options
 source("_common.R")
 
+# AIC BIC< one is more conservative
+
 ```
+
+## Overview
+
+In the process of running analyses and working with new methods, we often encounter the situation where we don't know what the best course of action is for continuing our work. It may not be clear if our new method is really any more accurate than existing methods, or which algorithm is more efficient, or which parameterization is best. If we look to existing literature, web resources and professional advice, we might find a solution already exists; or we might learn that there is not clear answer, and we have to figure it out ourselves. What do we do then?
+
+*Example: In a standard knn regression, we predict the response value for a new point by finding the k-nearest points from the training data, then calculating their average as a prediction for the new point. This is a nice non-parametric model but it requires a lot of distance calculation to find the neighbors. Suppose that a researcher is working on a new approximation to a k-nearest neighbor regression model. Instead of creating neighborhoods based on distance, instead the neighborhoods are defined by binning the features using quantile-based bins. The researcher thinks that this should be faster than knn, but is unsure if the predictions will be as accurate.*
+
+*Example: You have heard of stepwise variable selection for regression. Suppose you also learn the LASSO regression can also be used to run variable selection. Which will lead to smaller models? Which is faster? Which make a model that is better for predictive accuracy?*
+
+```{r}
+#| label: packages
+
+# load packages
+library(tidyverse)
+library(glmnet)
+library(caret)
+
+```
+
+## Methods preview {#sec-methods-preview}
+
+We are going to build a regression model for prediction. We can start with using a single dataset, air quality. So we are going to predict air quality based on certain chemicals and we want to see which combinations of variables leads to the best predictions.
+
+```{r}
+#| label: load-air-quality
+
+# load and preview data
+load("Files/Data/air_quality_cleaned.Rdata")
+glimpse(data)
+
+```
+
+To start we can fit all the variables.
+
+```{r}
+#| label: full-model
+
+# fit full model
+big_mod <- lm(y ~ . , data = data)
+summary(big_mod)
+
+```
+
+But for prediction, this can lead to overfitting. So we need to select variables, specifically which ones are helpful in predicting air quality. One option is to do stepwise selection based on AIC. We see that a few variables are dropped based on AIC, which measures some complexity penalty, and the stepwise procedure is trying to give us a more parsimonious model. The model could then be the final model used for prediction.
+
+```{r}
+#| label: pick-variables-stepwise
+
+# stepwise variable selection based on AIC
+# -> direction = "both" by default
+step_selected <- step(big_mod)
+step_selected
+
+```
+
+Or we could use another method such as LASSO variable selection. LASSO is a fairly common method that selects variables based on a different complexity penalty (not AIC), specifically it is based on shrinkage penalty (controlled by $\lambda$ parameter). In a standard regression setting, there is a way of solving the $\boldsymbol{\beta}$ equation to minimize the SSE (or MSE).
+
+When we fit a LASSO model, we add a penalty $\lambda$ for complexity (i.e. $\beta$s that are very big in magnitude, which means they stay included in the model). Essentially, we solve for $\boldsymbol{\beta}$ while conditioning them to be generally smaller. And because LASSO can become more and more aggressive if we penalize more and more (i.e. increase $\lambda$), LASSO can push some of the $\beta$s all the way down to zero. So we might end up with some $\beta_i = 0$ in a constrained solution. Thus the corresponding $X$ variable is essentially removed from the model when we multiply $\boldsymbol{X} \boldsymbol{\beta}$.
+
+So we have to tune the $\lambda$ to get a value that results in good performance (parameter tuning). We can use `cv.glmnet()` to cross-validate to pick a $\lambda$ value that is tuned for optimal performance based on the specified measure. In the example below, we chose deviance which is measure of model fit (commonly used by computer scientists). We could have picked for example MSE or MAE, it is essentially the same type of decision as using AIC vs BIC as a model criteria (or penalty).
+
+```{r}
+#| label: pick-variables-lasso
+
+# pick variables with LASSO
+# -> pick lambda based on a cross validated tuning process
+# -> x = predictor variables, y = response
+cv.out <- cv.glmnet(x = as.matrix(x = data[ , -which(names(data) == "y")]),
+                    y = data$y, alpha = 1, type.measure = "deviance")
+
+# view tuned lambda
+cv.out$lambda.1se
+
+# use tuned lambda to pick variables
+lasso_mod <- glmnet(x = as.matrix(x = data[ , -which(names(data) == "y")]),
+                    y = data$y, alpha = 1, lambda = cv.out$lambda.1se)
+
+# view resulting coefficient estimates
+lasso_mod$beta[,1]
+
+# find variables whose coefficients were NOT shrunk to zero
+lasso_vars <- names(lasso_mod$beta[,1])[which(lasso_mod$beta[,1] != 0)]
+
+# use selected variables to fit the linear model
+
+# first convert the names of the selected variables to a formula string
+lasso_vars
+paste(lasso_vars, collapse = " + ")
+paste0("y ~ ",paste(lasso_vars, collapse = " + "))
+
+# fit model based on lasso selected variables
+lasso_selected <- lm(formula(paste0("y ~ ",paste(lasso_vars, collapse = " + "))), data = data )
+lasso_selected
+
+```
+
+This method suggest cut more variables than the stepwise selection, so it was more aggressive for variable selection. So which of these approaches is superior? Depends on what we are trying to ask. To gather an understanding of how they behave, we should try them out in a comprehensive way (multiple datasets): does lasso tend to pick more variables than AIC or was it just a weird dataset? Maybe it won't always be this way. So we need to do side by side comparison in a comprehensive, methodical way with an experiment.
+
+## Preparing to experiment
+
+In experimental design, what are key features? Response of interest, treatments, subjects, control, randomization, replication, reproducibility. We need to fit these into the framework of our computational experiment (essentially data collection).
+
+In the knn regression example above identify the following:
+
+Computational experiment
+
+1.  What are the responses of interest? What do we want to know or be able to measure for the two methods?
+
+    -   Predictive performance (accuracy metric such as RMSE on testing data)
+    -   Number of variables selected (maybe proportion of total selected: transformation to make it more relative to the dataset size); does one select simpler (more parsimonious) models?
+    -   Variability of the coefficients (does a smaller model end up with more uncertatinty in the $\beta$s?)
+    -   Timing comparison (time to select and fit model; comparison of how fast the process is on the same dataset)
+
+2.  What are the treatments that we want to test above? What are we going to systematically change between each trial run of this experiment?
+
+    -   Select algorithm (lasso vs step)
+    -   Parameter sets (need to tune parameters, can change how to tune -- lasso: lambda, stepwise: AIC/BIC)
+    -   NOTE for the experiment below: Even though lasso is super flexible and we can penalize more or less, we are going to use some preset criteria for how to set the value (kinda like for stepwise where we are picking a preset criteria of AIC)
+
+3.  What are the subjects? What are we applying the treatment to?
+
+    -   Datasets (9 real datasets from the UCI repository)
+    -   NOTE we are concerned with accuracy, so better to use real data than simulated data
+    -   NOTE in a more classic, experimental setting where we have more control over the subjects, we could simulate the datasets in a sequential way and change certain aspects (e.g. we can change the covariance matrix); this way we know how the treatments should behave because we simulated the subjects in a particular manner (we can design the subjects to match the characteristics we want to test)
+
+4.  What do we need to control? Kinda like blocks in a real study, but what does this mean in a computational experiment?
+
+    -   Predefined structure in code and design that either sets up consistant parameters or processes (this allows for correct comparison of results)
+    -   (e.g. tuning parameters: if the $\lambda$ is not what is being studied for LASSO, the values can be different from dataset to dataset but they need to be found in a consistent way (a prescribed method))
+    -   Removing the effect of magnitude for the $X$ variables (i.e. standardizing all $X$ variable information so they are on same scales, this is like a process / setup that the datasets had to go through first to ensure the scales don't introduce a different treatment)
+
+5.  What roll does randomization play? Randomization of individuals to groups, how does this translate to computational experiments?
+
+    -   Will talk about this later, but want to align simulation approach so we know that we have balance across all other factors
+
+6.  What do we do for replication?
+
+    -   Timing replication; can do bootstrapping on timings because there could be other processes running on computer while doing the timer that affect the timing results, so we want to collect many timings
+    -   Bootstrap datasets for variable selection; will LASSO always select 4 variables, what if we permute the data? We want to try to capture some of that random behavior
+
+7.  How do I make it all reproducible?
+
+    -   How to layout code file to know what data cleaning was done ahead of time, what functions are being called throughout the experiment, how the results are organized and doing it in a way that can be replicated.
+
+## Organizing to support an experiment
+
+To be organized to run a computational experiment, we need many components prepared. Thinking about set of tasks we need to do beforehand will help. There is lots of work to be done before can start getting results.
+
+-   If we have data that will act as the experimental subject, then we need to have this cleaned and accessible.
+
+    -   If simulating data, then would want a function to do all the data generation based on the desired properties.
+
+-   If we have a summary statistic(s) selected as our response of interest, then we need to have functions that can compute and store those values.
+
+-   If we have identified the algorithms and models that will act as our treatments, then we need functions that can implement these methods.
+
+-   If we have a set of possible parameter settings for an algorithm that will act as treatment factors, then we need to have those values organized into a data object that can be accessed when needed.
+
+This is all to say, there is often a lot of preparation of data and functions that is required before we can start gathering results from computational experiments. We want everything to be organized so that we can automate everything.
+
+### Load data
+
+We are going to figure out which type of model will behave more accurately in terms of a predictive setting. So working with simulated data sets might not have as much real application.
+
+We are going to work with 9 machine learning datasets from real settings (found in the UCI repository). These are commonly used regression data sets for whenever researchers have new methods and they want to see how the models behave on real data (e.g. check their predictive capabilities).
+
+Data prep: All datasets have been put through the following processes
+
+-   Standardized to remove effect of magnitude
+
+-   Response variable renamed to `y` so there is no confusion about what the response is (all other $X$ variable names are unchanged)
+
+-   Similar naming structure `_cleaned.RData` to read in easily
+
+Then we can save them all in organized holding structure for easy access.
+
+```{r}
+#| label: load-reg-datasets
+
+# dataset names used for testing
+all_reg_sets <- c("wpbc", "wankara", "laser", "treasury", "skillcraft", "puma", "air_quality", "ccpp", "casp")
+
+# initialize items
+data_list <- list(NULL)
+all_reg_sizes <- NA
+
+# loop through dataset names to load all datasets
+for (i in 1:length(all_reg_sets)){
+  
+  # concatenate path with specific dataset name
+  data_path <- paste0("Files/Data/", all_reg_sets[i], "_cleaned.Rdata")
+  
+  # load and assign data
+  load(data_path)
+  data_list[[i]] <- data
+  all_reg_sizes[i] <- nrow(data)
+  
+  # print loaded variables
+  print(paste("vars from data", all_reg_sets[i]))
+  print(names(data))
+  
+}
+
+# rename data lists
+names(data_list) <- all_reg_sets
+
+# view loaded data
+str(data_list, max.level = 1)
+
+```
+
+### Modularize code
+
+Rather than having one function that does everything, we want to have modularized code where helper functions perform *singular tasks* (this way they are like action statements).
+
+The variable selection helper functions below perform the same steps as in @sec-methods-preview, just generalized for the cleaned data. They should take the subjects as inputs (datasets) and output a model from the treatment.
+
+```{r}
+#| label: helper-functions-variable-selection
+
+# helper functions for running the experiment with variable selection
+
+# function for choosing with stepwise and fitting a regression
+# -> inputs dataframe and returns selected model
+step_var_mod <- function(df){
+  
+  # run stepwise procedure from full model
+  step_selected <- step(lm(y ~ . , data = df), trace = FALSE)
+  
+  return(step_selected)
+
+}
+
+# test function on a single dataset
+step_var_mod(data_list$air_quality)
+
+# function for choosing with lasso and fitting regression
+# -> inputs dataframe and returns selected model
+lasso_var_mod <- function(df){
+  
+  # tune shrinkage parameter lambda
+  cv.out <- cv.glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
+                      y = df$y, alpha = 1, type.measure = "deviance")
+  
+  # run lasso selection on model using tuned lambda
+  lasso_mod <- glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
+                      y = df$y, alpha = 1, lambda = cv.out$lambda.1se)
+  
+  # save names of non0-shrunk X variables
+  lasso_vars <- names(lasso_mod$beta[,1])[which(lasso_mod$beta[,1] != 0)]
+  
+  # fit model based on lasso selected variables (plus intercept)
+  lasso_selected <- lm(formula(paste0("y ~ 1 + ", paste(lasso_vars, collapse = " + "))), data = df)
+  
+  return(lasso_selected)
+
+}
+
+# test function on a single dataset
+lasso_var_mod(data_list$air_quality)
+
+```
+
+Now we need some functions to extract the results of interest from the selected model, i.e. collecting the measurements.
+
+The outcome of the treatment is a model, so these functions should take in a model and output the measurement.
+
+```{r}
+#| label: helper-function-results
+
+# function for finding number of variables included
+# -> inputs a model and returns an integer
+select_var_count <- function(lin_mod){
+  
+  # count the number of variables in the model (excluding intercept)
+  length(coef(lin_mod))-1
+  
+}
+
+# test function on a single dataset
+lasso_var_mod(data_list$air_quality) %>% select_var_count
+
+
+# function for finding 10-fold cross validated RMSE (our accuracy measure)
+select_cv_rmse <- function(lin_mod){
+  
+  # run 10-fold CV on the model
+  # -> by default trainControl() uses bootstrap validation, so need to switch it
+  # -> always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison
+  cv_result <- train(formula(lin_mod), 
+                     data = lin_mod$model,
+                     method = "lm",
+                     trControl = trainControl(method = "cv", number = 10),
+                     tuneGrid = data.frame(intercept = TRUE))
+  
+  # return RMSE
+  return(cv_result$results$RMSE)
+}
+
+# test function on a single dataset
+lasso_var_mod(data_list$air_quality) %>% select_cv_rmse
+
+```
+
+Lots of work went into setting up how to apply the treatments and gathering results. Now we are just doing everything through functions.
+
+## Putting together the experiment
+
+### Run single trial
+
+While planning the steps above we might lose track of the general goal. Apply the treatments to the subjects and record the outcomes. With everything above setup well, actually running the experiment should be relatively simple.
+
+We can still do this in a modularized fashion by first creating a function to run a single trial. In which, we don't actually want to save the model that was fit, rather we want the results of it.
+
+```{r}
+#| label: running-single-trial
+
+# define function to run a single trial
+# -> inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results
+run_trial <- function(selection_alg, df) {
+  
+  # run variable selection model
+  # -> we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)
+  tmp_mod = selection_alg(df)
+  
+  # collect measurements for number of variables and predictive accuracy
+  # -> will be storing results as dataframe, so want to return a mini dataframe here
+  # -> want to name elements when returning more complex data structures
+  return(data.frame(nvars = select_var_count(tmp_mod),
+                    rmse = select_cv_rmse(tmp_mod)))
+}
+
+# run trial for a single dataset to check results
+run_trial(step_var_mod, data_list$air_quality)
+run_trial(lasso_var_mod, data_list$air_quality)
+
+```
+
+### Run experiment {#sec-run-experiment}
+
+Now we can run the experiment for all datasets. If trying to automate this, we can of coures use APPLY statements. When choosing which APPLY statement, we should think about what the input is (list of dataframes) and what the output will be (a dataframe).
+
+```{r}
+#| label: run-experiment
+
+# run experiment
+# -> run separately for stepwise and lasso algorithms
+results_step <- sapply(X = data_list, FUN = function(X) run_trial(step_var_mod, X))
+results_lasso <- sapply(X = data_list, FUN = function(X) run_trial(lasso_var_mod, X))
+results_step
+results_lasso
+
+```
+
+In most cases, stepwise selects a bigger model and has similar accuracy to LASSO.
+
+### Questioning results
+
+Because this is a computational experiment, we need to consider how the computer is behaving and which of our results should have some variability.
+
+-   If we rerun the stepwise procedure, we should get the same results in the number of selected variables because it is a **deterministic** approach (it is calculating the AIC the same every single time). There is no randomness in this process. Although the accuracy (cv-rmse) measure may change a bit because may change slightly because of the cross validation. So we may need to repeatedly gather the cross-validated RMSE to see how uncertain we should be in those numbers (seeing if the accuracy is stable). We could simulate this 100 times and take the average cv-rmse; this would be the Monte Carlo simulation average of the 10-fold cross-validated RMSE. This would be a long term accuracy measure.
+
+-  In the LASSO, there is an additional source of variation from the cross-validation procedure used to tune the shrinkage parameter $\lambda$ (data is randomly divided into 10-folds and then it iteratively goes through to find the best parameter value. How we divide up the data into 10 folds differs from trial to trial and we can get different results. This is where we start thinking about repetition and replication is necessary to understand uncertainty. Even though we are in a computational setting and have a lot more control, we are still working with outcomes and algorithms that have random components. So here, even though there isn't randomization in our subjects, our treatments might manifest differently in different trials on the same data.
+
+## Improving the experiment
+
+### Timing study
+
+When timing a study, we need to be careful about how this is done.
+
+The best approach would be to build a function that not only fits the model based on the supplied selection procedure and dataframe, but also records the time it takes to do so.
+
+Note that assigning a start time and endtime is an imperfect way to record time because it takes the system time to record the time (assign the system time to the namespace, albeit a negligible amount).
+
+We also want to be careful with the units for when we convert the time difference to numeric to store it. To account for this, use `difftime()` and specify the units for equal comparison. This is demonstrated below. 
+
+```{r}
+#| label: timing-calculations
+
+# record start time
+start_time <- Sys.time()
+
+# run trial
+results_lasso <- sapply(X = data_list, FUN = function(X) run_trial(lasso_var_mod, X))
+
+# record end time
+start_time <- Sys.time()
+
+# calculate difference - naive way
+end_time - start_time
+as.numeric(end_time - start_time)
+end_time_step + 120 - start_time
+as.numeric(end_time + 120 - start_time)
+
+# have no idea what the units are when convert
+
+# calculate difference - correct way
+difftime(end_time, start_time, units = "sec")
+as.numeric(difftime(end_time, start_time, units = "min"))
+
+```
+
+Now we can incorporate timing into our function to run trials.
+
+```{r}
+#| label: running-single-trial-timing
+
+# define function to run a single trial
+# -> inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results
+run_trial <- function(selection_alg, df) {
+  
+  # run variable selection model
+  # -> we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)
+  # record start and end time
+  start_time = Sys.time()
+    tmp_mod = selection_alg(df)
+  end_time = Sys.time()
+  
+  # collect measurements for number of variables and predictive accuracy
+  # -> will be storing results as dataframe, so want to return a mini dataframe here
+  # -> want to name elements when returning more complex data structures
+  return(data.frame(nvars = select_var_count(tmp_mod),
+                    rmse = select_cv_rmse(tmp_mod),
+                    time = difftime(end_time, start_time, units = "sec")))
+}
+
+# run trial for a single dataset to check results
+run_trial(lasso_var_mod, data_list$air_quality)
+
+```
+
+Then we can get Monte Carlo intervals for the timing.
+
+Final note about timing: It is a good idea to test our experiments with small datasets like this to understand the behavior. For example, if one algorithm takes 5 times longer to run than another on just these smaller cases, then we might be worried about handing it 100,000 observations. If big datasets worry us, then perhaps simulated dataset is good to start with so we can control how large it is.
+
+### Bundling the trial functions
+
+In the implementation in @sec-run-experiment, there is just a single function that runs the trials and we call if for both algorithms (applying it to all the datasets). We could setup another function to run the datasets through both algorithms and combine results.
+
+```{r}
+#| label: run-both
+
+# define function to run both algorithms
+run_both <- function(df){
+  
+  # calculate results
+  # -> add indicator for which algorithm was used
+  tmp_step = cbind(data.frame(algorithm = "step"),
+                   run_trial(step_var_mod, df))
+  tmp_lasso = cbind(data.frame(algorithm = "lasso"),
+                    run_trial(lasso_var_mod, df))
+
+  return(rbind(tmp_step, tmp_lasso))
+}
+
+# run all datasets through both algorithms
+results <- lapply(data_list, run_both)
+glimpse(results, max.level = 1)
+results$air_quality
+
+```
+
+We could get better formatted results by adding an indicator for which dataset was used. Then we would be able to reduce the results list to a single dataframe rather than a list of smaller dataframes.
+
+### Bootstrapping the data
+
+We could also think about at this stage if the particular dataset is of interest or if we are more concerned about this type of data (data from a population like the 9 that are represented here). Reapplying to the same data wouldn't get us anywhere because of the deterministic nature of the stepwise algorithm. So if the main question is how many variables tend to be selected in data like these, then we could bootstrap the dataframes going in (this would get at the variability in how large the set of variables tends to be selected in data like these, in addition to the variability in accuracies from dataset to dataset via the 10-fold cv-rmse). Then can get bootstrap intervals for the variable counts.
+

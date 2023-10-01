@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./simulation-studies.html" rel="next">
+<link href="./assignments.html" rel="next">
 <link href="./bootstrap.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -95,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -164,13 +164,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./using-and-building-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using naandd Building Functions 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using and Building Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./permutation-tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Permutation Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -183,18 +183,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./computational-experiments.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./simulation-studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation Studies 1</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./improving-code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Improving Code 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -211,19 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./hw2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -233,15 +209,717 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">5.1</span> Overview</a></li>
+  <li><a href="#sec-methods-preview" id="toc-sec-methods-preview" class="nav-link" data-scroll-target="#sec-methods-preview"><span class="header-section-number">5.2</span> Methods preview</a></li>
+  <li><a href="#preparing-to-experiment" id="toc-preparing-to-experiment" class="nav-link" data-scroll-target="#preparing-to-experiment"><span class="header-section-number">5.3</span> Preparing to experiment</a></li>
+  <li>
+<a href="#organizing-to-support-an-experiment" id="toc-organizing-to-support-an-experiment" class="nav-link" data-scroll-target="#organizing-to-support-an-experiment"><span class="header-section-number">5.4</span> Organizing to support an experiment</a>
+  <ul class="collapse">
+<li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">5.4.1</span> Load data</a></li>
+  <li><a href="#modularize-code" id="toc-modularize-code" class="nav-link" data-scroll-target="#modularize-code"><span class="header-section-number">5.4.2</span> Modularize code</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#putting-together-the-experiment" id="toc-putting-together-the-experiment" class="nav-link" data-scroll-target="#putting-together-the-experiment"><span class="header-section-number">5.5</span> Putting together the experiment</a>
+  <ul class="collapse">
+<li><a href="#run-single-trial" id="toc-run-single-trial" class="nav-link" data-scroll-target="#run-single-trial"><span class="header-section-number">5.5.1</span> Run single trial</a></li>
+  <li><a href="#sec-run-experiment" id="toc-sec-run-experiment" class="nav-link" data-scroll-target="#sec-run-experiment"><span class="header-section-number">5.5.2</span> Run experiment</a></li>
+  <li><a href="#questioning-results" id="toc-questioning-results" class="nav-link" data-scroll-target="#questioning-results"><span class="header-section-number">5.5.3</span> Questioning results</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#improving-the-experiment" id="toc-improving-the-experiment" class="nav-link" data-scroll-target="#improving-the-experiment"><span class="header-section-number">5.6</span> Improving the experiment</a>
+  <ul class="collapse">
+<li><a href="#timing-study" id="toc-timing-study" class="nav-link" data-scroll-target="#timing-study"><span class="header-section-number">5.6.1</span> Timing study</a></li>
+  <li><a href="#bundling-the-trial-functions" id="toc-bundling-the-trial-functions" class="nav-link" data-scroll-target="#bundling-the-trial-functions"><span class="header-section-number">5.6.2</span> Bundling the trial functions</a></li>
+  <li><a href="#bootstrapping-the-data" id="toc-bootstrapping-the-data" class="nav-link" data-scroll-target="#bootstrapping-the-data"><span class="header-section-number">5.6.3</span> Bootstrapping the data</a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="overview" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="overview">
+<span class="header-section-number">5.1</span> Overview</h2>
+<p>In the process of running analyses and working with new methods, we often encounter the situation where we don’t know what the best course of action is for continuing our work. It may not be clear if our new method is really any more accurate than existing methods, or which algorithm is more efficient, or which parameterization is best. If we look to existing literature, web resources and professional advice, we might find a solution already exists; or we might learn that there is not clear answer, and we have to figure it out ourselves. What do we do then?</p>
+<p><em>Example: In a standard knn regression, we predict the response value for a new point by finding the k-nearest points from the training data, then calculating their average as a prediction for the new point. This is a nice non-parametric model but it requires a lot of distance calculation to find the neighbors. Suppose that a researcher is working on a new approximation to a k-nearest neighbor regression model. Instead of creating neighborhoods based on distance, instead the neighborhoods are defined by binning the features using quantile-based bins. The researcher thinks that this should be faster than knn, but is unsure if the predictions will be as accurate.</em></p>
+<p><em>Example: You have heard of stepwise variable selection for regression. Suppose you also learn the LASSO regression can also be used to run variable selection. Which will lead to smaller models? Which is faster? Which make a model that is better for predictive accuracy?</em></p>
+<div class="cell" data-hash="computational-experiments_cache/html/packages_f0396261e884db507babbd069213c977">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glmnet.stanford.edu">glmnet</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="sec-methods-preview" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-methods-preview">
+<span class="header-section-number">5.2</span> Methods preview</h2>
+<p>We are going to build a regression model for prediction. We can start with using a single dataset, air quality. So we are going to predict air quality based on certain chemicals and we want to see which combinations of variables leads to the best predictions.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/load-air-quality_3d0f5cf33e39eeca1dd18fbe58799414">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load and preview data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"Files/Data/air_quality_cleaned.Rdata"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 9,357
+Columns: 13
+$ y            &lt;dbl&gt; 0.4739746, 0.4662483, 0.4688237, 0.4688237, 0.4610975, 0.…
+$ PT08S1_CO_   &lt;dbl&gt; 0.942932371, 0.736767251, 1.070269650, 0.991441811, 0.676…
+$ NMHC_GT_     &lt;dbl&gt; 2.211117, 1.939279, 1.767592, 1.710363, 1.502908, 1.40991…
+$ C6H6_GT_     &lt;dbl&gt; 0.242490732, 0.182075374, 0.172408916, 0.177242145, 0.111…
+$ PT08S2_NMHC_ &lt;dbl&gt; 0.44227291, 0.17645006, 0.12971198, 0.15600215, -0.171164…
+$ NOx_GT_      &lt;dbl&gt; -0.01016561, -0.25488865, -0.14612285, 0.01314135, -0.146…
+$ PT08S3_NOx_  &lt;dbl&gt; 0.81060577, 1.17707274, 1.07148056, 0.92240926, 1.2733479…
+$ NO2_GT_      &lt;dbl&gt; 0.43210124, 0.26666934, 0.43997894, 0.50300062, 0.4557343…
+$ PT08S4_NO2_  &lt;dbl&gt; 0.643223131, 0.358554642, 0.349993184, 0.412063757, 0.210…
+$ PT08S5_O3_   &lt;dbl&gt; 0.641066950, -0.006723079, 0.216501863, 0.498815761, 0.29…
+$ T            &lt;dbl&gt; 0.0884577431, 0.0815138810, 0.0491091913, 0.0282776050, 0…
+$ RH           &lt;dbl&gt; 0.1838213, 0.1603912, 0.2833993, 0.4005499, 0.3927398, 0.…
+$ AH           &lt;dbl&gt; 0.1948705, 0.1940418, 0.1946755, 0.1956120, 0.1956659, 0.…</code></pre>
+</div>
+</div>
+<p>To start we can fit all the variables.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/full-model_b0a9dd760ae7ceb04e66f2c3691a8a83">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit full model</span></span>
+<span><span class="va">big_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span> , data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">big_mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ ., data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.8408 -0.1165  0.1332  0.3043  2.3941 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   3.734e-17  7.505e-03   0.000  1.00000    
+PT08S1_CO_   -2.355e-02  3.494e-02  -0.674  0.50031    
+NMHC_GT_      8.878e-02  9.380e-03   9.465  &lt; 2e-16 ***
+C6H6_GT_     -2.407e-01  2.728e-01  -0.883  0.37751    
+PT08S2_NMHC_ -5.690e-02  7.628e-02  -0.746  0.45575    
+NOx_GT_       1.206e-01  2.025e-02   5.959 2.62e-09 ***
+PT08S3_NOx_   4.952e-02  2.154e-02   2.299  0.02150 *  
+NO2_GT_       6.300e-01  1.620e-02  38.882  &lt; 2e-16 ***
+PT08S4_NO2_  -1.460e-02  3.499e-02  -0.417  0.67646    
+PT08S5_O3_   -5.765e-02  2.551e-02  -2.260  0.02382 *  
+T             2.587e-01  1.049e-01   2.467  0.01365 *  
+RH            1.572e-01  4.909e-02   3.203  0.00136 ** 
+AH           -9.846e-02  2.899e-01  -0.340  0.73413    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.726 on 9344 degrees of freedom
+Multiple R-squared:  0.4737,    Adjusted R-squared:  0.473 
+F-statistic: 700.7 on 12 and 9344 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>But for prediction, this can lead to overfitting. So we need to select variables, specifically which ones are helpful in predicting air quality. One option is to do stepwise selection based on AIC. We see that a few variables are dropped based on AIC, which measures some complexity penalty, and the stepwise procedure is trying to give us a more parsimonious model. The model could then be the final model used for prediction.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/pick-variables-stepwise_b68fa84737300691f1a5832746ba6998">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># stepwise variable selection based on AIC</span></span>
+<span><span class="co"># -&gt; direction = "both" by default</span></span>
+<span><span class="va">step_selected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">big_mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-5980.41
+y ~ PT08S1_CO_ + NMHC_GT_ + C6H6_GT_ + PT08S2_NMHC_ + NOx_GT_ + 
+    PT08S3_NOx_ + NO2_GT_ + PT08S4_NO2_ + PT08S5_O3_ + T + RH + 
+    AH
+
+               Df Sum of Sq    RSS     AIC
+- AH            1      0.06 4924.5 -5982.3
+- PT08S4_NO2_   1      0.09 4924.5 -5982.2
+- PT08S1_CO_    1      0.24 4924.7 -5982.0
+- PT08S2_NMHC_  1      0.29 4924.7 -5981.9
+- C6H6_GT_      1      0.41 4924.8 -5981.6
+&lt;none&gt;                      4924.4 -5980.4
+- PT08S5_O3_    1      2.69 4927.1 -5977.3
+- PT08S3_NOx_   1      2.79 4927.2 -5977.1
+- T             1      3.21 4927.6 -5976.3
+- RH            1      5.41 4929.8 -5972.1
+- NOx_GT_       1     18.72 4943.1 -5946.9
+- NMHC_GT_      1     47.21 4971.6 -5893.1
+- NO2_GT_       1    796.74 5721.2 -4579.2
+
+Step:  AIC=-5982.3
+y ~ PT08S1_CO_ + NMHC_GT_ + C6H6_GT_ + PT08S2_NMHC_ + NOx_GT_ + 
+    PT08S3_NOx_ + NO2_GT_ + PT08S4_NO2_ + PT08S5_O3_ + T + RH
+
+               Df Sum of Sq    RSS     AIC
+- PT08S4_NO2_   1      0.04 4924.5 -5984.2
+- PT08S1_CO_    1      0.23 4924.7 -5983.9
+- PT08S2_NMHC_  1      0.24 4924.7 -5983.8
+&lt;none&gt;                      4924.5 -5982.3
+- PT08S5_O3_    1      2.80 4927.3 -5979.0
+- PT08S3_NOx_   1      2.91 4927.4 -5978.8
+- C6H6_GT_      1      3.03 4927.5 -5978.5
+- T             1      4.99 4929.5 -5974.8
+- RH            1      7.16 4931.6 -5970.7
+- NOx_GT_       1     21.65 4946.1 -5943.3
+- NMHC_GT_      1     48.36 4972.8 -5892.9
+- NO2_GT_       1    879.80 5804.3 -4446.2
+
+Step:  AIC=-5984.21
+y ~ PT08S1_CO_ + NMHC_GT_ + C6H6_GT_ + PT08S2_NMHC_ + NOx_GT_ + 
+    PT08S3_NOx_ + NO2_GT_ + PT08S5_O3_ + T + RH
+
+               Df Sum of Sq    RSS     AIC
+- PT08S1_CO_    1      0.26 4924.8 -5985.7
+&lt;none&gt;                      4924.5 -5984.2
+- PT08S2_NMHC_  1      1.26 4925.8 -5983.8
+- PT08S5_O3_    1      2.78 4927.3 -5980.9
+- PT08S3_NOx_   1      3.19 4927.7 -5980.1
+- C6H6_GT_      1      5.83 4930.4 -5975.1
+- T             1      9.40 4933.9 -5968.4
+- RH            1     11.12 4935.7 -5965.1
+- NOx_GT_       1     23.65 4948.2 -5941.4
+- NMHC_GT_      1     49.42 4974.0 -5892.8
+- NO2_GT_       1    891.42 5816.0 -4429.4
+
+Step:  AIC=-5985.71
+y ~ NMHC_GT_ + C6H6_GT_ + PT08S2_NMHC_ + NOx_GT_ + PT08S3_NOx_ + 
+    NO2_GT_ + PT08S5_O3_ + T + RH
+
+               Df Sum of Sq    RSS     AIC
+&lt;none&gt;                      4924.8 -5985.7
+- PT08S2_NMHC_  1      1.82 4926.6 -5984.3
+- PT08S3_NOx_   1      3.61 4928.4 -5980.9
+- PT08S5_O3_    1      3.95 4928.7 -5980.2
+- C6H6_GT_      1      6.19 4931.0 -5976.0
+- T             1      9.38 4934.2 -5969.9
+- RH            1     10.91 4935.7 -5967.0
+- NOx_GT_       1     23.50 4948.3 -5943.2
+- NMHC_GT_      1     54.60 4979.4 -5884.5
+- NO2_GT_       1    891.52 5816.3 -4430.9</code></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">step_selected</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ NMHC_GT_ + C6H6_GT_ + PT08S2_NMHC_ + NOx_GT_ + 
+    PT08S3_NOx_ + NO2_GT_ + PT08S5_O3_ + T + RH, data = data)
+
+Coefficients:
+ (Intercept)      NMHC_GT_      C6H6_GT_  PT08S2_NMHC_       NOx_GT_  
+   4.900e-17     8.526e-02    -2.994e-01    -6.404e-02     1.238e-01  
+ PT08S3_NOx_       NO2_GT_    PT08S5_O3_             T            RH  
+   5.002e-02     6.277e-01    -6.467e-02     2.179e-01     1.353e-01  </code></pre>
+</div>
+</div>
+<p>Or we could use another method such as LASSO variable selection. LASSO is a fairly common method that selects variables based on a different complexity penalty (not AIC), specifically it is based on shrinkage penalty (controlled by <span class="math inline">\(\lambda\)</span> parameter). In a standard regression setting, there is a way of solving the <span class="math inline">\(\boldsymbol{\beta}\)</span> equation to minimize the SSE (or MSE).</p>
+<p>When we fit a LASSO model, we add a penalty <span class="math inline">\(\lambda\)</span> for complexity (i.e.&nbsp;<span class="math inline">\(\beta\)</span>s that are very big in magnitude, which means they stay included in the model). Essentially, we solve for <span class="math inline">\(\boldsymbol{\beta}\)</span> while conditioning them to be generally smaller. And because LASSO can become more and more aggressive if we penalize more and more (i.e.&nbsp;increase <span class="math inline">\(\lambda\)</span>), LASSO can push some of the <span class="math inline">\(\beta\)</span>s all the way down to zero. So we might end up with some <span class="math inline">\(\beta_i = 0\)</span> in a constrained solution. Thus the corresponding <span class="math inline">\(X\)</span> variable is essentially removed from the model when we multiply <span class="math inline">\(\boldsymbol{X} \boldsymbol{\beta}\)</span>.</p>
+<p>So we have to tune the <span class="math inline">\(\lambda\)</span> to get a value that results in good performance (parameter tuning). We can use <code><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">cv.glmnet()</a></code> to cross-validate to pick a <span class="math inline">\(\lambda\)</span> value that is tuned for optimal performance based on the specified measure. In the example below, we chose deviance which is measure of model fit (commonly used by computer scientists). We could have picked for example MSE or MAE, it is essentially the same type of decision as using AIC vs BIC as a model criteria (or penalty).</p>
+<div class="cell" data-hash="computational-experiments_cache/html/pick-variables-lasso_aef435a9550e68cb3e327c0bed37083d">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># pick variables with LASSO</span></span>
+<span><span class="co"># -&gt; pick lambda based on a cross validated tuning process</span></span>
+<span><span class="co"># -&gt; x = predictor variables, y = response</span></span>
+<span><span class="va">cv.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">cv.glmnet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                    y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">y</span>, alpha <span class="op">=</span> <span class="fl">1</span>, type.measure <span class="op">=</span> <span class="st">"deviance"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># view tuned lambda</span></span>
+<span><span class="va">cv.out</span><span class="op">$</span><span class="va">lambda.1se</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04117753</code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># use tuned lambda to pick variables</span></span>
+<span><span class="va">lasso_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/glmnet.html">glmnet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                    y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">y</span>, alpha <span class="op">=</span> <span class="fl">1</span>, lambda <span class="op">=</span> <span class="va">cv.out</span><span class="op">$</span><span class="va">lambda.1se</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># view resulting coefficient estimates</span></span>
+<span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PT08S1_CO_     NMHC_GT_     C6H6_GT_ PT08S2_NMHC_      NOx_GT_  PT08S3_NOx_ 
+  0.00000000   0.02408635   0.00000000  -0.04278944   0.00000000   0.02913581 
+     NO2_GT_  PT08S4_NO2_   PT08S5_O3_            T           RH           AH 
+  0.64247636   0.00000000   0.00000000   0.00000000   0.00000000   0.00000000 </code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># find variables whose coefficients were NOT shrunk to zero</span></span>
+<span><span class="va">lasso_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># use selected variables to fit the linear model</span></span>
+<span></span>
+<span><span class="co"># first convert the names of the selected variables to a formula string</span></span>
+<span><span class="va">lasso_vars</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "NMHC_GT_"     "PT08S2_NMHC_" "PT08S3_NOx_"  "NO2_GT_"     </code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">lasso_vars</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "NMHC_GT_ + PT08S2_NMHC_ + PT08S3_NOx_ + NO2_GT_"</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y ~ "</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">lasso_vars</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "y ~ NMHC_GT_ + PT08S2_NMHC_ + PT08S3_NOx_ + NO2_GT_"</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit model based on lasso selected variables</span></span>
+<span><span class="va">lasso_selected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/formula.html">formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y ~ "</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">lasso_vars</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">data</span> <span class="op">)</span></span>
+<span><span class="va">lasso_selected</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = formula(paste0("y ~ ", paste(lasso_vars, collapse = " + "))), 
+    data = data)
+
+Coefficients:
+ (Intercept)      NMHC_GT_  PT08S2_NMHC_   PT08S3_NOx_       NO2_GT_  
+  -2.502e-17     6.240e-02    -9.494e-02     7.983e-02     7.019e-01  </code></pre>
+</div>
+</div>
+<p>This method suggest cut more variables than the stepwise selection, so it was more aggressive for variable selection. So which of these approaches is superior? Depends on what we are trying to ask. To gather an understanding of how they behave, we should try them out in a comprehensive way (multiple datasets): does lasso tend to pick more variables than AIC or was it just a weird dataset? Maybe it won’t always be this way. So we need to do side by side comparison in a comprehensive, methodical way with an experiment.</p>
+</section><section id="preparing-to-experiment" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="preparing-to-experiment">
+<span class="header-section-number">5.3</span> Preparing to experiment</h2>
+<p>In experimental design, what are key features? Response of interest, treatments, subjects, control, randomization, replication, reproducibility. We need to fit these into the framework of our computational experiment (essentially data collection).</p>
+<p>In the knn regression example above identify the following:</p>
+<p>Computational experiment</p>
+<ol type="1">
+<li>
+<p>What are the responses of interest? What do we want to know or be able to measure for the two methods?</p>
+<ul>
+<li>Predictive performance (accuracy metric such as RMSE on testing data)</li>
+<li>Number of variables selected (maybe proportion of total selected: transformation to make it more relative to the dataset size); does one select simpler (more parsimonious) models?</li>
+<li>Variability of the coefficients (does a smaller model end up with more uncertatinty in the <span class="math inline">\(\beta\)</span>s?)</li>
+<li>Timing comparison (time to select and fit model; comparison of how fast the process is on the same dataset)</li>
+</ul>
+</li>
+<li>
+<p>What are the treatments that we want to test above? What are we going to systematically change between each trial run of this experiment?</p>
+<ul>
+<li>Select algorithm (lasso vs step)</li>
+<li>Parameter sets (need to tune parameters, can change how to tune – lasso: lambda, stepwise: AIC/BIC)</li>
+<li>NOTE for the experiment below: Even though lasso is super flexible and we can penalize more or less, we are going to use some preset criteria for how to set the value (kinda like for stepwise where we are picking a preset criteria of AIC)</li>
+</ul>
+</li>
+<li>
+<p>What are the subjects? What are we applying the treatment to?</p>
+<ul>
+<li>Datasets (9 real datasets from the UCI repository)</li>
+<li>NOTE we are concerned with accuracy, so better to use real data than simulated data</li>
+<li>NOTE in a more classic, experimental setting where we have more control over the subjects, we could simulate the datasets in a sequential way and change certain aspects (e.g.&nbsp;we can change the covariance matrix); this way we know how the treatments should behave because we simulated the subjects in a particular manner (we can design the subjects to match the characteristics we want to test)</li>
+</ul>
+</li>
+<li>
+<p>What do we need to control? Kinda like blocks in a real study, but what does this mean in a computational experiment?</p>
+<ul>
+<li>Predefined structure in code and design that either sets up consistant parameters or processes (this allows for correct comparison of results)</li>
+<li>(e.g.&nbsp;tuning parameters: if the <span class="math inline">\(\lambda\)</span> is not what is being studied for LASSO, the values can be different from dataset to dataset but they need to be found in a consistent way (a prescribed method))</li>
+<li>Removing the effect of magnitude for the <span class="math inline">\(X\)</span> variables (i.e.&nbsp;standardizing all <span class="math inline">\(X\)</span> variable information so they are on same scales, this is like a process / setup that the datasets had to go through first to ensure the scales don’t introduce a different treatment)</li>
+</ul>
+</li>
+<li>
+<p>What roll does randomization play? Randomization of individuals to groups, how does this translate to computational experiments?</p>
+<ul>
+<li>Will talk about this later, but want to align simulation approach so we know that we have balance across all other factors</li>
+</ul>
+</li>
+<li>
+<p>What do we do for replication?</p>
+<ul>
+<li>Timing replication; can do bootstrapping on timings because there could be other processes running on computer while doing the timer that affect the timing results, so we want to collect many timings</li>
+<li>Bootstrap datasets for variable selection; will LASSO always select 4 variables, what if we permute the data? We want to try to capture some of that random behavior</li>
+</ul>
+</li>
+<li>
+<p>How do I make it all reproducible?</p>
+<ul>
+<li>How to layout code file to know what data cleaning was done ahead of time, what functions are being called throughout the experiment, how the results are organized and doing it in a way that can be replicated.</li>
+</ul>
+</li>
+</ol></section><section id="organizing-to-support-an-experiment" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="organizing-to-support-an-experiment">
+<span class="header-section-number">5.4</span> Organizing to support an experiment</h2>
+<p>To be organized to run a computational experiment, we need many components prepared. Thinking about set of tasks we need to do beforehand will help. There is lots of work to be done before can start getting results.</p>
+<ul>
+<li>
+<p>If we have data that will act as the experimental subject, then we need to have this cleaned and accessible.</p>
+<ul>
+<li>If simulating data, then would want a function to do all the data generation based on the desired properties.</li>
+</ul>
+</li>
+<li><p>If we have a summary statistic(s) selected as our response of interest, then we need to have functions that can compute and store those values.</p></li>
+<li><p>If we have identified the algorithms and models that will act as our treatments, then we need functions that can implement these methods.</p></li>
+<li><p>If we have a set of possible parameter settings for an algorithm that will act as treatment factors, then we need to have those values organized into a data object that can be accessed when needed.</p></li>
+</ul>
+<p>This is all to say, there is often a lot of preparation of data and functions that is required before we can start gathering results from computational experiments. We want everything to be organized so that we can automate everything.</p>
+<section id="load-data" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="load-data">
+<span class="header-section-number">5.4.1</span> Load data</h3>
+<p>We are going to figure out which type of model will behave more accurately in terms of a predictive setting. So working with simulated data sets might not have as much real application.</p>
+<p>We are going to work with 9 machine learning datasets from real settings (found in the UCI repository). These are commonly used regression data sets for whenever researchers have new methods and they want to see how the models behave on real data (e.g.&nbsp;check their predictive capabilities).</p>
+<p>Data prep: All datasets have been put through the following processes</p>
+<ul>
+<li><p>Standardized to remove effect of magnitude</p></li>
+<li><p>Response variable renamed to <code>y</code> so there is no confusion about what the response is (all other <span class="math inline">\(X\)</span> variable names are unchanged)</p></li>
+<li><p>Similar naming structure <code>_cleaned.RData</code> to read in easily</p></li>
+</ul>
+<p>Then we can save them all in organized holding structure for easy access.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/load-reg-datasets_0573ccf2e7981f2ef8cb520b1c65c7f7">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># dataset names used for testing</span></span>
+<span><span class="va">all_reg_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wpbc"</span>, <span class="st">"wankara"</span>, <span class="st">"laser"</span>, <span class="st">"treasury"</span>, <span class="st">"skillcraft"</span>, <span class="st">"puma"</span>, <span class="st">"air_quality"</span>, <span class="st">"ccpp"</span>, <span class="st">"casp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># initialize items</span></span>
+<span><span class="va">data_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="va">all_reg_sizes</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span></span>
+<span><span class="co"># loop through dataset names to load all datasets</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_reg_sets</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># concatenate path with specific dataset name</span></span>
+<span>  <span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Files/Data/"</span>, <span class="va">all_reg_sets</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_cleaned.Rdata"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># load and assign data</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">data_path</span><span class="op">)</span></span>
+<span>  <span class="va">data_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">data</span></span>
+<span>  <span class="va">all_reg_sizes</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># print loaded variables</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"vars from data"</span>, <span class="va">all_reg_sets</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "vars from data wpbc"
+ [1] "y"   "V4"  "V5"  "V6"  "V7"  "V8"  "V9"  "V10" "V11" "V12" "V13" "V14"
+[13] "V15" "V16" "V17" "V18" "V19" "V20" "V21" "V22" "V23" "V24" "V25" "V26"
+[25] "V27" "V28" "V29" "V30" "V31" "V32" "V33" "V34"
+[1] "vars from data wankara"
+ [1] "V1" "V2" "V3" "V4" "V5" "V6" "V7" "V8" "V9" "y" 
+[1] "vars from data laser"
+[1] "V1" "V2" "V3" "V4" "y" 
+[1] "vars from data treasury"
+ [1] "V1"  "V2"  "V3"  "V4"  "V5"  "V6"  "V7"  "V8"  "V9"  "V10" "V11" "V12"
+[13] "V13" "V14" "V15" "y"  
+[1] "vars from data skillcraft"
+[1] "LeagueIndex"      "y"                "UniqueHotkeys"    "NumberOfPACs"    
+[5] "GapBetweenPACs"   "ActionLatency"    "ActionsInPAC"     "TotalMapExplored"
+[9] "UniqueUnitsMade" 
+[1] "vars from data puma"
+ [1] "V1"  "V2"  "V3"  "V4"  "V5"  "V6"  "V7"  "V8"  "V9"  "V10" "V11" "V12"
+[13] "V13" "V14" "V15" "V16" "V17" "V18" "V19" "V20" "V21" "V22" "V23" "V24"
+[25] "V25" "V26" "V27" "V28" "V29" "V30" "V31" "V32" "y"  
+[1] "vars from data air_quality"
+ [1] "y"            "PT08S1_CO_"   "NMHC_GT_"     "C6H6_GT_"     "PT08S2_NMHC_"
+ [6] "NOx_GT_"      "PT08S3_NOx_"  "NO2_GT_"      "PT08S4_NO2_"  "PT08S5_O3_"  
+[11] "T"            "RH"           "AH"          
+[1] "vars from data ccpp"
+[1] "AT" "V"  "AP" "RH" "y" 
+[1] "vars from data casp"
+ [1] "y"  "F1" "F2" "F3" "F4" "F5" "F6" "F7" "F8" "F9"</code></pre>
+</div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># rename data lists</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data_list</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">all_reg_sets</span></span>
+<span></span>
+<span><span class="co"># view loaded data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">data_list</span>, max.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 9
+ $ wpbc       :'data.frame':    198 obs. of  32 variables:
+ $ wankara    :'data.frame':    321 obs. of  10 variables:
+ $ laser      :'data.frame':    993 obs. of  5 variables:
+ $ treasury   :'data.frame':    1049 obs. of  16 variables:
+ $ skillcraft :'data.frame':    3395 obs. of  9 variables:
+ $ puma       :'data.frame':    8192 obs. of  33 variables:
+ $ air_quality:'data.frame':    9357 obs. of  13 variables:
+ $ ccpp       :'data.frame':    9568 obs. of  5 variables:
+ $ casp       :'data.frame':    45730 obs. of  10 variables:</code></pre>
+</div>
+</div>
+</section><section id="modularize-code" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="modularize-code">
+<span class="header-section-number">5.4.2</span> Modularize code</h3>
+<p>Rather than having one function that does everything, we want to have modularized code where helper functions perform <em>singular tasks</em> (this way they are like action statements).</p>
+<p>The variable selection helper functions below perform the same steps as in <a href="#sec-methods-preview" class="quarto-xref"><span>Section&nbsp;5.2</span></a>, just generalized for the cleaned data. They should take the subjects as inputs (datasets) and output a model from the treatment.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/helper-functions-variable-selection_d7a2e9d109afeeff8b7e129bae59aa43">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># helper functions for running the experiment with variable selection</span></span>
+<span></span>
+<span><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
+<span><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
+<span><span class="va">step_var_mod</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># run stepwise procedure from full model</span></span>
+<span>  <span class="va">step_selected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span> , data <span class="op">=</span> <span class="va">df</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">step_selected</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># test function on a single dataset</span></span>
+<span><span class="fu">step_var_mod</span><span class="op">(</span><span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ NMHC_GT_ + C6H6_GT_ + PT08S2_NMHC_ + NOx_GT_ + 
+    PT08S3_NOx_ + NO2_GT_ + PT08S5_O3_ + T + RH, data = df)
+
+Coefficients:
+ (Intercept)      NMHC_GT_      C6H6_GT_  PT08S2_NMHC_       NOx_GT_  
+   4.900e-17     8.526e-02    -2.994e-01    -6.404e-02     1.238e-01  
+ PT08S3_NOx_       NO2_GT_    PT08S5_O3_             T            RH  
+   5.002e-02     6.277e-01    -6.467e-02     2.179e-01     1.353e-01  </code></pre>
+</div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function for choosing with lasso and fitting regression</span></span>
+<span><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
+<span><span class="va">lasso_var_mod</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># tune shrinkage parameter lambda</span></span>
+<span>  <span class="va">cv.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">cv.glmnet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">==</span> <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                      y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">y</span>, alpha <span class="op">=</span> <span class="fl">1</span>, type.measure <span class="op">=</span> <span class="st">"deviance"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># run lasso selection on model using tuned lambda</span></span>
+<span>  <span class="va">lasso_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/glmnet.html">glmnet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">==</span> <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                      y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">y</span>, alpha <span class="op">=</span> <span class="fl">1</span>, lambda <span class="op">=</span> <span class="va">cv.out</span><span class="op">$</span><span class="va">lambda.1se</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># save names of non0-shrunk X variables</span></span>
+<span>  <span class="va">lasso_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="co"># fit model based on lasso selected variables (plus intercept)</span></span>
+<span>  <span class="va">lasso_selected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/formula.html">formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"y ~ 1 + "</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">lasso_vars</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">lasso_selected</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># test function on a single dataset</span></span>
+<span><span class="fu">lasso_var_mod</span><span class="op">(</span><span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = formula(paste0("y ~ 1 + ", paste(lasso_vars, collapse = " + "))), 
+    data = df)
+
+Coefficients:
+ (Intercept)      NMHC_GT_  PT08S2_NMHC_   PT08S3_NOx_       NO2_GT_  
+  -2.502e-17     6.240e-02    -9.494e-02     7.983e-02     7.019e-01  </code></pre>
+</div>
+</div>
+<p>Now we need some functions to extract the results of interest from the selected model, i.e.&nbsp;collecting the measurements.</p>
+<p>The outcome of the treatment is a model, so these functions should take in a model and output the measurement.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/helper-function-results_9756f42e37c7aa5f1a2c7f1e3a875ee1">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function for finding number of variables included</span></span>
+<span><span class="co"># -&gt; inputs a model and returns an integer</span></span>
+<span><span class="va">select_var_count</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># count the number of variables in the model (excluding intercept)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># test function on a single dataset</span></span>
+<span><span class="fu">lasso_var_mod</span><span class="op">(</span><span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">select_var_count</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function for finding 10-fold cross validated RMSE (our accuracy measure)</span></span>
+<span><span class="va">select_cv_rmse</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># run 10-fold CV on the model</span></span>
+<span>  <span class="co"># -&gt; by default trainControl() uses bootstrap validation, so need to switch it</span></span>
+<span>  <span class="co"># -&gt; always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison</span></span>
+<span>  <span class="va">cv_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html">train</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/formula.html">formula</a></span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span>, </span>
+<span>                     data <span class="op">=</span> <span class="va">lin_mod</span><span class="op">$</span><span class="va">model</span>,</span>
+<span>                     method <span class="op">=</span> <span class="st">"lm"</span>,</span>
+<span>                     trControl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html">trainControl</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"cv"</span>, number <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>                     tuneGrid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># return RMSE</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">cv_result</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">RMSE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># test function on a single dataset</span></span>
+<span><span class="fu">lasso_var_mod</span><span class="op">(</span><span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">select_cv_rmse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7287836</code></pre>
+</div>
+</div>
+<p>Lots of work went into setting up how to apply the treatments and gathering results. Now we are just doing everything through functions.</p>
+</section></section><section id="putting-together-the-experiment" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="putting-together-the-experiment">
+<span class="header-section-number">5.5</span> Putting together the experiment</h2>
+<section id="run-single-trial" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="run-single-trial">
+<span class="header-section-number">5.5.1</span> Run single trial</h3>
+<p>While planning the steps above we might lose track of the general goal. Apply the treatments to the subjects and record the outcomes. With everything above setup well, actually running the experiment should be relatively simple.</p>
+<p>We can still do this in a modularized fashion by first creating a function to run a single trial. In which, we don’t actually want to save the model that was fit, rather we want the results of it.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/running-single-trial_750b9f705dff7b742f2bcbcce8f841b2">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to run a single trial</span></span>
+<span><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
+<span><span class="va">run_trial</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">selection_alg</span>, <span class="va">df</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># run variable selection model</span></span>
+<span>  <span class="co"># -&gt; we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)</span></span>
+<span>  <span class="va">tmp_mod</span> <span class="op">=</span> <span class="fu">selection_alg</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># collect measurements for number of variables and predictive accuracy</span></span>
+<span>  <span class="co"># -&gt; will be storing results as dataframe, so want to return a mini dataframe here</span></span>
+<span>  <span class="co"># -&gt; want to name elements when returning more complex data structures</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>nvars <span class="op">=</span> <span class="fu">select_var_count</span><span class="op">(</span><span class="va">tmp_mod</span><span class="op">)</span>,</span>
+<span>                    rmse <span class="op">=</span> <span class="fu">select_cv_rmse</span><span class="op">(</span><span class="va">tmp_mod</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># run trial for a single dataset to check results</span></span>
+<span><span class="fu">run_trial</span><span class="op">(</span><span class="va">step_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nvars      rmse
+1     9 0.7258984</code></pre>
+</div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nvars      rmse
+1     4 0.7285072</code></pre>
+</div>
+</div>
+</section><section id="sec-run-experiment" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-run-experiment">
+<span class="header-section-number">5.5.2</span> Run experiment</h3>
+<p>Now we can run the experiment for all datasets. If trying to automate this, we can of coures use APPLY statements. When choosing which APPLY statement, we should think about what the input is (list of dataframes) and what the output will be (a dataframe).</p>
+<div class="cell" data-hash="computational-experiments_cache/html/run-experiment_50b9d50a2685c2bf74a71f6345376d79">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># run experiment</span></span>
+<span><span class="co"># -&gt; run separately for stepwise and lasso algorithms</span></span>
+<span><span class="va">results_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_list</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">run_trial</span><span class="op">(</span><span class="va">step_var_mod</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">results_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_list</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">results_step</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma      air_quality
+nvars 10        7         4         11         8          6         9          
+rmse  0.8813572 0.1064508 0.4875476 0.06971399 0.4910892  0.8831056 0.7257736  
+      ccpp      casp     
+nvars 4         9        
+rmse  0.2670773 0.8474096</code></pre>
+</div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results_lasso</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma      air_quality
+nvars 4         5         4         6          6          1         4          
+rmse  0.9022181 0.1083249 0.4939863 0.07403357 0.4922274  0.8833521 0.7285326  
+      ccpp      casp     
+nvars 4         9        
+rmse  0.2669846 0.8474624</code></pre>
+</div>
+</div>
+<p>In most cases, stepwise selects a bigger model and has similar accuracy to LASSO.</p>
+</section><section id="questioning-results" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="questioning-results">
+<span class="header-section-number">5.5.3</span> Questioning results</h3>
+<p>Because this is a computational experiment, we need to consider how the computer is behaving and which of our results should have some variability.</p>
+<ul>
+<li><p>If we rerun the stepwise procedure, we should get the same results in the number of selected variables because it is a <strong>deterministic</strong> approach (it is calculating the AIC the same every single time). There is no randomness in this process. Although the accuracy (cv-rmse) measure may change a bit because may change slightly because of the cross validation. So we may need to repeatedly gather the cross-validated RMSE to see how uncertain we should be in those numbers (seeing if the accuracy is stable). We could simulate this 100 times and take the average cv-rmse; this would be the Monte Carlo simulation average of the 10-fold cross-validated RMSE. This would be a long term accuracy measure.</p></li>
+<li><p>In the LASSO, there is an additional source of variation from the cross-validation procedure used to tune the shrinkage parameter <span class="math inline">\(\lambda\)</span> (data is randomly divided into 10-folds and then it iteratively goes through to find the best parameter value. How we divide up the data into 10 folds differs from trial to trial and we can get different results. This is where we start thinking about repetition and replication is necessary to understand uncertainty. Even though we are in a computational setting and have a lot more control, we are still working with outcomes and algorithms that have random components. So here, even though there isn’t randomization in our subjects, our treatments might manifest differently in different trials on the same data.</p></li>
+</ul></section></section><section id="improving-the-experiment" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="improving-the-experiment">
+<span class="header-section-number">5.6</span> Improving the experiment</h2>
+<section id="timing-study" class="level3" data-number="5.6.1"><h3 data-number="5.6.1" class="anchored" data-anchor-id="timing-study">
+<span class="header-section-number">5.6.1</span> Timing study</h3>
+<p>When timing a study, we need to be careful about how this is done.</p>
+<p>The best approach would be to build a function that not only fits the model based on the supplied selection procedure and dataframe, but also records the time it takes to do so.</p>
+<p>Note that assigning a start time and endtime is an imperfect way to record time because it takes the system time to record the time (assign the system time to the namespace, albeit a negligible amount).</p>
+<p>We also want to be careful with the units for when we convert the time difference to numeric to store it. To account for this, use <code><a href="https://rdrr.io/r/base/difftime.html">difftime()</a></code> and specify the units for equal comparison. This is demonstrated below.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/timing-calculations_7eae576362dbb611ab7c96884c39697e">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># record start time</span></span>
+<span><span class="va">start_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># run trial</span></span>
+<span><span class="va">results_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_list</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># record end time</span></span>
+<span><span class="va">start_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate difference - naive way</span></span>
+<span><span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'end_time' not found</code></pre>
+</div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'end_time' not found</code></pre>
+</div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">end_time_step</span> <span class="op">+</span> <span class="fl">120</span> <span class="op">-</span> <span class="va">start_time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'end_time_step' not found</code></pre>
+</div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">end_time</span> <span class="op">+</span> <span class="fl">120</span> <span class="op">-</span> <span class="va">start_time</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'end_time' not found</code></pre>
+</div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># have no idea what the units are when convert</span></span>
+<span></span>
+<span><span class="co"># calculate difference - correct way</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="va">end_time</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"sec"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'end_time' not found</code></pre>
+</div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="va">end_time</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'end_time' not found</code></pre>
+</div>
+</div>
+<p>Now we can incorporate timing into our function to run trials.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/running-single-trial-timing_9239ee56c5dd6b22e1f6cdc3401fee0b">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to run a single trial</span></span>
+<span><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
+<span><span class="va">run_trial</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">selection_alg</span>, <span class="va">df</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># run variable selection model</span></span>
+<span>  <span class="co"># -&gt; we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)</span></span>
+<span>  <span class="co"># record start and end time</span></span>
+<span>  <span class="va">start_time</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">tmp_mod</span> <span class="op">=</span> <span class="fu">selection_alg</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span>  <span class="va">end_time</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># collect measurements for number of variables and predictive accuracy</span></span>
+<span>  <span class="co"># -&gt; will be storing results as dataframe, so want to return a mini dataframe here</span></span>
+<span>  <span class="co"># -&gt; want to name elements when returning more complex data structures</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>nvars <span class="op">=</span> <span class="fu">select_var_count</span><span class="op">(</span><span class="va">tmp_mod</span><span class="op">)</span>,</span>
+<span>                    rmse <span class="op">=</span> <span class="fu">select_cv_rmse</span><span class="op">(</span><span class="va">tmp_mod</span><span class="op">)</span>,</span>
+<span>                    time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="va">end_time</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"sec"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># run trial for a single dataset to check results</span></span>
+<span><span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nvars      rmse           time
+1     4 0.7286559 0.1980691 secs</code></pre>
+</div>
+</div>
+<p>Then we can get Monte Carlo intervals for the timing.</p>
+<p>Final note about timing: It is a good idea to test our experiments with small datasets like this to understand the behavior. For example, if one algorithm takes 5 times longer to run than another on just these smaller cases, then we might be worried about handing it 100,000 observations. If big datasets worry us, then perhaps simulated dataset is good to start with so we can control how large it is.</p>
+</section><section id="bundling-the-trial-functions" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="bundling-the-trial-functions">
+<span class="header-section-number">5.6.2</span> Bundling the trial functions</h3>
+<p>In the implementation in <a href="#sec-run-experiment" class="quarto-xref"><span>Section&nbsp;5.5.2</span></a>, there is just a single function that runs the trials and we call if for both algorithms (applying it to all the datasets). We could setup another function to run the datasets through both algorithms and combine results.</p>
+<div class="cell" data-hash="computational-experiments_cache/html/run-both_3b1fe4f538f489ab30983240a67d4a3b">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to run both algorithms</span></span>
+<span><span class="va">run_both</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># calculate results</span></span>
+<span>  <span class="co"># -&gt; add indicator for which algorithm was used</span></span>
+<span>  <span class="va">tmp_step</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>algorithm <span class="op">=</span> <span class="st">"step"</span><span class="op">)</span>,</span>
+<span>                   <span class="fu">run_trial</span><span class="op">(</span><span class="va">step_var_mod</span>, <span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">tmp_lasso</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>algorithm <span class="op">=</span> <span class="st">"lasso"</span><span class="op">)</span>,</span>
+<span>                    <span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">tmp_step</span>, <span class="va">tmp_lasso</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># run all datasets through both algorithms</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">data_list</span>, <span class="va">run_both</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">results</span>, max.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 9
+ $ wpbc       :'data.frame':    2 obs. of  4 variables:
+ $ wankara    :'data.frame':    2 obs. of  4 variables:
+ $ laser      :'data.frame':    2 obs. of  4 variables:
+ $ treasury   :'data.frame':    2 obs. of  4 variables:
+ $ skillcraft :'data.frame':    2 obs. of  4 variables:
+ $ puma       :'data.frame':    2 obs. of  4 variables:
+ $ air_quality:'data.frame':    2 obs. of  4 variables:
+ $ ccpp       :'data.frame':    2 obs. of  4 variables:
+ $ casp       :'data.frame':    2 obs. of  4 variables:</code></pre>
+</div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">air_quality</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  algorithm nvars      rmse           time
+1      step     9 0.7257123 0.6172910 secs
+2     lasso     4 0.7286869 0.1899009 secs</code></pre>
+</div>
+</div>
+<p>We could get better formatted results by adding an indicator for which dataset was used. Then we would be able to reduce the results list to a single dataframe rather than a list of smaller dataframes.</p>
+</section><section id="bootstrapping-the-data" class="level3" data-number="5.6.3"><h3 data-number="5.6.3" class="anchored" data-anchor-id="bootstrapping-the-data">
+<span class="header-section-number">5.6.3</span> Bootstrapping the data</h3>
+<p>We could also think about at this stage if the particular dataset is of interest or if we are more concerned about this type of data (data from a population like the 9 that are represented here). Reapplying to the same data wouldn’t get us anywhere because of the deterministic nature of the stepwise algorithm. So if the main question is how many variables tend to be selected in data like these, then we could bootstrap the dataframes going in (this would get at the variability in how large the set of variables tends to be selected in data like these, in addition to the variability in accuracies from dataset to dataset via the 10-fold cv-rmse). Then can get bootstrap intervals for the variable counts.</p>
+
 
 <!-- -->
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -641,22 +1319,491 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./simulation-studies.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation Studies 1</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./assignments.html" class="pagination-link">
+        <span class="nav-page-text">Assignments</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Computational Experiments {#sec-computational-experiments}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb60" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Computational Experiments {#sec-computational-experiments}</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="co"># AIC BIC&lt; one is more conservative</span></span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>In the process of running analyses and working with new methods, we often encounter the situation where we don't know what the best course of action is for continuing our work. It may not be clear if our new method is really any more accurate than existing methods, or which algorithm is more efficient, or which parameterization is best. If we look to existing literature, web resources and professional advice, we might find a solution already exists; or we might learn that there is not clear answer, and we have to figure it out ourselves. What do we do then?</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>*Example: In a standard knn regression, we predict the response value for a new point by finding the k-nearest points from the training data, then calculating their average as a prediction for the new point. This is a nice non-parametric model but it requires a lot of distance calculation to find the neighbors. Suppose that a researcher is working on a new approximation to a k-nearest neighbor regression model. Instead of creating neighborhoods based on distance, instead the neighborhoods are defined by binning the features using quantile-based bins. The researcher thinks that this should be faster than knn, but is unsure if the predictions will be as accurate.*</span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>*Example: You have heard of stepwise variable selection for regression. Suppose you also learn the LASSO regression can also be used to run variable selection. Which will lead to smaller models? Which is faster? Which make a model that is better for predictive accuracy?*</span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: packages</span></span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb60-33"><a href="#cb60-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb60-34"><a href="#cb60-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-35"><a href="#cb60-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-36"><a href="#cb60-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-37"><a href="#cb60-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods preview {#sec-methods-preview}</span></span>
+<span id="cb60-38"><a href="#cb60-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-39"><a href="#cb60-39" aria-hidden="true" tabindex="-1"></a>We are going to build a regression model for prediction. We can start with using a single dataset, air quality. So we are going to predict air quality based on certain chemicals and we want to see which combinations of variables leads to the best predictions.</span>
+<span id="cb60-40"><a href="#cb60-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-43"><a href="#cb60-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-44"><a href="#cb60-44" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-air-quality</span></span>
+<span id="cb60-45"><a href="#cb60-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-46"><a href="#cb60-46" aria-hidden="true" tabindex="-1"></a><span class="co"># load and preview data</span></span>
+<span id="cb60-47"><a href="#cb60-47" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Files/Data/air_quality_cleaned.Rdata"</span>)</span>
+<span id="cb60-48"><a href="#cb60-48" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span>
+<span id="cb60-49"><a href="#cb60-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-50"><a href="#cb60-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-51"><a href="#cb60-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-52"><a href="#cb60-52" aria-hidden="true" tabindex="-1"></a>To start we can fit all the variables.</span>
+<span id="cb60-53"><a href="#cb60-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-56"><a href="#cb60-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-57"><a href="#cb60-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: full-model</span></span>
+<span id="cb60-58"><a href="#cb60-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-59"><a href="#cb60-59" aria-hidden="true" tabindex="-1"></a><span class="co"># fit full model</span></span>
+<span id="cb60-60"><a href="#cb60-60" aria-hidden="true" tabindex="-1"></a>big_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> data)</span>
+<span id="cb60-61"><a href="#cb60-61" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(big_mod)</span>
+<span id="cb60-62"><a href="#cb60-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-63"><a href="#cb60-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-64"><a href="#cb60-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-65"><a href="#cb60-65" aria-hidden="true" tabindex="-1"></a>But for prediction, this can lead to overfitting. So we need to select variables, specifically which ones are helpful in predicting air quality. One option is to do stepwise selection based on AIC. We see that a few variables are dropped based on AIC, which measures some complexity penalty, and the stepwise procedure is trying to give us a more parsimonious model. The model could then be the final model used for prediction.</span>
+<span id="cb60-66"><a href="#cb60-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-69"><a href="#cb60-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-70"><a href="#cb60-70" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pick-variables-stepwise</span></span>
+<span id="cb60-71"><a href="#cb60-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-72"><a href="#cb60-72" aria-hidden="true" tabindex="-1"></a><span class="co"># stepwise variable selection based on AIC</span></span>
+<span id="cb60-73"><a href="#cb60-73" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; direction = "both" by default</span></span>
+<span id="cb60-74"><a href="#cb60-74" aria-hidden="true" tabindex="-1"></a>step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(big_mod)</span>
+<span id="cb60-75"><a href="#cb60-75" aria-hidden="true" tabindex="-1"></a>step_selected</span>
+<span id="cb60-76"><a href="#cb60-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-77"><a href="#cb60-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-78"><a href="#cb60-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-79"><a href="#cb60-79" aria-hidden="true" tabindex="-1"></a>Or we could use another method such as LASSO variable selection. LASSO is a fairly common method that selects variables based on a different complexity penalty (not AIC), specifically it is based on shrinkage penalty (controlled by $\lambda$ parameter). In a standard regression setting, there is a way of solving the $\boldsymbol{\beta}$ equation to minimize the SSE (or MSE).</span>
+<span id="cb60-80"><a href="#cb60-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-81"><a href="#cb60-81" aria-hidden="true" tabindex="-1"></a>When we fit a LASSO model, we add a penalty $\lambda$ for complexity (i.e. $\beta$s that are very big in magnitude, which means they stay included in the model). Essentially, we solve for $\boldsymbol{\beta}$ while conditioning them to be generally smaller. And because LASSO can become more and more aggressive if we penalize more and more (i.e. increase $\lambda$), LASSO can push some of the $\beta$s all the way down to zero. So we might end up with some $\beta_i = 0$ in a constrained solution. Thus the corresponding $X$ variable is essentially removed from the model when we multiply $\boldsymbol{X} \boldsymbol{\beta}$.</span>
+<span id="cb60-82"><a href="#cb60-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-83"><a href="#cb60-83" aria-hidden="true" tabindex="-1"></a>So we have to tune the $\lambda$ to get a value that results in good performance (parameter tuning). We can use <span class="in">`cv.glmnet()`</span> to cross-validate to pick a $\lambda$ value that is tuned for optimal performance based on the specified measure. In the example below, we chose deviance which is measure of model fit (commonly used by computer scientists). We could have picked for example MSE or MAE, it is essentially the same type of decision as using AIC vs BIC as a model criteria (or penalty).</span>
+<span id="cb60-84"><a href="#cb60-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-87"><a href="#cb60-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-88"><a href="#cb60-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pick-variables-lasso</span></span>
+<span id="cb60-89"><a href="#cb60-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-90"><a href="#cb60-90" aria-hidden="true" tabindex="-1"></a><span class="co"># pick variables with LASSO</span></span>
+<span id="cb60-91"><a href="#cb60-91" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; pick lambda based on a cross validated tuning process</span></span>
+<span id="cb60-92"><a href="#cb60-92" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; x = predictor variables, y = response</span></span>
+<span id="cb60-93"><a href="#cb60-93" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> data[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(data) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb60-94"><a href="#cb60-94" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> data<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb60-95"><a href="#cb60-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-96"><a href="#cb60-96" aria-hidden="true" tabindex="-1"></a><span class="co"># view tuned lambda</span></span>
+<span id="cb60-97"><a href="#cb60-97" aria-hidden="true" tabindex="-1"></a>cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se</span>
+<span id="cb60-98"><a href="#cb60-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-99"><a href="#cb60-99" aria-hidden="true" tabindex="-1"></a><span class="co"># use tuned lambda to pick variables</span></span>
+<span id="cb60-100"><a href="#cb60-100" aria-hidden="true" tabindex="-1"></a>lasso_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> data[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(data) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb60-101"><a href="#cb60-101" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> data<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb60-102"><a href="#cb60-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-103"><a href="#cb60-103" aria-hidden="true" tabindex="-1"></a><span class="co"># view resulting coefficient estimates</span></span>
+<span id="cb60-104"><a href="#cb60-104" aria-hidden="true" tabindex="-1"></a>lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>]</span>
+<span id="cb60-105"><a href="#cb60-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-106"><a href="#cb60-106" aria-hidden="true" tabindex="-1"></a><span class="co"># find variables whose coefficients were NOT shrunk to zero</span></span>
+<span id="cb60-107"><a href="#cb60-107" aria-hidden="true" tabindex="-1"></a>lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb60-108"><a href="#cb60-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-109"><a href="#cb60-109" aria-hidden="true" tabindex="-1"></a><span class="co"># use selected variables to fit the linear model</span></span>
+<span id="cb60-110"><a href="#cb60-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-111"><a href="#cb60-111" aria-hidden="true" tabindex="-1"></a><span class="co"># first convert the names of the selected variables to a formula string</span></span>
+<span id="cb60-112"><a href="#cb60-112" aria-hidden="true" tabindex="-1"></a>lasso_vars</span>
+<span id="cb60-113"><a href="#cb60-113" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>)</span>
+<span id="cb60-114"><a href="#cb60-114" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"y ~ "</span>,<span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))</span>
+<span id="cb60-115"><a href="#cb60-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-116"><a href="#cb60-116" aria-hidden="true" tabindex="-1"></a><span class="co"># fit model based on lasso selected variables</span></span>
+<span id="cb60-117"><a href="#cb60-117" aria-hidden="true" tabindex="-1"></a>lasso_selected <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ "</span>,<span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> data )</span>
+<span id="cb60-118"><a href="#cb60-118" aria-hidden="true" tabindex="-1"></a>lasso_selected</span>
+<span id="cb60-119"><a href="#cb60-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-120"><a href="#cb60-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-121"><a href="#cb60-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-122"><a href="#cb60-122" aria-hidden="true" tabindex="-1"></a>This method suggest cut more variables than the stepwise selection, so it was more aggressive for variable selection. So which of these approaches is superior? Depends on what we are trying to ask. To gather an understanding of how they behave, we should try them out in a comprehensive way (multiple datasets): does lasso tend to pick more variables than AIC or was it just a weird dataset? Maybe it won't always be this way. So we need to do side by side comparison in a comprehensive, methodical way with an experiment.</span>
+<span id="cb60-123"><a href="#cb60-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-124"><a href="#cb60-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preparing to experiment</span></span>
+<span id="cb60-125"><a href="#cb60-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-126"><a href="#cb60-126" aria-hidden="true" tabindex="-1"></a>In experimental design, what are key features? Response of interest, treatments, subjects, control, randomization, replication, reproducibility. We need to fit these into the framework of our computational experiment (essentially data collection).</span>
+<span id="cb60-127"><a href="#cb60-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-128"><a href="#cb60-128" aria-hidden="true" tabindex="-1"></a>In the knn regression example above identify the following:</span>
+<span id="cb60-129"><a href="#cb60-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-130"><a href="#cb60-130" aria-hidden="true" tabindex="-1"></a>Computational experiment</span>
+<span id="cb60-131"><a href="#cb60-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-132"><a href="#cb60-132" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>What are the responses of interest? What do we want to know or be able to measure for the two methods?</span>
+<span id="cb60-133"><a href="#cb60-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-134"><a href="#cb60-134" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Predictive performance (accuracy metric such as RMSE on testing data)</span>
+<span id="cb60-135"><a href="#cb60-135" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Number of variables selected (maybe proportion of total selected: transformation to make it more relative to the dataset size); does one select simpler (more parsimonious) models?</span>
+<span id="cb60-136"><a href="#cb60-136" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Variability of the coefficients (does a smaller model end up with more uncertatinty in the $\beta$s?)</span>
+<span id="cb60-137"><a href="#cb60-137" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Timing comparison (time to select and fit model; comparison of how fast the process is on the same dataset)</span>
+<span id="cb60-138"><a href="#cb60-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-139"><a href="#cb60-139" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>What are the treatments that we want to test above? What are we going to systematically change between each trial run of this experiment?</span>
+<span id="cb60-140"><a href="#cb60-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-141"><a href="#cb60-141" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Select algorithm (lasso vs step)</span>
+<span id="cb60-142"><a href="#cb60-142" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Parameter sets (need to tune parameters, can change how to tune -- lasso: lambda, stepwise: AIC/BIC)</span>
+<span id="cb60-143"><a href="#cb60-143" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>NOTE for the experiment below: Even though lasso is super flexible and we can penalize more or less, we are going to use some preset criteria for how to set the value (kinda like for stepwise where we are picking a preset criteria of AIC)</span>
+<span id="cb60-144"><a href="#cb60-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-145"><a href="#cb60-145" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>What are the subjects? What are we applying the treatment to?</span>
+<span id="cb60-146"><a href="#cb60-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-147"><a href="#cb60-147" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Datasets (9 real datasets from the UCI repository)</span>
+<span id="cb60-148"><a href="#cb60-148" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>NOTE we are concerned with accuracy, so better to use real data than simulated data</span>
+<span id="cb60-149"><a href="#cb60-149" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>NOTE in a more classic, experimental setting where we have more control over the subjects, we could simulate the datasets in a sequential way and change certain aspects (e.g. we can change the covariance matrix); this way we know how the treatments should behave because we simulated the subjects in a particular manner (we can design the subjects to match the characteristics we want to test)</span>
+<span id="cb60-150"><a href="#cb60-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-151"><a href="#cb60-151" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>What do we need to control? Kinda like blocks in a real study, but what does this mean in a computational experiment?</span>
+<span id="cb60-152"><a href="#cb60-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-153"><a href="#cb60-153" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Predefined structure in code and design that either sets up consistant parameters or processes (this allows for correct comparison of results)</span>
+<span id="cb60-154"><a href="#cb60-154" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>(e.g. tuning parameters: if the $\lambda$ is not what is being studied for LASSO, the values can be different from dataset to dataset but they need to be found in a consistent way (a prescribed method))</span>
+<span id="cb60-155"><a href="#cb60-155" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Removing the effect of magnitude for the $X$ variables (i.e. standardizing all $X$ variable information so they are on same scales, this is like a process / setup that the datasets had to go through first to ensure the scales don't introduce a different treatment)</span>
+<span id="cb60-156"><a href="#cb60-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-157"><a href="#cb60-157" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>What roll does randomization play? Randomization of individuals to groups, how does this translate to computational experiments?</span>
+<span id="cb60-158"><a href="#cb60-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-159"><a href="#cb60-159" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Will talk about this later, but want to align simulation approach so we know that we have balance across all other factors</span>
+<span id="cb60-160"><a href="#cb60-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-161"><a href="#cb60-161" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>What do we do for replication?</span>
+<span id="cb60-162"><a href="#cb60-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-163"><a href="#cb60-163" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Timing replication; can do bootstrapping on timings because there could be other processes running on computer while doing the timer that affect the timing results, so we want to collect many timings</span>
+<span id="cb60-164"><a href="#cb60-164" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Bootstrap datasets for variable selection; will LASSO always select 4 variables, what if we permute the data? We want to try to capture some of that random behavior</span>
+<span id="cb60-165"><a href="#cb60-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-166"><a href="#cb60-166" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>How do I make it all reproducible?</span>
+<span id="cb60-167"><a href="#cb60-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-168"><a href="#cb60-168" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>How to layout code file to know what data cleaning was done ahead of time, what functions are being called throughout the experiment, how the results are organized and doing it in a way that can be replicated.</span>
+<span id="cb60-169"><a href="#cb60-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-170"><a href="#cb60-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## Organizing to support an experiment</span></span>
+<span id="cb60-171"><a href="#cb60-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-172"><a href="#cb60-172" aria-hidden="true" tabindex="-1"></a>To be organized to run a computational experiment, we need many components prepared. Thinking about set of tasks we need to do beforehand will help. There is lots of work to be done before can start getting results.</span>
+<span id="cb60-173"><a href="#cb60-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-174"><a href="#cb60-174" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If we have data that will act as the experimental subject, then we need to have this cleaned and accessible.</span>
+<span id="cb60-175"><a href="#cb60-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-176"><a href="#cb60-176" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>If simulating data, then would want a function to do all the data generation based on the desired properties.</span>
+<span id="cb60-177"><a href="#cb60-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-178"><a href="#cb60-178" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If we have a summary statistic(s) selected as our response of interest, then we need to have functions that can compute and store those values.</span>
+<span id="cb60-179"><a href="#cb60-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-180"><a href="#cb60-180" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If we have identified the algorithms and models that will act as our treatments, then we need functions that can implement these methods.</span>
+<span id="cb60-181"><a href="#cb60-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-182"><a href="#cb60-182" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If we have a set of possible parameter settings for an algorithm that will act as treatment factors, then we need to have those values organized into a data object that can be accessed when needed.</span>
+<span id="cb60-183"><a href="#cb60-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-184"><a href="#cb60-184" aria-hidden="true" tabindex="-1"></a>This is all to say, there is often a lot of preparation of data and functions that is required before we can start gathering results from computational experiments. We want everything to be organized so that we can automate everything.</span>
+<span id="cb60-185"><a href="#cb60-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-186"><a href="#cb60-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data</span></span>
+<span id="cb60-187"><a href="#cb60-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-188"><a href="#cb60-188" aria-hidden="true" tabindex="-1"></a>We are going to figure out which type of model will behave more accurately in terms of a predictive setting. So working with simulated data sets might not have as much real application.</span>
+<span id="cb60-189"><a href="#cb60-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-190"><a href="#cb60-190" aria-hidden="true" tabindex="-1"></a>We are going to work with 9 machine learning datasets from real settings (found in the UCI repository). These are commonly used regression data sets for whenever researchers have new methods and they want to see how the models behave on real data (e.g. check their predictive capabilities).</span>
+<span id="cb60-191"><a href="#cb60-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-192"><a href="#cb60-192" aria-hidden="true" tabindex="-1"></a>Data prep: All datasets have been put through the following processes</span>
+<span id="cb60-193"><a href="#cb60-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-194"><a href="#cb60-194" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Standardized to remove effect of magnitude</span>
+<span id="cb60-195"><a href="#cb60-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-196"><a href="#cb60-196" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Response variable renamed to <span class="in">`y`</span> so there is no confusion about what the response is (all other $X$ variable names are unchanged)</span>
+<span id="cb60-197"><a href="#cb60-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-198"><a href="#cb60-198" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Similar naming structure <span class="in">`_cleaned.RData`</span> to read in easily</span>
+<span id="cb60-199"><a href="#cb60-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-200"><a href="#cb60-200" aria-hidden="true" tabindex="-1"></a>Then we can save them all in organized holding structure for easy access.</span>
+<span id="cb60-201"><a href="#cb60-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-204"><a href="#cb60-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-205"><a href="#cb60-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-reg-datasets</span></span>
+<span id="cb60-206"><a href="#cb60-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-207"><a href="#cb60-207" aria-hidden="true" tabindex="-1"></a><span class="co"># dataset names used for testing</span></span>
+<span id="cb60-208"><a href="#cb60-208" aria-hidden="true" tabindex="-1"></a>all_reg_sets <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"wpbc"</span>, <span class="st">"wankara"</span>, <span class="st">"laser"</span>, <span class="st">"treasury"</span>, <span class="st">"skillcraft"</span>, <span class="st">"puma"</span>, <span class="st">"air_quality"</span>, <span class="st">"ccpp"</span>, <span class="st">"casp"</span>)</span>
+<span id="cb60-209"><a href="#cb60-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-210"><a href="#cb60-210" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize items</span></span>
+<span id="cb60-211"><a href="#cb60-211" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="cn">NULL</span>)</span>
+<span id="cb60-212"><a href="#cb60-212" aria-hidden="true" tabindex="-1"></a>all_reg_sizes <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb60-213"><a href="#cb60-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-214"><a href="#cb60-214" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through dataset names to load all datasets</span></span>
+<span id="cb60-215"><a href="#cb60-215" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(all_reg_sets)){</span>
+<span id="cb60-216"><a href="#cb60-216" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-217"><a href="#cb60-217" aria-hidden="true" tabindex="-1"></a>  <span class="co"># concatenate path with specific dataset name</span></span>
+<span id="cb60-218"><a href="#cb60-218" aria-hidden="true" tabindex="-1"></a>  data_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Files/Data/"</span>, all_reg_sets[i], <span class="st">"_cleaned.Rdata"</span>)</span>
+<span id="cb60-219"><a href="#cb60-219" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-220"><a href="#cb60-220" aria-hidden="true" tabindex="-1"></a>  <span class="co"># load and assign data</span></span>
+<span id="cb60-221"><a href="#cb60-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">load</span>(data_path)</span>
+<span id="cb60-222"><a href="#cb60-222" aria-hidden="true" tabindex="-1"></a>  data_list[[i]] <span class="ot">&lt;-</span> data</span>
+<span id="cb60-223"><a href="#cb60-223" aria-hidden="true" tabindex="-1"></a>  all_reg_sizes[i] <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb60-224"><a href="#cb60-224" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-225"><a href="#cb60-225" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print loaded variables</span></span>
+<span id="cb60-226"><a href="#cb60-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"vars from data"</span>, all_reg_sets[i]))</span>
+<span id="cb60-227"><a href="#cb60-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">names</span>(data))</span>
+<span id="cb60-228"><a href="#cb60-228" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-229"><a href="#cb60-229" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-230"><a href="#cb60-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-231"><a href="#cb60-231" aria-hidden="true" tabindex="-1"></a><span class="co"># rename data lists</span></span>
+<span id="cb60-232"><a href="#cb60-232" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_list) <span class="ot">&lt;-</span> all_reg_sets</span>
+<span id="cb60-233"><a href="#cb60-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-234"><a href="#cb60-234" aria-hidden="true" tabindex="-1"></a><span class="co"># view loaded data</span></span>
+<span id="cb60-235"><a href="#cb60-235" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_list, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb60-236"><a href="#cb60-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-237"><a href="#cb60-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-238"><a href="#cb60-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-239"><a href="#cb60-239" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modularize code</span></span>
+<span id="cb60-240"><a href="#cb60-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-241"><a href="#cb60-241" aria-hidden="true" tabindex="-1"></a>Rather than having one function that does everything, we want to have modularized code where helper functions perform *singular tasks* (this way they are like action statements).</span>
+<span id="cb60-242"><a href="#cb60-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-243"><a href="#cb60-243" aria-hidden="true" tabindex="-1"></a>The variable selection helper functions below perform the same steps as in @sec-methods-preview, just generalized for the cleaned data. They should take the subjects as inputs (datasets) and output a model from the treatment.</span>
+<span id="cb60-244"><a href="#cb60-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-247"><a href="#cb60-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-248"><a href="#cb60-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: helper-functions-variable-selection</span></span>
+<span id="cb60-249"><a href="#cb60-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-250"><a href="#cb60-250" aria-hidden="true" tabindex="-1"></a><span class="co"># helper functions for running the experiment with variable selection</span></span>
+<span id="cb60-251"><a href="#cb60-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-252"><a href="#cb60-252" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
+<span id="cb60-253"><a href="#cb60-253" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
+<span id="cb60-254"><a href="#cb60-254" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb60-255"><a href="#cb60-255" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-256"><a href="#cb60-256" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run stepwise procedure from full model</span></span>
+<span id="cb60-257"><a href="#cb60-257" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-258"><a href="#cb60-258" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-259"><a href="#cb60-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
+<span id="cb60-260"><a href="#cb60-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-261"><a href="#cb60-261" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-262"><a href="#cb60-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-263"><a href="#cb60-263" aria-hidden="true" tabindex="-1"></a><span class="co"># test function on a single dataset</span></span>
+<span id="cb60-264"><a href="#cb60-264" aria-hidden="true" tabindex="-1"></a><span class="fu">step_var_mod</span>(data_list<span class="sc">$</span>air_quality)</span>
+<span id="cb60-265"><a href="#cb60-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-266"><a href="#cb60-266" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
+<span id="cb60-267"><a href="#cb60-267" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
+<span id="cb60-268"><a href="#cb60-268" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb60-269"><a href="#cb60-269" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-270"><a href="#cb60-270" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tune shrinkage parameter lambda</span></span>
+<span id="cb60-271"><a href="#cb60-271" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb60-272"><a href="#cb60-272" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb60-273"><a href="#cb60-273" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-274"><a href="#cb60-274" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run lasso selection on model using tuned lambda</span></span>
+<span id="cb60-275"><a href="#cb60-275" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb60-276"><a href="#cb60-276" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb60-277"><a href="#cb60-277" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-278"><a href="#cb60-278" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save names of non0-shrunk X variables</span></span>
+<span id="cb60-279"><a href="#cb60-279" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb60-280"><a href="#cb60-280" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-281"><a href="#cb60-281" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit model based on lasso selected variables (plus intercept)</span></span>
+<span id="cb60-282"><a href="#cb60-282" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
+<span id="cb60-283"><a href="#cb60-283" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-284"><a href="#cb60-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
+<span id="cb60-285"><a href="#cb60-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-286"><a href="#cb60-286" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-287"><a href="#cb60-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-288"><a href="#cb60-288" aria-hidden="true" tabindex="-1"></a><span class="co"># test function on a single dataset</span></span>
+<span id="cb60-289"><a href="#cb60-289" aria-hidden="true" tabindex="-1"></a><span class="fu">lasso_var_mod</span>(data_list<span class="sc">$</span>air_quality)</span>
+<span id="cb60-290"><a href="#cb60-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-291"><a href="#cb60-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-292"><a href="#cb60-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-293"><a href="#cb60-293" aria-hidden="true" tabindex="-1"></a>Now we need some functions to extract the results of interest from the selected model, i.e. collecting the measurements.</span>
+<span id="cb60-294"><a href="#cb60-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-295"><a href="#cb60-295" aria-hidden="true" tabindex="-1"></a>The outcome of the treatment is a model, so these functions should take in a model and output the measurement.</span>
+<span id="cb60-296"><a href="#cb60-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-299"><a href="#cb60-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-300"><a href="#cb60-300" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: helper-function-results</span></span>
+<span id="cb60-301"><a href="#cb60-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-302"><a href="#cb60-302" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
+<span id="cb60-303"><a href="#cb60-303" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs a model and returns an integer</span></span>
+<span id="cb60-304"><a href="#cb60-304" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb60-305"><a href="#cb60-305" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-306"><a href="#cb60-306" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count the number of variables in the model (excluding intercept)</span></span>
+<span id="cb60-307"><a href="#cb60-307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb60-308"><a href="#cb60-308" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-309"><a href="#cb60-309" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-310"><a href="#cb60-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-311"><a href="#cb60-311" aria-hidden="true" tabindex="-1"></a><span class="co"># test function on a single dataset</span></span>
+<span id="cb60-312"><a href="#cb60-312" aria-hidden="true" tabindex="-1"></a><span class="fu">lasso_var_mod</span>(data_list<span class="sc">$</span>air_quality) <span class="sc">%&gt;%</span> select_var_count</span>
+<span id="cb60-313"><a href="#cb60-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-314"><a href="#cb60-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-315"><a href="#cb60-315" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE (our accuracy measure)</span></span>
+<span id="cb60-316"><a href="#cb60-316" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb60-317"><a href="#cb60-317" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-318"><a href="#cb60-318" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run 10-fold CV on the model</span></span>
+<span id="cb60-319"><a href="#cb60-319" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; by default trainControl() uses bootstrap validation, so need to switch it</span></span>
+<span id="cb60-320"><a href="#cb60-320" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison</span></span>
+<span id="cb60-321"><a href="#cb60-321" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
+<span id="cb60-322"><a href="#cb60-322" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
+<span id="cb60-323"><a href="#cb60-323" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb60-324"><a href="#cb60-324" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb60-325"><a href="#cb60-325" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb60-326"><a href="#cb60-326" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-327"><a href="#cb60-327" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return RMSE</span></span>
+<span id="cb60-328"><a href="#cb60-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
+<span id="cb60-329"><a href="#cb60-329" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-330"><a href="#cb60-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-331"><a href="#cb60-331" aria-hidden="true" tabindex="-1"></a><span class="co"># test function on a single dataset</span></span>
+<span id="cb60-332"><a href="#cb60-332" aria-hidden="true" tabindex="-1"></a><span class="fu">lasso_var_mod</span>(data_list<span class="sc">$</span>air_quality) <span class="sc">%&gt;%</span> select_cv_rmse</span>
+<span id="cb60-333"><a href="#cb60-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-334"><a href="#cb60-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-335"><a href="#cb60-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-336"><a href="#cb60-336" aria-hidden="true" tabindex="-1"></a>Lots of work went into setting up how to apply the treatments and gathering results. Now we are just doing everything through functions.</span>
+<span id="cb60-337"><a href="#cb60-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-338"><a href="#cb60-338" aria-hidden="true" tabindex="-1"></a><span class="fu">## Putting together the experiment</span></span>
+<span id="cb60-339"><a href="#cb60-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-340"><a href="#cb60-340" aria-hidden="true" tabindex="-1"></a><span class="fu">### Run single trial</span></span>
+<span id="cb60-341"><a href="#cb60-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-342"><a href="#cb60-342" aria-hidden="true" tabindex="-1"></a>While planning the steps above we might lose track of the general goal. Apply the treatments to the subjects and record the outcomes. With everything above setup well, actually running the experiment should be relatively simple.</span>
+<span id="cb60-343"><a href="#cb60-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-344"><a href="#cb60-344" aria-hidden="true" tabindex="-1"></a>We can still do this in a modularized fashion by first creating a function to run a single trial. In which, we don't actually want to save the model that was fit, rather we want the results of it.</span>
+<span id="cb60-345"><a href="#cb60-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-348"><a href="#cb60-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-349"><a href="#cb60-349" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: running-single-trial</span></span>
+<span id="cb60-350"><a href="#cb60-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-351"><a href="#cb60-351" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run a single trial</span></span>
+<span id="cb60-352"><a href="#cb60-352" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
+<span id="cb60-353"><a href="#cb60-353" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df) {</span>
+<span id="cb60-354"><a href="#cb60-354" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-355"><a href="#cb60-355" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run variable selection model</span></span>
+<span id="cb60-356"><a href="#cb60-356" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)</span></span>
+<span id="cb60-357"><a href="#cb60-357" aria-hidden="true" tabindex="-1"></a>  tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df)</span>
+<span id="cb60-358"><a href="#cb60-358" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-359"><a href="#cb60-359" aria-hidden="true" tabindex="-1"></a>  <span class="co"># collect measurements for number of variables and predictive accuracy</span></span>
+<span id="cb60-360"><a href="#cb60-360" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; will be storing results as dataframe, so want to return a mini dataframe here</span></span>
+<span id="cb60-361"><a href="#cb60-361" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; want to name elements when returning more complex data structures</span></span>
+<span id="cb60-362"><a href="#cb60-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">nvars =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
+<span id="cb60-363"><a href="#cb60-363" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod)))</span>
+<span id="cb60-364"><a href="#cb60-364" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-365"><a href="#cb60-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-366"><a href="#cb60-366" aria-hidden="true" tabindex="-1"></a><span class="co"># run trial for a single dataset to check results</span></span>
+<span id="cb60-367"><a href="#cb60-367" aria-hidden="true" tabindex="-1"></a><span class="fu">run_trial</span>(step_var_mod, data_list<span class="sc">$</span>air_quality)</span>
+<span id="cb60-368"><a href="#cb60-368" aria-hidden="true" tabindex="-1"></a><span class="fu">run_trial</span>(lasso_var_mod, data_list<span class="sc">$</span>air_quality)</span>
+<span id="cb60-369"><a href="#cb60-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-370"><a href="#cb60-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-371"><a href="#cb60-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-372"><a href="#cb60-372" aria-hidden="true" tabindex="-1"></a><span class="fu">### Run experiment {#sec-run-experiment}</span></span>
+<span id="cb60-373"><a href="#cb60-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-374"><a href="#cb60-374" aria-hidden="true" tabindex="-1"></a>Now we can run the experiment for all datasets. If trying to automate this, we can of coures use APPLY statements. When choosing which APPLY statement, we should think about what the input is (list of dataframes) and what the output will be (a dataframe).</span>
+<span id="cb60-375"><a href="#cb60-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-378"><a href="#cb60-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-379"><a href="#cb60-379" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: run-experiment</span></span>
+<span id="cb60-380"><a href="#cb60-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-381"><a href="#cb60-381" aria-hidden="true" tabindex="-1"></a><span class="co"># run experiment</span></span>
+<span id="cb60-382"><a href="#cb60-382" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; run separately for stepwise and lasso algorithms</span></span>
+<span id="cb60-383"><a href="#cb60-383" aria-hidden="true" tabindex="-1"></a>results_step <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> data_list, <span class="at">FUN =</span> <span class="cf">function</span>(X) <span class="fu">run_trial</span>(step_var_mod, X))</span>
+<span id="cb60-384"><a href="#cb60-384" aria-hidden="true" tabindex="-1"></a>results_lasso <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> data_list, <span class="at">FUN =</span> <span class="cf">function</span>(X) <span class="fu">run_trial</span>(lasso_var_mod, X))</span>
+<span id="cb60-385"><a href="#cb60-385" aria-hidden="true" tabindex="-1"></a>results_step</span>
+<span id="cb60-386"><a href="#cb60-386" aria-hidden="true" tabindex="-1"></a>results_lasso</span>
+<span id="cb60-387"><a href="#cb60-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-388"><a href="#cb60-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-389"><a href="#cb60-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-390"><a href="#cb60-390" aria-hidden="true" tabindex="-1"></a>In most cases, stepwise selects a bigger model and has similar accuracy to LASSO.</span>
+<span id="cb60-391"><a href="#cb60-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-392"><a href="#cb60-392" aria-hidden="true" tabindex="-1"></a><span class="fu">### Questioning results</span></span>
+<span id="cb60-393"><a href="#cb60-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-394"><a href="#cb60-394" aria-hidden="true" tabindex="-1"></a>Because this is a computational experiment, we need to consider how the computer is behaving and which of our results should have some variability.</span>
+<span id="cb60-395"><a href="#cb60-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-396"><a href="#cb60-396" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If we rerun the stepwise procedure, we should get the same results in the number of selected variables because it is a **deterministic** approach (it is calculating the AIC the same every single time). There is no randomness in this process. Although the accuracy (cv-rmse) measure may change a bit because may change slightly because of the cross validation. So we may need to repeatedly gather the cross-validated RMSE to see how uncertain we should be in those numbers (seeing if the accuracy is stable). We could simulate this 100 times and take the average cv-rmse; this would be the Monte Carlo simulation average of the 10-fold cross-validated RMSE. This would be a long term accuracy measure.</span>
+<span id="cb60-397"><a href="#cb60-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-398"><a href="#cb60-398" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>In the LASSO, there is an additional source of variation from the cross-validation procedure used to tune the shrinkage parameter $\lambda$ (data is randomly divided into 10-folds and then it iteratively goes through to find the best parameter value. How we divide up the data into 10 folds differs from trial to trial and we can get different results. This is where we start thinking about repetition and replication is necessary to understand uncertainty. Even though we are in a computational setting and have a lot more control, we are still working with outcomes and algorithms that have random components. So here, even though there isn't randomization in our subjects, our treatments might manifest differently in different trials on the same data.</span>
+<span id="cb60-399"><a href="#cb60-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-400"><a href="#cb60-400" aria-hidden="true" tabindex="-1"></a><span class="fu">## Improving the experiment</span></span>
+<span id="cb60-401"><a href="#cb60-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-402"><a href="#cb60-402" aria-hidden="true" tabindex="-1"></a><span class="fu">### Timing study</span></span>
+<span id="cb60-403"><a href="#cb60-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-404"><a href="#cb60-404" aria-hidden="true" tabindex="-1"></a>When timing a study, we need to be careful about how this is done.</span>
+<span id="cb60-405"><a href="#cb60-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-406"><a href="#cb60-406" aria-hidden="true" tabindex="-1"></a>The best approach would be to build a function that not only fits the model based on the supplied selection procedure and dataframe, but also records the time it takes to do so.</span>
+<span id="cb60-407"><a href="#cb60-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-408"><a href="#cb60-408" aria-hidden="true" tabindex="-1"></a>Note that assigning a start time and endtime is an imperfect way to record time because it takes the system time to record the time (assign the system time to the namespace, albeit a negligible amount).</span>
+<span id="cb60-409"><a href="#cb60-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-410"><a href="#cb60-410" aria-hidden="true" tabindex="-1"></a>We also want to be careful with the units for when we convert the time difference to numeric to store it. To account for this, use <span class="in">`difftime()`</span> and specify the units for equal comparison. This is demonstrated below. </span>
+<span id="cb60-411"><a href="#cb60-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-414"><a href="#cb60-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-415"><a href="#cb60-415" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: timing-calculations</span></span>
+<span id="cb60-416"><a href="#cb60-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-417"><a href="#cb60-417" aria-hidden="true" tabindex="-1"></a><span class="co"># record start time</span></span>
+<span id="cb60-418"><a href="#cb60-418" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb60-419"><a href="#cb60-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-420"><a href="#cb60-420" aria-hidden="true" tabindex="-1"></a><span class="co"># run trial</span></span>
+<span id="cb60-421"><a href="#cb60-421" aria-hidden="true" tabindex="-1"></a>results_lasso <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> data_list, <span class="at">FUN =</span> <span class="cf">function</span>(X) <span class="fu">run_trial</span>(lasso_var_mod, X))</span>
+<span id="cb60-422"><a href="#cb60-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-423"><a href="#cb60-423" aria-hidden="true" tabindex="-1"></a><span class="co"># record end time</span></span>
+<span id="cb60-424"><a href="#cb60-424" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb60-425"><a href="#cb60-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-426"><a href="#cb60-426" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate difference - naive way</span></span>
+<span id="cb60-427"><a href="#cb60-427" aria-hidden="true" tabindex="-1"></a>end_time <span class="sc">-</span> start_time</span>
+<span id="cb60-428"><a href="#cb60-428" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(end_time <span class="sc">-</span> start_time)</span>
+<span id="cb60-429"><a href="#cb60-429" aria-hidden="true" tabindex="-1"></a>end_time_step <span class="sc">+</span> <span class="dv">120</span> <span class="sc">-</span> start_time</span>
+<span id="cb60-430"><a href="#cb60-430" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(end_time <span class="sc">+</span> <span class="dv">120</span> <span class="sc">-</span> start_time)</span>
+<span id="cb60-431"><a href="#cb60-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-432"><a href="#cb60-432" aria-hidden="true" tabindex="-1"></a><span class="co"># have no idea what the units are when convert</span></span>
+<span id="cb60-433"><a href="#cb60-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-434"><a href="#cb60-434" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate difference - correct way</span></span>
+<span id="cb60-435"><a href="#cb60-435" aria-hidden="true" tabindex="-1"></a><span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"sec"</span>)</span>
+<span id="cb60-436"><a href="#cb60-436" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"min"</span>))</span>
+<span id="cb60-437"><a href="#cb60-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-438"><a href="#cb60-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-439"><a href="#cb60-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-440"><a href="#cb60-440" aria-hidden="true" tabindex="-1"></a>Now we can incorporate timing into our function to run trials.</span>
+<span id="cb60-441"><a href="#cb60-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-444"><a href="#cb60-444" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-445"><a href="#cb60-445" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: running-single-trial-timing</span></span>
+<span id="cb60-446"><a href="#cb60-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-447"><a href="#cb60-447" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run a single trial</span></span>
+<span id="cb60-448"><a href="#cb60-448" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
+<span id="cb60-449"><a href="#cb60-449" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df) {</span>
+<span id="cb60-450"><a href="#cb60-450" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-451"><a href="#cb60-451" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run variable selection model</span></span>
+<span id="cb60-452"><a href="#cb60-452" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)</span></span>
+<span id="cb60-453"><a href="#cb60-453" aria-hidden="true" tabindex="-1"></a>  <span class="co"># record start and end time</span></span>
+<span id="cb60-454"><a href="#cb60-454" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb60-455"><a href="#cb60-455" aria-hidden="true" tabindex="-1"></a>    tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df)</span>
+<span id="cb60-456"><a href="#cb60-456" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb60-457"><a href="#cb60-457" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-458"><a href="#cb60-458" aria-hidden="true" tabindex="-1"></a>  <span class="co"># collect measurements for number of variables and predictive accuracy</span></span>
+<span id="cb60-459"><a href="#cb60-459" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; will be storing results as dataframe, so want to return a mini dataframe here</span></span>
+<span id="cb60-460"><a href="#cb60-460" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; want to name elements when returning more complex data structures</span></span>
+<span id="cb60-461"><a href="#cb60-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">nvars =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
+<span id="cb60-462"><a href="#cb60-462" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod),</span>
+<span id="cb60-463"><a href="#cb60-463" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"sec"</span>)))</span>
+<span id="cb60-464"><a href="#cb60-464" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-465"><a href="#cb60-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-466"><a href="#cb60-466" aria-hidden="true" tabindex="-1"></a><span class="co"># run trial for a single dataset to check results</span></span>
+<span id="cb60-467"><a href="#cb60-467" aria-hidden="true" tabindex="-1"></a><span class="fu">run_trial</span>(lasso_var_mod, data_list<span class="sc">$</span>air_quality)</span>
+<span id="cb60-468"><a href="#cb60-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-469"><a href="#cb60-469" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-470"><a href="#cb60-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-471"><a href="#cb60-471" aria-hidden="true" tabindex="-1"></a>Then we can get Monte Carlo intervals for the timing.</span>
+<span id="cb60-472"><a href="#cb60-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-473"><a href="#cb60-473" aria-hidden="true" tabindex="-1"></a>Final note about timing: It is a good idea to test our experiments with small datasets like this to understand the behavior. For example, if one algorithm takes 5 times longer to run than another on just these smaller cases, then we might be worried about handing it 100,000 observations. If big datasets worry us, then perhaps simulated dataset is good to start with so we can control how large it is.</span>
+<span id="cb60-474"><a href="#cb60-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-475"><a href="#cb60-475" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bundling the trial functions</span></span>
+<span id="cb60-476"><a href="#cb60-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-477"><a href="#cb60-477" aria-hidden="true" tabindex="-1"></a>In the implementation in @sec-run-experiment, there is just a single function that runs the trials and we call if for both algorithms (applying it to all the datasets). We could setup another function to run the datasets through both algorithms and combine results.</span>
+<span id="cb60-478"><a href="#cb60-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-481"><a href="#cb60-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-482"><a href="#cb60-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: run-both</span></span>
+<span id="cb60-483"><a href="#cb60-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-484"><a href="#cb60-484" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run both algorithms</span></span>
+<span id="cb60-485"><a href="#cb60-485" aria-hidden="true" tabindex="-1"></a>run_both <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb60-486"><a href="#cb60-486" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb60-487"><a href="#cb60-487" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate results</span></span>
+<span id="cb60-488"><a href="#cb60-488" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; add indicator for which algorithm was used</span></span>
+<span id="cb60-489"><a href="#cb60-489" aria-hidden="true" tabindex="-1"></a>  tmp_step <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">data.frame</span>(<span class="at">algorithm =</span> <span class="st">"step"</span>),</span>
+<span id="cb60-490"><a href="#cb60-490" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">run_trial</span>(step_var_mod, df))</span>
+<span id="cb60-491"><a href="#cb60-491" aria-hidden="true" tabindex="-1"></a>  tmp_lasso <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">data.frame</span>(<span class="at">algorithm =</span> <span class="st">"lasso"</span>),</span>
+<span id="cb60-492"><a href="#cb60-492" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">run_trial</span>(lasso_var_mod, df))</span>
+<span id="cb60-493"><a href="#cb60-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-494"><a href="#cb60-494" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">rbind</span>(tmp_step, tmp_lasso))</span>
+<span id="cb60-495"><a href="#cb60-495" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb60-496"><a href="#cb60-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-497"><a href="#cb60-497" aria-hidden="true" tabindex="-1"></a><span class="co"># run all datasets through both algorithms</span></span>
+<span id="cb60-498"><a href="#cb60-498" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data_list, run_both)</span>
+<span id="cb60-499"><a href="#cb60-499" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(results, <span class="at">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb60-500"><a href="#cb60-500" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>air_quality</span>
+<span id="cb60-501"><a href="#cb60-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-502"><a href="#cb60-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-503"><a href="#cb60-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-504"><a href="#cb60-504" aria-hidden="true" tabindex="-1"></a>We could get better formatted results by adding an indicator for which dataset was used. Then we would be able to reduce the results list to a single dataframe rather than a list of smaller dataframes.</span>
+<span id="cb60-505"><a href="#cb60-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-506"><a href="#cb60-506" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bootstrapping the data</span></span>
+<span id="cb60-507"><a href="#cb60-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-508"><a href="#cb60-508" aria-hidden="true" tabindex="-1"></a>We could also think about at this stage if the particular dataset is of interest or if we are more concerned about this type of data (data from a population like the 9 that are represented here). Reapplying to the same data wouldn't get us anywhere because of the deterministic nature of the stepwise algorithm. So if the main question is how many variables tend to be selected in data like these, then we could bootstrap the dataframes going in (this would get at the variability in how large the set of variables tends to be selected in data like these, in addition to the variability in accuracies from dataset to dataset via the 10-fold cv-rmse). Then can get bootstrap intervals for the variable counts.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

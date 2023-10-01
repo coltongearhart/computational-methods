@@ -179,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bootstrap</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computational-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -193,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -462,7 +468,12 @@ $...</code></pre>
 <code>&lt;&lt;-</code> Assigns values from a local environment (like a function call) and saves it in the global environment (this is a really bad idea because it could overwrite something that you already have in the global environment)</li>
 </ul>
 </li>
-<li><p>Returning values: Functions implicitly return the last thing computed. So it is often a good idea to be explicit about what to return.</p></li>
+<li>
+<p>Returning values: Functions implicitly return the last thing computed. So it is often a good idea to be explicit about what to return.</p>
+<ul>
+<li>All standalone functions should have explicit returns. When doing an on-the-fly function in an <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> for example, we can stylistically omit <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> and still have readable code.</li>
+</ul>
+</li>
 </ul>
 <div class="cell" data-hash="using-and-building-functions_cache/html/defining-functions-assignment_f9ab824909487ebef8e130fbe28d6fcc">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># write function add two numbers</span></span>
@@ -1928,631 +1939,633 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb128-226"><a href="#cb128-226" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb128-227"><a href="#cb128-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Returning values: Functions implicitly return the last thing computed. So it is often a good idea to be explicit about what to return.</span>
 <span id="cb128-228"><a href="#cb128-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-231"><a href="#cb128-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-232"><a href="#cb128-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: defining-functions-assignment</span></span>
-<span id="cb128-233"><a href="#cb128-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-234"><a href="#cb128-234" aria-hidden="true" tabindex="-1"></a><span class="co"># write function add two numbers</span></span>
-<span id="cb128-235"><a href="#cb128-235" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
-<span id="cb128-236"><a href="#cb128-236" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">=</span> x <span class="sc">+</span> y</span>
-<span id="cb128-237"><a href="#cb128-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
-<span id="cb128-238"><a href="#cb128-238" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-239"><a href="#cb128-239" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb128-240"><a href="#cb128-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-241"><a href="#cb128-241" aria-hidden="true" tabindex="-1"></a><span class="co"># bad idea</span></span>
-<span id="cb128-242"><a href="#cb128-242" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
-<span id="cb128-243"><a href="#cb128-243" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb128-244"><a href="#cb128-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
-<span id="cb128-245"><a href="#cb128-245" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-246"><a href="#cb128-246" aria-hidden="true" tabindex="-1"></a><span class="co"># val isn't in the global environment</span></span>
-<span id="cb128-247"><a href="#cb128-247" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb128-248"><a href="#cb128-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-249"><a href="#cb128-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-229"><a href="#cb128-229" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>All standalone functions should have explicit returns. When doing an on-the-fly function in an <span class="in">`sapply()`</span> for example, we can stylistically omit <span class="in">`return()`</span> and still have readable code.</span>
+<span id="cb128-230"><a href="#cb128-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-233"><a href="#cb128-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-234"><a href="#cb128-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: defining-functions-assignment</span></span>
+<span id="cb128-235"><a href="#cb128-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-236"><a href="#cb128-236" aria-hidden="true" tabindex="-1"></a><span class="co"># write function add two numbers</span></span>
+<span id="cb128-237"><a href="#cb128-237" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb128-238"><a href="#cb128-238" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">=</span> x <span class="sc">+</span> y</span>
+<span id="cb128-239"><a href="#cb128-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
+<span id="cb128-240"><a href="#cb128-240" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-241"><a href="#cb128-241" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb128-242"><a href="#cb128-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-243"><a href="#cb128-243" aria-hidden="true" tabindex="-1"></a><span class="co"># bad idea</span></span>
+<span id="cb128-244"><a href="#cb128-244" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb128-245"><a href="#cb128-245" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb128-246"><a href="#cb128-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
+<span id="cb128-247"><a href="#cb128-247" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-248"><a href="#cb128-248" aria-hidden="true" tabindex="-1"></a><span class="co"># val isn't in the global environment</span></span>
+<span id="cb128-249"><a href="#cb128-249" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb128-250"><a href="#cb128-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-251"><a href="#cb128-251" aria-hidden="true" tabindex="-1"></a>More complex functions: In a legitimate function, to have our function behave differently, we can use some if and else statements that are usually triggered by a yes / no or true / false.</span>
+<span id="cb128-251"><a href="#cb128-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-252"><a href="#cb128-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-253"><a href="#cb128-253" aria-hidden="true" tabindex="-1"></a><span class="in">`sapply()`</span> is a function that calls other functions in an iterative way (really efficient for loop).</span>
+<span id="cb128-253"><a href="#cb128-253" aria-hidden="true" tabindex="-1"></a>More complex functions: In a legitimate function, to have our function behave differently, we can use some if and else statements that are usually triggered by a yes / no or true / false.</span>
 <span id="cb128-254"><a href="#cb128-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-257"><a href="#cb128-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-258"><a href="#cb128-258" aria-hidden="true" tabindex="-1"></a><span class="co"># label: defining-functions-ifs</span></span>
-<span id="cb128-259"><a href="#cb128-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-260"><a href="#cb128-260" aria-hidden="true" tabindex="-1"></a><span class="co"># now trying to do something cool (and / or breaking it)</span></span>
-<span id="cb128-261"><a href="#cb128-261" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; on rare occasions, add some random error to the sum</span></span>
-<span id="cb128-262"><a href="#cb128-262" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">mischief =</span> <span class="cn">TRUE</span>){</span>
-<span id="cb128-263"><a href="#cb128-263" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(mischief <span class="sc">==</span> <span class="cn">FALSE</span>){</span>
-<span id="cb128-264"><a href="#cb128-264" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y</span>
-<span id="cb128-265"><a href="#cb128-265" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb128-266"><a href="#cb128-266" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y <span class="sc">+</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">02</span>,.<span class="dv">96</span>,.<span class="dv">02</span>))</span>
-<span id="cb128-267"><a href="#cb128-267" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb128-268"><a href="#cb128-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
-<span id="cb128-269"><a href="#cb128-269" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-270"><a href="#cb128-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-271"><a href="#cb128-271" aria-hidden="true" tabindex="-1"></a><span class="co"># run the function 100 times using specified values for the arguments</span></span>
-<span id="cb128-272"><a href="#cb128-272" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; not using the X in our function call</span></span>
-<span id="cb128-273"><a href="#cb128-273" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, my_sum, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">2</span>)</span>
-<span id="cb128-274"><a href="#cb128-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-275"><a href="#cb128-275" aria-hidden="true" tabindex="-1"></a><span class="co"># equivalent to</span></span>
-<span id="cb128-276"><a href="#cb128-276" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb128-277"><a href="#cb128-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">my_sum</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb128-278"><a href="#cb128-278" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-279"><a href="#cb128-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-280"><a href="#cb128-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-255"><a href="#cb128-255" aria-hidden="true" tabindex="-1"></a><span class="in">`sapply()`</span> is a function that calls other functions in an iterative way (really efficient for loop).</span>
+<span id="cb128-256"><a href="#cb128-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-259"><a href="#cb128-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-260"><a href="#cb128-260" aria-hidden="true" tabindex="-1"></a><span class="co"># label: defining-functions-ifs</span></span>
+<span id="cb128-261"><a href="#cb128-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-262"><a href="#cb128-262" aria-hidden="true" tabindex="-1"></a><span class="co"># now trying to do something cool (and / or breaking it)</span></span>
+<span id="cb128-263"><a href="#cb128-263" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; on rare occasions, add some random error to the sum</span></span>
+<span id="cb128-264"><a href="#cb128-264" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">mischief =</span> <span class="cn">TRUE</span>){</span>
+<span id="cb128-265"><a href="#cb128-265" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(mischief <span class="sc">==</span> <span class="cn">FALSE</span>){</span>
+<span id="cb128-266"><a href="#cb128-266" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y</span>
+<span id="cb128-267"><a href="#cb128-267" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb128-268"><a href="#cb128-268" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y <span class="sc">+</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">02</span>,.<span class="dv">96</span>,.<span class="dv">02</span>))</span>
+<span id="cb128-269"><a href="#cb128-269" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb128-270"><a href="#cb128-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
+<span id="cb128-271"><a href="#cb128-271" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-272"><a href="#cb128-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-273"><a href="#cb128-273" aria-hidden="true" tabindex="-1"></a><span class="co"># run the function 100 times using specified values for the arguments</span></span>
+<span id="cb128-274"><a href="#cb128-274" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; not using the X in our function call</span></span>
+<span id="cb128-275"><a href="#cb128-275" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, my_sum, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">2</span>)</span>
+<span id="cb128-276"><a href="#cb128-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-277"><a href="#cb128-277" aria-hidden="true" tabindex="-1"></a><span class="co"># equivalent to</span></span>
+<span id="cb128-278"><a href="#cb128-278" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb128-279"><a href="#cb128-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">my_sum</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb128-280"><a href="#cb128-280" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb128-281"><a href="#cb128-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-282"><a href="#cb128-282" aria-hidden="true" tabindex="-1"></a>Can return something more complex than just a data value by returning lists. Functions that output lists are kinda the next step of complex computing ideas.</span>
+<span id="cb128-282"><a href="#cb128-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-283"><a href="#cb128-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-286"><a href="#cb128-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-287"><a href="#cb128-287" aria-hidden="true" tabindex="-1"></a><span class="co"># label: defining-functions-return-list</span></span>
-<span id="cb128-288"><a href="#cb128-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-289"><a href="#cb128-289" aria-hidden="true" tabindex="-1"></a><span class="co"># modify function to return a list with multiple objects in it</span></span>
-<span id="cb128-290"><a href="#cb128-290" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">mischief =</span> <span class="cn">TRUE</span>){</span>
-<span id="cb128-291"><a href="#cb128-291" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(mischief <span class="sc">==</span> <span class="cn">FALSE</span>){</span>
-<span id="cb128-292"><a href="#cb128-292" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y</span>
-<span id="cb128-293"><a href="#cb128-293" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb128-294"><a href="#cb128-294" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y <span class="sc">+</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">02</span>,.<span class="dv">96</span>,.<span class="dv">02</span>))</span>
-<span id="cb128-295"><a href="#cb128-295" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb128-296"><a href="#cb128-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">value =</span> val,</span>
-<span id="cb128-297"><a href="#cb128-297" aria-hidden="true" tabindex="-1"></a>              <span class="at">mischief =</span> mischief))</span>
-<span id="cb128-298"><a href="#cb128-298" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-299"><a href="#cb128-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-300"><a href="#cb128-300" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb128-284"><a href="#cb128-284" aria-hidden="true" tabindex="-1"></a>Can return something more complex than just a data value by returning lists. Functions that output lists are kinda the next step of complex computing ideas.</span>
+<span id="cb128-285"><a href="#cb128-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-288"><a href="#cb128-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-289"><a href="#cb128-289" aria-hidden="true" tabindex="-1"></a><span class="co"># label: defining-functions-return-list</span></span>
+<span id="cb128-290"><a href="#cb128-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-291"><a href="#cb128-291" aria-hidden="true" tabindex="-1"></a><span class="co"># modify function to return a list with multiple objects in it</span></span>
+<span id="cb128-292"><a href="#cb128-292" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">mischief =</span> <span class="cn">TRUE</span>){</span>
+<span id="cb128-293"><a href="#cb128-293" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(mischief <span class="sc">==</span> <span class="cn">FALSE</span>){</span>
+<span id="cb128-294"><a href="#cb128-294" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y</span>
+<span id="cb128-295"><a href="#cb128-295" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb128-296"><a href="#cb128-296" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> x <span class="sc">+</span> y <span class="sc">+</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">02</span>,.<span class="dv">96</span>,.<span class="dv">02</span>))</span>
+<span id="cb128-297"><a href="#cb128-297" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb128-298"><a href="#cb128-298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">value =</span> val,</span>
+<span id="cb128-299"><a href="#cb128-299" aria-hidden="true" tabindex="-1"></a>              <span class="at">mischief =</span> mischief))</span>
+<span id="cb128-300"><a href="#cb128-300" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb128-301"><a href="#cb128-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-302"><a href="#cb128-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-302"><a href="#cb128-302" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sum</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb128-303"><a href="#cb128-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-304"><a href="#cb128-304" aria-hidden="true" tabindex="-1"></a><span class="fu">### Calling a Function</span></span>
+<span id="cb128-304"><a href="#cb128-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-305"><a href="#cb128-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-306"><a href="#cb128-306" aria-hidden="true" tabindex="-1"></a>To call a function, you simply use its name and define any required formal arguments. Typically this is done within a set of parentheses directly following the function name. Only a few special cases break from that pattern. </span>
+<span id="cb128-306"><a href="#cb128-306" aria-hidden="true" tabindex="-1"></a><span class="fu">### Calling a Function</span></span>
 <span id="cb128-307"><a href="#cb128-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-308"><a href="#cb128-308" aria-hidden="true" tabindex="-1"></a>What is more important to focus on is **if** and **how** we define the arguments. We may choose to define nothing in the arguments and the function might still work. </span>
+<span id="cb128-308"><a href="#cb128-308" aria-hidden="true" tabindex="-1"></a>To call a function, you simply use its name and define any required formal arguments. Typically this is done within a set of parentheses directly following the function name. Only a few special cases break from that pattern. </span>
 <span id="cb128-309"><a href="#cb128-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-312"><a href="#cb128-312" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-313"><a href="#cb128-313" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: args-null</span></span>
-<span id="cb128-314"><a href="#cb128-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb128-315"><a href="#cb128-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-316"><a href="#cb128-316" aria-hidden="true" tabindex="-1"></a><span class="co"># write function that has no arguments to simply return this hardcoded value</span></span>
-<span id="cb128-317"><a href="#cb128-317" aria-hidden="true" tabindex="-1"></a>no_arg <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb128-318"><a href="#cb128-318" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="dv">10</span></span>
-<span id="cb128-319"><a href="#cb128-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
-<span id="cb128-320"><a href="#cb128-320" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-321"><a href="#cb128-321" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg</span>()</span>
-<span id="cb128-322"><a href="#cb128-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-323"><a href="#cb128-323" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; so it will generate an error if we tried to give it an argument that isn't defined in the function</span></span>
-<span id="cb128-324"><a href="#cb128-324" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg</span>(<span class="at">x =</span> <span class="dv">20</span>)</span>
-<span id="cb128-325"><a href="#cb128-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-326"><a href="#cb128-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-310"><a href="#cb128-310" aria-hidden="true" tabindex="-1"></a>What is more important to focus on is **if** and **how** we define the arguments. We may choose to define nothing in the arguments and the function might still work. </span>
+<span id="cb128-311"><a href="#cb128-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-314"><a href="#cb128-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-315"><a href="#cb128-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: args-null</span></span>
+<span id="cb128-316"><a href="#cb128-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb128-317"><a href="#cb128-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-318"><a href="#cb128-318" aria-hidden="true" tabindex="-1"></a><span class="co"># write function that has no arguments to simply return this hardcoded value</span></span>
+<span id="cb128-319"><a href="#cb128-319" aria-hidden="true" tabindex="-1"></a>no_arg <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb128-320"><a href="#cb128-320" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb128-321"><a href="#cb128-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb128-322"><a href="#cb128-322" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-323"><a href="#cb128-323" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg</span>()</span>
+<span id="cb128-324"><a href="#cb128-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-325"><a href="#cb128-325" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; so it will generate an error if we tried to give it an argument that isn't defined in the function</span></span>
+<span id="cb128-326"><a href="#cb128-326" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg</span>(<span class="at">x =</span> <span class="dv">20</span>)</span>
 <span id="cb128-327"><a href="#cb128-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-328"><a href="#cb128-328" aria-hidden="true" tabindex="-1"></a>Typically these are made more flexible using dots <span class="in">`...`</span>. All this does is put the values into the local namespace and continues running the function. These are optional arguments.</span>
+<span id="cb128-328"><a href="#cb128-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-329"><a href="#cb128-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-332"><a href="#cb128-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-333"><a href="#cb128-333" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: args-dots</span></span>
-<span id="cb128-334"><a href="#cb128-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-335"><a href="#cb128-335" aria-hidden="true" tabindex="-1"></a><span class="co"># define function wtih ... formal</span></span>
-<span id="cb128-336"><a href="#cb128-336" aria-hidden="true" tabindex="-1"></a>no_arg2 <span class="ot">&lt;-</span> <span class="cf">function</span>(...){</span>
-<span id="cb128-337"><a href="#cb128-337" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="dv">10</span></span>
-<span id="cb128-338"><a href="#cb128-338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
-<span id="cb128-339"><a href="#cb128-339" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-340"><a href="#cb128-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-341"><a href="#cb128-341" aria-hidden="true" tabindex="-1"></a><span class="co"># functions works with no arguments</span></span>
-<span id="cb128-342"><a href="#cb128-342" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg2</span>() </span>
-<span id="cb128-343"><a href="#cb128-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-344"><a href="#cb128-344" aria-hidden="true" tabindex="-1"></a><span class="co"># and now with arguments</span></span>
-<span id="cb128-345"><a href="#cb128-345" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; it initializes the value of x, but then  overwrites the value of x internally</span></span>
-<span id="cb128-346"><a href="#cb128-346" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg2</span>(<span class="at">x =</span> <span class="dv">20</span>)</span>
-<span id="cb128-347"><a href="#cb128-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-348"><a href="#cb128-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-330"><a href="#cb128-330" aria-hidden="true" tabindex="-1"></a>Typically these are made more flexible using dots <span class="in">`...`</span>. All this does is put the values into the local namespace and continues running the function. These are optional arguments.</span>
+<span id="cb128-331"><a href="#cb128-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-334"><a href="#cb128-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-335"><a href="#cb128-335" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: args-dots</span></span>
+<span id="cb128-336"><a href="#cb128-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-337"><a href="#cb128-337" aria-hidden="true" tabindex="-1"></a><span class="co"># define function wtih ... formal</span></span>
+<span id="cb128-338"><a href="#cb128-338" aria-hidden="true" tabindex="-1"></a>no_arg2 <span class="ot">&lt;-</span> <span class="cf">function</span>(...){</span>
+<span id="cb128-339"><a href="#cb128-339" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb128-340"><a href="#cb128-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb128-341"><a href="#cb128-341" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-342"><a href="#cb128-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-343"><a href="#cb128-343" aria-hidden="true" tabindex="-1"></a><span class="co"># functions works with no arguments</span></span>
+<span id="cb128-344"><a href="#cb128-344" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg2</span>() </span>
+<span id="cb128-345"><a href="#cb128-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-346"><a href="#cb128-346" aria-hidden="true" tabindex="-1"></a><span class="co"># and now with arguments</span></span>
+<span id="cb128-347"><a href="#cb128-347" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; it initializes the value of x, but then  overwrites the value of x internally</span></span>
+<span id="cb128-348"><a href="#cb128-348" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg2</span>(<span class="at">x =</span> <span class="dv">20</span>)</span>
 <span id="cb128-349"><a href="#cb128-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-350"><a href="#cb128-350" aria-hidden="true" tabindex="-1"></a>For "optional" arguments (arguments that sometimes matters and sometimes don't matter), we should define them as formal parameters with some default values. This way we can override them if we wanted to.</span>
+<span id="cb128-350"><a href="#cb128-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-351"><a href="#cb128-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-354"><a href="#cb128-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-355"><a href="#cb128-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: args-defaults</span></span>
-<span id="cb128-356"><a href="#cb128-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-357"><a href="#cb128-357" aria-hidden="true" tabindex="-1"></a><span class="co"># add default value to argument</span></span>
-<span id="cb128-358"><a href="#cb128-358" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; now it behaves typically how we want, but can change them if we want</span></span>
-<span id="cb128-359"><a href="#cb128-359" aria-hidden="true" tabindex="-1"></a>no_arg3 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x =</span> <span class="dv">10</span>){</span>
-<span id="cb128-360"><a href="#cb128-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
-<span id="cb128-361"><a href="#cb128-361" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-362"><a href="#cb128-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-363"><a href="#cb128-363" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the behavior we typically will want</span></span>
-<span id="cb128-364"><a href="#cb128-364" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg3</span>()</span>
-<span id="cb128-365"><a href="#cb128-365" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg3</span>(<span class="at">x =</span> <span class="dv">20</span>)</span>
-<span id="cb128-366"><a href="#cb128-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-367"><a href="#cb128-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-352"><a href="#cb128-352" aria-hidden="true" tabindex="-1"></a>For "optional" arguments (arguments that sometimes matters and sometimes don't matter), we should define them as formal parameters with some default values. This way we can override them if we wanted to.</span>
+<span id="cb128-353"><a href="#cb128-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-356"><a href="#cb128-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-357"><a href="#cb128-357" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: args-defaults</span></span>
+<span id="cb128-358"><a href="#cb128-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-359"><a href="#cb128-359" aria-hidden="true" tabindex="-1"></a><span class="co"># add default value to argument</span></span>
+<span id="cb128-360"><a href="#cb128-360" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; now it behaves typically how we want, but can change them if we want</span></span>
+<span id="cb128-361"><a href="#cb128-361" aria-hidden="true" tabindex="-1"></a>no_arg3 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x =</span> <span class="dv">10</span>){</span>
+<span id="cb128-362"><a href="#cb128-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb128-363"><a href="#cb128-363" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-364"><a href="#cb128-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-365"><a href="#cb128-365" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the behavior we typically will want</span></span>
+<span id="cb128-366"><a href="#cb128-366" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg3</span>()</span>
+<span id="cb128-367"><a href="#cb128-367" aria-hidden="true" tabindex="-1"></a><span class="fu">no_arg3</span>(<span class="at">x =</span> <span class="dv">20</span>)</span>
 <span id="cb128-368"><a href="#cb128-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-369"><a href="#cb128-369" aria-hidden="true" tabindex="-1"></a>The more important characteristics of function calls are related to how we define our arguments: implicitly and explicitly. If we rely on the default ordering of the arguements, then we are calling the arguments *implicitly*. If we refer to the argument by it's name while defining the values, then we are calling the argument *explicitly*. Often we use a mix of these methods, but it is important to be aware of how and why we choose to define our arguments.</span>
+<span id="cb128-369"><a href="#cb128-369" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-370"><a href="#cb128-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-371"><a href="#cb128-371" aria-hidden="true" tabindex="-1"></a>A function runs through all of the named arguments, then goes in order for the unnamed arguments.</span>
+<span id="cb128-371"><a href="#cb128-371" aria-hidden="true" tabindex="-1"></a>The more important characteristics of function calls are related to how we define our arguments: implicitly and explicitly. If we rely on the default ordering of the arguements, then we are calling the arguments *implicitly*. If we refer to the argument by it's name while defining the values, then we are calling the argument *explicitly*. Often we use a mix of these methods, but it is important to be aware of how and why we choose to define our arguments.</span>
 <span id="cb128-372"><a href="#cb128-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-375"><a href="#cb128-375" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-376"><a href="#cb128-376" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: arg_exp_implicit</span></span>
-<span id="cb128-377"><a href="#cb128-377" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb128-378"><a href="#cb128-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-379"><a href="#cb128-379" aria-hidden="true" tabindex="-1"></a><span class="co"># all of the following are equivalent</span></span>
-<span id="cb128-380"><a href="#cb128-380" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb128-381"><a href="#cb128-381" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb128-382"><a href="#cb128-382" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb128-383"><a href="#cb128-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-384"><a href="#cb128-384" aria-hidden="true" tabindex="-1"></a><span class="co"># the following is NOT equivalent</span></span>
-<span id="cb128-385"><a href="#cb128-385" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; it is expecting a numeric first</span></span>
-<span id="cb128-386"><a href="#cb128-386" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="cn">TRUE</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb128-387"><a href="#cb128-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-388"><a href="#cb128-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-373"><a href="#cb128-373" aria-hidden="true" tabindex="-1"></a>A function runs through all of the named arguments, then goes in order for the unnamed arguments.</span>
+<span id="cb128-374"><a href="#cb128-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-377"><a href="#cb128-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-378"><a href="#cb128-378" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: arg_exp_implicit</span></span>
+<span id="cb128-379"><a href="#cb128-379" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb128-380"><a href="#cb128-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-381"><a href="#cb128-381" aria-hidden="true" tabindex="-1"></a><span class="co"># all of the following are equivalent</span></span>
+<span id="cb128-382"><a href="#cb128-382" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb128-383"><a href="#cb128-383" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb128-384"><a href="#cb128-384" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb128-385"><a href="#cb128-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-386"><a href="#cb128-386" aria-hidden="true" tabindex="-1"></a><span class="co"># the following is NOT equivalent</span></span>
+<span id="cb128-387"><a href="#cb128-387" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; it is expecting a numeric first</span></span>
+<span id="cb128-388"><a href="#cb128-388" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="cn">TRUE</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
 <span id="cb128-389"><a href="#cb128-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-390"><a href="#cb128-390" aria-hidden="true" tabindex="-1"></a>Possible convention: Implicitly give the function data values first, then use explicit calling for the options (this will still be readable because the function name will indicate what it's going to do with the data values).</span>
+<span id="cb128-390"><a href="#cb128-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-391"><a href="#cb128-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-392"><a href="#cb128-392" aria-hidden="true" tabindex="-1"></a><span class="fu">### Automating procedures</span></span>
+<span id="cb128-392"><a href="#cb128-392" aria-hidden="true" tabindex="-1"></a>Possible convention: Implicitly give the function data values first, then use explicit calling for the options (this will still be readable because the function name will indicate what it's going to do with the data values).</span>
 <span id="cb128-393"><a href="#cb128-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-394"><a href="#cb128-394" aria-hidden="true" tabindex="-1"></a>The following example demonstrates code that would be better served by constructing a function to accomplish the task.</span>
+<span id="cb128-394"><a href="#cb128-394" aria-hidden="true" tabindex="-1"></a><span class="fu">### Automating procedures</span></span>
 <span id="cb128-395"><a href="#cb128-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-398"><a href="#cb128-398" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-399"><a href="#cb128-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-manual</span></span>
-<span id="cb128-400"><a href="#cb128-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-401"><a href="#cb128-401" aria-hidden="true" tabindex="-1"></a><span class="co"># take the following olive oil data and standardize the columns</span></span>
-<span id="cb128-402"><a href="#cb128-402" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdfCluster) <span class="co"># for the data</span></span>
-<span id="cb128-403"><a href="#cb128-403" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(oliveoil) <span class="co"># ?oliveoil</span></span>
-<span id="cb128-404"><a href="#cb128-404" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oliveoil)</span>
-<span id="cb128-405"><a href="#cb128-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-406"><a href="#cb128-406" aria-hidden="true" tabindex="-1"></a><span class="co"># start with a dataframe where create the z-scores for palmitic acid, then add the rest </span></span>
-<span id="cb128-407"><a href="#cb128-407" aria-hidden="true" tabindex="-1"></a>oo_standardized <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb128-408"><a href="#cb128-408" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitic =</span> (oliveoil[,<span class="st">"palmitic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"palmitic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"palmitic"</span>])</span>
-<span id="cb128-409"><a href="#cb128-409" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb128-410"><a href="#cb128-410" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized)</span>
-<span id="cb128-411"><a href="#cb128-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-412"><a href="#cb128-412" aria-hidden="true" tabindex="-1"></a><span class="co"># if wanted to do this manually for all columns we would do this</span></span>
-<span id="cb128-413"><a href="#cb128-413" aria-hidden="true" tabindex="-1"></a>oo_standardized <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb128-414"><a href="#cb128-414" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitic =</span> (oliveoil[,<span class="st">"palmitic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"palmitic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"palmitic"</span>]),</span>
-<span id="cb128-415"><a href="#cb128-415" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitoleic =</span> (oliveoil[,<span class="st">"palmitoleic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"palmitoleic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"palmitoleic"</span>]),</span>
-<span id="cb128-416"><a href="#cb128-416" aria-hidden="true" tabindex="-1"></a>  <span class="at">stearic =</span> (oliveoil[,<span class="st">"stearic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"stearic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"stearic"</span>]),</span>
-<span id="cb128-417"><a href="#cb128-417" aria-hidden="true" tabindex="-1"></a>  <span class="at">oleic =</span> (oliveoil[,<span class="st">"oleic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"oleic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"oleic"</span>]),</span>
-<span id="cb128-418"><a href="#cb128-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">linoleic =</span> (oliveoil[,<span class="st">"linoleic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"linoleic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"linoleic"</span>]),</span>
-<span id="cb128-419"><a href="#cb128-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">linolenic =</span> (oliveoil[,<span class="st">"linolenic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"linolenic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"linolenic"</span>]),</span>
-<span id="cb128-420"><a href="#cb128-420" aria-hidden="true" tabindex="-1"></a>  <span class="at">arachidic =</span> (oliveoil[,<span class="st">"arachidic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"arachidic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"arachidic"</span>]),</span>
-<span id="cb128-421"><a href="#cb128-421" aria-hidden="true" tabindex="-1"></a>  <span class="at">eicosenoic =</span> (oliveoil[,<span class="st">"eicosenoic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"eicosenoic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"eicosenoic"</span>])</span>
-<span id="cb128-422"><a href="#cb128-422" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb128-423"><a href="#cb128-423" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized)</span>
-<span id="cb128-424"><a href="#cb128-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-425"><a href="#cb128-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-396"><a href="#cb128-396" aria-hidden="true" tabindex="-1"></a>The following example demonstrates code that would be better served by constructing a function to accomplish the task.</span>
+<span id="cb128-397"><a href="#cb128-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-400"><a href="#cb128-400" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-401"><a href="#cb128-401" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-manual</span></span>
+<span id="cb128-402"><a href="#cb128-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-403"><a href="#cb128-403" aria-hidden="true" tabindex="-1"></a><span class="co"># take the following olive oil data and standardize the columns</span></span>
+<span id="cb128-404"><a href="#cb128-404" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdfCluster) <span class="co"># for the data</span></span>
+<span id="cb128-405"><a href="#cb128-405" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(oliveoil) <span class="co"># ?oliveoil</span></span>
+<span id="cb128-406"><a href="#cb128-406" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oliveoil)</span>
+<span id="cb128-407"><a href="#cb128-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-408"><a href="#cb128-408" aria-hidden="true" tabindex="-1"></a><span class="co"># start with a dataframe where create the z-scores for palmitic acid, then add the rest </span></span>
+<span id="cb128-409"><a href="#cb128-409" aria-hidden="true" tabindex="-1"></a>oo_standardized <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb128-410"><a href="#cb128-410" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitic =</span> (oliveoil[,<span class="st">"palmitic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"palmitic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"palmitic"</span>])</span>
+<span id="cb128-411"><a href="#cb128-411" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb128-412"><a href="#cb128-412" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized)</span>
+<span id="cb128-413"><a href="#cb128-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-414"><a href="#cb128-414" aria-hidden="true" tabindex="-1"></a><span class="co"># if wanted to do this manually for all columns we would do this</span></span>
+<span id="cb128-415"><a href="#cb128-415" aria-hidden="true" tabindex="-1"></a>oo_standardized <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb128-416"><a href="#cb128-416" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitic =</span> (oliveoil[,<span class="st">"palmitic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"palmitic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"palmitic"</span>]),</span>
+<span id="cb128-417"><a href="#cb128-417" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitoleic =</span> (oliveoil[,<span class="st">"palmitoleic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"palmitoleic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"palmitoleic"</span>]),</span>
+<span id="cb128-418"><a href="#cb128-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">stearic =</span> (oliveoil[,<span class="st">"stearic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"stearic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"stearic"</span>]),</span>
+<span id="cb128-419"><a href="#cb128-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">oleic =</span> (oliveoil[,<span class="st">"oleic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"oleic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"oleic"</span>]),</span>
+<span id="cb128-420"><a href="#cb128-420" aria-hidden="true" tabindex="-1"></a>  <span class="at">linoleic =</span> (oliveoil[,<span class="st">"linoleic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"linoleic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"linoleic"</span>]),</span>
+<span id="cb128-421"><a href="#cb128-421" aria-hidden="true" tabindex="-1"></a>  <span class="at">linolenic =</span> (oliveoil[,<span class="st">"linolenic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"linolenic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"linolenic"</span>]),</span>
+<span id="cb128-422"><a href="#cb128-422" aria-hidden="true" tabindex="-1"></a>  <span class="at">arachidic =</span> (oliveoil[,<span class="st">"arachidic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"arachidic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"arachidic"</span>]),</span>
+<span id="cb128-423"><a href="#cb128-423" aria-hidden="true" tabindex="-1"></a>  <span class="at">eicosenoic =</span> (oliveoil[,<span class="st">"eicosenoic"</span>]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,<span class="st">"eicosenoic"</span>]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,<span class="st">"eicosenoic"</span>])</span>
+<span id="cb128-424"><a href="#cb128-424" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb128-425"><a href="#cb128-425" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized)</span>
 <span id="cb128-426"><a href="#cb128-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-427"><a href="#cb128-427" aria-hidden="true" tabindex="-1"></a>Could do this (slighlty) better with a function, rather than copy and paste and change column names.</span>
+<span id="cb128-427"><a href="#cb128-427" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-428"><a href="#cb128-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-431"><a href="#cb128-431" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-432"><a href="#cb128-432" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-function</span></span>
-<span id="cb128-433"><a href="#cb128-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-434"><a href="#cb128-434" aria-hidden="true" tabindex="-1"></a><span class="co"># write function to take a variable name and return the standardized column</span></span>
-<span id="cb128-435"><a href="#cb128-435" aria-hidden="true" tabindex="-1"></a>oo_stand <span class="ot">&lt;-</span> <span class="cf">function</span>(varname) {</span>
-<span id="cb128-436"><a href="#cb128-436" aria-hidden="true" tabindex="-1"></a>  (oliveoil[,varname]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,varname]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,varname])</span>
-<span id="cb128-437"><a href="#cb128-437" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-438"><a href="#cb128-438" aria-hidden="true" tabindex="-1"></a><span class="fu">oo_stand</span>(<span class="st">"palmitic"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb128-439"><a href="#cb128-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-440"><a href="#cb128-440" aria-hidden="true" tabindex="-1"></a><span class="co"># building the standardized data almost as repetitive as previous approach</span></span>
-<span id="cb128-441"><a href="#cb128-441" aria-hidden="true" tabindex="-1"></a>oo_standardized2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb128-442"><a href="#cb128-442" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitic =</span>  <span class="fu">oo_stand</span>(<span class="st">"palmitic"</span>),</span>
-<span id="cb128-443"><a href="#cb128-443" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitoleic =</span>  <span class="fu">oo_stand</span>(<span class="st">"palmitoleic"</span>),</span>
-<span id="cb128-444"><a href="#cb128-444" aria-hidden="true" tabindex="-1"></a>  <span class="at">stearic =</span>  <span class="fu">oo_stand</span>(<span class="st">"stearic"</span>),</span>
-<span id="cb128-445"><a href="#cb128-445" aria-hidden="true" tabindex="-1"></a>  <span class="at">oleic =</span>  <span class="fu">oo_stand</span>(<span class="st">"oleic"</span>),</span>
-<span id="cb128-446"><a href="#cb128-446" aria-hidden="true" tabindex="-1"></a>  <span class="at">linoleic =</span>  <span class="fu">oo_stand</span>(<span class="st">"linoleic"</span>),</span>
-<span id="cb128-447"><a href="#cb128-447" aria-hidden="true" tabindex="-1"></a>  <span class="at">linolenic =</span>  <span class="fu">oo_stand</span>(<span class="st">"linolenic"</span>),</span>
-<span id="cb128-448"><a href="#cb128-448" aria-hidden="true" tabindex="-1"></a>  <span class="at">arachidic =</span>  <span class="fu">oo_stand</span>(<span class="st">"arachidic"</span>),</span>
-<span id="cb128-449"><a href="#cb128-449" aria-hidden="true" tabindex="-1"></a>  <span class="at">eicosenoic =</span>  <span class="fu">oo_stand</span>(<span class="st">"eicosenoic"</span>)</span>
-<span id="cb128-450"><a href="#cb128-450" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb128-451"><a href="#cb128-451" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized2)</span>
-<span id="cb128-452"><a href="#cb128-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-453"><a href="#cb128-453" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-429"><a href="#cb128-429" aria-hidden="true" tabindex="-1"></a>Could do this (slighlty) better with a function, rather than copy and paste and change column names.</span>
+<span id="cb128-430"><a href="#cb128-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-433"><a href="#cb128-433" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-434"><a href="#cb128-434" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-function</span></span>
+<span id="cb128-435"><a href="#cb128-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-436"><a href="#cb128-436" aria-hidden="true" tabindex="-1"></a><span class="co"># write function to take a variable name and return the standardized column</span></span>
+<span id="cb128-437"><a href="#cb128-437" aria-hidden="true" tabindex="-1"></a>oo_stand <span class="ot">&lt;-</span> <span class="cf">function</span>(varname) {</span>
+<span id="cb128-438"><a href="#cb128-438" aria-hidden="true" tabindex="-1"></a>  (oliveoil[,varname]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,varname]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,varname])</span>
+<span id="cb128-439"><a href="#cb128-439" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-440"><a href="#cb128-440" aria-hidden="true" tabindex="-1"></a><span class="fu">oo_stand</span>(<span class="st">"palmitic"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb128-441"><a href="#cb128-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-442"><a href="#cb128-442" aria-hidden="true" tabindex="-1"></a><span class="co"># building the standardized data almost as repetitive as previous approach</span></span>
+<span id="cb128-443"><a href="#cb128-443" aria-hidden="true" tabindex="-1"></a>oo_standardized2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb128-444"><a href="#cb128-444" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitic =</span>  <span class="fu">oo_stand</span>(<span class="st">"palmitic"</span>),</span>
+<span id="cb128-445"><a href="#cb128-445" aria-hidden="true" tabindex="-1"></a>  <span class="at">palmitoleic =</span>  <span class="fu">oo_stand</span>(<span class="st">"palmitoleic"</span>),</span>
+<span id="cb128-446"><a href="#cb128-446" aria-hidden="true" tabindex="-1"></a>  <span class="at">stearic =</span>  <span class="fu">oo_stand</span>(<span class="st">"stearic"</span>),</span>
+<span id="cb128-447"><a href="#cb128-447" aria-hidden="true" tabindex="-1"></a>  <span class="at">oleic =</span>  <span class="fu">oo_stand</span>(<span class="st">"oleic"</span>),</span>
+<span id="cb128-448"><a href="#cb128-448" aria-hidden="true" tabindex="-1"></a>  <span class="at">linoleic =</span>  <span class="fu">oo_stand</span>(<span class="st">"linoleic"</span>),</span>
+<span id="cb128-449"><a href="#cb128-449" aria-hidden="true" tabindex="-1"></a>  <span class="at">linolenic =</span>  <span class="fu">oo_stand</span>(<span class="st">"linolenic"</span>),</span>
+<span id="cb128-450"><a href="#cb128-450" aria-hidden="true" tabindex="-1"></a>  <span class="at">arachidic =</span>  <span class="fu">oo_stand</span>(<span class="st">"arachidic"</span>),</span>
+<span id="cb128-451"><a href="#cb128-451" aria-hidden="true" tabindex="-1"></a>  <span class="at">eicosenoic =</span>  <span class="fu">oo_stand</span>(<span class="st">"eicosenoic"</span>)</span>
+<span id="cb128-452"><a href="#cb128-452" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb128-453"><a href="#cb128-453" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized2)</span>
 <span id="cb128-454"><a href="#cb128-454" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-455"><a href="#cb128-455" aria-hidden="true" tabindex="-1"></a>Next, can do this iteratively with for-loops to first print the result (for demonstration) and then to store the result.</span>
+<span id="cb128-455"><a href="#cb128-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-456"><a href="#cb128-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-459"><a href="#cb128-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-460"><a href="#cb128-460" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-for-loops</span></span>
-<span id="cb128-461"><a href="#cb128-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-462"><a href="#cb128-462" aria-hidden="true" tabindex="-1"></a><span class="co"># intitialize names</span></span>
-<span id="cb128-463"><a href="#cb128-463" aria-hidden="true" tabindex="-1"></a>acids <span class="ot">&lt;-</span> <span class="fu">names</span>(oliveoil[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>])</span>
-<span id="cb128-464"><a href="#cb128-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-465"><a href="#cb128-465" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over names and print first few standardized observations</span></span>
-<span id="cb128-466"><a href="#cb128-466" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (acid_name <span class="cf">in</span> acids){</span>
-<span id="cb128-467"><a href="#cb128-467" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">oo_stand</span>(acid_name)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb128-468"><a href="#cb128-468" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-469"><a href="#cb128-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-470"><a href="#cb128-470" aria-hidden="true" tabindex="-1"></a><span class="co"># initialization storage space for transformed values</span></span>
-<span id="cb128-471"><a href="#cb128-471" aria-hidden="true" tabindex="-1"></a>oo_standardized3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">nrow</span>(oliveoil) <span class="sc">*</span> <span class="dv">8</span>), </span>
-<span id="cb128-472"><a href="#cb128-472" aria-hidden="true" tabindex="-1"></a>                           <span class="at">nrow =</span> <span class="fu">nrow</span>(oliveoil)) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-473"><a href="#cb128-473" aria-hidden="true" tabindex="-1"></a>  as.data.frame</span>
-<span id="cb128-474"><a href="#cb128-474" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(oo_standardized3) <span class="ot">&lt;-</span> <span class="fu">names</span>(oliveoil)[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb128-475"><a href="#cb128-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-476"><a href="#cb128-476" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over the acid names</span></span>
-<span id="cb128-477"><a href="#cb128-477" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (acid_name <span class="cf">in</span> acids){</span>
-<span id="cb128-478"><a href="#cb128-478" aria-hidden="true" tabindex="-1"></a>  oo_standardized3[,acid_name] <span class="ot">&lt;-</span> <span class="fu">oo_stand</span>(acid_name)</span>
-<span id="cb128-479"><a href="#cb128-479" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-480"><a href="#cb128-480" aria-hidden="true" tabindex="-1"></a><span class="co"># check the outcome</span></span>
-<span id="cb128-481"><a href="#cb128-481" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized3)</span>
-<span id="cb128-482"><a href="#cb128-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-483"><a href="#cb128-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-457"><a href="#cb128-457" aria-hidden="true" tabindex="-1"></a>Next, can do this iteratively with for-loops to first print the result (for demonstration) and then to store the result.</span>
+<span id="cb128-458"><a href="#cb128-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-461"><a href="#cb128-461" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-462"><a href="#cb128-462" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-for-loops</span></span>
+<span id="cb128-463"><a href="#cb128-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-464"><a href="#cb128-464" aria-hidden="true" tabindex="-1"></a><span class="co"># intitialize names</span></span>
+<span id="cb128-465"><a href="#cb128-465" aria-hidden="true" tabindex="-1"></a>acids <span class="ot">&lt;-</span> <span class="fu">names</span>(oliveoil[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb128-466"><a href="#cb128-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-467"><a href="#cb128-467" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over names and print first few standardized observations</span></span>
+<span id="cb128-468"><a href="#cb128-468" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (acid_name <span class="cf">in</span> acids){</span>
+<span id="cb128-469"><a href="#cb128-469" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">oo_stand</span>(acid_name)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb128-470"><a href="#cb128-470" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-471"><a href="#cb128-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-472"><a href="#cb128-472" aria-hidden="true" tabindex="-1"></a><span class="co"># initialization storage space for transformed values</span></span>
+<span id="cb128-473"><a href="#cb128-473" aria-hidden="true" tabindex="-1"></a>oo_standardized3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">nrow</span>(oliveoil) <span class="sc">*</span> <span class="dv">8</span>), </span>
+<span id="cb128-474"><a href="#cb128-474" aria-hidden="true" tabindex="-1"></a>                           <span class="at">nrow =</span> <span class="fu">nrow</span>(oliveoil)) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-475"><a href="#cb128-475" aria-hidden="true" tabindex="-1"></a>  as.data.frame</span>
+<span id="cb128-476"><a href="#cb128-476" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(oo_standardized3) <span class="ot">&lt;-</span> <span class="fu">names</span>(oliveoil)[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb128-477"><a href="#cb128-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-478"><a href="#cb128-478" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over the acid names</span></span>
+<span id="cb128-479"><a href="#cb128-479" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (acid_name <span class="cf">in</span> acids){</span>
+<span id="cb128-480"><a href="#cb128-480" aria-hidden="true" tabindex="-1"></a>  oo_standardized3[,acid_name] <span class="ot">&lt;-</span> <span class="fu">oo_stand</span>(acid_name)</span>
+<span id="cb128-481"><a href="#cb128-481" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-482"><a href="#cb128-482" aria-hidden="true" tabindex="-1"></a><span class="co"># check the outcome</span></span>
+<span id="cb128-483"><a href="#cb128-483" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oo_standardized3)</span>
 <span id="cb128-484"><a href="#cb128-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-485"><a href="#cb128-485" aria-hidden="true" tabindex="-1"></a>Best solution is to vectorize the procedure and use the APPLY type statements.</span>
+<span id="cb128-485"><a href="#cb128-485" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-486"><a href="#cb128-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-487"><a href="#cb128-487" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`apply()`</span> used to apply functions over the indices of an array.</span>
+<span id="cb128-487"><a href="#cb128-487" aria-hidden="true" tabindex="-1"></a>Best solution is to vectorize the procedure and use the APPLY type statements.</span>
 <span id="cb128-488"><a href="#cb128-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-489"><a href="#cb128-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`lapply()`</span> used to apply functions over the values in a list, outputs to a list.</span>
+<span id="cb128-489"><a href="#cb128-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`apply()`</span> used to apply functions over the indices of an array.</span>
 <span id="cb128-490"><a href="#cb128-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-491"><a href="#cb128-491" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sapply()`</span> used to apply functions over the values in a list, outputs to a simplified array.</span>
+<span id="cb128-491"><a href="#cb128-491" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`lapply()`</span> used to apply functions over the values in a list, outputs to a list.</span>
 <span id="cb128-492"><a href="#cb128-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-493"><a href="#cb128-493" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`lapply()`</span> and <span class="in">`sapply(simplify = FALSE)`</span> are the same thing, kinda how <span class="in">`paste()`</span> and <span class="in">`paste0()`</span> are the same except <span class="in">`paste0()`</span> has a default separator (which is very useful, so they just gave it a shorthand function).</span>
+<span id="cb128-493"><a href="#cb128-493" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sapply()`</span> used to apply functions over the values in a list, outputs to a simplified array.</span>
 <span id="cb128-494"><a href="#cb128-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-495"><a href="#cb128-495" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`vapply()`</span> used to apply functions over the values in a list, outputs to specified object type.</span>
+<span id="cb128-495"><a href="#cb128-495" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`lapply()`</span> and <span class="in">`sapply(simplify = FALSE)`</span> are the same thing, kinda how <span class="in">`paste()`</span> and <span class="in">`paste0()`</span> are the same except <span class="in">`paste0()`</span> has a default separator (which is very useful, so they just gave it a shorthand function).</span>
 <span id="cb128-496"><a href="#cb128-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-497"><a href="#cb128-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`mapply()`</span> used to apply functions over the corresponding values in multiple lists.</span>
+<span id="cb128-497"><a href="#cb128-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`vapply()`</span> used to apply functions over the values in a list, outputs to specified object type.</span>
 <span id="cb128-498"><a href="#cb128-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-499"><a href="#cb128-499" aria-hidden="true" tabindex="-1"></a>Karsten's Personal Use (with orders of magnitude &gt;): <span class="in">`sapply`</span> $&gt;$ <span class="in">`lapply`</span> $&gt;&gt;$ <span class="in">`mapply`</span> $&gt;&gt;$ <span class="in">`vapply`</span> $&gt;&gt;$ <span class="in">`apply`</span></span>
+<span id="cb128-499"><a href="#cb128-499" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`mapply()`</span> used to apply functions over the corresponding values in multiple lists.</span>
 <span id="cb128-500"><a href="#cb128-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-503"><a href="#cb128-503" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-504"><a href="#cb128-504" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-apply</span></span>
-<span id="cb128-505"><a href="#cb128-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-506"><a href="#cb128-506" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over all column names with sapply()</span></span>
-<span id="cb128-507"><a href="#cb128-507" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; typically in practice the formals are given implicitly and just know that the object to be looped over is first and the function being applied is second</span></span>
-<span id="cb128-508"><a href="#cb128-508" aria-hidden="true" tabindex="-1"></a>oo_better <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> acids, <span class="at">FUN =</span> oo_stand) <span class="sc">%&gt;%</span> as.data.frame</span>
-<span id="cb128-509"><a href="#cb128-509" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(better_oo)</span>
-<span id="cb128-510"><a href="#cb128-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-511"><a href="#cb128-511" aria-hidden="true" tabindex="-1"></a><span class="co"># same thing, but return object is a list</span></span>
-<span id="cb128-512"><a href="#cb128-512" aria-hidden="true" tabindex="-1"></a>oo_better_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> acids, <span class="at">FUN =</span> oo_stand)</span>
-<span id="cb128-513"><a href="#cb128-513" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(oo_better_list)</span>
-<span id="cb128-514"><a href="#cb128-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-515"><a href="#cb128-515" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-501"><a href="#cb128-501" aria-hidden="true" tabindex="-1"></a>Karsten's Personal Use (with orders of magnitude &gt;): <span class="in">`sapply`</span> $&gt;$ <span class="in">`lapply`</span> $&gt;&gt;$ <span class="in">`mapply`</span> $&gt;&gt;$ <span class="in">`vapply`</span> $&gt;&gt;$ <span class="in">`apply`</span></span>
+<span id="cb128-502"><a href="#cb128-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-505"><a href="#cb128-505" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-506"><a href="#cb128-506" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-apply</span></span>
+<span id="cb128-507"><a href="#cb128-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-508"><a href="#cb128-508" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over all column names with sapply()</span></span>
+<span id="cb128-509"><a href="#cb128-509" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; typically in practice the formals are given implicitly and just know that the object to be looped over is first and the function being applied is second</span></span>
+<span id="cb128-510"><a href="#cb128-510" aria-hidden="true" tabindex="-1"></a>oo_better <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> acids, <span class="at">FUN =</span> oo_stand) <span class="sc">%&gt;%</span> as.data.frame</span>
+<span id="cb128-511"><a href="#cb128-511" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(better_oo)</span>
+<span id="cb128-512"><a href="#cb128-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-513"><a href="#cb128-513" aria-hidden="true" tabindex="-1"></a><span class="co"># same thing, but return object is a list</span></span>
+<span id="cb128-514"><a href="#cb128-514" aria-hidden="true" tabindex="-1"></a>oo_better_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> acids, <span class="at">FUN =</span> oo_stand)</span>
+<span id="cb128-515"><a href="#cb128-515" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(oo_better_list)</span>
 <span id="cb128-516"><a href="#cb128-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-517"><a href="#cb128-517" aria-hidden="true" tabindex="-1"></a>Can use tidyverse equivalents from the <span class="in">`purrr`</span> package (<span class="co">[</span><span class="ot">documentation</span><span class="co">](http://purrr.tidyverse.org)</span>), specifically <span class="in">`map()`</span>.</span>
+<span id="cb128-517"><a href="#cb128-517" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-518"><a href="#cb128-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-519"><a href="#cb128-519" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`map()`</span> always returns a list, so this would be equivalent <span class="in">`lapply()`</span>.</span>
+<span id="cb128-519"><a href="#cb128-519" aria-hidden="true" tabindex="-1"></a>Can use tidyverse equivalents from the <span class="in">`purrr`</span> package (<span class="co">[</span><span class="ot">documentation</span><span class="co">](http://purrr.tidyverse.org)</span>), specifically <span class="in">`map()`</span>.</span>
 <span id="cb128-520"><a href="#cb128-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-521"><a href="#cb128-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Other variants include:</span>
+<span id="cb128-521"><a href="#cb128-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`map()`</span> always returns a list, so this would be equivalent <span class="in">`lapply()`</span>.</span>
 <span id="cb128-522"><a href="#cb128-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-523"><a href="#cb128-523" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`map_vec()`</span> must return a single value from each operation. If you know the output type, it is more efficient to use the corresponding variant such as <span class="in">`map_dbl()`</span>, <span class="in">`map_chr()`</span>, etc.</span>
-<span id="cb128-524"><a href="#cb128-524" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-525"><a href="#cb128-525" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>indexed map <span class="in">`imap()`</span> applies a function to each element of a vector, and its index (which is shorthand for a particular use of <span class="in">`map2()`</span> which iterates over 2 arguments at a time).</span>
+<span id="cb128-523"><a href="#cb128-523" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Other variants include:</span>
+<span id="cb128-524"><a href="#cb128-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-525"><a href="#cb128-525" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`map_vec()`</span> must return a single value from each operation. If you know the output type, it is more efficient to use the corresponding variant such as <span class="in">`map_dbl()`</span>, <span class="in">`map_chr()`</span>, etc.</span>
 <span id="cb128-526"><a href="#cb128-526" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-527"><a href="#cb128-527" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`lmap()`</span> applies a function to list-elements of a list, useful for applying functions that take lists as arguments.</span>
+<span id="cb128-527"><a href="#cb128-527" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>indexed map <span class="in">`imap()`</span> applies a function to each element of a vector, and its index (which is shorthand for a particular use of <span class="in">`map2()`</span> which iterates over 2 arguments at a time).</span>
 <span id="cb128-528"><a href="#cb128-528" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-529"><a href="#cb128-529" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`pmap()`</span> extends <span class="in">`map2()`</span> to iterate over multiple arguments simultaneously.</span>
-<span id="cb128-530"><a href="#cb128-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-533"><a href="#cb128-533" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-534"><a href="#cb128-534" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-map</span></span>
-<span id="cb128-535"><a href="#cb128-535" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb128-536"><a href="#cb128-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-537"><a href="#cb128-537" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over all column names with sapply()</span></span>
-<span id="cb128-538"><a href="#cb128-538" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb128-539"><a href="#cb128-539" aria-hidden="true" tabindex="-1"></a><span class="co">#  </span></span>
-<span id="cb128-540"><a href="#cb128-540" aria-hidden="true" tabindex="-1"></a><span class="co"># help(package="purrr")</span></span>
-<span id="cb128-541"><a href="#cb128-541" aria-hidden="true" tabindex="-1"></a><span class="co"># ?map</span></span>
-<span id="cb128-542"><a href="#cb128-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-543"><a href="#cb128-543" aria-hidden="true" tabindex="-1"></a><span class="co"># apply same function over names of columns using purrr equivalent function to lapply</span></span>
-<span id="cb128-544"><a href="#cb128-544" aria-hidden="true" tabindex="-1"></a>oo_purrr_list <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand)</span>
-<span id="cb128-545"><a href="#cb128-545" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(oo_purrr_list)</span>
-<span id="cb128-546"><a href="#cb128-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-547"><a href="#cb128-547" aria-hidden="true" tabindex="-1"></a><span class="co"># same thing, but now simplify the result</span></span>
-<span id="cb128-548"><a href="#cb128-548" aria-hidden="true" tabindex="-1"></a><span class="fu">map_vec</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand)</span>
-<span id="cb128-549"><a href="#cb128-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-550"><a href="#cb128-550" aria-hidden="true" tabindex="-1"></a><span class="co"># modify function to just return the st dev of the standardized columns</span></span>
-<span id="cb128-551"><a href="#cb128-551" aria-hidden="true" tabindex="-1"></a>oo_stand_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(varname) {</span>
-<span id="cb128-552"><a href="#cb128-552" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sd</span>((oliveoil[,varname]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,varname]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,varname]))</span>
-<span id="cb128-553"><a href="#cb128-553" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-554"><a href="#cb128-554" aria-hidden="true" tabindex="-1"></a><span class="fu">map_vec</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand_sd)</span>
-<span id="cb128-555"><a href="#cb128-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-556"><a href="#cb128-556" aria-hidden="true" tabindex="-1"></a><span class="co"># know returning a double, so use map_dbl()</span></span>
-<span id="cb128-557"><a href="#cb128-557" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand_sd)</span>
-<span id="cb128-558"><a href="#cb128-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-559"><a href="#cb128-559" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-529"><a href="#cb128-529" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`lmap()`</span> applies a function to list-elements of a list, useful for applying functions that take lists as arguments.</span>
+<span id="cb128-530"><a href="#cb128-530" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb128-531"><a href="#cb128-531" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span><span class="in">`pmap()`</span> extends <span class="in">`map2()`</span> to iterate over multiple arguments simultaneously.</span>
+<span id="cb128-532"><a href="#cb128-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-535"><a href="#cb128-535" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-536"><a href="#cb128-536" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: example-change-to-functions-map</span></span>
+<span id="cb128-537"><a href="#cb128-537" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb128-538"><a href="#cb128-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-539"><a href="#cb128-539" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over all column names with sapply()</span></span>
+<span id="cb128-540"><a href="#cb128-540" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb128-541"><a href="#cb128-541" aria-hidden="true" tabindex="-1"></a><span class="co">#  </span></span>
+<span id="cb128-542"><a href="#cb128-542" aria-hidden="true" tabindex="-1"></a><span class="co"># help(package="purrr")</span></span>
+<span id="cb128-543"><a href="#cb128-543" aria-hidden="true" tabindex="-1"></a><span class="co"># ?map</span></span>
+<span id="cb128-544"><a href="#cb128-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-545"><a href="#cb128-545" aria-hidden="true" tabindex="-1"></a><span class="co"># apply same function over names of columns using purrr equivalent function to lapply</span></span>
+<span id="cb128-546"><a href="#cb128-546" aria-hidden="true" tabindex="-1"></a>oo_purrr_list <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand)</span>
+<span id="cb128-547"><a href="#cb128-547" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(oo_purrr_list)</span>
+<span id="cb128-548"><a href="#cb128-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-549"><a href="#cb128-549" aria-hidden="true" tabindex="-1"></a><span class="co"># same thing, but now simplify the result</span></span>
+<span id="cb128-550"><a href="#cb128-550" aria-hidden="true" tabindex="-1"></a><span class="fu">map_vec</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand)</span>
+<span id="cb128-551"><a href="#cb128-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-552"><a href="#cb128-552" aria-hidden="true" tabindex="-1"></a><span class="co"># modify function to just return the st dev of the standardized columns</span></span>
+<span id="cb128-553"><a href="#cb128-553" aria-hidden="true" tabindex="-1"></a>oo_stand_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(varname) {</span>
+<span id="cb128-554"><a href="#cb128-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sd</span>((oliveoil[,varname]<span class="sc">-</span><span class="fu">mean</span>(oliveoil[,varname]))<span class="sc">/</span><span class="fu">sd</span>(oliveoil[,varname]))</span>
+<span id="cb128-555"><a href="#cb128-555" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-556"><a href="#cb128-556" aria-hidden="true" tabindex="-1"></a><span class="fu">map_vec</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand_sd)</span>
+<span id="cb128-557"><a href="#cb128-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-558"><a href="#cb128-558" aria-hidden="true" tabindex="-1"></a><span class="co"># know returning a double, so use map_dbl()</span></span>
+<span id="cb128-559"><a href="#cb128-559" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="at">.x =</span> acids, <span class="at">.f =</span> oo_stand_sd)</span>
 <span id="cb128-560"><a href="#cb128-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-561"><a href="#cb128-561" aria-hidden="true" tabindex="-1"></a>Mini timing study to see which method of looping is most efficient.</span>
+<span id="cb128-561"><a href="#cb128-561" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-562"><a href="#cb128-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-563"><a href="#cb128-563" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>APPLY statements are quicker than for because they are run in C rather than R.</span>
+<span id="cb128-563"><a href="#cb128-563" aria-hidden="true" tabindex="-1"></a>Mini timing study to see which method of looping is most efficient.</span>
 <span id="cb128-564"><a href="#cb128-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-567"><a href="#cb128-567" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-568"><a href="#cb128-568" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: timing</span></span>
-<span id="cb128-569"><a href="#cb128-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-570"><a href="#cb128-570" aria-hidden="true" tabindex="-1"></a><span class="co"># create lots of lm from different random samples and store the slope of a particular variable</span></span>
-<span id="cb128-571"><a href="#cb128-571" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb128-572"><a href="#cb128-572" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb128-573"><a href="#cb128-573" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-574"><a href="#cb128-574" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize timing study and use for loop</span></span>
-<span id="cb128-575"><a href="#cb128-575" aria-hidden="true" tabindex="-1"></a>timer_for <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb128-576"><a href="#cb128-576" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
-<span id="cb128-577"><a href="#cb128-577" aria-hidden="true" tabindex="-1"></a>  betas[i] <span class="ot">&lt;-</span> <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>]</span>
-<span id="cb128-578"><a href="#cb128-578" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-579"><a href="#cb128-579" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_for</span>
-<span id="cb128-580"><a href="#cb128-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-581"><a href="#cb128-581" aria-hidden="true" tabindex="-1"></a><span class="co"># now use sapply()</span></span>
-<span id="cb128-582"><a href="#cb128-582" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; again not really using X = 1:n in the function that sapply() calls, it is just for the iterations to do the thing that many times</span></span>
-<span id="cb128-583"><a href="#cb128-583" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb128-584"><a href="#cb128-584" aria-hidden="true" tabindex="-1"></a>timer_sapply <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb128-585"><a href="#cb128-585" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(x) {</span>
-<span id="cb128-586"><a href="#cb128-586" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>]</span>
-<span id="cb128-587"><a href="#cb128-587" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb128-588"><a href="#cb128-588" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_sapply</span>
-<span id="cb128-589"><a href="#cb128-589" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-590"><a href="#cb128-590" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map()</span></span>
-<span id="cb128-591"><a href="#cb128-591" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb128-592"><a href="#cb128-592" aria-hidden="true" tabindex="-1"></a>timer_map <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb128-593"><a href="#cb128-593" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span>n, \(x) <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>])</span>
-<span id="cb128-594"><a href="#cb128-594" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_map</span>
-<span id="cb128-595"><a href="#cb128-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-596"><a href="#cb128-596" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map_dbl()</span></span>
-<span id="cb128-597"><a href="#cb128-597" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb128-598"><a href="#cb128-598" aria-hidden="true" tabindex="-1"></a>timer_dbl <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb128-599"><a href="#cb128-599" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>n, \(x) <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>])</span>
-<span id="cb128-600"><a href="#cb128-600" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_dbl</span>
-<span id="cb128-601"><a href="#cb128-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-602"><a href="#cb128-602" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-565"><a href="#cb128-565" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>APPLY statements are quicker than for because they are run in C rather than R.</span>
+<span id="cb128-566"><a href="#cb128-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-569"><a href="#cb128-569" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-570"><a href="#cb128-570" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: timing</span></span>
+<span id="cb128-571"><a href="#cb128-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-572"><a href="#cb128-572" aria-hidden="true" tabindex="-1"></a><span class="co"># create lots of lm from different random samples and store the slope of a particular variable</span></span>
+<span id="cb128-573"><a href="#cb128-573" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb128-574"><a href="#cb128-574" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb128-575"><a href="#cb128-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-576"><a href="#cb128-576" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize timing study and use for loop</span></span>
+<span id="cb128-577"><a href="#cb128-577" aria-hidden="true" tabindex="-1"></a>timer_for <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-578"><a href="#cb128-578" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb128-579"><a href="#cb128-579" aria-hidden="true" tabindex="-1"></a>  betas[i] <span class="ot">&lt;-</span> <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>]</span>
+<span id="cb128-580"><a href="#cb128-580" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-581"><a href="#cb128-581" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_for</span>
+<span id="cb128-582"><a href="#cb128-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-583"><a href="#cb128-583" aria-hidden="true" tabindex="-1"></a><span class="co"># now use sapply()</span></span>
+<span id="cb128-584"><a href="#cb128-584" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; again not really using X = 1:n in the function that sapply() calls, it is just for the iterations to do the thing that many times</span></span>
+<span id="cb128-585"><a href="#cb128-585" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb128-586"><a href="#cb128-586" aria-hidden="true" tabindex="-1"></a>timer_sapply <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-587"><a href="#cb128-587" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="cf">function</span>(x) {</span>
+<span id="cb128-588"><a href="#cb128-588" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>]</span>
+<span id="cb128-589"><a href="#cb128-589" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb128-590"><a href="#cb128-590" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_sapply</span>
+<span id="cb128-591"><a href="#cb128-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-592"><a href="#cb128-592" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map()</span></span>
+<span id="cb128-593"><a href="#cb128-593" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb128-594"><a href="#cb128-594" aria-hidden="true" tabindex="-1"></a>timer_map <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-595"><a href="#cb128-595" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span>n, \(x) <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>])</span>
+<span id="cb128-596"><a href="#cb128-596" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_map</span>
+<span id="cb128-597"><a href="#cb128-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-598"><a href="#cb128-598" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map_dbl()</span></span>
+<span id="cb128-599"><a href="#cb128-599" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb128-600"><a href="#cb128-600" aria-hidden="true" tabindex="-1"></a>timer_dbl <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-601"><a href="#cb128-601" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>n, \(x) <span class="fu">lm</span>(palmitic <span class="sc">~</span> . , <span class="at">data =</span> <span class="fu">slice_sample</span>(oliveoil, <span class="at">n =</span> <span class="dv">100</span>))<span class="sc">$</span>coefficients[<span class="st">"oleic"</span>])</span>
+<span id="cb128-602"><a href="#cb128-602" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> timer_dbl</span>
 <span id="cb128-603"><a href="#cb128-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-604"><a href="#cb128-604" aria-hidden="true" tabindex="-1"></a><span class="fu">## Applying functions over multiple sets of parameters</span></span>
+<span id="cb128-604"><a href="#cb128-604" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-605"><a href="#cb128-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-606"><a href="#cb128-606" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simulate data </span></span>
+<span id="cb128-606"><a href="#cb128-606" aria-hidden="true" tabindex="-1"></a><span class="fu">## Applying functions over multiple sets of parameters</span></span>
 <span id="cb128-607"><a href="#cb128-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-608"><a href="#cb128-608" aria-hidden="true" tabindex="-1"></a>In some cases we may wish to apply a complex function by putting in multiple sets of arguments and collecting the results. In the example below we explore a simple case where we want to gather simulated values from a beta distribution with several different shape parameter ($\alpha$, $\beta$) pairs.</span>
+<span id="cb128-608"><a href="#cb128-608" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simulate data </span></span>
 <span id="cb128-609"><a href="#cb128-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-612"><a href="#cb128-612" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-613"><a href="#cb128-613" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: multiple-param-beta</span></span>
-<span id="cb128-614"><a href="#cb128-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-615"><a href="#cb128-615" aria-hidden="true" tabindex="-1"></a><span class="co"># let's check what the rbeta() function does first in the help menu</span></span>
-<span id="cb128-616"><a href="#cb128-616" aria-hidden="true" tabindex="-1"></a><span class="co"># ?rbeta</span></span>
-<span id="cb128-617"><a href="#cb128-617" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate n observations from a specific beta distribution</span></span>
-<span id="cb128-618"><a href="#cb128-618" aria-hidden="true" tabindex="-1"></a><span class="fu">rbeta</span>(<span class="dv">5</span>, <span class="at">shape1 =</span> <span class="dv">1</span>, <span class="at">shape2 =</span> <span class="dv">1</span>)</span>
-<span id="cb128-619"><a href="#cb128-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-620"><a href="#cb128-620" aria-hidden="true" tabindex="-1"></a><span class="co"># want to apply the rbeta() function over all 100 unique combinations</span></span>
-<span id="cb128-621"><a href="#cb128-621" aria-hidden="true" tabindex="-1"></a><span class="co"># of shape1 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}</span></span>
-<span id="cb128-622"><a href="#cb128-622" aria-hidden="true" tabindex="-1"></a><span class="co"># and shape2 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}</span></span>
-<span id="cb128-623"><a href="#cb128-623" aria-hidden="true" tabindex="-1"></a>param_combinations <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">shape1 =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.5</span>),</span>
-<span id="cb128-624"><a href="#cb128-624" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">shape2 =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.5</span>))</span>
-<span id="cb128-625"><a href="#cb128-625" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(param_combinations)</span>
-<span id="cb128-626"><a href="#cb128-626" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-627"><a href="#cb128-627" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-610"><a href="#cb128-610" aria-hidden="true" tabindex="-1"></a>In some cases we may wish to apply a complex function by putting in multiple sets of arguments and collecting the results. In the example below we explore a simple case where we want to gather simulated values from a beta distribution with several different shape parameter ($\alpha$, $\beta$) pairs.</span>
+<span id="cb128-611"><a href="#cb128-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-614"><a href="#cb128-614" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-615"><a href="#cb128-615" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: multiple-param-beta</span></span>
+<span id="cb128-616"><a href="#cb128-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-617"><a href="#cb128-617" aria-hidden="true" tabindex="-1"></a><span class="co"># let's check what the rbeta() function does first in the help menu</span></span>
+<span id="cb128-618"><a href="#cb128-618" aria-hidden="true" tabindex="-1"></a><span class="co"># ?rbeta</span></span>
+<span id="cb128-619"><a href="#cb128-619" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate n observations from a specific beta distribution</span></span>
+<span id="cb128-620"><a href="#cb128-620" aria-hidden="true" tabindex="-1"></a><span class="fu">rbeta</span>(<span class="dv">5</span>, <span class="at">shape1 =</span> <span class="dv">1</span>, <span class="at">shape2 =</span> <span class="dv">1</span>)</span>
+<span id="cb128-621"><a href="#cb128-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-622"><a href="#cb128-622" aria-hidden="true" tabindex="-1"></a><span class="co"># want to apply the rbeta() function over all 100 unique combinations</span></span>
+<span id="cb128-623"><a href="#cb128-623" aria-hidden="true" tabindex="-1"></a><span class="co"># of shape1 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}</span></span>
+<span id="cb128-624"><a href="#cb128-624" aria-hidden="true" tabindex="-1"></a><span class="co"># and shape2 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}</span></span>
+<span id="cb128-625"><a href="#cb128-625" aria-hidden="true" tabindex="-1"></a>param_combinations <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">shape1 =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.5</span>),</span>
+<span id="cb128-626"><a href="#cb128-626" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">shape2 =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.5</span>))</span>
+<span id="cb128-627"><a href="#cb128-627" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(param_combinations)</span>
 <span id="cb128-628"><a href="#cb128-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-629"><a href="#cb128-629" aria-hidden="true" tabindex="-1"></a>Could create two nested for loops to iterate over these pairs and store as it loops, but that is messy. Instead we will iterate over each pair using <span class="in">`mapply()`</span> and <span class="in">`map2()`</span>.</span>
+<span id="cb128-629"><a href="#cb128-629" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-630"><a href="#cb128-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-633"><a href="#cb128-633" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-634"><a href="#cb128-634" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: iterate-multiple-args</span></span>
-<span id="cb128-635"><a href="#cb128-635" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-636"><a href="#cb128-636" aria-hidden="true" tabindex="-1"></a><span class="co"># run simulation to generate 5 values beta values from each parameter combo</span></span>
-<span id="cb128-637"><a href="#cb128-637" aria-hidden="true" tabindex="-1"></a><span class="co"># use mapply() and simplify the result</span></span>
-<span id="cb128-638"><a href="#cb128-638" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb128-639"><a href="#cb128-639" aria-hidden="true" tabindex="-1"></a>my_beta_sims <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> rbeta, </span>
-<span id="cb128-640"><a href="#cb128-640" aria-hidden="true" tabindex="-1"></a>                       <span class="at">shape1 =</span> param_combinations<span class="sc">$</span>shape1,</span>
-<span id="cb128-641"><a href="#cb128-641" aria-hidden="true" tabindex="-1"></a>                       <span class="at">shape2 =</span> param_combinations<span class="sc">$</span>shape2,</span>
-<span id="cb128-642"><a href="#cb128-642" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MoreArgs =</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="dv">5</span>),</span>
-<span id="cb128-643"><a href="#cb128-643" aria-hidden="true" tabindex="-1"></a>                       <span class="at">SIMPLIFY =</span> <span class="st">"array"</span>)</span>
-<span id="cb128-644"><a href="#cb128-644" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-645"><a href="#cb128-645" aria-hidden="true" tabindex="-1"></a><span class="co"># map way shown at end</span></span>
+<span id="cb128-631"><a href="#cb128-631" aria-hidden="true" tabindex="-1"></a>Could create two nested for loops to iterate over these pairs and store as it loops, but that is messy. Instead we will iterate over each pair using <span class="in">`mapply()`</span> and <span class="in">`map2()`</span>.</span>
+<span id="cb128-632"><a href="#cb128-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-635"><a href="#cb128-635" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-636"><a href="#cb128-636" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: iterate-multiple-args</span></span>
+<span id="cb128-637"><a href="#cb128-637" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-638"><a href="#cb128-638" aria-hidden="true" tabindex="-1"></a><span class="co"># run simulation to generate 5 values beta values from each parameter combo</span></span>
+<span id="cb128-639"><a href="#cb128-639" aria-hidden="true" tabindex="-1"></a><span class="co"># use mapply() and simplify the result</span></span>
+<span id="cb128-640"><a href="#cb128-640" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb128-641"><a href="#cb128-641" aria-hidden="true" tabindex="-1"></a>my_beta_sims <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> rbeta, </span>
+<span id="cb128-642"><a href="#cb128-642" aria-hidden="true" tabindex="-1"></a>                       <span class="at">shape1 =</span> param_combinations<span class="sc">$</span>shape1,</span>
+<span id="cb128-643"><a href="#cb128-643" aria-hidden="true" tabindex="-1"></a>                       <span class="at">shape2 =</span> param_combinations<span class="sc">$</span>shape2,</span>
+<span id="cb128-644"><a href="#cb128-644" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MoreArgs =</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="dv">5</span>),</span>
+<span id="cb128-645"><a href="#cb128-645" aria-hidden="true" tabindex="-1"></a>                       <span class="at">SIMPLIFY =</span> <span class="st">"array"</span>)</span>
 <span id="cb128-646"><a href="#cb128-646" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-647"><a href="#cb128-647" aria-hidden="true" tabindex="-1"></a><span class="co"># rows in parameter storage correspond to the columns in the simulation array</span></span>
-<span id="cb128-648"><a href="#cb128-648" aria-hidden="true" tabindex="-1"></a>param_combinations[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span>
-<span id="cb128-649"><a href="#cb128-649" aria-hidden="true" tabindex="-1"></a>my_beta_sims[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb128-650"><a href="#cb128-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-651"><a href="#cb128-651" aria-hidden="true" tabindex="-1"></a><span class="co"># use map2()</span></span>
-<span id="cb128-652"><a href="#cb128-652" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; returns a list, so have to reduce it to turn into a matrix and then set the colnames to be readable</span></span>
-<span id="cb128-653"><a href="#cb128-653" aria-hidden="true" tabindex="-1"></a>my_beta_sims <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
-<span id="cb128-654"><a href="#cb128-654" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2,</span>
-<span id="cb128-655"><a href="#cb128-655" aria-hidden="true" tabindex="-1"></a>       \(shape1, shape2) <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">shape1 =</span> shape1, <span class="at">shape2 =</span> shape2))} <span class="sc">%&gt;%</span> </span>
-<span id="cb128-656"><a href="#cb128-656" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(cbind)</span>
-<span id="cb128-657"><a href="#cb128-657" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_beta_sims) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"sim"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(param_combinations))</span>
-<span id="cb128-658"><a href="#cb128-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-659"><a href="#cb128-659" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-647"><a href="#cb128-647" aria-hidden="true" tabindex="-1"></a><span class="co"># map way shown at end</span></span>
+<span id="cb128-648"><a href="#cb128-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-649"><a href="#cb128-649" aria-hidden="true" tabindex="-1"></a><span class="co"># rows in parameter storage correspond to the columns in the simulation array</span></span>
+<span id="cb128-650"><a href="#cb128-650" aria-hidden="true" tabindex="-1"></a>param_combinations[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span>
+<span id="cb128-651"><a href="#cb128-651" aria-hidden="true" tabindex="-1"></a>my_beta_sims[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb128-652"><a href="#cb128-652" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-653"><a href="#cb128-653" aria-hidden="true" tabindex="-1"></a><span class="co"># use map2()</span></span>
+<span id="cb128-654"><a href="#cb128-654" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; returns a list, so have to reduce it to turn into a matrix and then set the colnames to be readable</span></span>
+<span id="cb128-655"><a href="#cb128-655" aria-hidden="true" tabindex="-1"></a>my_beta_sims <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
+<span id="cb128-656"><a href="#cb128-656" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2,</span>
+<span id="cb128-657"><a href="#cb128-657" aria-hidden="true" tabindex="-1"></a>       \(shape1, shape2) <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">shape1 =</span> shape1, <span class="at">shape2 =</span> shape2))} <span class="sc">%&gt;%</span> </span>
+<span id="cb128-658"><a href="#cb128-658" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(cbind)</span>
+<span id="cb128-659"><a href="#cb128-659" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_beta_sims) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"sim"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(param_combinations))</span>
 <span id="cb128-660"><a href="#cb128-660" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-661"><a href="#cb128-661" aria-hidden="true" tabindex="-1"></a>Or even better organization is to turn this into an 3-dimensional array where the index <span class="in">`[i,j,k]`</span> represent the $i$th simulation, $j$th <span class="in">`shape1`</span>, and $k$-th <span class="in">`shape2`</span>.</span>
+<span id="cb128-661"><a href="#cb128-661" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-662"><a href="#cb128-662" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-665"><a href="#cb128-665" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-666"><a href="#cb128-666" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: array</span></span>
-<span id="cb128-667"><a href="#cb128-667" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-668"><a href="#cb128-668" aria-hidden="true" tabindex="-1"></a><span class="co"># convert copy of matrix to array (remember )</span></span>
-<span id="cb128-669"><a href="#cb128-669" aria-hidden="true" tabindex="-1"></a>my_beta_sims_array <span class="ot">&lt;-</span> my_beta_sims</span>
-<span id="cb128-670"><a href="#cb128-670" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(my_beta_sims_array) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
-<span id="cb128-671"><a href="#cb128-671" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-672"><a href="#cb128-672" aria-hidden="true" tabindex="-1"></a><span class="co"># remember R goes down the columns first to fill the first layer</span></span>
-<span id="cb128-673"><a href="#cb128-673" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then starts the next layer down the columns....</span></span>
-<span id="cb128-674"><a href="#cb128-674" aria-hidden="true" tabindex="-1"></a>my_beta_sims_array[ , , <span class="dv">1</span>] <span class="sc">==</span> my_beta_sims[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb128-675"><a href="#cb128-675" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-676"><a href="#cb128-676" aria-hidden="true" tabindex="-1"></a><span class="co"># display all simulations from the first shape 2 (columns = simulation and rows = iteration)</span></span>
-<span id="cb128-677"><a href="#cb128-677" aria-hidden="true" tabindex="-1"></a>my_beta_sims_array[ , , <span class="dv">1</span>]</span>
-<span id="cb128-678"><a href="#cb128-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-679"><a href="#cb128-679" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-663"><a href="#cb128-663" aria-hidden="true" tabindex="-1"></a>Or even better organization is to turn this into an 3-dimensional array where the index <span class="in">`[i,j,k]`</span> represent the $i$th simulation, $j$th <span class="in">`shape1`</span>, and $k$-th <span class="in">`shape2`</span>.</span>
+<span id="cb128-664"><a href="#cb128-664" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-667"><a href="#cb128-667" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-668"><a href="#cb128-668" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: array</span></span>
+<span id="cb128-669"><a href="#cb128-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-670"><a href="#cb128-670" aria-hidden="true" tabindex="-1"></a><span class="co"># convert copy of matrix to array (remember )</span></span>
+<span id="cb128-671"><a href="#cb128-671" aria-hidden="true" tabindex="-1"></a>my_beta_sims_array <span class="ot">&lt;-</span> my_beta_sims</span>
+<span id="cb128-672"><a href="#cb128-672" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(my_beta_sims_array) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb128-673"><a href="#cb128-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-674"><a href="#cb128-674" aria-hidden="true" tabindex="-1"></a><span class="co"># remember R goes down the columns first to fill the first layer</span></span>
+<span id="cb128-675"><a href="#cb128-675" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then starts the next layer down the columns....</span></span>
+<span id="cb128-676"><a href="#cb128-676" aria-hidden="true" tabindex="-1"></a>my_beta_sims_array[ , , <span class="dv">1</span>] <span class="sc">==</span> my_beta_sims[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb128-677"><a href="#cb128-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-678"><a href="#cb128-678" aria-hidden="true" tabindex="-1"></a><span class="co"># display all simulations from the first shape 2 (columns = simulation and rows = iteration)</span></span>
+<span id="cb128-679"><a href="#cb128-679" aria-hidden="true" tabindex="-1"></a>my_beta_sims_array[ , , <span class="dv">1</span>]</span>
 <span id="cb128-680"><a href="#cb128-680" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-681"><a href="#cb128-681" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summarize simulation </span></span>
+<span id="cb128-681"><a href="#cb128-681" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-682"><a href="#cb128-682" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-683"><a href="#cb128-683" aria-hidden="true" tabindex="-1"></a>Now suppose we want the mean for the simulation outcomes array. Use <span class="in">`apply()`</span> to iterate over indices of the array.</span>
+<span id="cb128-683"><a href="#cb128-683" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summarize simulation </span></span>
 <span id="cb128-684"><a href="#cb128-684" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-687"><a href="#cb128-687" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-688"><a href="#cb128-688" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: functions-on-array</span></span>
-<span id="cb128-689"><a href="#cb128-689" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-690"><a href="#cb128-690" aria-hidden="true" tabindex="-1"></a><span class="co"># calc mean of a particular iteration</span></span>
-<span id="cb128-691"><a href="#cb128-691" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(my_beta_sims_array[ ,<span class="dv">1</span> , <span class="dv">1</span>])</span>
-<span id="cb128-692"><a href="#cb128-692" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-693"><a href="#cb128-693" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over each column in each layer (thus averaging over the rows) with apply()</span></span>
-<span id="cb128-694"><a href="#cb128-694" aria-hidden="true" tabindex="-1"></a>beta_means <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> my_beta_sims_array,</span>
-<span id="cb128-695"><a href="#cb128-695" aria-hidden="true" tabindex="-1"></a>                    <span class="at">MARGIN =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),</span>
-<span id="cb128-696"><a href="#cb128-696" aria-hidden="true" tabindex="-1"></a>                    <span class="at">FUN =</span> mean)</span>
-<span id="cb128-697"><a href="#cb128-697" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(beta_means)</span>
-<span id="cb128-698"><a href="#cb128-698" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-699"><a href="#cb128-699" aria-hidden="true" tabindex="-1"></a><span class="co"># map way requires different functions</span></span>
-<span id="cb128-700"><a href="#cb128-700" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; need to convert the array to a list first with array_tree() (a hierarchical list), and then map at the second level</span></span>
-<span id="cb128-701"><a href="#cb128-701" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then simplify</span></span>
-<span id="cb128-702"><a href="#cb128-702" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> -&gt; changing the order of dimensions in MARGIN transposes the result (i.e. order matters)</span></span>
-<span id="cb128-703"><a href="#cb128-703" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="ot">&lt;-</span> my_beta_sims_array <span class="sc">%&gt;%</span> </span>
-<span id="cb128-704"><a href="#cb128-704" aria-hidden="true" tabindex="-1"></a>  <span class="fu">array_tree</span>(<span class="at">margin =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="co"># first level list will be the layers, then the columns result$layer[[column]]</span></span>
-<span id="cb128-705"><a href="#cb128-705" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="at">.depth =</span> <span class="dv">2</span>, <span class="at">.f =</span> mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-706"><a href="#cb128-706" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(cbind)</span>
-<span id="cb128-707"><a href="#cb128-707" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape1_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape1))</span>
-<span id="cb128-708"><a href="#cb128-708" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape2_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape2))</span>
-<span id="cb128-709"><a href="#cb128-709" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-710"><a href="#cb128-710" aria-hidden="true" tabindex="-1"></a><span class="co"># compare two different methods</span></span>
-<span id="cb128-711"><a href="#cb128-711" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="sc">==</span> beta_means</span>
-<span id="cb128-712"><a href="#cb128-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-713"><a href="#cb128-713" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-685"><a href="#cb128-685" aria-hidden="true" tabindex="-1"></a>Now suppose we want the mean for the simulation outcomes array. Use <span class="in">`apply()`</span> to iterate over indices of the array.</span>
+<span id="cb128-686"><a href="#cb128-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-689"><a href="#cb128-689" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-690"><a href="#cb128-690" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: functions-on-array</span></span>
+<span id="cb128-691"><a href="#cb128-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-692"><a href="#cb128-692" aria-hidden="true" tabindex="-1"></a><span class="co"># calc mean of a particular iteration</span></span>
+<span id="cb128-693"><a href="#cb128-693" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(my_beta_sims_array[ ,<span class="dv">1</span> , <span class="dv">1</span>])</span>
+<span id="cb128-694"><a href="#cb128-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-695"><a href="#cb128-695" aria-hidden="true" tabindex="-1"></a><span class="co"># loop over each column in each layer (thus averaging over the rows) with apply()</span></span>
+<span id="cb128-696"><a href="#cb128-696" aria-hidden="true" tabindex="-1"></a>beta_means <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="at">X =</span> my_beta_sims_array,</span>
+<span id="cb128-697"><a href="#cb128-697" aria-hidden="true" tabindex="-1"></a>                    <span class="at">MARGIN =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb128-698"><a href="#cb128-698" aria-hidden="true" tabindex="-1"></a>                    <span class="at">FUN =</span> mean)</span>
+<span id="cb128-699"><a href="#cb128-699" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(beta_means)</span>
+<span id="cb128-700"><a href="#cb128-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-701"><a href="#cb128-701" aria-hidden="true" tabindex="-1"></a><span class="co"># map way requires different functions</span></span>
+<span id="cb128-702"><a href="#cb128-702" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; need to convert the array to a list first with array_tree() (a hierarchical list), and then map at the second level</span></span>
+<span id="cb128-703"><a href="#cb128-703" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then simplify</span></span>
+<span id="cb128-704"><a href="#cb128-704" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> -&gt; changing the order of dimensions in MARGIN transposes the result (i.e. order matters)</span></span>
+<span id="cb128-705"><a href="#cb128-705" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="ot">&lt;-</span> my_beta_sims_array <span class="sc">%&gt;%</span> </span>
+<span id="cb128-706"><a href="#cb128-706" aria-hidden="true" tabindex="-1"></a>  <span class="fu">array_tree</span>(<span class="at">margin =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="co"># first level list will be the layers, then the columns result$layer[[column]]</span></span>
+<span id="cb128-707"><a href="#cb128-707" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_depth</span>(<span class="at">.depth =</span> <span class="dv">2</span>, <span class="at">.f =</span> mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-708"><a href="#cb128-708" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(cbind)</span>
+<span id="cb128-709"><a href="#cb128-709" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape1_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape1))</span>
+<span id="cb128-710"><a href="#cb128-710" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(beta_means2) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"shape2_"</span>, <span class="fu">unique</span>(param_combinations<span class="sc">$</span>shape2))</span>
+<span id="cb128-711"><a href="#cb128-711" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-712"><a href="#cb128-712" aria-hidden="true" tabindex="-1"></a><span class="co"># compare two different methods</span></span>
+<span id="cb128-713"><a href="#cb128-713" aria-hidden="true" tabindex="-1"></a>beta_means2 <span class="sc">==</span> beta_means</span>
 <span id="cb128-714"><a href="#cb128-714" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-715"><a href="#cb128-715" aria-hidden="true" tabindex="-1"></a>Now we can check our simulated means against a theoretical mean: $X \sim \text{beta}(\alpha, \beta) \Longrightarrow E(X) = \frac{\alpha}{\alpha + \beta}$.</span>
+<span id="cb128-715"><a href="#cb128-715" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-716"><a href="#cb128-716" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-719"><a href="#cb128-719" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-720"><a href="#cb128-720" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compute-means</span></span>
-<span id="cb128-721"><a href="#cb128-721" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-722"><a href="#cb128-722" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate theoretical beta mean</span></span>
-<span id="cb128-723"><a href="#cb128-723" aria-hidden="true" tabindex="-1"></a>theoretical_beta_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, beta){</span>
-<span id="cb128-724"><a href="#cb128-724" aria-hidden="true" tabindex="-1"></a>  alpha <span class="sc">/</span> (alpha <span class="sc">+</span> beta)</span>
-<span id="cb128-725"><a href="#cb128-725" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-726"><a href="#cb128-726" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-727"><a href="#cb128-727" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 10 x 10 matrix of the theoretical means for the beta distribution using the function above</span></span>
-<span id="cb128-728"><a href="#cb128-728" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> theoretical_beta_mean,</span>
-<span id="cb128-729"><a href="#cb128-729" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> param_combinations<span class="sc">$</span>shape1,</span>
-<span id="cb128-730"><a href="#cb128-730" aria-hidden="true" tabindex="-1"></a>                            <span class="at">beta =</span> param_combinations<span class="sc">$</span>shape2,</span>
-<span id="cb128-731"><a href="#cb128-731" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SIMPLIFY =</span> <span class="st">"array"</span>)</span>
-<span id="cb128-732"><a href="#cb128-732" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb128-733"><a href="#cb128-733" aria-hidden="true" tabindex="-1"></a>theoretical_means</span>
-<span id="cb128-734"><a href="#cb128-734" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-735"><a href="#cb128-735" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map2, then simplify to vector and convert to matrix</span></span>
-<span id="cb128-736"><a href="#cb128-736" aria-hidden="true" tabindex="-1"></a>theoretical_means2 <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
-<span id="cb128-737"><a href="#cb128-737" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(alpha, beta) <span class="fu">theoretical_beta_mean</span>(alpha, beta))} <span class="sc">%&gt;%</span> </span>
-<span id="cb128-738"><a href="#cb128-738" aria-hidden="true" tabindex="-1"></a>  as_vector</span>
-<span id="cb128-739"><a href="#cb128-739" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb128-740"><a href="#cb128-740" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-741"><a href="#cb128-741" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">==</span> theoretical_means2</span>
+<span id="cb128-717"><a href="#cb128-717" aria-hidden="true" tabindex="-1"></a>Now we can check our simulated means against a theoretical mean: $X \sim \text{beta}(\alpha, \beta) \Longrightarrow E(X) = \frac{\alpha}{\alpha + \beta}$.</span>
+<span id="cb128-718"><a href="#cb128-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-721"><a href="#cb128-721" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-722"><a href="#cb128-722" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compute-means</span></span>
+<span id="cb128-723"><a href="#cb128-723" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-724"><a href="#cb128-724" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate theoretical beta mean</span></span>
+<span id="cb128-725"><a href="#cb128-725" aria-hidden="true" tabindex="-1"></a>theoretical_beta_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, beta){</span>
+<span id="cb128-726"><a href="#cb128-726" aria-hidden="true" tabindex="-1"></a>  alpha <span class="sc">/</span> (alpha <span class="sc">+</span> beta)</span>
+<span id="cb128-727"><a href="#cb128-727" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-728"><a href="#cb128-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-729"><a href="#cb128-729" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 10 x 10 matrix of the theoretical means for the beta distribution using the function above</span></span>
+<span id="cb128-730"><a href="#cb128-730" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="at">FUN =</span> theoretical_beta_mean,</span>
+<span id="cb128-731"><a href="#cb128-731" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> param_combinations<span class="sc">$</span>shape1,</span>
+<span id="cb128-732"><a href="#cb128-732" aria-hidden="true" tabindex="-1"></a>                            <span class="at">beta =</span> param_combinations<span class="sc">$</span>shape2,</span>
+<span id="cb128-733"><a href="#cb128-733" aria-hidden="true" tabindex="-1"></a>                            <span class="at">SIMPLIFY =</span> <span class="st">"array"</span>)</span>
+<span id="cb128-734"><a href="#cb128-734" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb128-735"><a href="#cb128-735" aria-hidden="true" tabindex="-1"></a>theoretical_means</span>
+<span id="cb128-736"><a href="#cb128-736" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-737"><a href="#cb128-737" aria-hidden="true" tabindex="-1"></a><span class="co"># now use map2, then simplify to vector and convert to matrix</span></span>
+<span id="cb128-738"><a href="#cb128-738" aria-hidden="true" tabindex="-1"></a>theoretical_means2 <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
+<span id="cb128-739"><a href="#cb128-739" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(alpha, beta) <span class="fu">theoretical_beta_mean</span>(alpha, beta))} <span class="sc">%&gt;%</span> </span>
+<span id="cb128-740"><a href="#cb128-740" aria-hidden="true" tabindex="-1"></a>  as_vector</span>
+<span id="cb128-741"><a href="#cb128-741" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(theoretical_means2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)</span>
 <span id="cb128-742"><a href="#cb128-742" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-743"><a href="#cb128-743" aria-hidden="true" tabindex="-1"></a><span class="co"># compare a few means</span></span>
-<span id="cb128-744"><a href="#cb128-744" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; note that for some reason beta_means2 is stored as a list but displaying like a matrix? but it is correct</span></span>
-<span id="cb128-745"><a href="#cb128-745" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">2</span>,<span class="dv">7</span>] <span class="sc">-</span> beta_means2[<span class="dv">2</span>,<span class="dv">7</span>][[<span class="dv">1</span>]]</span>
-<span id="cb128-746"><a href="#cb128-746" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">1</span>,<span class="dv">10</span>] <span class="sc">-</span> beta_means2[<span class="dv">1</span>,<span class="dv">10</span>][[<span class="dv">1</span>]]</span>
-<span id="cb128-747"><a href="#cb128-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-748"><a href="#cb128-748" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-743"><a href="#cb128-743" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">==</span> theoretical_means2</span>
+<span id="cb128-744"><a href="#cb128-744" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-745"><a href="#cb128-745" aria-hidden="true" tabindex="-1"></a><span class="co"># compare a few means</span></span>
+<span id="cb128-746"><a href="#cb128-746" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; note that for some reason beta_means2 is stored as a list but displaying like a matrix? but it is correct</span></span>
+<span id="cb128-747"><a href="#cb128-747" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">2</span>,<span class="dv">7</span>] <span class="sc">-</span> beta_means2[<span class="dv">2</span>,<span class="dv">7</span>][[<span class="dv">1</span>]]</span>
+<span id="cb128-748"><a href="#cb128-748" aria-hidden="true" tabindex="-1"></a>theoretical_means[<span class="dv">1</span>,<span class="dv">10</span>] <span class="sc">-</span> beta_means2[<span class="dv">1</span>,<span class="dv">10</span>][[<span class="dv">1</span>]]</span>
 <span id="cb128-749"><a href="#cb128-749" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-750"><a href="#cb128-750" aria-hidden="true" tabindex="-1"></a><span class="fu">### Entire workflow </span></span>
+<span id="cb128-750"><a href="#cb128-750" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-751"><a href="#cb128-751" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-752"><a href="#cb128-752" aria-hidden="true" tabindex="-1"></a>To confirm the simulated data is correct, we can do a bigger simulation (more iterations) and then compare to the theoretical means.</span>
+<span id="cb128-752"><a href="#cb128-752" aria-hidden="true" tabindex="-1"></a><span class="fu">### Entire workflow </span></span>
 <span id="cb128-753"><a href="#cb128-753" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-756"><a href="#cb128-756" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-757"><a href="#cb128-757" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: entire-workflow</span></span>
-<span id="cb128-758"><a href="#cb128-758" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-759"><a href="#cb128-759" aria-hidden="true" tabindex="-1"></a><span class="co"># steps of simulation</span></span>
-<span id="cb128-760"><a href="#cb128-760" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; simulate data based on parameter combinations</span></span>
-<span id="cb128-761"><a href="#cb128-761" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; keep in list form where each list all the iterations for a parameter pair</span></span>
-<span id="cb128-762"><a href="#cb128-762" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then unpack and convert to 10 x 10 matrix</span></span>
-<span id="cb128-763"><a href="#cb128-763" aria-hidden="true" tabindex="-1"></a>beta_simulation <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
-<span id="cb128-764"><a href="#cb128-764" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(shape1, shape2) <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">shape1 =</span> shape1, <span class="at">shape2 =</span> shape2))} <span class="sc">%&gt;%</span> </span>
-<span id="cb128-765"><a href="#cb128-765" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-766"><a href="#cb128-766" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(rbind)</span>
-<span id="cb128-767"><a href="#cb128-767" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(beta_simulation) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>)</span>
-<span id="cb128-768"><a href="#cb128-768" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-769"><a href="#cb128-769" aria-hidden="true" tabindex="-1"></a><span class="co"># compare simulated and theoretical means</span></span>
-<span id="cb128-770"><a href="#cb128-770" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">-</span> beta_simulation</span>
-<span id="cb128-771"><a href="#cb128-771" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-772"><a href="#cb128-772" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-754"><a href="#cb128-754" aria-hidden="true" tabindex="-1"></a>To confirm the simulated data is correct, we can do a bigger simulation (more iterations) and then compare to the theoretical means.</span>
+<span id="cb128-755"><a href="#cb128-755" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-758"><a href="#cb128-758" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-759"><a href="#cb128-759" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: entire-workflow</span></span>
+<span id="cb128-760"><a href="#cb128-760" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-761"><a href="#cb128-761" aria-hidden="true" tabindex="-1"></a><span class="co"># steps of simulation</span></span>
+<span id="cb128-762"><a href="#cb128-762" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; simulate data based on parameter combinations</span></span>
+<span id="cb128-763"><a href="#cb128-763" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; keep in list form where each list all the iterations for a parameter pair</span></span>
+<span id="cb128-764"><a href="#cb128-764" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; then unpack and convert to 10 x 10 matrix</span></span>
+<span id="cb128-765"><a href="#cb128-765" aria-hidden="true" tabindex="-1"></a>beta_simulation <span class="ot">&lt;-</span> param_combinations <span class="sc">%&gt;%</span> </span>
+<span id="cb128-766"><a href="#cb128-766" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">map2</span>(.<span class="sc">$</span>shape1, .<span class="sc">$</span>shape2, \(shape1, shape2) <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">shape1 =</span> shape1, <span class="at">shape2 =</span> shape2))} <span class="sc">%&gt;%</span> </span>
+<span id="cb128-767"><a href="#cb128-767" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-768"><a href="#cb128-768" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(rbind)</span>
+<span id="cb128-769"><a href="#cb128-769" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(beta_simulation) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb128-770"><a href="#cb128-770" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-771"><a href="#cb128-771" aria-hidden="true" tabindex="-1"></a><span class="co"># compare simulated and theoretical means</span></span>
+<span id="cb128-772"><a href="#cb128-772" aria-hidden="true" tabindex="-1"></a>theoretical_means <span class="sc">-</span> beta_simulation</span>
 <span id="cb128-773"><a href="#cb128-773" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-774"><a href="#cb128-774" aria-hidden="true" tabindex="-1"></a><span class="fu">## Writing Modular Functions</span></span>
+<span id="cb128-774"><a href="#cb128-774" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb128-775"><a href="#cb128-775" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-776"><a href="#cb128-776" aria-hidden="true" tabindex="-1"></a>When you are writing functions to do a complex task, try to identify the system of simple tasks that are needed to accomplish it step-by-step. For example we might consider building functions to help us to automate the process of running stepwise selection based on AIC, then outputting a model object that we can use for prediction, or inference. </span>
+<span id="cb128-776"><a href="#cb128-776" aria-hidden="true" tabindex="-1"></a><span class="fu">## Writing Modular Functions</span></span>
 <span id="cb128-777"><a href="#cb128-777" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-778"><a href="#cb128-778" aria-hidden="true" tabindex="-1"></a>We might initially think of one big function that can take a model matrix, X, and does a bunch of linear algebra to get beta estimates, calculates an AIC for the fitted model, then removes a columns from X to reduce the model... and repeat... a lot. Is that what we find inside the <span class="in">`step()`</span> function? Run <span class="in">`body(step)`</span> to see.</span>
+<span id="cb128-778"><a href="#cb128-778" aria-hidden="true" tabindex="-1"></a>When you are writing functions to do a complex task, try to identify the system of simple tasks that are needed to accomplish it step-by-step. For example we might consider building functions to help us to automate the process of running stepwise selection based on AIC, then outputting a model object that we can use for prediction, or inference. </span>
 <span id="cb128-779"><a href="#cb128-779" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-780"><a href="#cb128-780" aria-hidden="true" tabindex="-1"></a>It isn't doing any of the linear algebra and AIC calculations we expected! The body of the step function is filled with, well more functions! It is function pinata!</span>
+<span id="cb128-780"><a href="#cb128-780" aria-hidden="true" tabindex="-1"></a>We might initially think of one big function that can take a model matrix, X, and does a bunch of linear algebra to get beta estimates, calculates an AIC for the fitted model, then removes a columns from X to reduce the model... and repeat... a lot. Is that what we find inside the <span class="in">`step()`</span> function? Run <span class="in">`body(step)`</span> to see.</span>
 <span id="cb128-781"><a href="#cb128-781" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-782"><a href="#cb128-782" aria-hidden="true" tabindex="-1"></a>What we find is that the <span class="in">`step()`</span> function calls many other functions to do the individual smaller tasks that make up the complex procedure. If we search closely, there is a function for dropping a row, <span class="in">`drop1()`</span>, within a <span class="in">`while`</span> loop that keeps dropping rows until a condition is met. There is a function for updating the fit of the model, <span class="in">`update()`</span>, and calculating the AIC, <span class="in">`extractAIC()`</span>. There is even a function created at the start of the body that are used to help organize and return a helpful print statement about the stepwise procedure: <span class="in">`step.results()`</span>. </span>
+<span id="cb128-782"><a href="#cb128-782" aria-hidden="true" tabindex="-1"></a>It isn't doing any of the linear algebra and AIC calculations we expected! The body of the step function is filled with, well more functions! It is function pinata!</span>
 <span id="cb128-783"><a href="#cb128-783" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-784"><a href="#cb128-784" aria-hidden="true" tabindex="-1"></a>These functions are often times called "helper functions", completing the sub-tasks of the primary function. This modular format allows each function to complete a single simple task, and when used in combination, achieve a complex task. </span>
+<span id="cb128-784"><a href="#cb128-784" aria-hidden="true" tabindex="-1"></a>What we find is that the <span class="in">`step()`</span> function calls many other functions to do the individual smaller tasks that make up the complex procedure. If we search closely, there is a function for dropping a row, <span class="in">`drop1()`</span>, within a <span class="in">`while`</span> loop that keeps dropping rows until a condition is met. There is a function for updating the fit of the model, <span class="in">`update()`</span>, and calculating the AIC, <span class="in">`extractAIC()`</span>. There is even a function created at the start of the body that are used to help organize and return a helpful print statement about the stepwise procedure: <span class="in">`step.results()`</span>. </span>
 <span id="cb128-785"><a href="#cb128-785" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-786"><a href="#cb128-786" aria-hidden="true" tabindex="-1"></a>Thus, when modularizing code, the end goal to have one "overall" function that just has some helper functions within. On the way to having modularized code, is it better to start with an overall function and add modules sequentially (so e.g. if we call the overall, it will call module 1, so we check if that works; then add module 2 and call the overall which runs mod 1 and mod 2).... etc.</span>
+<span id="cb128-786"><a href="#cb128-786" aria-hidden="true" tabindex="-1"></a>These functions are often times called "helper functions", completing the sub-tasks of the primary function. This modular format allows each function to complete a single simple task, and when used in combination, achieve a complex task. </span>
 <span id="cb128-787"><a href="#cb128-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-788"><a href="#cb128-788" aria-hidden="true" tabindex="-1"></a>Below is an example (NOT RUN) to demostrate how helper functions can be used so that the overall function is body is relatively simple, all the work is being done by other functions. The overall function should be readable step by step.</span>
+<span id="cb128-788"><a href="#cb128-788" aria-hidden="true" tabindex="-1"></a>Thus, when modularizing code, the end goal to have one "overall" function that just has some helper functions within. On the way to having modularized code, is it better to start with an overall function and add modules sequentially (so e.g. if we call the overall, it will call module 1, so we check if that works; then add module 2 and call the overall which runs mod 1 and mod 2).... etc.</span>
 <span id="cb128-789"><a href="#cb128-789" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-792"><a href="#cb128-792" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb128-793"><a href="#cb128-793" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: helper-functions</span></span>
-<span id="cb128-794"><a href="#cb128-794" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb128-795"><a href="#cb128-795" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-796"><a href="#cb128-796" aria-hidden="true" tabindex="-1"></a><span class="co"># main data simulation function</span></span>
-<span id="cb128-797"><a href="#cb128-797" aria-hidden="true" tabindex="-1"></a><span class="co"># write a function to simulate a dataset for an n x p dataset for a regression model where q of the variables are inactive (signal variables)</span></span>
-<span id="cb128-798"><a href="#cb128-798" aria-hidden="true" tabindex="-1"></a>make_sim_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">20</span>, <span class="at">q =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.1</span>, <span class="at">sd_y =</span> <span class="dv">1</span>, <span class="at">sd_x =</span> <span class="dv">1</span>){</span>
-<span id="cb128-799"><a href="#cb128-799" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-800"><a href="#cb128-800" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate a n(iteration in sample) x p(sample) matrix from rnorm(0, sd_X)</span></span>
-<span id="cb128-801"><a href="#cb128-801" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="at">sd =</span> sd_x))</span>
-<span id="cb128-802"><a href="#cb128-802" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,<span class="dv">1</span><span class="sc">:</span>p)</span>
-<span id="cb128-803"><a href="#cb128-803" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-804"><a href="#cb128-804" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify population coefficients</span></span>
-<span id="cb128-805"><a href="#cb128-805" aria-hidden="true" tabindex="-1"></a>  betas <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(b, q), <span class="fu">rep</span>(<span class="dv">0</span>, p<span class="sc">-</span>q))</span>
-<span id="cb128-806"><a href="#cb128-806" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-807"><a href="#cb128-807" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate responses</span></span>
-<span id="cb128-808"><a href="#cb128-808" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> (X <span class="sc">%*%</span> betas)[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>, sd_y)</span>
-<span id="cb128-809"><a href="#cb128-809" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-810"><a href="#cb128-810" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine data</span></span>
-<span id="cb128-811"><a href="#cb128-811" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y,X)</span>
-<span id="cb128-812"><a href="#cb128-812" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-813"><a href="#cb128-813" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sim_data)</span>
-<span id="cb128-814"><a href="#cb128-814" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-815"><a href="#cb128-815" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-790"><a href="#cb128-790" aria-hidden="true" tabindex="-1"></a>Below is an example (NOT RUN) to demostrate how helper functions can be used so that the overall function is body is relatively simple, all the work is being done by other functions. The overall function should be readable step by step.</span>
+<span id="cb128-791"><a href="#cb128-791" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-794"><a href="#cb128-794" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb128-795"><a href="#cb128-795" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: helper-functions</span></span>
+<span id="cb128-796"><a href="#cb128-796" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb128-797"><a href="#cb128-797" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-798"><a href="#cb128-798" aria-hidden="true" tabindex="-1"></a><span class="co"># main data simulation function</span></span>
+<span id="cb128-799"><a href="#cb128-799" aria-hidden="true" tabindex="-1"></a><span class="co"># write a function to simulate a dataset for an n x p dataset for a regression model where q of the variables are inactive (signal variables)</span></span>
+<span id="cb128-800"><a href="#cb128-800" aria-hidden="true" tabindex="-1"></a>make_sim_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">20</span>, <span class="at">q =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.1</span>, <span class="at">sd_y =</span> <span class="dv">1</span>, <span class="at">sd_x =</span> <span class="dv">1</span>){</span>
+<span id="cb128-801"><a href="#cb128-801" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-802"><a href="#cb128-802" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate a n(iteration in sample) x p(sample) matrix from rnorm(0, sd_X)</span></span>
+<span id="cb128-803"><a href="#cb128-803" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="at">sd =</span> sd_x))</span>
+<span id="cb128-804"><a href="#cb128-804" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,<span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb128-805"><a href="#cb128-805" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-806"><a href="#cb128-806" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify population coefficients</span></span>
+<span id="cb128-807"><a href="#cb128-807" aria-hidden="true" tabindex="-1"></a>  betas <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(b, q), <span class="fu">rep</span>(<span class="dv">0</span>, p<span class="sc">-</span>q))</span>
+<span id="cb128-808"><a href="#cb128-808" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-809"><a href="#cb128-809" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate responses</span></span>
+<span id="cb128-810"><a href="#cb128-810" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> (X <span class="sc">%*%</span> betas)[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>, sd_y)</span>
+<span id="cb128-811"><a href="#cb128-811" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-812"><a href="#cb128-812" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine data</span></span>
+<span id="cb128-813"><a href="#cb128-813" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y,X)</span>
+<span id="cb128-814"><a href="#cb128-814" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-815"><a href="#cb128-815" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sim_data)</span>
 <span id="cb128-816"><a href="#cb128-816" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-817"><a href="#cb128-817" aria-hidden="true" tabindex="-1"></a><span class="co"># helper functions for running the experiment with variable selection</span></span>
+<span id="cb128-817"><a href="#cb128-817" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb128-818"><a href="#cb128-818" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-819"><a href="#cb128-819" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
-<span id="cb128-820"><a href="#cb128-820" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb128-821"><a href="#cb128-821" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb128-822"><a href="#cb128-822" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
-<span id="cb128-823"><a href="#cb128-823" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-824"><a href="#cb128-824" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-825"><a href="#cb128-825" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
-<span id="cb128-826"><a href="#cb128-826" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb128-827"><a href="#cb128-827" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-828"><a href="#cb128-828" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ ,<span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
-<span id="cb128-829"><a href="#cb128-829" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
-<span id="cb128-830"><a href="#cb128-830" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-831"><a href="#cb128-831" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">=</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[, <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
-<span id="cb128-832"><a href="#cb128-832" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
-<span id="cb128-833"><a href="#cb128-833" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-834"><a href="#cb128-834" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">=</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb128-819"><a href="#cb128-819" aria-hidden="true" tabindex="-1"></a><span class="co"># helper functions for running the experiment with variable selection</span></span>
+<span id="cb128-820"><a href="#cb128-820" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-821"><a href="#cb128-821" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
+<span id="cb128-822"><a href="#cb128-822" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb128-823"><a href="#cb128-823" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb128-824"><a href="#cb128-824" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
+<span id="cb128-825"><a href="#cb128-825" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-826"><a href="#cb128-826" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-827"><a href="#cb128-827" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
+<span id="cb128-828"><a href="#cb128-828" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb128-829"><a href="#cb128-829" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-830"><a href="#cb128-830" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">=</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ ,<span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb128-831"><a href="#cb128-831" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb128-832"><a href="#cb128-832" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-833"><a href="#cb128-833" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">=</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[, <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb128-834"><a href="#cb128-834" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
 <span id="cb128-835"><a href="#cb128-835" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-836"><a href="#cb128-836" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lasso_vars) <span class="sc">==</span> <span class="dv">0</span>) lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="dv">1</span>]</span>
+<span id="cb128-836"><a href="#cb128-836" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">=</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
 <span id="cb128-837"><a href="#cb128-837" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-838"><a href="#cb128-838" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
+<span id="cb128-838"><a href="#cb128-838" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lasso_vars) <span class="sc">==</span> <span class="dv">0</span>) lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="dv">1</span>]</span>
 <span id="cb128-839"><a href="#cb128-839" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-840"><a href="#cb128-840" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
+<span id="cb128-840"><a href="#cb128-840" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
 <span id="cb128-841"><a href="#cb128-841" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-842"><a href="#cb128-842" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-843"><a href="#cb128-843" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-844"><a href="#cb128-844" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
-<span id="cb128-845"><a href="#cb128-845" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
-<span id="cb128-846"><a href="#cb128-846" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb128-847"><a href="#cb128-847" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-848"><a href="#cb128-848" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-849"><a href="#cb128-849" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE</span></span>
-<span id="cb128-850"><a href="#cb128-850" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
-<span id="cb128-851"><a href="#cb128-851" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-852"><a href="#cb128-852" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">=</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
-<span id="cb128-853"><a href="#cb128-853" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
-<span id="cb128-854"><a href="#cb128-854" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb128-855"><a href="#cb128-855" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
-<span id="cb128-856"><a href="#cb128-856" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept=</span><span class="cn">TRUE</span>))</span>
-<span id="cb128-857"><a href="#cb128-857" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-858"><a href="#cb128-858" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
+<span id="cb128-842"><a href="#cb128-842" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
+<span id="cb128-843"><a href="#cb128-843" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-844"><a href="#cb128-844" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-845"><a href="#cb128-845" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-846"><a href="#cb128-846" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
+<span id="cb128-847"><a href="#cb128-847" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb128-848"><a href="#cb128-848" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb128-849"><a href="#cb128-849" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-850"><a href="#cb128-850" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-851"><a href="#cb128-851" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE</span></span>
+<span id="cb128-852"><a href="#cb128-852" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb128-853"><a href="#cb128-853" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-854"><a href="#cb128-854" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">=</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
+<span id="cb128-855"><a href="#cb128-855" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
+<span id="cb128-856"><a href="#cb128-856" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb128-857"><a href="#cb128-857" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb128-858"><a href="#cb128-858" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept=</span><span class="cn">TRUE</span>))</span>
 <span id="cb128-859"><a href="#cb128-859" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-860"><a href="#cb128-860" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-861"><a href="#cb128-861" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-862"><a href="#cb128-862" aria-hidden="true" tabindex="-1"></a><span class="co"># function to run trial </span></span>
-<span id="cb128-863"><a href="#cb128-863" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df){</span>
-<span id="cb128-864"><a href="#cb128-864" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-865"><a href="#cb128-865" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-860"><a href="#cb128-860" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
+<span id="cb128-861"><a href="#cb128-861" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-862"><a href="#cb128-862" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-863"><a href="#cb128-863" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-864"><a href="#cb128-864" aria-hidden="true" tabindex="-1"></a><span class="co"># function to run trial </span></span>
+<span id="cb128-865"><a href="#cb128-865" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df){</span>
 <span id="cb128-866"><a href="#cb128-866" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-867"><a href="#cb128-867" aria-hidden="true" tabindex="-1"></a>  tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df) <span class="co"># not sure where this function comes from</span></span>
+<span id="cb128-867"><a href="#cb128-867" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb128-868"><a href="#cb128-868" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-869"><a href="#cb128-869" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-869"><a href="#cb128-869" aria-hidden="true" tabindex="-1"></a>  tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df) <span class="co"># not sure where this function comes from</span></span>
 <span id="cb128-870"><a href="#cb128-870" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-871"><a href="#cb128-871" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">var_count =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
-<span id="cb128-872"><a href="#cb128-872" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod), <span class="co"># nor this function</span></span>
-<span id="cb128-873"><a href="#cb128-873" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"secs"</span>)))</span>
-<span id="cb128-874"><a href="#cb128-874" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-875"><a href="#cb128-875" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-876"><a href="#cb128-876" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-877"><a href="#cb128-877" aria-hidden="true" tabindex="-1"></a><span class="co"># make into a function of n_sims, n, p and q</span></span>
-<span id="cb128-878"><a href="#cb128-878" aria-hidden="true" tabindex="-1"></a>sim_var_select <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_sim =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_ftn =</span> step_var_mod){</span>
-<span id="cb128-879"><a href="#cb128-879" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-880"><a href="#cb128-880" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb128-871"><a href="#cb128-871" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb128-872"><a href="#cb128-872" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-873"><a href="#cb128-873" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">var_count =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
+<span id="cb128-874"><a href="#cb128-874" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod), <span class="co"># nor this function</span></span>
+<span id="cb128-875"><a href="#cb128-875" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"secs"</span>)))</span>
+<span id="cb128-876"><a href="#cb128-876" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-877"><a href="#cb128-877" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-878"><a href="#cb128-878" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-879"><a href="#cb128-879" aria-hidden="true" tabindex="-1"></a><span class="co"># make into a function of n_sims, n, p and q</span></span>
+<span id="cb128-880"><a href="#cb128-880" aria-hidden="true" tabindex="-1"></a>sim_var_select <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_sim =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_ftn =</span> step_var_mod){</span>
 <span id="cb128-881"><a href="#cb128-881" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-882"><a href="#cb128-882" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim){</span>
-<span id="cb128-883"><a href="#cb128-883" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-884"><a href="#cb128-884" aria-hidden="true" tabindex="-1"></a>    sim_data <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> n, <span class="at">p =</span> p,<span class="at">q =</span> q)</span>
+<span id="cb128-882"><a href="#cb128-882" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb128-883"><a href="#cb128-883" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-884"><a href="#cb128-884" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim){</span>
 <span id="cb128-885"><a href="#cb128-885" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-886"><a href="#cb128-886" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">run_trial</span>(var_select_ftn, sim_data))</span>
+<span id="cb128-886"><a href="#cb128-886" aria-hidden="true" tabindex="-1"></a>    sim_data <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> n, <span class="at">p =</span> p,<span class="at">q =</span> q)</span>
 <span id="cb128-887"><a href="#cb128-887" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb128-888"><a href="#cb128-888" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb128-889"><a href="#cb128-889" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb128-890"><a href="#cb128-890" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
-<span id="cb128-891"><a href="#cb128-891" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb128-892"><a href="#cb128-892" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb128-893"><a href="#cb128-893" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb128-888"><a href="#cb128-888" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">run_trial</span>(var_select_ftn, sim_data))</span>
+<span id="cb128-889"><a href="#cb128-889" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb128-890"><a href="#cb128-890" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb128-891"><a href="#cb128-891" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb128-892"><a href="#cb128-892" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb128-893"><a href="#cb128-893" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb128-894"><a href="#cb128-894" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-895"><a href="#cb128-895" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -206,6 +206,8 @@ Better example of simple function for adding up two numbers.
     
 - Returning values: Functions implicitly return the last thing computed. So it is often a good idea to be explicit about what to return.
 
+    - All standalone functions should have explicit returns. When doing an on-the-fly function in an `sapply()` for example, we can stylistically omit `return()` and still have readable code.
+
 ```{r}
 #| label: defining-functions-assignment
 
