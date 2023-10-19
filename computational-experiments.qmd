@@ -38,7 +38,7 @@ We are going to build a regression model for prediction. We can start with using
 #| label: load-air-quality
 
 # load and preview data
-load("Files/Data/air_quality_cleaned.Rdata")
+load("files/data/air_quality_cleaned.Rdata")
 glimpse(data)
 
 ```
@@ -201,7 +201,7 @@ all_reg_sizes <- NA
 for (i in 1:length(all_reg_sets)){
   
   # concatenate path with specific dataset name
-  data_path <- paste0("Files/Data/", all_reg_sets[i], "_cleaned.Rdata")
+  data_path <- paste0("files/data/", all_reg_sets[i], "_cleaned.Rdata")
   
   # load and assign data
   load(data_path)

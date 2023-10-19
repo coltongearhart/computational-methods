@@ -255,9 +255,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="sec-methods-preview" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-methods-preview">
 <span class="header-section-number">5.2</span> Methods preview</h2>
 <p>We are going to build a regression model for prediction. We can start with using a single dataset, air quality. So we are going to predict air quality based on certain chemicals and we want to see which combinations of variables leads to the best predictions.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/load-air-quality_3d0f5cf33e39eeca1dd18fbe58799414">
+<div class="cell" data-hash="computational-experiments_cache/html/load-air-quality_5e3e0806bcb7462b44170f71c6e47415">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load and preview data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"Files/Data/air_quality_cleaned.Rdata"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"files/data/air_quality_cleaned.Rdata"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 9,357
@@ -549,7 +549,7 @@ Coefficients:
 <li><p>Similar naming structure <code>_cleaned.RData</code> to read in easily</p></li>
 </ul>
 <p>Then we can save them all in organized holding structure for easy access.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/load-reg-datasets_0573ccf2e7981f2ef8cb520b1c65c7f7">
+<div class="cell" data-hash="computational-experiments_cache/html/load-reg-datasets_b1145fb3e86595e70d41520f02c16f4d">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># dataset names used for testing</span></span>
 <span><span class="va">all_reg_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wpbc"</span>, <span class="st">"wankara"</span>, <span class="st">"laser"</span>, <span class="st">"treasury"</span>, <span class="st">"skillcraft"</span>, <span class="st">"puma"</span>, <span class="st">"air_quality"</span>, <span class="st">"ccpp"</span>, <span class="st">"casp"</span><span class="op">)</span></span>
 <span></span>
@@ -561,7 +561,7 @@ Coefficients:
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all_reg_sets</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="co"># concatenate path with specific dataset name</span></span>
-<span>  <span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Files/Data/"</span>, <span class="va">all_reg_sets</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_cleaned.Rdata"</span><span class="op">)</span></span>
+<span>  <span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"files/data/"</span>, <span class="va">all_reg_sets</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_cleaned.Rdata"</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># load and assign data</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">data_path</span><span class="op">)</span></span>
@@ -1364,7 +1364,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-44"><a href="#cb60-44" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-air-quality</span></span>
 <span id="cb60-45"><a href="#cb60-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-46"><a href="#cb60-46" aria-hidden="true" tabindex="-1"></a><span class="co"># load and preview data</span></span>
-<span id="cb60-47"><a href="#cb60-47" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Files/Data/air_quality_cleaned.Rdata"</span>)</span>
+<span id="cb60-47"><a href="#cb60-47" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"files/data/air_quality_cleaned.Rdata"</span>)</span>
 <span id="cb60-48"><a href="#cb60-48" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span>
 <span id="cb60-49"><a href="#cb60-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-50"><a href="#cb60-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1527,7 +1527,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-215"><a href="#cb60-215" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(all_reg_sets)){</span>
 <span id="cb60-216"><a href="#cb60-216" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb60-217"><a href="#cb60-217" aria-hidden="true" tabindex="-1"></a>  <span class="co"># concatenate path with specific dataset name</span></span>
-<span id="cb60-218"><a href="#cb60-218" aria-hidden="true" tabindex="-1"></a>  data_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Files/Data/"</span>, all_reg_sets[i], <span class="st">"_cleaned.Rdata"</span>)</span>
+<span id="cb60-218"><a href="#cb60-218" aria-hidden="true" tabindex="-1"></a>  data_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"files/data/"</span>, all_reg_sets[i], <span class="st">"_cleaned.Rdata"</span>)</span>
 <span id="cb60-219"><a href="#cb60-219" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb60-220"><a href="#cb60-220" aria-hidden="true" tabindex="-1"></a>  <span class="co"># load and assign data</span></span>
 <span id="cb60-221"><a href="#cb60-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">load</span>(data_path)</span>
