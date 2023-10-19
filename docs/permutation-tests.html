@@ -179,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bootstrap</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computational-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -193,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -375,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># check assuptions </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="permutation-tests_files/figure-html/t-test-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -384,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="permutation-tests_files/figure-html/t-test-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -434,7 +440,7 @@ mean of x mean of y
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">perm_diffs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="permutation-tests_files/figure-html/perm-test-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -549,7 +555,7 @@ mean of x mean of y
 </div>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span><span class="op">)</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "no"  "no"  "no"  "no"  "yes" "no"  "no"  "no"  "no"  "no"  "no"  "no" 
+<pre><code> [1] "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no" 
 [13] "no"  "no"  "no"  "no"  "yes" "no"  "no"  "no" </code></pre>
 </div>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create a function to do both steps, permute first then calculate difference</span></span>
@@ -583,7 +589,7 @@ mean of x mean of y
 <span><span class="va">real_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pool_diffs</span> <span class="op">&gt;=</span> <span class="va">real_diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0853</code></pre>
+<pre><code>[1] 0.0923</code></pre>
 </div>
 </div>
 <p>Based on this p-value, there is insufficient evidence to suggest that the 90th quantile of house prices with pools is greater than that without pools.</p>

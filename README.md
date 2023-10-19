@@ -1,2 +1,2 @@
 # computational-methods
-Mini-course in computational methods in R
+Mini-course for computational methods in R

@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assignments.html" rel="next">
+<link href="./computational-experiments.html" rel="next">
 <link href="./permutation-tests.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -179,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Bootstrap</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computational-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -193,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
       </ul>
@@ -258,11 +264,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">simple_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    row value
-2     2     6
+1     1     7
 3     3     9
-2.1   2     6
 5     5    11
-2.2   2     6</code></pre>
+1.1   1     7
+3.1   3     9</code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># row names are indexed by the number of additional times they are included</span></span>
 <span><span class="co"># -&gt; so 3.1 means the second time the third obs was included in the sample</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -340,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># view results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">boot_prop_ex</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="bootstrap_files/figure-html/pca-bootstrap-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -350,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">boot_prop_ex</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.4245  0.4589  0.4657  0.4658  0.4726  0.5057 </code></pre>
+ 0.4297  0.4590  0.4659  0.4660  0.4729  0.5050 </code></pre>
 </div>
 </div>
 </section><section id="bootstrap-inference" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="bootstrap-inference">
@@ -361,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">boot_prop_ex</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       5%       50%       95% 
-0.4491787 0.4657085 0.4827787 </code></pre>
+0.4492655 0.4658594 0.4835129 </code></pre>
 </div>
 </div>
 <p>If wanted to do official hypothesis test, this is the logic (called inverting the test, generate from the sample instead of the sampling distribution):</p>
@@ -381,11 +387,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># check other quantities</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">boot_prop_ex</span> <span class="op">&gt;=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
+<pre><code>[1] 6</code></pre>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_prop_ex</span> <span class="op">&gt;=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0009</code></pre>
+<pre><code>[1] 0.0006</code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># shift bootstrap distribution to S_not</span></span>
 <span><span class="co"># -&gt; calculate sample statistic found earlier (in one line!)</span></span>
@@ -414,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>             color <span class="op">=</span> <span class="st">"purple"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="bootstrap_files/figure-html/bootstrap-inversion-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -449,26 +455,29 @@ Residuals  569 769685  1352.7               </code></pre>
 <span>    <span class="va">anova</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="va">.</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">]</span></span>
 <span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in oliveoil[sample(1:nrow(oliveoil), replace = TRUE), ] %&gt;% {: could not find function "%&gt;%"</code></pre>
-</div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># view results</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># view results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">boot_anova</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'boot_anova' not found</code></pre>
+<div class="cell-output-display">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<figure class="quarto-float quarto-float-fig figure"><div>
+<img src="bootstrap_files/figure-html/f-test-bootstrap-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_anova</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">stearic</span> <span class="op">~</span> <span class="va">macro.area</span>, data <span class="op">=</span> <span class="va">oliveoil</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">anova</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'boot_anova' not found</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7172</code></pre>
 </div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># same conclusion as the original F-test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># same conclusion as the original F-test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This also demonstrates that we won’t always get symmetric bootstrap distributions. It depends on the statistic we are studying, the skewness in the population, the sample size, etc. (the same factors as usual for sampling distributions).</p>
 <p>Additionally, we have been doing thus far is the simple bootstrap. We can try other sampling techniques as well. Another strategy would be to do a stratified sample rather than sampling with replacement for the whole sample. This would entail bootstrapping within each group, so the group sample sizes of macro.area are the same in our bootstrap samples as in the original sample.</p>
 <div class="cell" data-hash="bootstrap_cache/html/stratified-bootstrap_2de74d1a25d53a6deae37cd07738e7a3">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># collect a single stratified bootstrap sample</span></span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># collect a single stratified bootstrap sample</span></span>
 <span><span class="co"># -&gt; split by macro.area, bootstrap within each, then combine results back together</span></span>
 <span><span class="va">sample_stratified</span> <span class="op">&lt;-</span> <span class="va">oliveoil</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">macro.area</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -483,7 +492,7 @@ Residuals  569 769685  1352.7               </code></pre>
 [2,]       TRUE TRUE
 [3,]       TRUE TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># loop to collect the boostrap statistics of the F stat from 10000 bootstrap samples</span></span>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># loop to collect the boostrap statistics of the F stat from 10000 bootstrap samples</span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
 <span><span class="va">boot_anova_stratified</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">B</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -505,19 +514,19 @@ Residuals  569 769685  1352.7               </code></pre>
 <span><span class="co"># view results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">boot_anova_stratified</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
 <figure class="quarto-float quarto-float-fig figure"><div>
-<img src="bootstrap_files/figure-html/stratified-bootstrap-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img" data-fig-pos="hold" width="672">
+<img src="bootstrap_files/figure-html/stratified-bootstrap-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
 </figure>
 </div>
 </div>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_anova_stratified</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">stearic</span> <span class="op">~</span> <span class="va">macro.area</span>, data <span class="op">=</span> <span class="va">oliveoil</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">anova</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7942</code></pre>
+<pre><code>[1] 0.7912</code></pre>
 </div>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># same conclusion as the simple random bootstrap F-test (even less evidence)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># same conclusion as the simple random bootstrap F-test (even less evidence)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -923,283 +932,283 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./assignments.html" class="pagination-link">
-        <span class="nav-page-text">Assignments</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./computational-experiments.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb39" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Bootstrap {#sec-bootstrap}</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co"># turn off scientific notation</span></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Bootstrap</span></span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>The statistical procedure known at the bootstrap was born out of Brad Efron's work in 1979. The bootstrap is named after the hyperbolic phrase "pulling yourself up by your bootstraps" -- a physical act that would be impossible -- because the bootstrap seems to work in a somewhat unbelievable manner for accomplishing statistical inference.</span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>We know that most of the inferential statistics that we have seen previously have been based on knowing theoretical properties of sampling distributions, then working to align our construction of confidence intervals or test-statistics with these known distributions (example knowing CLT and using that for confidence intervals). This is why many of our tests focus around the used of means and proportions, because they have well known properties in large sample sizes. But how do we do inference if the behavior of the sampling distribution isn't already known? Bootstrapping is one possible solution.</span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bootstrap Sampling</span></span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>Normally we would repeatedly sample from the population and compute our summary statistic of interest. This would tell us what values we can expect from repeated random samples and how uncertain we should be in any particular sample we have. Formally, a sampling distribution for a sample statistic is the probability structure for outcomes of the statistic in repeated sampling from the population. If we don't have theoretical properties that tell us how that will behave, our solution is simple... just sample repeatedly from the population to find out the distribution of sample statistics. Wait. That is not very practical, since we used our available resources to collect our one real dataset.</span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>In bootstrapping, we exchange the idea of resampling from our population, and instead resample from our *sample* with replacement! In essence, we take the sample that we have and treat it as the entire population (more specifically because our sample is probably small to be a population, we treat many copies of our sample as the population). Then by repeatedly sampling *with replacement* (each time we will get a different subsample), we can get the randomness from sample to sample that the sampling distribution represents (takes account of). If the sample is representative, then the population *should* behave like many copies of my sample.</span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>Terminology: A **bootstrap sample** is a random resampling of $n$ from the $n$ observations in our original sample, with replacement. The summary statistic that you calculate from a bootstrap sample, is the **bootstrap statistic**. The distribution of bootstrap statistics that you obtain by repeatedly generating bootstrap samples is called the **bootstrap distribution**.</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>The amazing thing about the bootstrap distribution is that the shape and spread of the bootstrap distribution are surprisingly good estimate for the shape and spread of the sampling distribution for the same summary statistic. The primary difference is that instead of sampling distribution having an expected value equal to the population parameter, the bootstrap distribution has an expected value equal to the original sample statistic.</span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>So suppose you have a summary statistic that doesn't have a known sampling distribution. How can you do inference? Generate a bunch of bootstrap samples, use these to compute the bootstrap statistics, then use the variability estimates from the bootstrap distribution as approximations to help us build intervals or p-values.</span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>Bootstrap is centered at the sample statistic, rather than the true population statistic (so it is a bit off); but the variability (i.e. spread) of the bootstrap distribution is a very good stand-in for the variation in the sampling distribution. The shape of the bootstrap distribution is also well mimicked. And the larger original sample that we have / more representative of the population that it is, the better the estimates are of the true variability. So we assume that the location of our intervals and test statistics come from the sample, but we want to get the variability information (e.g. standard errors) from our bootstrap distribution. We can do this for lots of different scenarios that we would have no idea what the theoretical properties are, but with bootstrapping we can still do inference. It makes inference much more flexible and computation focused (rather than theoretical) and we can estimate distribution forms that were not previously possible, we just need to be able to resample.</span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>In short, bootstrapping generates a sampling distribution from the sample. The variability is from the resampling (each bootstrap sample sometimes hits subjects more often). So there is a point estimate from the real data for the summary statistic (like in any other setting), say the 80th percentile, then construct bootstrap confidence intervals using variability estimates from the bootstrap distribution.</span>
-<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>Compared to the traditional frequentist CI, bootstrapping is a different method for estimating the same thing (so it is a different type interval). There is lots of theory underpinning bootstrapping and when it works well / doesn't work, but there is no general rule for when bootstrapping would be better than frequentist / bayesian methods. However, bootstrapping is surprisingly good in a wide variety of settings.</span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>Although it still cannot really handle small samples. Yes it doesn't need an assumption of large sample for CLT, but it is unlikely that a small sample of say 10 observations will be representative of any population, variability will be high. But we can still perform the inferences.</span>
-<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Examples</span></span>
-<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simple example</span></span>
-<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a>Here is a simple example to show how to get a bootstrap sample.</span>
-<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: bootstrap-sample</span></span>
-<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a><span class="co"># lets explore what a bootstrap sample looks like</span></span>
-<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a><span class="co"># original sample</span></span>
-<span id="cb39-58"><a href="#cb39-58" aria-hidden="true" tabindex="-1"></a>simple_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">row =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">11</span>))</span>
-<span id="cb39-59"><a href="#cb39-59" aria-hidden="true" tabindex="-1"></a>simple_data</span>
-<span id="cb39-60"><a href="#cb39-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-61"><a href="#cb39-61" aria-hidden="true" tabindex="-1"></a><span class="co"># single bootstrap sample</span></span>
-<span id="cb39-62"><a href="#cb39-62" aria-hidden="true" tabindex="-1"></a>simple_data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), ]</span>
-<span id="cb39-63"><a href="#cb39-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-64"><a href="#cb39-64" aria-hidden="true" tabindex="-1"></a><span class="co"># row names are indexed by the number of additional times they are included</span></span>
-<span id="cb39-65"><a href="#cb39-65" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; so 3.1 means the second time the third obs was included in the sample</span></span>
-<span id="cb39-66"><a href="#cb39-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-67"><a href="#cb39-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-68"><a href="#cb39-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-69"><a href="#cb39-69" aria-hidden="true" tabindex="-1"></a>Note that only 5 obs would obviously not be a good representative of any important population of interest. So lets work with a bigger dataset and a complex statistic.</span>
-<span id="cb39-70"><a href="#cb39-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-71"><a href="#cb39-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Principal compenent bootstrap</span></span>
-<span id="cb39-72"><a href="#cb39-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-73"><a href="#cb39-73" aria-hidden="true" tabindex="-1"></a>Olive oil dataset contains 8 numeric columns of different acids and suppose we want to do some kind of dimension reduction technique, specifically principal component analysis (PCA).</span>
-<span id="cb39-74"><a href="#cb39-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-77"><a href="#cb39-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-78"><a href="#cb39-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: olive-oil-data</span></span>
-<span id="cb39-79"><a href="#cb39-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-80"><a href="#cb39-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb39-81"><a href="#cb39-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdfCluster)</span>
-<span id="cb39-82"><a href="#cb39-82" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"oliveoil"</span>)</span>
-<span id="cb39-83"><a href="#cb39-83" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oliveoil)</span>
-<span id="cb39-84"><a href="#cb39-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-85"><a href="#cb39-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-86"><a href="#cb39-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-87"><a href="#cb39-87" aria-hidden="true" tabindex="-1"></a>PCA idea:</span>
-<span id="cb39-88"><a href="#cb39-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-89"><a href="#cb39-89" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Instead of 8 dimensions explaining the differences / relationships between olive oils, perhaps only 2 or 3 dimensions could explain just as much information.</span>
-<span id="cb39-90"><a href="#cb39-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-91"><a href="#cb39-91" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>One feature of PCA is that is uses the variance-covariance matrix, which is unit-dependent. So currently if we attempt to rotate this space, oleic (whose scale is much bigger) will highlight more than the others. Instead we can use the correlation matrix, which is unit-free, to remedy this. Thus when figuring out the relationships between variables, it uses these unitless z-scores instead it will treat all 8 as equally important.</span>
-<span id="cb39-92"><a href="#cb39-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-93"><a href="#cb39-93" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`princomp()`</span> performs the PCA. It also gives us standard deviations, which we can turn into variance by squaring. These are then very interpretable. By using the correlation matrix, the sum of the variances equals the number of original dimensions. And the ratio of the variance to the original dimension is the proportion of variability explained by each respective principal component.</span>
-<span id="cb39-94"><a href="#cb39-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-97"><a href="#cb39-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-98"><a href="#cb39-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pca</span></span>
-<span id="cb39-99"><a href="#cb39-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-100"><a href="#cb39-100" aria-hidden="true" tabindex="-1"></a><span class="co"># perform PCA</span></span>
-<span id="cb39-101"><a href="#cb39-101" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; x os the matrix we are trying to reduce and we want to use the correlation matrix</span></span>
-<span id="cb39-102"><a href="#cb39-102" aria-hidden="true" tabindex="-1"></a>oo_pca <span class="ot">&lt;-</span> <span class="fu">princomp</span>(<span class="at">x =</span> oliveoil[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cor =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-103"><a href="#cb39-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-104"><a href="#cb39-104" aria-hidden="true" tabindex="-1"></a><span class="co"># check sum of variances and calculate proportion of the variances explained for each principal component</span></span>
-<span id="cb39-105"><a href="#cb39-105" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb39-106"><a href="#cb39-106" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span>), <span class="dv">3</span>)</span>
-<span id="cb39-107"><a href="#cb39-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-108"><a href="#cb39-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-109"><a href="#cb39-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-110"><a href="#cb39-110" aria-hidden="true" tabindex="-1"></a>For example, the interpretation of this summary statistic is that <span class="in">`r round((oo_pca$sdev)^2 / sum((oo_pca$sdev)^2), 3)[1] * 100`</span> % of the variability found in 8 dimensions can be explained by the first principal component. And <span class="in">`r sum(round((oo_pca$sdev)^2 / sum((oo_pca$sdev)^2), 3)[1:2]) * 100`</span> % can be explained by the first two and so on.</span>
-<span id="cb39-111"><a href="#cb39-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-112"><a href="#cb39-112" aria-hidden="true" tabindex="-1"></a>The first principle component variability percent is what we are going to bootstrap. We can't be super certain that our one particular value is the correct value, but it is definitely an interpretable summary that we can study.</span>
-<span id="cb39-113"><a href="#cb39-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-114"><a href="#cb39-114" aria-hidden="true" tabindex="-1"></a>Goal: collect the bootstrap statistics from 10,000 bootstrap samples for that proportion of variability explained.</span>
-<span id="cb39-115"><a href="#cb39-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-118"><a href="#cb39-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-119"><a href="#cb39-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pca-bootstrap</span></span>
-<span id="cb39-120"><a href="#cb39-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-121"><a href="#cb39-121" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize items</span></span>
-<span id="cb39-122"><a href="#cb39-122" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb39-123"><a href="#cb39-123" aria-hidden="true" tabindex="-1"></a>boot_prop_ex <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
-<span id="cb39-124"><a href="#cb39-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-125"><a href="#cb39-125" aria-hidden="true" tabindex="-1"></a><span class="co"># loop</span></span>
-<span id="cb39-126"><a href="#cb39-126" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb39-127"><a href="#cb39-127" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-128"><a href="#cb39-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create bootstrap sample</span></span>
-<span id="cb39-129"><a href="#cb39-129" aria-hidden="true" tabindex="-1"></a>  boot_samp <span class="ot">&lt;-</span> oliveoil[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(oliveoil), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]</span>
-<span id="cb39-130"><a href="#cb39-130" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-131"><a href="#cb39-131" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate PCA</span></span>
-<span id="cb39-132"><a href="#cb39-132" aria-hidden="true" tabindex="-1"></a>  oo_pca <span class="ot">&lt;-</span> <span class="fu">princomp</span>(<span class="at">x =</span> boot_samp[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cor =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-133"><a href="#cb39-133" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-134"><a href="#cb39-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save explained variability of first principal component</span></span>
-<span id="cb39-135"><a href="#cb39-135" aria-hidden="true" tabindex="-1"></a>  boot_prop_ex[b] <span class="ot">&lt;-</span> ((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span>))[<span class="dv">1</span>]</span>
-<span id="cb39-136"><a href="#cb39-136" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-137"><a href="#cb39-137" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-138"><a href="#cb39-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-139"><a href="#cb39-139" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb39-140"><a href="#cb39-140" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_prop_ex)</span>
-<span id="cb39-141"><a href="#cb39-141" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(boot_prop_ex)</span>
-<span id="cb39-142"><a href="#cb39-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-143"><a href="#cb39-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-144"><a href="#cb39-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-145"><a href="#cb39-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bootstrap inference </span></span>
-<span id="cb39-146"><a href="#cb39-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-147"><a href="#cb39-147" aria-hidden="true" tabindex="-1"></a>Then we can get a central bootstrap interval by getting the lower and upper quantiles of the middle, say 90%, of bootstrap statistics. Replace bootstrap distribution with sampling distribution and we have a confidence interval (they are analogous). This bootstrap interval should have the same width as a regular confidence interval built from resampling the population and the sampling distribution, just centered at the sample statistic instead of the true mean.</span>
-<span id="cb39-148"><a href="#cb39-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-151"><a href="#cb39-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-152"><a href="#cb39-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: bootstrap-interval</span></span>
-<span id="cb39-153"><a href="#cb39-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-154"><a href="#cb39-154" aria-hidden="true" tabindex="-1"></a><span class="co"># central boootstrap interval</span></span>
-<span id="cb39-155"><a href="#cb39-155" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(boot_prop_ex, <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span>))</span>
-<span id="cb39-156"><a href="#cb39-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-157"><a href="#cb39-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-158"><a href="#cb39-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-159"><a href="#cb39-159" aria-hidden="true" tabindex="-1"></a>If wanted to do official hypothesis test, this is the logic (called inverting the test, generate from the sample instead of the sampling distribution):</span>
-<span id="cb39-160"><a href="#cb39-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-161"><a href="#cb39-161" aria-hidden="true" tabindex="-1"></a><span class="al">![](Files/Images/bootstrap-hypothesis-test.png)</span>{width="292"}</span>
-<span id="cb39-162"><a href="#cb39-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-163"><a href="#cb39-163" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Suppose the bootstrap distribution is centered at the sample statistic $S$. The shape and spread are exactly like what the true sampling distribution would be.</span>
-<span id="cb39-164"><a href="#cb39-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-165"><a href="#cb39-165" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Now suppose there is a hypothesized value, say $S_0 = 0.5$. This is where the sampling distribution should be centered. We know the variability we should see around that value.</span>
-<span id="cb39-166"><a href="#cb39-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-167"><a href="#cb39-167" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>So $S_0$ being in the tail of the bootstrap distribution is like $S$ being in the tail of the sampling distribution. We are inverting the roles of the test statistic and the center point. We can use this to do testing.</span>
-<span id="cb39-168"><a href="#cb39-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-169"><a href="#cb39-169" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Being way out in the tails is evidence that the hypothesized value probably isn't the true value; same logic as regular hypothesis test. Formally, we could actually shift all the points in the bootstrap dist and calculate a p-value.</span>
-<span id="cb39-170"><a href="#cb39-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-173"><a href="#cb39-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-174"><a href="#cb39-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: bootstrap-inversion</span></span>
-<span id="cb39-175"><a href="#cb39-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-176"><a href="#cb39-176" aria-hidden="true" tabindex="-1"></a><span class="co"># check other quantities</span></span>
-<span id="cb39-177"><a href="#cb39-177" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(boot_prop_ex <span class="sc">&gt;=</span> <span class="fl">0.5</span>)</span>
-<span id="cb39-178"><a href="#cb39-178" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_prop_ex <span class="sc">&gt;=</span> <span class="fl">0.5</span>)</span>
-<span id="cb39-179"><a href="#cb39-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-180"><a href="#cb39-180" aria-hidden="true" tabindex="-1"></a><span class="co"># shift bootstrap distribution to S_not</span></span>
-<span id="cb39-181"><a href="#cb39-181" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; calculate sample statistic found earlier (in one line!)</span></span>
-<span id="cb39-182"><a href="#cb39-182" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> (<span class="fu">princomp</span>(<span class="at">x =</span> oliveoil[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cor =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span> magrittr<span class="sc">::</span><span class="fu">divide_by</span>(<span class="fu">sum</span>(.)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span>]</span>
-<span id="cb39-183"><a href="#cb39-183" aria-hidden="true" tabindex="-1"></a>S_not <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb39-184"><a href="#cb39-184" aria-hidden="true" tabindex="-1"></a>boot_prop_ex_inverted <span class="ot">&lt;-</span> boot_prop_ex <span class="sc">+</span> (<span class="fu">abs</span>(<span class="fu">mean</span>(boot_prop_ex) <span class="sc">-</span> S_not))</span>
-<span id="cb39-185"><a href="#cb39-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-186"><a href="#cb39-186" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate p-value</span></span>
-<span id="cb39-187"><a href="#cb39-187" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_prop_ex_inverted <span class="sc">&lt;=</span> S)</span>
-<span id="cb39-188"><a href="#cb39-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-189"><a href="#cb39-189" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize shift</span></span>
-<span id="cb39-190"><a href="#cb39-190" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb39-191"><a href="#cb39-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> boot_prop_ex),</span>
-<span id="cb39-192"><a href="#cb39-192" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb39-193"><a href="#cb39-193" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb39-194"><a href="#cb39-194" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.20</span>) <span class="sc">+</span> </span>
-<span id="cb39-195"><a href="#cb39-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> boot_prop_ex_inverted),</span>
-<span id="cb39-196"><a href="#cb39-196" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"purple"</span>,</span>
-<span id="cb39-197"><a href="#cb39-197" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"purple"</span>,</span>
-<span id="cb39-198"><a href="#cb39-198" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.20</span>) <span class="sc">+</span> </span>
-<span id="cb39-199"><a href="#cb39-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> S),</span>
-<span id="cb39-200"><a href="#cb39-200" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb39-201"><a href="#cb39-201" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> S_not),</span>
-<span id="cb39-202"><a href="#cb39-202" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"purple"</span>) <span class="sc">+</span> </span>
-<span id="cb39-203"><a href="#cb39-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb39-204"><a href="#cb39-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-205"><a href="#cb39-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-206"><a href="#cb39-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-207"><a href="#cb39-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### F-test bootstrap</span></span>
-<span id="cb39-208"><a href="#cb39-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-209"><a href="#cb39-209" aria-hidden="true" tabindex="-1"></a>Use bootstrapping to reproduce the following ANOVA F-test for the difference in overall mean Palmitic Acid for olive oils in different macro areas. </span>
-<span id="cb39-210"><a href="#cb39-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-213"><a href="#cb39-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-214"><a href="#cb39-214" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: f-test-bootstrap</span></span>
-<span id="cb39-215"><a href="#cb39-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-216"><a href="#cb39-216" aria-hidden="true" tabindex="-1"></a><span class="co"># find alternative bootstrap to a common test</span></span>
-<span id="cb39-217"><a href="#cb39-217" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> oliveoil)</span>
-<span id="cb39-218"><a href="#cb39-218" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span>
-<span id="cb39-219"><a href="#cb39-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-220"><a href="#cb39-220" aria-hidden="true" tabindex="-1"></a><span class="co"># loop to collect the boostrap statistics of the F stat from 10000 bootstrap samples</span></span>
-<span id="cb39-221"><a href="#cb39-221" aria-hidden="true" tabindex="-1"></a>boot_anova <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>B, <span class="cf">function</span>(X) {</span>
-<span id="cb39-222"><a href="#cb39-222" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-223"><a href="#cb39-223" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate bootstrap sample</span></span>
-<span id="cb39-224"><a href="#cb39-224" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; fit model</span></span>
-<span id="cb39-225"><a href="#cb39-225" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; anova table</span></span>
-<span id="cb39-226"><a href="#cb39-226" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; extract F-stat</span></span>
-<span id="cb39-227"><a href="#cb39-227" aria-hidden="true" tabindex="-1"></a>  oliveoil[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(oliveoil), <span class="at">replace =</span> <span class="cn">TRUE</span>), ] <span class="sc">%&gt;%</span> </span>
-<span id="cb39-228"><a href="#cb39-228" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> .)} <span class="sc">%&gt;%</span> </span>
-<span id="cb39-229"><a href="#cb39-229" aria-hidden="true" tabindex="-1"></a>    anova <span class="sc">%&gt;%</span> </span>
-<span id="cb39-230"><a href="#cb39-230" aria-hidden="true" tabindex="-1"></a>    .[<span class="dv">1</span>, <span class="dv">4</span>]</span>
-<span id="cb39-231"><a href="#cb39-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-232"><a href="#cb39-232" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb39-233"><a href="#cb39-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-234"><a href="#cb39-234" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb39-235"><a href="#cb39-235" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_anova)</span>
-<span id="cb39-236"><a href="#cb39-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-237"><a href="#cb39-237" aria-hidden="true" tabindex="-1"></a><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
-<span id="cb39-238"><a href="#cb39-238" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_anova <span class="sc">&gt;=</span> <span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> oliveoil) <span class="sc">%&gt;%</span> anova <span class="sc">%&gt;%</span> .[<span class="dv">1</span>,<span class="dv">4</span>])</span>
-<span id="cb39-239"><a href="#cb39-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-240"><a href="#cb39-240" aria-hidden="true" tabindex="-1"></a><span class="co"># same conclusion as the original F-test</span></span>
-<span id="cb39-241"><a href="#cb39-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-242"><a href="#cb39-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-243"><a href="#cb39-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-244"><a href="#cb39-244" aria-hidden="true" tabindex="-1"></a>This also demonstrates that we won't always get symmetric bootstrap distributions. It depends on the statistic we are studying, the skewness in the population, the sample size, etc. (the same factors as usual for sampling distributions).</span>
-<span id="cb39-245"><a href="#cb39-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-246"><a href="#cb39-246" aria-hidden="true" tabindex="-1"></a>Additionally, we have been doing thus far is the simple bootstrap. We can try other sampling techniques as well. Another strategy would be to do a stratified sample rather than sampling with replacement for the whole sample. This would entail bootstrapping within each group, so the group sample sizes of macro.area are the same in our bootstrap samples as in the original sample.</span>
-<span id="cb39-247"><a href="#cb39-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-250"><a href="#cb39-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-251"><a href="#cb39-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: stratified-bootstrap</span></span>
-<span id="cb39-252"><a href="#cb39-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-253"><a href="#cb39-253" aria-hidden="true" tabindex="-1"></a><span class="co"># collect a single stratified bootstrap sample</span></span>
-<span id="cb39-254"><a href="#cb39-254" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; split by macro.area, bootstrap within each, then combine results back together</span></span>
-<span id="cb39-255"><a href="#cb39-255" aria-hidden="true" tabindex="-1"></a>sample_stratified <span class="ot">&lt;-</span> oliveoil <span class="sc">%&gt;%</span> </span>
-<span id="cb39-256"><a href="#cb39-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>macro.area) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-257"><a href="#cb39-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(df) df[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-258"><a href="#cb39-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(bind_rows)</span>
-<span id="cb39-259"><a href="#cb39-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-260"><a href="#cb39-260" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm group counts</span></span>
-<span id="cb39-261"><a href="#cb39-261" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(sample_stratified, macro.area) <span class="sc">==</span> <span class="fu">count</span>(oliveoil, macro.area)</span>
-<span id="cb39-262"><a href="#cb39-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-263"><a href="#cb39-263" aria-hidden="true" tabindex="-1"></a><span class="co"># loop to collect the boostrap statistics of the F stat from 10000 bootstrap samples</span></span>
-<span id="cb39-264"><a href="#cb39-264" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb39-265"><a href="#cb39-265" aria-hidden="true" tabindex="-1"></a>boot_anova_stratified <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>B, <span class="cf">function</span>(X) {</span>
-<span id="cb39-266"><a href="#cb39-266" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-267"><a href="#cb39-267" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate stratified bootstrap sample</span></span>
-<span id="cb39-268"><a href="#cb39-268" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; fit model</span></span>
-<span id="cb39-269"><a href="#cb39-269" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; anova table</span></span>
-<span id="cb39-270"><a href="#cb39-270" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; extract F-stat</span></span>
-<span id="cb39-271"><a href="#cb39-271" aria-hidden="true" tabindex="-1"></a>  oliveoil <span class="sc">%&gt;%</span> </span>
-<span id="cb39-272"><a href="#cb39-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>macro.area) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-273"><a href="#cb39-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(df) df[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-274"><a href="#cb39-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(bind_rows) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-275"><a href="#cb39-275" aria-hidden="true" tabindex="-1"></a>    .[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(oliveoil), <span class="at">replace =</span> <span class="cn">TRUE</span>), ] <span class="sc">%&gt;%</span> </span>
-<span id="cb39-276"><a href="#cb39-276" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> .)} <span class="sc">%&gt;%</span> </span>
-<span id="cb39-277"><a href="#cb39-277" aria-hidden="true" tabindex="-1"></a>    anova <span class="sc">%&gt;%</span> </span>
-<span id="cb39-278"><a href="#cb39-278" aria-hidden="true" tabindex="-1"></a>    .[<span class="dv">1</span>, <span class="dv">4</span>]</span>
-<span id="cb39-279"><a href="#cb39-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-280"><a href="#cb39-280" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb39-281"><a href="#cb39-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-282"><a href="#cb39-282" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb39-283"><a href="#cb39-283" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_anova_stratified)</span>
-<span id="cb39-284"><a href="#cb39-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-285"><a href="#cb39-285" aria-hidden="true" tabindex="-1"></a><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
-<span id="cb39-286"><a href="#cb39-286" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_anova_stratified <span class="sc">&gt;=</span> <span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> oliveoil) <span class="sc">%&gt;%</span> anova <span class="sc">%&gt;%</span> .[<span class="dv">1</span>,<span class="dv">4</span>])</span>
-<span id="cb39-287"><a href="#cb39-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-288"><a href="#cb39-288" aria-hidden="true" tabindex="-1"></a><span class="co"># same conclusion as the simple random bootstrap F-test (even less evidence)</span></span>
-<span id="cb39-289"><a href="#cb39-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-290"><a href="#cb39-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb36" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Bootstrap {#sec-bootstrap}</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co"># turn off scientific notation</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Bootstrap</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>The statistical procedure known at the bootstrap was born out of Brad Efron's work in 1979. The bootstrap is named after the hyperbolic phrase "pulling yourself up by your bootstraps" -- a physical act that would be impossible -- because the bootstrap seems to work in a somewhat unbelievable manner for accomplishing statistical inference.</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>We know that most of the inferential statistics that we have seen previously have been based on knowing theoretical properties of sampling distributions, then working to align our construction of confidence intervals or test-statistics with these known distributions (example knowing CLT and using that for confidence intervals). This is why many of our tests focus around the used of means and proportions, because they have well known properties in large sample sizes. But how do we do inference if the behavior of the sampling distribution isn't already known? Bootstrapping is one possible solution.</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bootstrap Sampling</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>Normally we would repeatedly sample from the population and compute our summary statistic of interest. This would tell us what values we can expect from repeated random samples and how uncertain we should be in any particular sample we have. Formally, a sampling distribution for a sample statistic is the probability structure for outcomes of the statistic in repeated sampling from the population. If we don't have theoretical properties that tell us how that will behave, our solution is simple... just sample repeatedly from the population to find out the distribution of sample statistics. Wait. That is not very practical, since we used our available resources to collect our one real dataset.</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>In bootstrapping, we exchange the idea of resampling from our population, and instead resample from our *sample* with replacement! In essence, we take the sample that we have and treat it as the entire population (more specifically because our sample is probably small to be a population, we treat many copies of our sample as the population). Then by repeatedly sampling *with replacement* (each time we will get a different subsample), we can get the randomness from sample to sample that the sampling distribution represents (takes account of). If the sample is representative, then the population *should* behave like many copies of my sample.</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>Terminology: A **bootstrap sample** is a random resampling of $n$ from the $n$ observations in our original sample, with replacement. The summary statistic that you calculate from a bootstrap sample, is the **bootstrap statistic**. The distribution of bootstrap statistics that you obtain by repeatedly generating bootstrap samples is called the **bootstrap distribution**.</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>The amazing thing about the bootstrap distribution is that the shape and spread of the bootstrap distribution are surprisingly good estimate for the shape and spread of the sampling distribution for the same summary statistic. The primary difference is that instead of sampling distribution having an expected value equal to the population parameter, the bootstrap distribution has an expected value equal to the original sample statistic.</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>So suppose you have a summary statistic that doesn't have a known sampling distribution. How can you do inference? Generate a bunch of bootstrap samples, use these to compute the bootstrap statistics, then use the variability estimates from the bootstrap distribution as approximations to help us build intervals or p-values.</span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>Bootstrap is centered at the sample statistic, rather than the true population statistic (so it is a bit off); but the variability (i.e. spread) of the bootstrap distribution is a very good stand-in for the variation in the sampling distribution. The shape of the bootstrap distribution is also well mimicked. And the larger original sample that we have / more representative of the population that it is, the better the estimates are of the true variability. So we assume that the location of our intervals and test statistics come from the sample, but we want to get the variability information (e.g. standard errors) from our bootstrap distribution. We can do this for lots of different scenarios that we would have no idea what the theoretical properties are, but with bootstrapping we can still do inference. It makes inference much more flexible and computation focused (rather than theoretical) and we can estimate distribution forms that were not previously possible, we just need to be able to resample.</span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>In short, bootstrapping generates a sampling distribution from the sample. The variability is from the resampling (each bootstrap sample sometimes hits subjects more often). So there is a point estimate from the real data for the summary statistic (like in any other setting), say the 80th percentile, then construct bootstrap confidence intervals using variability estimates from the bootstrap distribution.</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>Compared to the traditional frequentist CI, bootstrapping is a different method for estimating the same thing (so it is a different type interval). There is lots of theory underpinning bootstrapping and when it works well / doesn't work, but there is no general rule for when bootstrapping would be better than frequentist / bayesian methods. However, bootstrapping is surprisingly good in a wide variety of settings.</span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>Although it still cannot really handle small samples. Yes it doesn't need an assumption of large sample for CLT, but it is unlikely that a small sample of say 10 observations will be representative of any population, variability will be high. But we can still perform the inferences.</span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Examples</span></span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simple example</span></span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>Here is a simple example to show how to get a bootstrap sample.</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: bootstrap-sample</span></span>
+<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a><span class="co"># lets explore what a bootstrap sample looks like</span></span>
+<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a><span class="co"># original sample</span></span>
+<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a>simple_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">row =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">11</span>))</span>
+<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a>simple_data</span>
+<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a><span class="co"># single bootstrap sample</span></span>
+<span id="cb36-62"><a href="#cb36-62" aria-hidden="true" tabindex="-1"></a>simple_data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb36-63"><a href="#cb36-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-64"><a href="#cb36-64" aria-hidden="true" tabindex="-1"></a><span class="co"># row names are indexed by the number of additional times they are included</span></span>
+<span id="cb36-65"><a href="#cb36-65" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; so 3.1 means the second time the third obs was included in the sample</span></span>
+<span id="cb36-66"><a href="#cb36-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>Note that only 5 obs would obviously not be a good representative of any important population of interest. So lets work with a bigger dataset and a complex statistic.</span>
+<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Principal compenent bootstrap</span></span>
+<span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a>Olive oil dataset contains 8 numeric columns of different acids and suppose we want to do some kind of dimension reduction technique, specifically principal component analysis (PCA).</span>
+<span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: olive-oil-data</span></span>
+<span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-80"><a href="#cb36-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-81"><a href="#cb36-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdfCluster)</span>
+<span id="cb36-82"><a href="#cb36-82" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"oliveoil"</span>)</span>
+<span id="cb36-83"><a href="#cb36-83" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oliveoil)</span>
+<span id="cb36-84"><a href="#cb36-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-85"><a href="#cb36-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-86"><a href="#cb36-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-87"><a href="#cb36-87" aria-hidden="true" tabindex="-1"></a>PCA idea:</span>
+<span id="cb36-88"><a href="#cb36-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-89"><a href="#cb36-89" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Instead of 8 dimensions explaining the differences / relationships between olive oils, perhaps only 2 or 3 dimensions could explain just as much information.</span>
+<span id="cb36-90"><a href="#cb36-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-91"><a href="#cb36-91" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>One feature of PCA is that is uses the variance-covariance matrix, which is unit-dependent. So currently if we attempt to rotate this space, oleic (whose scale is much bigger) will highlight more than the others. Instead we can use the correlation matrix, which is unit-free, to remedy this. Thus when figuring out the relationships between variables, it uses these unitless z-scores instead it will treat all 8 as equally important.</span>
+<span id="cb36-92"><a href="#cb36-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-93"><a href="#cb36-93" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`princomp()`</span> performs the PCA. It also gives us standard deviations, which we can turn into variance by squaring. These are then very interpretable. By using the correlation matrix, the sum of the variances equals the number of original dimensions. And the ratio of the variance to the original dimension is the proportion of variability explained by each respective principal component.</span>
+<span id="cb36-94"><a href="#cb36-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-97"><a href="#cb36-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-98"><a href="#cb36-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pca</span></span>
+<span id="cb36-99"><a href="#cb36-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-100"><a href="#cb36-100" aria-hidden="true" tabindex="-1"></a><span class="co"># perform PCA</span></span>
+<span id="cb36-101"><a href="#cb36-101" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; x os the matrix we are trying to reduce and we want to use the correlation matrix</span></span>
+<span id="cb36-102"><a href="#cb36-102" aria-hidden="true" tabindex="-1"></a>oo_pca <span class="ot">&lt;-</span> <span class="fu">princomp</span>(<span class="at">x =</span> oliveoil[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cor =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-103"><a href="#cb36-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-104"><a href="#cb36-104" aria-hidden="true" tabindex="-1"></a><span class="co"># check sum of variances and calculate proportion of the variances explained for each principal component</span></span>
+<span id="cb36-105"><a href="#cb36-105" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb36-106"><a href="#cb36-106" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span>), <span class="dv">3</span>)</span>
+<span id="cb36-107"><a href="#cb36-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-108"><a href="#cb36-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-109"><a href="#cb36-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-110"><a href="#cb36-110" aria-hidden="true" tabindex="-1"></a>For example, the interpretation of this summary statistic is that <span class="in">`r round((oo_pca$sdev)^2 / sum((oo_pca$sdev)^2), 3)[1] * 100`</span> % of the variability found in 8 dimensions can be explained by the first principal component. And <span class="in">`r sum(round((oo_pca$sdev)^2 / sum((oo_pca$sdev)^2), 3)[1:2]) * 100`</span> % can be explained by the first two and so on.</span>
+<span id="cb36-111"><a href="#cb36-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-112"><a href="#cb36-112" aria-hidden="true" tabindex="-1"></a>The first principle component variability percent is what we are going to bootstrap. We can't be super certain that our one particular value is the correct value, but it is definitely an interpretable summary that we can study.</span>
+<span id="cb36-113"><a href="#cb36-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-114"><a href="#cb36-114" aria-hidden="true" tabindex="-1"></a>Goal: collect the bootstrap statistics from 10,000 bootstrap samples for that proportion of variability explained.</span>
+<span id="cb36-115"><a href="#cb36-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-118"><a href="#cb36-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-119"><a href="#cb36-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pca-bootstrap</span></span>
+<span id="cb36-120"><a href="#cb36-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-121"><a href="#cb36-121" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize items</span></span>
+<span id="cb36-122"><a href="#cb36-122" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb36-123"><a href="#cb36-123" aria-hidden="true" tabindex="-1"></a>boot_prop_ex <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, B)</span>
+<span id="cb36-124"><a href="#cb36-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-125"><a href="#cb36-125" aria-hidden="true" tabindex="-1"></a><span class="co"># loop</span></span>
+<span id="cb36-126"><a href="#cb36-126" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb36-127"><a href="#cb36-127" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-128"><a href="#cb36-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create bootstrap sample</span></span>
+<span id="cb36-129"><a href="#cb36-129" aria-hidden="true" tabindex="-1"></a>  boot_samp <span class="ot">&lt;-</span> oliveoil[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(oliveoil), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb36-130"><a href="#cb36-130" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-131"><a href="#cb36-131" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate PCA</span></span>
+<span id="cb36-132"><a href="#cb36-132" aria-hidden="true" tabindex="-1"></a>  oo_pca <span class="ot">&lt;-</span> <span class="fu">princomp</span>(<span class="at">x =</span> boot_samp[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cor =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-133"><a href="#cb36-133" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-134"><a href="#cb36-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save explained variability of first principal component</span></span>
+<span id="cb36-135"><a href="#cb36-135" aria-hidden="true" tabindex="-1"></a>  boot_prop_ex[b] <span class="ot">&lt;-</span> ((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>((oo_pca<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span>))[<span class="dv">1</span>]</span>
+<span id="cb36-136"><a href="#cb36-136" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-137"><a href="#cb36-137" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-138"><a href="#cb36-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-139"><a href="#cb36-139" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
+<span id="cb36-140"><a href="#cb36-140" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_prop_ex)</span>
+<span id="cb36-141"><a href="#cb36-141" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(boot_prop_ex)</span>
+<span id="cb36-142"><a href="#cb36-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-143"><a href="#cb36-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-144"><a href="#cb36-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-145"><a href="#cb36-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bootstrap inference </span></span>
+<span id="cb36-146"><a href="#cb36-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-147"><a href="#cb36-147" aria-hidden="true" tabindex="-1"></a>Then we can get a central bootstrap interval by getting the lower and upper quantiles of the middle, say 90%, of bootstrap statistics. Replace bootstrap distribution with sampling distribution and we have a confidence interval (they are analogous). This bootstrap interval should have the same width as a regular confidence interval built from resampling the population and the sampling distribution, just centered at the sample statistic instead of the true mean.</span>
+<span id="cb36-148"><a href="#cb36-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-151"><a href="#cb36-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-152"><a href="#cb36-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: bootstrap-interval</span></span>
+<span id="cb36-153"><a href="#cb36-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-154"><a href="#cb36-154" aria-hidden="true" tabindex="-1"></a><span class="co"># central boootstrap interval</span></span>
+<span id="cb36-155"><a href="#cb36-155" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(boot_prop_ex, <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span>))</span>
+<span id="cb36-156"><a href="#cb36-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-157"><a href="#cb36-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-158"><a href="#cb36-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-159"><a href="#cb36-159" aria-hidden="true" tabindex="-1"></a>If wanted to do official hypothesis test, this is the logic (called inverting the test, generate from the sample instead of the sampling distribution):</span>
+<span id="cb36-160"><a href="#cb36-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-161"><a href="#cb36-161" aria-hidden="true" tabindex="-1"></a><span class="al">![](Files/Images/bootstrap-hypothesis-test.png)</span>{width="292"}</span>
+<span id="cb36-162"><a href="#cb36-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-163"><a href="#cb36-163" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Suppose the bootstrap distribution is centered at the sample statistic $S$. The shape and spread are exactly like what the true sampling distribution would be.</span>
+<span id="cb36-164"><a href="#cb36-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-165"><a href="#cb36-165" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Now suppose there is a hypothesized value, say $S_0 = 0.5$. This is where the sampling distribution should be centered. We know the variability we should see around that value.</span>
+<span id="cb36-166"><a href="#cb36-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-167"><a href="#cb36-167" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>So $S_0$ being in the tail of the bootstrap distribution is like $S$ being in the tail of the sampling distribution. We are inverting the roles of the test statistic and the center point. We can use this to do testing.</span>
+<span id="cb36-168"><a href="#cb36-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-169"><a href="#cb36-169" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Being way out in the tails is evidence that the hypothesized value probably isn't the true value; same logic as regular hypothesis test. Formally, we could actually shift all the points in the bootstrap dist and calculate a p-value.</span>
+<span id="cb36-170"><a href="#cb36-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-173"><a href="#cb36-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-174"><a href="#cb36-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: bootstrap-inversion</span></span>
+<span id="cb36-175"><a href="#cb36-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-176"><a href="#cb36-176" aria-hidden="true" tabindex="-1"></a><span class="co"># check other quantities</span></span>
+<span id="cb36-177"><a href="#cb36-177" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(boot_prop_ex <span class="sc">&gt;=</span> <span class="fl">0.5</span>)</span>
+<span id="cb36-178"><a href="#cb36-178" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_prop_ex <span class="sc">&gt;=</span> <span class="fl">0.5</span>)</span>
+<span id="cb36-179"><a href="#cb36-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-180"><a href="#cb36-180" aria-hidden="true" tabindex="-1"></a><span class="co"># shift bootstrap distribution to S_not</span></span>
+<span id="cb36-181"><a href="#cb36-181" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; calculate sample statistic found earlier (in one line!)</span></span>
+<span id="cb36-182"><a href="#cb36-182" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> (<span class="fu">princomp</span>(<span class="at">x =</span> oliveoil[<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cor =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>sdev)<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span> magrittr<span class="sc">::</span><span class="fu">divide_by</span>(<span class="fu">sum</span>(.)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span>]</span>
+<span id="cb36-183"><a href="#cb36-183" aria-hidden="true" tabindex="-1"></a>S_not <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb36-184"><a href="#cb36-184" aria-hidden="true" tabindex="-1"></a>boot_prop_ex_inverted <span class="ot">&lt;-</span> boot_prop_ex <span class="sc">+</span> (<span class="fu">abs</span>(<span class="fu">mean</span>(boot_prop_ex) <span class="sc">-</span> S_not))</span>
+<span id="cb36-185"><a href="#cb36-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-186"><a href="#cb36-186" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate p-value</span></span>
+<span id="cb36-187"><a href="#cb36-187" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_prop_ex_inverted <span class="sc">&lt;=</span> S)</span>
+<span id="cb36-188"><a href="#cb36-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-189"><a href="#cb36-189" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize shift</span></span>
+<span id="cb36-190"><a href="#cb36-190" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb36-191"><a href="#cb36-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> boot_prop_ex),</span>
+<span id="cb36-192"><a href="#cb36-192" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb36-193"><a href="#cb36-193" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb36-194"><a href="#cb36-194" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.20</span>) <span class="sc">+</span> </span>
+<span id="cb36-195"><a href="#cb36-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> boot_prop_ex_inverted),</span>
+<span id="cb36-196"><a href="#cb36-196" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"purple"</span>,</span>
+<span id="cb36-197"><a href="#cb36-197" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"purple"</span>,</span>
+<span id="cb36-198"><a href="#cb36-198" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.20</span>) <span class="sc">+</span> </span>
+<span id="cb36-199"><a href="#cb36-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> S),</span>
+<span id="cb36-200"><a href="#cb36-200" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb36-201"><a href="#cb36-201" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> S_not),</span>
+<span id="cb36-202"><a href="#cb36-202" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"purple"</span>) <span class="sc">+</span> </span>
+<span id="cb36-203"><a href="#cb36-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb36-204"><a href="#cb36-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-205"><a href="#cb36-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-206"><a href="#cb36-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-207"><a href="#cb36-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### F-test bootstrap</span></span>
+<span id="cb36-208"><a href="#cb36-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-209"><a href="#cb36-209" aria-hidden="true" tabindex="-1"></a>Use bootstrapping to reproduce the following ANOVA F-test for the difference in overall mean Palmitic Acid for olive oils in different macro areas. </span>
+<span id="cb36-210"><a href="#cb36-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-213"><a href="#cb36-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-214"><a href="#cb36-214" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: f-test-bootstrap</span></span>
+<span id="cb36-215"><a href="#cb36-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-216"><a href="#cb36-216" aria-hidden="true" tabindex="-1"></a><span class="co"># find alternative bootstrap to a common test</span></span>
+<span id="cb36-217"><a href="#cb36-217" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> oliveoil)</span>
+<span id="cb36-218"><a href="#cb36-218" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span>
+<span id="cb36-219"><a href="#cb36-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-220"><a href="#cb36-220" aria-hidden="true" tabindex="-1"></a><span class="co"># loop to collect the boostrap statistics of the F stat from 10000 bootstrap samples</span></span>
+<span id="cb36-221"><a href="#cb36-221" aria-hidden="true" tabindex="-1"></a>boot_anova <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>B, <span class="cf">function</span>(X) {</span>
+<span id="cb36-222"><a href="#cb36-222" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-223"><a href="#cb36-223" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate bootstrap sample</span></span>
+<span id="cb36-224"><a href="#cb36-224" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; fit model</span></span>
+<span id="cb36-225"><a href="#cb36-225" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; anova table</span></span>
+<span id="cb36-226"><a href="#cb36-226" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; extract F-stat</span></span>
+<span id="cb36-227"><a href="#cb36-227" aria-hidden="true" tabindex="-1"></a>  oliveoil[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(oliveoil), <span class="at">replace =</span> <span class="cn">TRUE</span>), ] <span class="sc">%&gt;%</span> </span>
+<span id="cb36-228"><a href="#cb36-228" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> .)} <span class="sc">%&gt;%</span> </span>
+<span id="cb36-229"><a href="#cb36-229" aria-hidden="true" tabindex="-1"></a>    anova <span class="sc">%&gt;%</span> </span>
+<span id="cb36-230"><a href="#cb36-230" aria-hidden="true" tabindex="-1"></a>    .[<span class="dv">1</span>, <span class="dv">4</span>]</span>
+<span id="cb36-231"><a href="#cb36-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-232"><a href="#cb36-232" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb36-233"><a href="#cb36-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-234"><a href="#cb36-234" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
+<span id="cb36-235"><a href="#cb36-235" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_anova)</span>
+<span id="cb36-236"><a href="#cb36-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-237"><a href="#cb36-237" aria-hidden="true" tabindex="-1"></a><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
+<span id="cb36-238"><a href="#cb36-238" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_anova <span class="sc">&gt;=</span> <span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> oliveoil) <span class="sc">%&gt;%</span> anova <span class="sc">%&gt;%</span> .[<span class="dv">1</span>,<span class="dv">4</span>])</span>
+<span id="cb36-239"><a href="#cb36-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-240"><a href="#cb36-240" aria-hidden="true" tabindex="-1"></a><span class="co"># same conclusion as the original F-test</span></span>
+<span id="cb36-241"><a href="#cb36-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-242"><a href="#cb36-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-243"><a href="#cb36-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-244"><a href="#cb36-244" aria-hidden="true" tabindex="-1"></a>This also demonstrates that we won't always get symmetric bootstrap distributions. It depends on the statistic we are studying, the skewness in the population, the sample size, etc. (the same factors as usual for sampling distributions).</span>
+<span id="cb36-245"><a href="#cb36-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-246"><a href="#cb36-246" aria-hidden="true" tabindex="-1"></a>Additionally, we have been doing thus far is the simple bootstrap. We can try other sampling techniques as well. Another strategy would be to do a stratified sample rather than sampling with replacement for the whole sample. This would entail bootstrapping within each group, so the group sample sizes of macro.area are the same in our bootstrap samples as in the original sample.</span>
+<span id="cb36-247"><a href="#cb36-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-250"><a href="#cb36-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-251"><a href="#cb36-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: stratified-bootstrap</span></span>
+<span id="cb36-252"><a href="#cb36-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-253"><a href="#cb36-253" aria-hidden="true" tabindex="-1"></a><span class="co"># collect a single stratified bootstrap sample</span></span>
+<span id="cb36-254"><a href="#cb36-254" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; split by macro.area, bootstrap within each, then combine results back together</span></span>
+<span id="cb36-255"><a href="#cb36-255" aria-hidden="true" tabindex="-1"></a>sample_stratified <span class="ot">&lt;-</span> oliveoil <span class="sc">%&gt;%</span> </span>
+<span id="cb36-256"><a href="#cb36-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>macro.area) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-257"><a href="#cb36-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(df) df[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-258"><a href="#cb36-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(bind_rows)</span>
+<span id="cb36-259"><a href="#cb36-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-260"><a href="#cb36-260" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm group counts</span></span>
+<span id="cb36-261"><a href="#cb36-261" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(sample_stratified, macro.area) <span class="sc">==</span> <span class="fu">count</span>(oliveoil, macro.area)</span>
+<span id="cb36-262"><a href="#cb36-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-263"><a href="#cb36-263" aria-hidden="true" tabindex="-1"></a><span class="co"># loop to collect the boostrap statistics of the F stat from 10000 bootstrap samples</span></span>
+<span id="cb36-264"><a href="#cb36-264" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb36-265"><a href="#cb36-265" aria-hidden="true" tabindex="-1"></a>boot_anova_stratified <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>B, <span class="cf">function</span>(X) {</span>
+<span id="cb36-266"><a href="#cb36-266" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-267"><a href="#cb36-267" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate stratified bootstrap sample</span></span>
+<span id="cb36-268"><a href="#cb36-268" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; fit model</span></span>
+<span id="cb36-269"><a href="#cb36-269" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; anova table</span></span>
+<span id="cb36-270"><a href="#cb36-270" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; extract F-stat</span></span>
+<span id="cb36-271"><a href="#cb36-271" aria-hidden="true" tabindex="-1"></a>  oliveoil <span class="sc">%&gt;%</span> </span>
+<span id="cb36-272"><a href="#cb36-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>macro.area) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-273"><a href="#cb36-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(df) df[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-274"><a href="#cb36-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(bind_rows) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-275"><a href="#cb36-275" aria-hidden="true" tabindex="-1"></a>    .[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(oliveoil), <span class="at">replace =</span> <span class="cn">TRUE</span>), ] <span class="sc">%&gt;%</span> </span>
+<span id="cb36-276"><a href="#cb36-276" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> .)} <span class="sc">%&gt;%</span> </span>
+<span id="cb36-277"><a href="#cb36-277" aria-hidden="true" tabindex="-1"></a>    anova <span class="sc">%&gt;%</span> </span>
+<span id="cb36-278"><a href="#cb36-278" aria-hidden="true" tabindex="-1"></a>    .[<span class="dv">1</span>, <span class="dv">4</span>]</span>
+<span id="cb36-279"><a href="#cb36-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-280"><a href="#cb36-280" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb36-281"><a href="#cb36-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-282"><a href="#cb36-282" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
+<span id="cb36-283"><a href="#cb36-283" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_anova_stratified)</span>
+<span id="cb36-284"><a href="#cb36-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-285"><a href="#cb36-285" aria-hidden="true" tabindex="-1"></a><span class="co"># compare our p-value to the original by finding prob F &gt; original sample F</span></span>
+<span id="cb36-286"><a href="#cb36-286" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boot_anova_stratified <span class="sc">&gt;=</span> <span class="fu">lm</span>(stearic <span class="sc">~</span> macro.area, <span class="at">data =</span> oliveoil) <span class="sc">%&gt;%</span> anova <span class="sc">%&gt;%</span> .[<span class="dv">1</span>,<span class="dv">4</span>])</span>
+<span id="cb36-287"><a href="#cb36-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-288"><a href="#cb36-288" aria-hidden="true" tabindex="-1"></a><span class="co"># same conclusion as the simple random bootstrap F-test (even less evidence)</span></span>
+<span id="cb36-289"><a href="#cb36-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-290"><a href="#cb36-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
