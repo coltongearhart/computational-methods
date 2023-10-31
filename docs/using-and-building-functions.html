@@ -270,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <code>%&gt;%</code> piping symbol from the dplyr package</li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/function-calls_e7da165f65a7c8d2c9bd2a2c3fb2b4ec">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># a function without parentheses prints what it is</span></span>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x7fd72df60578&gt;
+&lt;bytecode: 0x7ff0ab392578&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ggplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -288,7 +288,7 @@ UseMethod("mean")
 {
     UseMethod("ggplot")
 }
-&lt;bytecode: 0x7fd70df4eae8&gt;
+&lt;bytecode: 0x7ff0bdbab968&gt;
 &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
@@ -297,7 +297,7 @@ UseMethod("mean")
 <li><p>This is actually quite a complex function (yes, a function) (things like this are called infix operator). Infix operators go in between arguments.</p></li>
 <li><p>Can surround an infix operator with tick marks to see what this function is actually doing.</p></li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/pipe_422fee37ce226f524428a97bba725900">
+<div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># infix operator: pipe</span></span>
 <span><span class="va">`%&gt;%`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -310,14 +310,14 @@ UseMethod("mean")
     lazy &lt;- TRUE
     .External2(magrittr_pipe)
 }
-&lt;bytecode: 0x7fd71d97b618&gt;
+&lt;bytecode: 0x7ff0ac2caeb0&gt;
 &lt;environment: namespace:magrittr&gt;</code></pre>
 </div>
 </div>
 <ul>
 <li>Another example is <code>+</code>. This is a primitive function, which just means that R doesn’t evaluate it. It sends it down and is evaluated in C (because it is more efficient).</li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/addition_087dc7848cf2177a866289d37edefa7b">
+<div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># infix operator as function</span></span>
 <span><span class="fu">`+`</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -331,7 +331,7 @@ UseMethod("mean")
 <li>
 <code>?formals()</code>: Formals are things that we define to change the behavior of the outcome.</li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/formals_527dc84a90537b6d3b14982677d98659">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># view formals</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/formals.html">formals</a></span><span class="op">(</span><span class="va">`%&gt;%`</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -354,7 +354,7 @@ $...</code></pre>
 </ul></section><section id="body" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="body">
 <span class="header-section-number">2.2.2</span> Body</h3>
 <p>The lines of code that will be run when the function is called. The body uses the formals and usually returns a result of some kind.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/body_bf27354e8b86ef8bb473791352ee9b05">
+<div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># body()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/body.html">body</a></span><span class="op">(</span><span class="va">`+`</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -378,7 +378,7 @@ $...</code></pre>
 <li><p>The global environment is everything that we have loaded in, created ourselves or in base R.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/ls.html">ls()</a></code> tells you what you have created / assigned in the global environment (to get, set, test for and create environments, use <code><a href="https://rdrr.io/r/base/environment.html">environment()</a></code>).</p></li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/global-environment_d0710f71eadff833ada2486d4afbbe1f">
+<div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ?environment()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -393,7 +393,7 @@ $...</code></pre>
 <ul>
 <li>When calling functions, they have access to the names of objects in the namespace. It can map the name to where the object is stored. So it retrieves values through the names, so names are very powerful and why we can do computation work that is readable.</li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/namespaces_8606eb5b4b2715d1121839eb60c5b6a4">
+<div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># y is now in the namespace, so we have access to it</span></span>
 <span><span class="co"># -&gt; the name gets mapped to its value</span></span>
 <span><span class="va">y</span><span class="op">*</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -422,7 +422,7 @@ $...</code></pre>
 <li><p>The primary difference is that when the local namespace is created, the formal argument names and their defined values are written into the local namespace. If these objects already exist in the global environment, they are overwritten locally while the function code is running. This is referred to as <strong>name masking</strong>.</p></li>
 <li><p>After the function code has completed running, the local environment is deleted. Thus, the local environment of a function is both nested in the global environment and is temporary.</p></li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/local-arguments_44f146609d299ecf9138f77c01c44545">
+<div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># when we call the mean function, x is defined locally but not globally</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -437,7 +437,7 @@ $...</code></pre>
 <li><p>Functions are first class objects (they store expressions, rather than data values).</p></li>
 <li><p>If there is a set of things we want to do, we can wrap a bunch of code into an expression by wrapping in curly brackets, then R thinks about it as one thing.</p></li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/defining-functions_cc40d6b8a686e065e5652fae3feb5786">
+<div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># writing functions</span></span>
 <span><span class="va">function_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">formal_arguments_go_here</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># code body expression goes here</span></span>
@@ -475,7 +475,7 @@ $...</code></pre>
 </ul>
 </li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/defining-functions-assignment_f9ab824909487ebef8e130fbe28d6fcc">
+<div class="cell">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># write function add two numbers</span></span>
 <span><span class="va">my_sum</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">val</span> <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span></span>
@@ -498,7 +498,7 @@ $...</code></pre>
 </div>
 <p>More complex functions: In a legitimate function, to have our function behave differently, we can use some if and else statements that are usually triggered by a yes / no or true / false.</p>
 <p><code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> is a function that calls other functions in an iterative way (really efficient for loop).</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/unnamed-chunk-12_5f8b1f676dc838f165423d2c5bb7b25c">
+<div class="cell">
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># label: defining-functions-ifs</span></span>
 <span></span>
 <span><span class="co"># now trying to do something cool (and / or breaking it)</span></span>
@@ -516,9 +516,9 @@ $...</code></pre>
 <span><span class="co"># -&gt; not using the X in our function call</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="va">my_sum</span>, x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3
- [38] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
- [75] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</code></pre>
+<pre><code>  [1] 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+ [38] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 4 3 3 3 3 3 3 3 3 3 3
+ [75] 3 3 3 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</code></pre>
 </div>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># equivalent to</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
@@ -529,16 +529,16 @@ $...</code></pre>
 [1] 3
 [1] 3
 [1] 3
+[1] 4
 [1] 3
 [1] 3
 [1] 3
 [1] 2
-[1] 3
 [1] 3</code></pre>
 </div>
 </div>
 <p>Can return something more complex than just a data value by returning lists. Functions that output lists are kinda the next step of complex computing ideas.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/unnamed-chunk-13_1ca69c081419ddc821d04c818d5654c1">
+<div class="cell">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># label: defining-functions-return-list</span></span>
 <span></span>
 <span><span class="co"># modify function to return a list with multiple objects in it</span></span>
@@ -565,7 +565,7 @@ $mischief
 <span class="header-section-number">2.3.1</span> Calling a Function</h3>
 <p>To call a function, you simply use its name and define any required formal arguments. Typically this is done within a set of parentheses directly following the function name. Only a few special cases break from that pattern.</p>
 <p>What is more important to focus on is <strong>if</strong> and <strong>how</strong> we define the arguments. We may choose to define nothing in the arguments and the function might still work.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/args-null_0e713db6c77882dfac583c943e03528b">
+<div class="cell">
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># write function that has no arguments to simply return this hardcoded value</span></span>
 <span><span class="va">no_arg</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">=</span> <span class="fl">10</span></span>
@@ -582,7 +582,7 @@ $mischief
 </div>
 </div>
 <p>Typically these are made more flexible using dots <code>...</code>. All this does is put the values into the local namespace and continues running the function. These are optional arguments.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/args-dots_311f926bb88067a96440c446ab0db58a">
+<div class="cell">
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function wtih ... formal</span></span>
 <span><span class="va">no_arg2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">=</span> <span class="fl">10</span></span>
@@ -602,7 +602,7 @@ $mischief
 </div>
 </div>
 <p>For “optional” arguments (arguments that sometimes matters and sometimes don’t matter), we should define them as formal parameters with some default values. This way we can override them if we wanted to.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/args-defaults_eb59379f399928265f743aea11dc2206">
+<div class="cell">
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># add default value to argument</span></span>
 <span><span class="co"># -&gt; now it behaves typically how we want, but can change them if we want</span></span>
 <span><span class="va">no_arg3</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
@@ -621,7 +621,7 @@ $mischief
 </div>
 <p>The more important characteristics of function calls are related to how we define our arguments: implicitly and explicitly. If we rely on the default ordering of the arguements, then we are calling the arguments <em>implicitly</em>. If we refer to the argument by it’s name while defining the values, then we are calling the argument <em>explicitly</em>. Often we use a mix of these methods, but it is important to be aware of how and why we choose to define our arguments.</p>
 <p>A function runs through all of the named arguments, then goes in order for the unnamed arguments.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/arg_exp_implicit_f14943d27732a432bba4f216f99b883c">
+<div class="cell">
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># all of the following are equivalent</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -646,7 +646,7 @@ $mischief
 </section><section id="automating-procedures" class="level3" data-number="2.3.2"><h3 data-number="2.3.2" class="anchored" data-anchor-id="automating-procedures">
 <span class="header-section-number">2.3.2</span> Automating procedures</h3>
 <p>The following example demonstrates code that would be better served by constructing a function to accomplish the task.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/example-change-to-functions-manual_d223c0a9efa57ecf9975a8afaf25096e">
+<div class="cell">
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># take the following olive oil data and standardize the columns</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pdfCluster</span><span class="op">)</span> <span class="co"># for the data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">oliveoil</span><span class="op">)</span> <span class="co"># ?oliveoil</span></span>
@@ -711,7 +711,7 @@ $mischief
 </div>
 </div>
 <p>Could do this (slighlty) better with a function, rather than copy and paste and change column names.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/example-change-to-functions-function_4447795e63587321057d389ae88908c1">
+<div class="cell">
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># write function to take a variable name and return the standardized column</span></span>
 <span><span class="va">oo_stand</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">varname</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="op">(</span><span class="va">oliveoil</span><span class="op">[</span>,<span class="va">varname</span><span class="op">]</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">oliveoil</span><span class="op">[</span>,<span class="va">varname</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">oliveoil</span><span class="op">[</span>,<span class="va">varname</span><span class="op">]</span><span class="op">)</span></span>
@@ -751,7 +751,7 @@ $mischief
 </div>
 </div>
 <p>Next, can do this iteratively with for-loops to first print the result (for demonstration) and then to store the result.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/example-change-to-functions-for-loops_2297169af99b9f6bc344e789af012811">
+<div class="cell">
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># intitialize names</span></span>
 <span><span class="va">acids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">oliveoil</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
@@ -813,7 +813,7 @@ $mischief
 <li><p><code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code> used to apply functions over the corresponding values in multiple lists.</p></li>
 </ul>
 <p>Karsten’s Personal Use (with orders of magnitude &gt;): <code>sapply</code> <span class="math inline">\(&gt;\)</span> <code>lapply</code> <span class="math inline">\(&gt;&gt;\)</span> <code>mapply</code> <span class="math inline">\(&gt;&gt;\)</span> <code>vapply</code> <span class="math inline">\(&gt;&gt;\)</span> <code>apply</code></p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/example-change-to-functions-apply_fa4bce8a02c55276228f197199b95754">
+<div class="cell">
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># loop over all column names with sapply()</span></span>
 <span><span class="co"># -&gt; typically in practice the formals are given implicitly and just know that the object to be looped over is first and the function being applied is second</span></span>
 <span><span class="va">oo_better</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">acids</span>, FUN <span class="op">=</span> <span class="va">oo_stand</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span></span>
@@ -849,7 +849,7 @@ $mischief
 </ul>
 </li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/example-change-to-functions-map_244a6c50fe9c70eae9cc158076e7345b">
+<div class="cell">
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># loop over all column names with sapply()</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
 <span><span class="co">#  </span></span>
@@ -894,7 +894,7 @@ $mischief
 <ul>
 <li>APPLY statements are quicker than for because they are run in C rather than R.</li>
 </ul>
-<div class="cell" data-hash="using-and-building-functions_cache/html/timing_7f2461db9d0608edc700eb67e6779b66">
+<div class="cell">
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create lots of lm from different random samples and store the slope of a particular variable</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">betas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">)</span></span>
@@ -906,7 +906,7 @@ $mischief
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">timer_for</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 1.549136 secs</code></pre>
+<pre><code>Time difference of 1.51896 secs</code></pre>
 </div>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># now use sapply()</span></span>
 <span><span class="co"># -&gt; again not really using X = 1:n in the function that sapply() calls, it is just for the iterations to do the thing that many times</span></span>
@@ -917,7 +917,7 @@ $mischief
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">timer_sapply</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 1.460332 secs</code></pre>
+<pre><code>Time difference of 1.474225 secs</code></pre>
 </div>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># now use map()</span></span>
 <span><span class="va">betas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">)</span></span>
@@ -925,7 +925,7 @@ $mischief
 <span><span class="va">betas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">palmitic</span> <span class="op">~</span> <span class="va">.</span> , data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">oliveoil</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="st">"oleic"</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">timer_map</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 1.465594 secs</code></pre>
+<pre><code>Time difference of 1.468056 secs</code></pre>
 </div>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># now use map_dbl()</span></span>
 <span><span class="va">betas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">)</span></span>
@@ -933,7 +933,7 @@ $mischief
 <span><span class="va">betas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">palmitic</span> <span class="op">~</span> <span class="va">.</span> , data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">oliveoil</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="st">"oleic"</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">timer_dbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 1.516779 secs</code></pre>
+<pre><code>Time difference of 1.503587 secs</code></pre>
 </div>
 </div>
 </section></section><section id="applying-functions-over-multiple-sets-of-parameters" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="applying-functions-over-multiple-sets-of-parameters">
@@ -941,13 +941,13 @@ $mischief
 <section id="simulate-data" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="simulate-data">
 <span class="header-section-number">2.4.1</span> Simulate data</h3>
 <p>In some cases we may wish to apply a complex function by putting in multiple sets of arguments and collecting the results. In the example below we explore a simple case where we want to gather simulated values from a beta distribution with several different shape parameter (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>) pairs.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/multiple-param-beta_da6b3c5f1b6c1255f44dccdd80ca187a">
+<div class="cell">
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># let's check what the rbeta() function does first in the help menu</span></span>
 <span><span class="co"># ?rbeta</span></span>
 <span><span class="co"># simulate n observations from a specific beta distribution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="fl">5</span>, shape1 <span class="op">=</span> <span class="fl">1</span>, shape2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7183191 0.7575821 0.7419841 0.5297242 0.2928911</code></pre>
+<pre><code>[1] 0.4420070 0.6736804 0.2605573 0.5639032 0.9110985</code></pre>
 </div>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># want to apply the rbeta() function over all 100 unique combinations</span></span>
 <span><span class="co"># of shape1 = {0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5}</span></span>
@@ -966,7 +966,7 @@ $mischief
 </div>
 </div>
 <p>Could create two nested for loops to iterate over these pairs and store as it loops, but that is messy. Instead we will iterate over each pair using <code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code> and <code><a href="https://purrr.tidyverse.org/reference/map2.html">map2()</a></code>.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/iterate-multiple-args_15ba8219597bcc20b17d2c1836235ad6">
+<div class="cell">
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># run simulation to generate 5 values beta values from each parameter combo</span></span>
 <span><span class="co"># use mapply() and simplify the result</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span></span>
@@ -1017,7 +1017,7 @@ $mischief
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">my_beta_sims</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"sim"</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">param_combinations</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Or even better organization is to turn this into an 3-dimensional array where the index <code>[i,j,k]</code> represent the <span class="math inline">\(i\)</span>th simulation, <span class="math inline">\(j\)</span>th <code>shape1</code>, and <span class="math inline">\(k\)</span>-th <code>shape2</code>.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/array_ec044f2add7e6d13e4bfd14c5308bf88">
+<div class="cell">
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># convert copy of matrix to array (remember )</span></span>
 <span><span class="va">my_beta_sims_array</span> <span class="op">&lt;-</span> <span class="va">my_beta_sims</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">my_beta_sims_array</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
@@ -1053,7 +1053,7 @@ $mischief
 </section><section id="summarize-simulation" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="summarize-simulation">
 <span class="header-section-number">2.4.2</span> Summarize simulation</h3>
 <p>Now suppose we want the mean for the simulation outcomes array. Use <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> to iterate over indices of the array.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/functions-on-array_efe575b3a27163a0516c1ae631244759">
+<div class="cell">
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calc mean of a particular iteration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">my_beta_sims_array</span><span class="op">[</span> ,<span class="fl">1</span> , <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1106,7 +1106,7 @@ shape1_5         TRUE     TRUE       TRUE     TRUE</code></pre>
 </div>
 </div>
 <p>Now we can check our simulated means against a theoretical mean: <span class="math inline">\(X \sim \text{beta}(\alpha, \beta) \Longrightarrow E(X) = \frac{\alpha}{\alpha + \beta}\)</span>.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/compute-means_b12006796959dafe811d2741e28bd0ab">
+<div class="cell">
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to calculate theoretical beta mean</span></span>
 <span><span class="va">theoretical_beta_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">beta</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">alpha</span> <span class="op">/</span> <span class="op">(</span><span class="va">alpha</span> <span class="op">+</span> <span class="va">beta</span><span class="op">)</span></span>
@@ -1177,7 +1177,7 @@ shape1_5         TRUE     TRUE       TRUE     TRUE</code></pre>
 </section><section id="entire-workflow" class="level3" data-number="2.4.3"><h3 data-number="2.4.3" class="anchored" data-anchor-id="entire-workflow">
 <span class="header-section-number">2.4.3</span> Entire workflow</h3>
 <p>To confirm the simulated data is correct, we can do a bigger simulation (more iterations) and then compare to the theoretical means.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/entire-workflow_6b77d9c43dd8e0c59ca09757103ac80b">
+<div class="cell">
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># steps of simulation</span></span>
 <span><span class="co"># -&gt; simulate data based on parameter combinations</span></span>
 <span><span class="co"># -&gt; keep in list form where each list all the iterations for a parameter pair</span></span>
@@ -1224,7 +1224,7 @@ shape1_5         TRUE     TRUE       TRUE     TRUE</code></pre>
 <p>These functions are often times called “helper functions”, completing the sub-tasks of the primary function. This modular format allows each function to complete a single simple task, and when used in combination, achieve a complex task.</p>
 <p>Thus, when modularizing code, the end goal to have one “overall” function that just has some helper functions within. On the way to having modularized code, is it better to start with an overall function and add modules sequentially (so e.g.&nbsp;if we call the overall, it will call module 1, so we check if that works; then add module 2 and call the overall which runs mod 1 and mod 2)…. etc.</p>
 <p>Below is an example (NOT RUN) to demostrate how helper functions can be used so that the overall function is body is relatively simple, all the work is being done by other functions. The overall function should be readable step by step.</p>
-<div class="cell" data-hash="using-and-building-functions_cache/html/helper-functions_81a9ac45265dd33027af13d87dd29102">
+<div class="cell">
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># main data simulation function</span></span>
 <span><span class="co"># write a function to simulate a dataset for an n x p dataset for a regression model where q of the variables are inactive (signal variables)</span></span>
 <span><span class="va">make_sim_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span>, <span class="va">p</span> <span class="op">=</span> <span class="fl">20</span>, <span class="va">q</span> <span class="op">=</span> <span class="fl">10</span>, <span class="va">b</span> <span class="op">=</span> <span class="fl">0.1</span>, <span class="va">sd_y</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">sd_x</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">{</span></span>

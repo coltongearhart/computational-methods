@@ -12,7 +12,7 @@ source("_common.R")
 
 ## Overview 
 
-In this mini courese we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. 
+In this mini course we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. 
 
 Readings come from the [Advanced R](https://adv-r.hadley.nz/) textbook by Hadley Wickham.
 

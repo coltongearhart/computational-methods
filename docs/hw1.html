@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section></section><section id="practice" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="practice">
 <span class="header-section-number">6.2</span> Practice</h2>
 <p>Here are some demos of working with simple examples to see how APPLY statements and MAP statements work on data types (matrix vs dataframe).</p>
-<div class="cell" data-hash="hw1_cache/html/apply-maps_cbf4aef5dbd02df6a48cffb0ac921923">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># investigate data types and vectorized results</span></span>
@@ -275,65 +275,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># -&gt; should be zeros, works for both types</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_mat</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622</code></pre>
+<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">data_df</span>, <span class="va">mean</span><span class="op">)</span> <span class="co"># works because each column in a dataframe is like a list and simplifies result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622 </code></pre>
+-0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622 </code></pre>
+-0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OTHER CORRECT WAYS</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data_mat</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data_mat</span><span class="op">[</span>,<span class="va">X</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622</code></pre>
+<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_df</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622 </code></pre>
+-0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data_df</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data_df</span><span class="op">[</span>,<span class="va">X</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622</code></pre>
+<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">data_df</span>, <span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$X1
-[1] -0.09674217
+[1] -0.05400396
 
 $X2
-[1] 0.1236161
+[1] -0.05404391
 
 $X3
-[1] -0.01847179
+[1] 0.1171654
 
 $X4
-[1] -0.02473565
+[1] 0.04152527
 
 $X5
-[1] 0.07315622</code></pre>
+[1] 0.03911136</code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_vec</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="co"># know returning data type, so should use _dbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622 </code></pre>
+-0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
 </div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html">reduce</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="co"># reduce cause map() returns a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09674217  0.12361613 -0.01847179 -0.02473565  0.07315622</code></pre>
+<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># INCORRECT WAYS</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">data_mat</span>, <span class="va">mean</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="co"># this takes each individual value and returns the mean (so the same value)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.21586043 -1.15460589 -1.32830971  0.26542268 -0.18786729  0.40025778
- [7] -0.45064663  2.21852982 -0.67084260  0.76577067 -2.42730866  0.42000982
-[13] -0.87838399  0.34156774 -1.89873049 -2.01490003  1.15765761 -0.41365506
-[19] -0.04694533 -0.52643129</code></pre>
+<pre><code> [1]  0.47396250 -0.55306786  0.35162823 -0.76858673 -2.28475143 -0.10665379
+ [7] -0.71853290 -0.44057683  1.22256012 -1.05750451  0.13752910 -0.04898068
+[13]  0.70449112  0.87378153 -0.84670521 -0.74373214 -1.30336909  1.77780881
+[19] -0.62932110  0.83923256</code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">data_mat</span>, <span class="va">mean</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">==</span> <span class="va">data_mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -342,26 +342,26 @@ $X5
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data_mat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="co"># same thing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] -0.2158604
+[1] 0.4739625
 
 [[2]]
-[1] -1.154606
+[1] -0.5530679
 
 [[3]]
-[1] -1.32831
+[1] 0.3516282
 
 [[4]]
-[1] 0.2654227
+[1] -0.7685867
 
 [[5]]
-[1] -0.1878673
+[1] -2.284751
 
 [[6]]
-[1] 0.4002578</code></pre>
+[1] -0.1066538</code></pre>
 </div>
 </div>
 <p>Now investigate structure of data holder.</p>
-<div class="cell" data-hash="hw1_cache/html/check structure_cb0ce09a41fcbb763f1a5e949e597ca1">
+<div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># this is just to make that we can correctly summarize over columns and layers of an array and keep index names for the result</span></span>
 <span></span>
 <span><span class="co"># fill example 2D dataset as a matrix</span></span>
@@ -380,7 +380,7 @@ $X5
 </div>
 </div>
 <p>Now apply confirmed results from above to a real scenario.</p>
-<div class="cell" data-hash="hw1_cache/html/example-simulation_61503442b86f9ebcfb3eb18703a59d13">
+<div class="cell">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initial vectors</span></span>
 <span><span class="co"># -&gt; i = obs ID, mu = mean and sigma = sd</span></span>
 <span><span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="co"># not using n = 10 so that can set row names below</span></span>
@@ -408,28 +408,28 @@ $X5
 <span><span class="va">data_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">data_sim</span>, MARGIN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">sd</span><span class="op">)</span></span>
 <span><span class="va">data_means</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         sigma = 0.5   sigma = 5
-mu = 0    -0.3792363   0.3723163
-mu = 5     4.7316578   6.6327820
-mu = 10   10.1168008   8.8695138
-mu = 100  99.9256209 100.4210262
-mu = 500 500.0466121 503.2079451</code></pre>
+<pre><code>          sigma = 0.5  sigma = 5
+mu = 0    -0.06373573   1.397530
+mu = 5     5.07286903   4.643620
+mu = 10   10.08404702   9.772814
+mu = 100 100.18075617 101.300889
+mu = 500 500.11772703 497.297924</code></pre>
 </div>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_sd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         sigma = 0.5 sigma = 5
-mu = 0     0.4075625  3.281164
-mu = 5     0.3890154  3.830885
-mu = 10    0.3925154  4.018785
-mu = 100   0.4796940  4.345132
-mu = 500   0.5596683  6.930979</code></pre>
+mu = 0     0.4303220  4.238961
+mu = 5     0.4062227  4.895236
+mu = 10    0.7479058  4.296652
+mu = 100   0.5462804  5.341503
+mu = 500   0.4054104  3.440882</code></pre>
 </div>
 </div>
 </section><section id="solution" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="solution">
 <span class="header-section-number">6.3</span> Solution</h2>
 <section id="gather-simulated-gamma-data-1" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="gather-simulated-gamma-data-1">
 <span class="header-section-number">6.3.1</span> Gather simulated gamma data</h3>
-<div class="cell" data-hash="hw1_cache/html/function_3cafbd0bca640197d03ec02a4b164833">
+<div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to create an array [sample size (n) x # of shapes (M) x # of scales (L)] of simulated data from a gamma distribution</span></span>
 <span><span class="co"># -&gt; arguments: n = sample size (integer), M = shape parameters (numeric vector), scale parameters (numeric vector), seed to set (integer)</span></span>
 <span><span class="co"># -&gt; returns: n x M x L array</span></span>
@@ -457,7 +457,7 @@ mu = 500   0.5596683  6.930979</code></pre>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The body from the above implementation is where we generate the data is equivalent to the following if we wanted to use an APPLY statement.</p>
-<div class="cell" data-hash="hw1_cache/html/function2_75f09cfb84620292c0fa709658af55cd">
+<div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># equivalent to:</span></span>
 <span>  <span class="co"># use an inner sapply() to fill the entire layer with one function call (sapply() then does it shape by shape column at a time) rather than column by column loop for changing layer</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">scales</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -467,7 +467,7 @@ mu = 500   0.5596683  6.930979</code></pre>
 <span>  <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now with the function defined, we can generate the data.</p>
-<div class="cell" data-hash="hw1_cache/html/generate-data_8c37e51f20c13ad53d733c51fd9235d9">
+<div class="cell">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initial vectors of the changing parameters for generating data</span></span>
 <span><span class="va">sample_sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">100</span>, <span class="fl">500</span>, <span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="va">shape_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">100</span><span class="op">)</span></span>
@@ -482,32 +482,32 @@ mu = 500   0.5596683  6.930979</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gam_arrays_list</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 6
- $ n = 25  : num [1:25, 1:4, 1:4] 1.73e-07 1.98e-03 3.54e-10 1.16e-10 1.27e-03 ...
+ $ n = 25  : num [1:25, 1:4, 1:4] 8.55e-05 6.33e-06 7.80e-08 4.98e-05 1.97e-07 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 50  : num [1:50, 1:4, 1:4] 2.13e-09 3.77e-08 4.28e-03 1.11e-13 7.02e-06 ...
+ $ n = 50  : num [1:50, 1:4, 1:4] 2.52e-02 1.43e-02 1.98e-06 1.78e-08 1.04e-02 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 75  : num [1:75, 1:4, 1:4] 9.11e-06 6.54e-06 2.75e-06 2.05e-02 6.14e-04 ...
+ $ n = 75  : num [1:75, 1:4, 1:4] 1.31e-05 3.77e-13 2.26e-08 4.55e-15 5.52e-04 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 100 : num [1:100, 1:4, 1:4] 5.37e-05 8.99e-02 5.48e-04 5.14e-02 3.52e-12 ...
+ $ n = 100 : num [1:100, 1:4, 1:4] 6.25e-06 1.07e-04 9.08e-17 1.69e-04 2.12e-08 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 500 : num [1:500, 1:4, 1:4] 1.60e-04 3.44e-02 1.61e-10 5.77e-07 7.26e-12 ...
+ $ n = 500 : num [1:500, 1:4, 1:4] 1.22e-03 5.13e-02 1.97e-07 4.20e-02 6.54e-03 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 1000: num [1:1000, 1:4, 1:4] 1.86e-03 3.02e-05 6.82e-05 2.12e-03 5.60e-09 ...
+ $ n = 1000: num [1:1000, 1:4, 1:4] 6.21e-02 4.90e-03 8.46e-03 5.20e-07 8.84e-03 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
@@ -516,36 +516,36 @@ mu = 500   0.5596683  6.930979</code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">gam_arrays_list</span><span class="op">$</span><span class="va">`n = 25`</span><span class="op">[</span>, , <span class="fl">1</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      shape = 0.1 shape = 1 shape = 10 shape = 100
- [1,]       0.000     0.032      0.763      10.296
- [2,]       0.002     0.041      0.995       9.124
- [3,]       0.000     0.088      1.857      10.406
- [4,]       0.000     0.159      1.259      10.047
- [5,]       0.001     0.079      0.820       9.496
- [6,]       0.006     0.142      1.054       9.259
- [7,]       0.000     0.053      1.219      11.835
- [8,]       0.000     0.083      0.902      10.608
- [9,]       0.000     0.275      1.074       9.781
-[10,]       0.004     0.022      1.195       9.970
-[11,]       0.018     0.079      1.258      10.237
-[12,]       0.000     0.065      0.582      10.171
-[13,]       0.001     0.059      1.562      10.708
-[14,]       0.000     0.007      0.575      11.024
-[15,]       0.050     0.009      1.680       9.758
-[16,]       0.003     0.273      0.968      10.401
-[17,]       0.000     0.097      0.656       9.545
-[18,]       0.009     0.008      1.454       8.255
-[19,]       0.000     0.241      1.551      11.360
-[20,]       0.000     0.099      1.575       9.502
-[21,]       0.065     0.003      0.829      10.529
-[22,]       0.000     0.087      0.607      11.340
-[23,]       0.000     0.002      1.177       9.925
-[24,]       0.000     0.013      0.940       9.270
-[25,]       0.000     0.041      1.182      10.699</code></pre>
+ [1,]       0.000     0.014      1.019       9.833
+ [2,]       0.000     0.096      1.391       9.837
+ [3,]       0.000     0.016      1.123      11.214
+ [4,]       0.000     0.121      1.494       9.199
+ [5,]       0.000     0.073      1.077      10.242
+ [6,]       0.076     0.025      0.998      10.080
+ [7,]       0.009     0.225      1.069       8.681
+ [8,]       0.010     0.034      0.656       9.161
+ [9,]       0.000     0.006      1.308       8.565
+[10,]       0.000     0.011      1.324      10.208
+[11,]       0.008     0.090      0.782       8.785
+[12,]       0.000     0.004      0.963       9.483
+[13,]       0.024     0.166      0.704      10.095
+[14,]       0.000     0.150      1.433       9.328
+[15,]       0.000     0.049      0.944       9.357
+[16,]       0.013     0.148      1.364       9.614
+[17,]       0.000     0.030      0.972      10.391
+[18,]       0.001     0.129      1.051       8.613
+[19,]       0.003     0.008      1.031      10.914
+[20,]       0.000     0.065      0.546       8.885
+[21,]       0.058     0.020      1.099       9.876
+[22,]       0.000     0.076      0.767      11.827
+[23,]       0.037     0.087      1.811       8.764
+[24,]       0.000     0.056      0.683      10.997
+[25,]       0.012     0.037      0.797      10.553</code></pre>
 </div>
 </div>
 </section><section id="compute-means-and-confidence-intervals-1" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="compute-means-and-confidence-intervals-1">
 <span class="header-section-number">6.3.2</span> Compute means and confidence intervals</h3>
-<div class="cell" data-hash="hw1_cache/html/summarize-data_5873a227fae6693b6af3780d3b1d8edd">
+<div class="cell">
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to calculate the mean of the simulated observations for each combination of shape and scale</span></span>
 <span><span class="co"># -&gt; argument: n x M x L array of simulated values</span></span>
 <span><span class="co"># -&gt; returns: M x L matrix of column means from each layer</span></span>
@@ -583,68 +583,68 @@ mu = 500   0.5596683  6.930979</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gam_x_bars</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 6
- $ n = 25  : num [1:4, 1:4] 0.0064 0.0823 1.1094 10.1419 0.0964 ...
+ $ n = 25  : num [1:4, 1:4] 0.01 0.0695 1.0562 9.7801 0.0475 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 50  : num [1:4, 1:4] 0.0139 0.0956 0.9609 9.7678 0.2517 ...
+ $ n = 50  : num [1:4, 1:4] 0.00405 0.10392 1.02116 9.97883 0.08361 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 75  : num [1:4, 1:4] 0.00361 0.09935 0.94923 9.93329 0.10385 ...
+ $ n = 75  : num [1:4, 1:4] 0.0125 0.0954 1.0022 10.078 0.0859 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 100 : num [1:4, 1:4] 0.00944 0.11239 0.98108 9.91866 0.08625 ...
+ $ n = 100 : num [1:4, 1:4] 0.0075 0.1085 1.0555 10.0528 0.1657 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 500 : num [1:4, 1:4] 0.0124 0.1022 1.0097 10.0512 0.1079 ...
+ $ n = 500 : num [1:4, 1:4] 0.0111 0.0954 0.9875 10.0186 0.0797 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 1000: num [1:4, 1:4] 0.011 0.1025 0.9971 9.9576 0.0965 ...
+ $ n = 1000: num [1:4, 1:4] 0.0112 0.1011 0.9871 9.9557 0.1007 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"</code></pre>
 </div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gam_x_bars</span><span class="op">$</span><span class="va">`n = 25`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             scale = 0.1    scale = 1 scale = 10 scale = 100
-shape = 0.1  0.006401244   0.09643231   0.604357    7.886012
-shape = 1    0.082266479   0.93173113  13.966072  123.482528
-shape = 10   1.109447712   9.93303527 104.366980  956.702459
-shape = 100 10.141856760 101.91443493 971.241584 9870.585651</code></pre>
+<pre><code>            scale = 0.1    scale = 1  scale = 10 scale = 100
+shape = 0.1  0.01001787   0.04751898   0.7051746    12.78012
+shape = 1    0.06949849   0.91883925   9.7653604   112.31653
+shape = 10   1.05623999  10.09542504  92.9124727   985.30090
+shape = 100  9.78008855 103.52050976 956.6786584 10364.17523</code></pre>
 </div>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gam_ci_bounds</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 6
- $ n = 25  : num [1:2, 1:4, 1:4] -0.000229 0.013032 0.049194 0.115339 0.960886 ...
+ $ n = 25  : num [1:2, 1:4, 1:4] 0.00199 0.01805 0.04506 0.09394 0.9314 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 50  : num [1:2, 1:4, 1:4] 0.00543 0.02238 0.07101 0.12029 0.87138 ...
+ $ n = 50  : num [1:2, 1:4, 1:4] 0.00185 0.00624 0.07613 0.13171 0.92321 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 75  : num [1:2, 1:4, 1:4] 0.000824 0.006398 0.073953 0.124749 0.872766 ...
+ $ n = 75  : num [1:2, 1:4, 1:4] 0.00044 0.02463 0.07095 0.11984 0.92489 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 100 : num [1:2, 1:4, 1:4] 0.00452 0.01435 0.08933 0.13546 0.90873 ...
+ $ n = 100 : num [1:2, 1:4, 1:4] 0.00282 0.01218 0.08727 0.12968 0.99306 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 500 : num [1:2, 1:4, 1:4] 0.00907 0.01575 0.09336 0.11104 0.98119 ...
+ $ n = 500 : num [1:2, 1:4, 1:4] 0.00847 0.01366 0.08708 0.10373 0.95978 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 1000: num [1:2, 1:4, 1:4] 0.00879 0.01328 0.09621 0.10889 0.9784 ...
+ $ n = 1000: num [1:2, 1:4, 1:4] 0.00885 0.01353 0.09451 0.10775 0.9669 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
@@ -654,27 +654,27 @@ shape = 100 10.141856760 101.91443493 971.241584 9870.585651</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , scale = 0.1
 
-              shape = 0.1  shape = 1 shape = 10 shape = 100
-lower bound -0.0002292388 0.04919374  0.9608864    9.811054
-upper bound  0.0130317276 0.11533922  1.2580090   10.472660
+            shape = 0.1  shape = 1 shape = 10 shape = 100
+lower bound 0.001988243 0.04506035  0.9314015    9.415955
+upper bound 0.018047502 0.09393663  1.1810785   10.144222
 
 , , scale = 1
 
-             shape = 0.1 shape = 1 shape = 10 shape = 100
-lower bound -0.002931172 0.6343758   8.595333    97.58777
-upper bound  0.195795786 1.2290865  11.270738   106.24110
+            shape = 0.1 shape = 1 shape = 10 shape = 100
+lower bound -0.01023031 0.6460409   8.887475    98.75415
+upper bound  0.10526827 1.1916376  11.303375   108.28687
 
 , , scale = 10
 
             shape = 0.1 shape = 1 shape = 10 shape = 100
-lower bound  -0.1486487   9.35798   90.66124    925.4733
-upper bound   1.3573627  18.57416  118.07272   1017.0099
+lower bound   0.2265346  5.628111   79.98262    922.0426
+upper bound   1.1838147 13.902610  105.84233    991.3147
 
 , , scale = 100
 
             shape = 0.1 shape = 1 shape = 10 shape = 100
-lower bound   -6.091404  72.78683   856.0475    9342.115
-upper bound   21.863428 174.17822  1057.3574   10399.057</code></pre>
+lower bound   -2.026462  77.09184   883.8548    9939.587
+upper bound   27.586708 147.54122  1086.7470   10788.764</code></pre>
 </div>
 </div>
 

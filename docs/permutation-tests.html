@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Even with only 20 observations, still a very large number of possible permutations. Probably won’t be able to run an exhaustive permutation test if the number is over a million or so</li>
 </ul>
-<div class="cell" data-hash="permutation-tests_cache/html/permutations_f5242cab6c7cf74eefd139b66bd390f4">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sleep</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   extra group ID
@@ -331,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Use <code><a href="https://rdrr.io/r/utils/combn.html">utils::combn()</a></code> function to define matrix of all sets of indices; the result is a <span class="math inline">\(k \times {n \choose k}\)</span> matrix where each column is the indices of the selected objects for that permutation.</p>
-<div class="cell" data-hash="permutation-tests_cache/html/group-assignments_d8ac6dd868b233e426f1cc2031849a36">
+<div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build a permutation matrix</span></span>
 <span><span class="co"># ?combn</span></span>
 <span><span class="va">sleep_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>, m <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>This function acts like using a dollar sign to access columns (i.e.&nbsp;nested naming such as <code>df$col</code>).</p></li>
 <li><p>It creates a temporary environment and attaches all columns names to the data that is given so we don’t have to have the nested names each time.</p></li>
 </ul>
-<div class="cell" data-hash="permutation-tests_cache/html/calc-means_e8ea7830d363fd11c60b5f76fc9c2328">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># demo with</span></span>
 <span><span class="co"># -&gt; extract just the first groups' `extra` column values</span></span>
 <span><span class="co"># -&gt; response is `extra` column, and `group` is the labels</span></span>
@@ -377,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Is this value significant? We could use parameterics. This difference would be be used to calculate the t-stat or be center of a t-interval and could determine significance from that.</p>
-<div class="cell" data-hash="permutation-tests_cache/html/t-test_552352dd0769b28cbf7f653dc06ce55a">
+<div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># check assuptions </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -417,7 +417,7 @@ mean of x mean of y
 </div>
 <p>Or we can do a permutation test. To do this, we need a function can take a vector of indices, and return the average difference in sleep in the two groups.</p>
 <p>Function writing strategy: Start with a specific call that we want (using <code><a href="https://rdrr.io/r/base/with.html">with()</a></code>), then generalize by making it work for non-hardcoded names.</p>
-<div class="cell" data-hash="permutation-tests_cache/html/perm-test_3967ff1593b432d5bacaa100299ce16d">
+<div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># hardcoded what we want</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -462,7 +462,7 @@ mean of x mean of y
 </div>
 </div>
 <p>This tells us if the null hypothesis is true and we are randomly assigning group labels, then the difference in sleep should be zero (no difference). Let’s calculate a p-value by using the permuted differences compared to the real difference that the study found. Specifically we can count the number of permutations further out in the tail than the real difference and get that proportion.</p>
-<div class="cell" data-hash="permutation-tests_cache/html/p-value_28d7523b26ff16c8cc944ee7fc3b737d">
+<div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># save real difference</span></span>
 <span><span class="va">real_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">sleep</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">extra</span><span class="op">[</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -494,7 +494,7 @@ mean of x mean of y
 <p>Monte Carlo methods are the idea that if you can simulate data from the assumed model, you can simulate Monte Carlo samples (simulated outcomes from that model). And if there is some property that those samples should have, we can store and evaluate those in a Monte Carlo simulation and studying their behavior.</p>
 <p>Use bigger data set where exhaustive permutation wouldn’t be possible. Try testing if the price of a high end home (at the 90th percentile) is higher for homes with or without swimming pools. Definitely can’t use a t-distribution for comparing quantiles nor figure out how the sampling distribution behaves theoretically, so this is a benefit of the simulation approach: can compare a wider variety of statistics.</p>
 <p>Use the Ames homes data.</p>
-<div class="cell" data-hash="permutation-tests_cache/html/homes-data_bfdf4954728dbace8fc28a540b0ed4b6">
+<div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load the real estate data</span></span>
 <span><span class="va">real_estate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Files/Data/realestate.csv"</span><span class="op">)</span></span>
 <span></span>
@@ -539,7 +539,7 @@ mean of x mean of y
 <li><p>Note that that there are different strategies for setting this up. In the first example, a UDF calculated the difference and <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> did the permuting. Now we will have the UDF do both jobs and we just need to loop over the number of simulations we are going to run.</p></li>
 <li><p>For loops have been optimized in R, so we are not really losing efficieny in terms of computing time by not using APPLY statements. It just depends on how you want to read the code.</p></li>
 </ul>
-<div class="cell" data-hash="permutation-tests_cache/html/monte-carlo-perm-test_67c98db60b1534984c84596e44660f0b">
+<div class="cell">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># we have no idea how the difference in 90th quantile of house prices behaves theoretically, but we can compute it</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -555,8 +555,8 @@ mean of x mean of y
 </div>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span><span class="op">)</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no"  "no" 
-[13] "no"  "no"  "no"  "no"  "yes" "no"  "no"  "no" </code></pre>
+<pre><code> [1] "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no"
+[16] "no" "no" "no" "no" "no"</code></pre>
 </div>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create a function to do both steps, permute first then calculate difference</span></span>
 <span><span class="co"># -&gt; this is different than the first example </span></span>
@@ -589,7 +589,7 @@ mean of x mean of y
 <span><span class="va">real_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pool_diffs</span> <span class="op">&gt;=</span> <span class="va">real_diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0923</code></pre>
+<pre><code>[1] 0.0846</code></pre>
 </div>
 </div>
 <p>Based on this p-value, there is insufficient evidence to suggest that the 90th quantile of house prices with pools is greater than that without pools.</p>

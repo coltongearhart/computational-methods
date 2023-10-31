@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the process of running analyses and working with new methods, we often encounter the situation where we don’t know what the best course of action is for continuing our work. It may not be clear if our new method is really any more accurate than existing methods, or which algorithm is more efficient, or which parameterization is best. If we look to existing literature, web resources and professional advice, we might find a solution already exists; or we might learn that there is not clear answer, and we have to figure it out ourselves. What do we do then?</p>
 <p><em>Example: In a standard knn regression, we predict the response value for a new point by finding the k-nearest points from the training data, then calculating their average as a prediction for the new point. This is a nice non-parametric model but it requires a lot of distance calculation to find the neighbors. Suppose that a researcher is working on a new approximation to a k-nearest neighbor regression model. Instead of creating neighborhoods based on distance, instead the neighborhoods are defined by binning the features using quantile-based bins. The researcher thinks that this should be faster than knn, but is unsure if the predictions will be as accurate.</em></p>
 <p><em>Example: You have heard of stepwise variable selection for regression. Suppose you also learn the LASSO regression can also be used to run variable selection. Which will lead to smaller models? Which is faster? Which make a model that is better for predictive accuracy?</em></p>
-<div class="cell" data-hash="computational-experiments_cache/html/packages_f0396261e884db507babbd069213c977">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glmnet.stanford.edu">glmnet</a></span><span class="op">)</span></span>
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="sec-methods-preview" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-methods-preview">
 <span class="header-section-number">5.2</span> Methods preview</h2>
 <p>We are going to build a regression model for prediction. We can start with using a single dataset, air quality. So we are going to predict air quality based on certain chemicals and we want to see which combinations of variables leads to the best predictions.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/load-air-quality_5e3e0806bcb7462b44170f71c6e47415">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load and preview data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"files/data/air_quality_cleaned.Rdata"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -278,7 +278,7 @@ $ AH           &lt;dbl&gt; 0.1948705, 0.1940418, 0.1946755, 0.1956120, 0.1956659
 </div>
 </div>
 <p>To start we can fit all the variables.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/full-model_b0a9dd760ae7ceb04e66f2c3691a8a83">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># fit full model</span></span>
 <span><span class="va">big_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span> , data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">big_mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -315,7 +315,7 @@ F-statistic: 700.7 on 12 and 9344 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>But for prediction, this can lead to overfitting. So we need to select variables, specifically which ones are helpful in predicting air quality. One option is to do stepwise selection based on AIC. We see that a few variables are dropped based on AIC, which measures some complexity penalty, and the stepwise procedure is trying to give us a more parsimonious model. The model could then be the final model used for prediction.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/pick-variables-stepwise_b68fa84737300691f1a5832746ba6998">
+<div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># stepwise variable selection based on AIC</span></span>
 <span><span class="co"># -&gt; direction = "both" by default</span></span>
 <span><span class="va">step_selected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">big_mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -408,7 +408,7 @@ Coefficients:
 <p>Or we could use another method such as LASSO variable selection. LASSO is a fairly common method that selects variables based on a different complexity penalty (not AIC), specifically it is based on shrinkage penalty (controlled by <span class="math inline">\(\lambda\)</span> parameter). In a standard regression setting, there is a way of solving the <span class="math inline">\(\boldsymbol{\beta}\)</span> equation to minimize the SSE (or MSE).</p>
 <p>When we fit a LASSO model, we add a penalty <span class="math inline">\(\lambda\)</span> for complexity (i.e.&nbsp;<span class="math inline">\(\beta\)</span>s that are very big in magnitude, which means they stay included in the model). Essentially, we solve for <span class="math inline">\(\boldsymbol{\beta}\)</span> while conditioning them to be generally smaller. And because LASSO can become more and more aggressive if we penalize more and more (i.e.&nbsp;increase <span class="math inline">\(\lambda\)</span>), LASSO can push some of the <span class="math inline">\(\beta\)</span>s all the way down to zero. So we might end up with some <span class="math inline">\(\beta_i = 0\)</span> in a constrained solution. Thus the corresponding <span class="math inline">\(X\)</span> variable is essentially removed from the model when we multiply <span class="math inline">\(\boldsymbol{X} \boldsymbol{\beta}\)</span>.</p>
 <p>So we have to tune the <span class="math inline">\(\lambda\)</span> to get a value that results in good performance (parameter tuning). We can use <code><a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">cv.glmnet()</a></code> to cross-validate to pick a <span class="math inline">\(\lambda\)</span> value that is tuned for optimal performance based on the specified measure. In the example below, we chose deviance which is measure of model fit (commonly used by computer scientists). We could have picked for example MSE or MAE, it is essentially the same type of decision as using AIC vs BIC as a model criteria (or penalty).</p>
-<div class="cell" data-hash="computational-experiments_cache/html/pick-variables-lasso_aef435a9550e68cb3e327c0bed37083d">
+<div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># pick variables with LASSO</span></span>
 <span><span class="co"># -&gt; pick lambda based on a cross validated tuning process</span></span>
 <span><span class="co"># -&gt; x = predictor variables, y = response</span></span>
@@ -418,7 +418,7 @@ Coefficients:
 <span><span class="co"># view tuned lambda</span></span>
 <span><span class="va">cv.out</span><span class="op">$</span><span class="va">lambda.1se</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.04959849</code></pre>
+<pre><code>[1] 0.03418631</code></pre>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># use tuned lambda to pick variables</span></span>
 <span><span class="va">lasso_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/glmnet.html">glmnet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
@@ -428,9 +428,9 @@ Coefficients:
 <span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  PT08S1_CO_     NMHC_GT_     C6H6_GT_ PT08S2_NMHC_      NOx_GT_  PT08S3_NOx_ 
-  0.00000000   0.01625114   0.00000000  -0.03212472   0.00000000   0.01877040 
+  0.00000000   0.03059124   0.00000000  -0.05164348   0.00000000   0.03774141 
      NO2_GT_  PT08S4_NO2_   PT08S5_O3_            T           RH           AH 
-  0.63032626   0.00000000   0.00000000   0.00000000   0.00000000   0.00000000 </code></pre>
+  0.65256361   0.00000000   0.00000000   0.00000000   0.00000000   0.00000000 </code></pre>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># find variables whose coefficients were NOT shrunk to zero</span></span>
 <span><span class="va">lasso_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span>
@@ -549,7 +549,7 @@ Coefficients:
 <li><p>Similar naming structure <code>_cleaned.RData</code> to read in easily</p></li>
 </ul>
 <p>Then we can save them all in organized holding structure for easy access.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/load-reg-datasets_b1145fb3e86595e70d41520f02c16f4d">
+<div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># dataset names used for testing</span></span>
 <span><span class="va">all_reg_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wpbc"</span>, <span class="st">"wankara"</span>, <span class="st">"laser"</span>, <span class="st">"treasury"</span>, <span class="st">"skillcraft"</span>, <span class="st">"puma"</span>, <span class="st">"air_quality"</span>, <span class="st">"ccpp"</span>, <span class="st">"casp"</span><span class="op">)</span></span>
 <span></span>
@@ -624,7 +624,7 @@ Coefficients:
 <span class="header-section-number">5.4.2</span> Modularize code</h3>
 <p>Rather than having one function that does everything, we want to have modularized code where helper functions perform <em>singular tasks</em> (this way they are like action statements).</p>
 <p>The variable selection helper functions below perform the same steps as in <a href="#sec-methods-preview" class="quarto-xref"><span>Section&nbsp;5.2</span></a>, just generalized for the cleaned data. They should take the subjects as inputs (datasets) and output a model from the treatment.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/helper-functions-variable-selection_d7a2e9d109afeeff8b7e129bae59aa43">
+<div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># helper functions for running the experiment with variable selection</span></span>
 <span></span>
 <span><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
@@ -689,7 +689,7 @@ Coefficients:
 </div>
 <p>Now we need some functions to extract the results of interest from the selected model, i.e.&nbsp;collecting the measurements.</p>
 <p>The outcome of the treatment is a model, so these functions should take in a model and output the measurement.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/helper-function-results_9756f42e37c7aa5f1a2c7f1e3a875ee1">
+<div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function for finding number of variables included</span></span>
 <span><span class="co"># -&gt; inputs a model and returns an integer</span></span>
 <span><span class="va">select_var_count</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lin_mod</span><span class="op">)</span><span class="op">{</span></span>
@@ -723,7 +723,7 @@ Coefficients:
 <span><span class="co"># test function on a single dataset</span></span>
 <span><span class="fu">lasso_var_mod</span><span class="op">(</span><span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">select_cv_rmse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7286929</code></pre>
+<pre><code>[1] 0.728541</code></pre>
 </div>
 </div>
 <p>Lots of work went into setting up how to apply the treatments and gathering results. Now we are just doing everything through functions.</p>
@@ -733,7 +733,7 @@ Coefficients:
 <span class="header-section-number">5.5.1</span> Run single trial</h3>
 <p>While planning the steps above we might lose track of the general goal. Apply the treatments to the subjects and record the outcomes. With everything above setup well, actually running the experiment should be relatively simple.</p>
 <p>We can still do this in a modularized fashion by first creating a function to run a single trial. In which, we don’t actually want to save the model that was fit, rather we want the results of it.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/running-single-trial_750b9f705dff7b742f2bcbcce8f841b2">
+<div class="cell">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to run a single trial</span></span>
 <span><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
 <span><span class="va">run_trial</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">selection_alg</span>, <span class="va">df</span><span class="op">)</span> <span class="op">{</span></span>
@@ -753,39 +753,39 @@ Coefficients:
 <span><span class="fu">run_trial</span><span class="op">(</span><span class="va">step_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nvars      rmse
-1     9 0.7259469</code></pre>
+1     9 0.7256239</code></pre>
 </div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  nvars      rmse
-1     4 0.7282899</code></pre>
+<pre><code>  nvars     rmse
+1     4 0.728729</code></pre>
 </div>
 </div>
 </section><section id="sec-run-experiment" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-run-experiment">
 <span class="header-section-number">5.5.2</span> Run experiment</h3>
 <p>Now we can run the experiment for all datasets. If trying to automate this, we can of coures use APPLY statements. When choosing which APPLY statement, we should think about what the input is (list of dataframes) and what the output will be (a dataframe).</p>
-<div class="cell" data-hash="computational-experiments_cache/html/run-experiment_50b9d50a2685c2bf74a71f6345376d79">
+<div class="cell">
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># run experiment</span></span>
 <span><span class="co"># -&gt; run separately for stepwise and lasso algorithms</span></span>
 <span><span class="va">results_step</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_list</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">run_trial</span><span class="op">(</span><span class="va">step_var_mod</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_list</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results_step</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma     air_quality
-nvars 10        7         4         11         8          6        9          
-rmse  0.8832615 0.1080863 0.4905213 0.06899687 0.492049   0.882911 0.7258602  
+<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma      air_quality
+nvars 10        7         4         11         8          6         9          
+rmse  0.8863911 0.1068005 0.4913205 0.07018728 0.4929057  0.8827446 0.7255822  
       ccpp      casp     
 nvars 4         9        
-rmse  0.2671386 0.8473679</code></pre>
+rmse  0.2669617 0.8473581</code></pre>
 </div>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results_lasso</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      wpbc      wankara  laser     treasury   skillcraft puma      air_quality
-nvars 3         5        4         7          6          1         4          
-rmse  0.9093433 0.107965 0.4885419 0.07317597 0.4937673  0.8834942 0.728632   
-      ccpp     casp     
-nvars 4        9        
-rmse  0.266866 0.8474291</code></pre>
+<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma    air_quality
+nvars 1         5         4         6          6          1       4          
+rmse  0.9370539 0.1075837 0.4881905 0.07404201 0.493253   0.88327 0.7286703  
+      ccpp      casp     
+nvars 4         9        
+rmse  0.2670317 0.8473767</code></pre>
 </div>
 </div>
 <p>In most cases, stepwise selects a bigger model and has similar accuracy to LASSO.</p>
@@ -803,7 +803,7 @@ rmse  0.266866 0.8474291</code></pre>
 <p>The best approach would be to build a function that not only fits the model based on the supplied selection procedure and dataframe, but also records the time it takes to do so.</p>
 <p>Note that assigning a start time and endtime is an imperfect way to record time because it takes the system time to record the time (assign the system time to the namespace, albeit a negligible amount).</p>
 <p>We also want to be careful with the units for when we convert the time difference to numeric to store it. To account for this, use <code><a href="https://rdrr.io/r/base/difftime.html">difftime()</a></code> and specify the units for equal comparison. This is demonstrated below.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/timing-calculations_7eae576362dbb611ab7c96884c39697e">
+<div class="cell">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># record start time</span></span>
 <span><span class="va">start_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -843,7 +843,7 @@ rmse  0.266866 0.8474291</code></pre>
 </div>
 </div>
 <p>Now we can incorporate timing into our function to run trials.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/running-single-trial-timing_9239ee56c5dd6b22e1f6cdc3401fee0b">
+<div class="cell">
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to run a single trial</span></span>
 <span><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
 <span><span class="va">run_trial</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">selection_alg</span>, <span class="va">df</span><span class="op">)</span> <span class="op">{</span></span>
@@ -867,7 +867,7 @@ rmse  0.266866 0.8474291</code></pre>
 <span><span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nvars      rmse          time
-1     4 0.7288902 0.194643 secs</code></pre>
+1     4 0.7287124 0.189374 secs</code></pre>
 </div>
 </div>
 <p>Then we can get Monte Carlo intervals for the timing.</p>
@@ -875,7 +875,7 @@ rmse  0.266866 0.8474291</code></pre>
 </section><section id="bundling-the-trial-functions" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="bundling-the-trial-functions">
 <span class="header-section-number">5.6.2</span> Bundling the trial functions</h3>
 <p>In the implementation in <a href="#sec-run-experiment" class="quarto-xref"><span>Section&nbsp;5.5.2</span></a>, there is just a single function that runs the trials and we call if for both algorithms (applying it to all the datasets). We could setup another function to run the datasets through both algorithms and combine results.</p>
-<div class="cell" data-hash="computational-experiments_cache/html/run-both_3b1fe4f538f489ab30983240a67d4a3b">
+<div class="cell">
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to run both algorithms</span></span>
 <span><span class="va">run_both</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
@@ -907,8 +907,8 @@ rmse  0.266866 0.8474291</code></pre>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">air_quality</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  algorithm nvars      rmse           time
-1      step     9 0.7254955 0.6162472 secs
-2     lasso     4 0.7287381 0.1829970 secs</code></pre>
+1      step     9 0.7255623 0.6232772 secs
+2     lasso     4 0.7284986 0.1879170 secs</code></pre>
 </div>
 </div>
 <p>We could get better formatted results by adding an indicator for which dataset was used. Then we would be able to reduce the results list to a single dataframe rather than a list of smaller dataframes.</p>

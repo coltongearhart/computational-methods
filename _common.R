@@ -1,6 +1,6 @@
 # set knitr options
 knitr::opts_chunk$set(
-  cache = TRUE, # cache output
+  cache = FALSE, # cache output
   error = TRUE, # continue code evaluation even if there is an error, in which case the error messages will print
   comment = '', # remove ## prefix for printed text output
   message = FALSE, # suppress printing of messages in the output document

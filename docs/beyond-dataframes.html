@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content"><section id="overview" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="overview">
 <span class="header-section-number">1.1</span> Overview</h2>
-<p>In this mini courese we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R.</p>
+<p>In this mini course we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R.</p>
 <p>Readings come from the <a href="https://adv-r.hadley.nz/">Advanced R</a> textbook by Hadley Wickham.</p>
 <blockquote class="blockquote">
 <p>``To understand computations in R, two slogans are helpful: Everything that exists is an object. Everything that happens is a function call.’’ — John Chambers</p>
@@ -280,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>The assignment arrow is pronounced “gets”, so the name gets the thing on the right.</li>
 </ul>
-<div class="cell" data-hash="beyond-dataframes_cache/html/ugly-code_da085fc4e316d486f8944a1215569f50">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># poor formatting makes cord hard to read </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">realestate</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Files/Data/realestate.csv"</span><span class="op">)</span></span>
@@ -300,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </li>
 </ul>
-<div class="cell" data-hash="beyond-dataframes_cache/html/less-ugly-code_bfe929b201a5c63d0d3bd73460a3459a">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># use keyboard shortcut for quick fixes</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">realestate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Files/Data/realestate.csv"</span><span class="op">)</span>; <span class="va">price_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>   , <span class="fl">1000</span><span class="op">)</span></span>
@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Use <code>knitr</code> chunk options with <code>formatR</code> installed: <code>tidy: formatR</code>. This parses the code with <code>tidy_source()</code> behind the scenes.</p></li>
 <li><p>Can specify additional options with <code>#| tidy-opts: #|   -</code>. View available ones in the help documentation <code>?tidy_source</code> or <a href="https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html">this r markdown cookbook section</a>.</p></li>
 </ul>
-<div class="cell" data-hash="beyond-dataframes_cache/html/automated-code-parse_11c1ad951be469cff2e585497ab8a9d6">
+<div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># automated code parsing -&gt; this has the same source as the first ugly code,</span></span>
 <span><span class="co"># but echos nicely</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">realestate</span><span class="op">$</span><span class="va">price</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Rebuilding code for readability (with comments)</p>
-<div class="cell" data-hash="beyond-dataframes_cache/html/readable-code_4abb49daa0099683cc15a85905f306bb">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># now we can add comments and space out the code for better readability</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">realestate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Files/Data/realestate.csv"</span><span class="op">)</span></span>
@@ -356,12 +356,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price_means</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%    97.5% 
-266154.1 289853.8 </code></pre>
+265932.7 290550.6 </code></pre>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price_medians</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  2.5%  97.5% 
-219000 240000 </code></pre>
+219450 240000 </code></pre>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># do these intervals match will with confidence intervals using central limit theorem?</span></span>
 <span><span class="co"># -&gt; compare interval to t-interval</span></span>
@@ -396,7 +396,7 @@ mean of x
 <p>Vectors don’t have attributes, but we can add attributes that can change how the data is organized.</p>
 <p>An <strong>array</strong> in R, is a vector for a <span class="math inline">\(p\)</span>-dimensional index set. This dimension attribute allows the vector to be searched and subsetted very efficiently. Technically we have already seen a 2-dimensional vector; an R matrix. Because an array is a special kind of vector, all values stored inside an array must be the same atomic type.</p>
 <p>When doing computation things, if we are only guessing how R handles everything, we cannot leverage how R works to have more efficient code. Note that <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> is <em>structure</em>, not <em>string</em>.</p>
-<div class="cell" data-hash="beyond-dataframes_cache/html/matrix_example_a36167c2cae86b187bad5bc3e43b7118">
+<div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># show that a matrix is a vector with dimension attributes</span></span>
 <span><span class="va">some_values</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
 <span><span class="va">some_values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -461,7 +461,7 @@ mean of x
 <ul>
 <li>When unpacking a matrix (i.e.&nbsp;converting it back to a vector), R goes down the columns rather than across the rows.</li>
 </ul>
-<div class="cell" data-hash="beyond-dataframes_cache/html/matrix_example2_e7fcad35374fef578683a197357fb532">
+<div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># unpack matrix</span></span>
 <span><span class="va">my_matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -479,7 +479,7 @@ mean of x
 <ul>
 <li>An array allows us to add an indexing structure (so we can subset these with square brackets), also allows sorting.</li>
 </ul>
-<div class="cell" data-hash="beyond-dataframes_cache/html/array_example_4617bcbb1cc3f9bb54b1af99e1146b5d">
+<div class="cell">
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build an array here</span></span>
 <span><span class="va">vec_to_array</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">30</span></span>
 <span></span>
@@ -510,7 +510,7 @@ mean of x
 <p>This can be very useful when the layers have characteristics (e.g.&nbsp;for simulations).</p>
 <p>Why is this helpful? Suppose we are collecting the resulting values for simulating <span class="math inline">\(n = 100\)</span> observations, from normals with means in <span class="math inline">\(\{-3,0,3\}\)</span> and standard deviations in <span class="math inline">\(\{2,10\}\)</span></p>
 <p>Use an array to store the observation index in the first dimension, the means in the second dimension, and standard deviations in the third dimension. Thus we create a 100 by 3 by 2 array to store the data. This allows us to easily access the data we want using the indexing.</p>
-<div class="cell" data-hash="beyond-dataframes_cache/html/simulation_array_4ee2fe9517f4f5e3d1dc440f16081876">
+<div class="cell">
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initialize simulation settings</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>,<span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span></span>
@@ -563,7 +563,7 @@ mean of x
 <span class="header-section-number">1.4.2</span> Lists</h3>
 <p>A <strong>list</strong> in R is an <em>indexed</em> set of other R objects that can be <em>named</em>. These objects do not all need to be the same type. Lists can help us to bundle together vectors, matrices, data frames, arrays, or even other lists.</p>
 <p>These are great for storing results that are contextually related to each other. Examples include results from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> objects.</p>
-<div class="cell" data-hash="beyond-dataframes_cache/html/list_example1_3b067c2573c5b9177c24fb2a82c5c432">
+<div class="cell">
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># build a list with several different object types</span></span>
 <span><span class="va">my_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  num_vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>,</span>
@@ -1033,7 +1033,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview </span></span>
 <span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>In this mini courese we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. </span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>In this mini course we will be exploring the use of computing and non-parametric method in statistical practice. This will look like a set of general programming and computing topics and methods. This will require that we use a statistical programming language in sophisticated ways, and the module will specifically explore techniques for advanced programming in R. </span>
 <span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>Readings come from the <span class="co">[</span><span class="ot">Advanced R</span><span class="co">](https://adv-r.hadley.nz/)</span> textbook by Hadley Wickham.</span>
 <span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a></span>
