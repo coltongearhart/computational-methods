@@ -2,6 +2,5 @@
 .Rproj.user
 .Rhistory
 .Ruserdata
-*.html
 *_cache/
 /.quarto/
