@@ -17,7 +17,7 @@ book:
         - permutation-tests.qmd
         - bootstrap.qmd
         - computational-experiments.qmd
-        #- simulation-studies.qmd
+        - simulation-studies.qmd
         #- improving-code.qmd
 
     - part: assignments.qmd

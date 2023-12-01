@@ -86,7 +86,7 @@ More formal steps:
 
 - Is there a preference in terms of parametric vs permutation tests in which is better? Pros and cons
 
-- ANSWER: Permutation testing i when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.
+- ANSWER: Permutation testing is when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.
 
 ### Permutation Test Example:
 

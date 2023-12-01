@@ -9,3 +9,334 @@
 source("_common.R")
 
 ```
+
+## Overview of computational experiments with simulated data
+
+In @sec-computational-experiments we discussed running computational experiments with empirical datasets as the experimental units in our treatment comparisons. What advantages might there be in running the experiments with simulated data as the experimental units? Let's consider this idea within the same construct of our experiments on variable selection between stepwise and lasso methods.
+
+With the previous computational experiment, we had a list of 9 datasets. This is not the most exhaustive list to be trying a timing study on for example. If we have to find a new, real dataset everytime we want time our new method, then we are going to have to find lots of new datasets. And all would have an uncontrolled number of variables and rows, which doesn't generalize well (e.g. sample size isn't growing in orders of magnitude, so can't make comparisons like X times longer when 2 times more rows). This is not a very systematic way of searching (just finding some random datasets will lead to not learning anything about timing if all are tiny).
+
+Instead of trying to find the perfect dataset that matches all the characteristics we want, we might want to build a dataset. Then we can set the sample size and the number of variables, and study if our stepwise selection method's timing more a function of $n$ or $p$ (and the number of actually important (significant, related to $Y$) covariates $q$ ($q < p$)). There's lots of things that go into the timing, and relying on finding a dataset where I know all of these things as true is nrealy impossible.
+
+Why choose simulated vs. real datasets for experiments?
+
+-   Advantages of simulated data:
+
+    -   I can control the "true" parameters that create the data ($q$), which is greatly preferred when evaluating the number of true parameters that tend to be chosen
+
+    -   I can control the sample sizes ($n$) and the number of variables ($p$), which is a hige advantage in timing studies (i.e. easier to capture timing info in a simulated environment)
+
+    -   Simulating data has almost zero cost to uses bigger and bigger datasets (just computational resources)
+
+-   Advantages of real data:
+
+    -   Predictive accuracy is measured more realistically; if wanting to study how methods perform in practice, we should have them perform in practice and not in just theory (i.e. a well-controlled, simulated environment)
+
+        -   Not going to get the oddities of real data such as outliers unless they are specifically coded in
+
+How might we choose to simulate data to conduct the experiments for the variable selection above?
+
+## Simulating data for your experiment
+
+When we are building our simulation study, we need to decide on how the data is generated, how we make the process reproducible and if we need to store the simulated datasets to allow for future audit.
+
+Simulate data function: Create a function that will simulate the x-values for our regression variable selection study.
+
+-   Let $Y = X \beta + \epsilon$, where $\epsilon \sim \text{Normal}(0, \sigma)$
+
+    -   Simulating from independent normal random variables (very simply), which lines up with the assumptions of LASSO. LASSO is basically fitting an MLR model with independent normal structure and some normal noise.
+
+-   Parameters
+
+    -   `n` = number of simulated rows
+    -   `p` = number of simulated covariates (X)
+    -   `q` = number of covariates linearly related to Y
+    -   `b` = strength of beta coefficients for linearly related X's
+        -   Can have stronger relationships with higher magnitudes of betas (such as 0.1 vs 10 vs 50)
+        -   This could be used to see if weak relationships are findable by the variable selection method
+    -   `sd_y` = sd of simulated y values
+    -   `sd_x` = sd of simulated x variables
+
+```{r}
+#| label: simulate-data
+
+# define function to simulate response and covariates
+make_sim_data <- function(n = 100, p = 20, q = 10, b = 0.1, sd_y = 1, sd_x = 1){
+  
+  # generate covariates
+  X = sapply(1:p, function(i) rnorm(n, mean = 0, sd = sd_x))
+  
+  # give column names
+  colnames(X) = paste0("x", 1:p)
+  
+  # generate beta vector (q significant, non-zero parameters and p-q zeros)
+  beta = c(rep(b, q), rep(0, p-q))
+  
+  # calculate response
+  y = (X %*% beta)[,1] + rnorm(n, mean = 0, sd = sd_y)
+  
+  # save as datafram
+  data_sim = data.frame(y,X)
+  
+  return(data_sim)
+  
+}
+
+# get the random same data each time
+set.seed(12345)
+
+# test function
+make_sim_data(n = 10, p = 2, q = 2, b = 0.1, sd_y = 1, sd_x = 1)
+
+```
+
+We know lots of information about the simulated dataset this function returns and how it should behave in a linear model. For example, if studying variable selection, we want `x1`:`xq` to be selected in the final model.
+
+So, we can now really quickly build any number of datasets that we want with the desired attributes.
+
+`set.seed()` tangent
+
+- This is supposed to run setup the psuedo random number generators start at the same point. So if the code is deterministic, then it should run in the same way
+
+- Can be tricky with functions because if introducing more randomness, it changes the position of the psuedo random generator. So everything is thrown off
+
+## Running the simulation study
+
+Here are the final helper functions from @sec-computational-experiments.
+
+```{r}
+#| label: previous-helper-functions
+
+# load packages
+library(glmnet)
+library(caret)
+
+# function for choosing with stepwise and fitting a regression
+# -> inputs dataframe and returns selected model
+step_var_mod <- function(df){
+  
+  # run stepwise procedure from full model
+  step_selected <- step(lm(y ~ . , data = df), trace = FALSE)
+  
+  return(step_selected)
+
+}
+# function for choosing with lasso and fitting regression
+# -> inputs dataframe and returns selected model
+lasso_var_mod <- function(df){
+  
+  # tune shrinkage parameter lambda
+  cv.out <- cv.glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
+                      y = df$y, alpha = 1, type.measure = "deviance")
+  
+  # run lasso selection on model using tuned lambda
+  lasso_mod <- glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
+                      y = df$y, alpha = 1, lambda = cv.out$lambda.1se)
+  
+  # save names of non-shrunk X variables
+  lasso_vars <- names(lasso_mod$beta[,1])[which(lasso_mod$beta[,1] != 0)]
+  
+  # HACK (not elegant solution): lasso had a tendency to select zero variables which breaks the timing study below
+  # -> so if no variables are selected, just take the first variable
+  if (length(lasso_vars) == 0)
+    lasso_vars <- names(lasso_mod$beta[,1])[1]
+  
+  # fit model based on lasso selected variables (plus intercept)
+  lasso_selected <- lm(formula(paste0("y ~ 1 + ", paste(lasso_vars, collapse = " + "))), data = df)
+  
+  return(lasso_selected)
+
+}
+
+# function for finding number of variables included
+# -> inputs a model and returns an integer
+select_var_count <- function(lin_mod){
+  
+  # count the number of variables in the model (excluding intercept)
+  length(coef(lin_mod))-1
+  
+}
+
+# function for finding 10-fold cross validated RMSE (our accuracy measure)
+select_cv_rmse <- function(lin_mod){
+  
+  # run 10-fold CV on the model
+  # -> by default trainControl() uses bootstrap validation, so need to switch it
+  # -> always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison
+  cv_result <- train(formula(lin_mod), 
+                     data = lin_mod$model,
+                     method = "lm",
+                     trControl = trainControl(method = "cv", number = 10),
+                     tuneGrid = data.frame(intercept = TRUE))
+  
+  # return RMSE
+  return(cv_result$results$RMSE)
+}
+
+# define function to run a single trial
+# -> inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results
+run_trial <- function(selection_alg, df) {
+  
+  # run variable selection model
+  # -> we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)
+  # record start and end time
+  start_time = Sys.time()
+    tmp_mod = selection_alg(df)
+  end_time = Sys.time()
+  
+  # collect measurements for number of variables and predictive accuracy
+  # -> will be storing results as dataframe, so want to return a mini dataframe here
+  # -> want to name elements when returning more complex data structures
+  return(data.frame(nvars = select_var_count(tmp_mod),
+                    rmse = select_cv_rmse(tmp_mod),
+                    time = difftime(end_time, start_time, units = "sec")))
+}
+
+```
+
+### Timing study
+
+To help with the timing study, we will use the `tictoc` package. `tic()` (starts the timer) / `toc()` (records the time to get the `toc()`) pairing does the data collection of setting up a `start_time <- Sys.time()` and `stop_time <- Sys.time()` for us in an automated way and creates a log file.
+
+We want to be careful about where we put the `tic()` and `toc()`: we don't care about how long it takes to generate the data, rather just the variable selection method. So we can run a loop with constant data dimensions to get an idea of the variability of the selection method timing.
+
+There are certain combinations that we are interested in checking. Stepwise method does a lot of solving the inverse of the $X'X$ matrix (a $p \times p$ matrix), which is the time consuming part. So if $p = 10$ is small, maybe stepwise is faster than lasso (maybe with less variability) but as $p$ increases, perhaps lasso becomes quicker. Can collect this information and perform inferences on the times (systematic effect of changing $n$, $p$, $q$ just like any other experiment (these are the treatments, in addition to the selection algorithm).
+
+```{r}
+#| label: mini-timing-study
+
+# load package
+library(tictoc)
+library(magrittr)
+
+# demonstrate tictoc timers
+# -> don't care about the parameters other than dimensions, so just use the defaults
+tic.clearlog()
+for(i in 1:3){
+  
+  # generate data
+  data_sim <- make_sim_data(n = 50000, p = 10, q = 5)
+  
+  # time variable selection
+  tic(paste0("sim",i))
+    run_trial(lasso_var_mod, data_sim)
+  toc(log = TRUE, quiet = TRUE)
+}
+
+# get information from tictoc
+# -> then calculate differences and simplify
+log_lst <- tic.log(format = FALSE)
+timings <- lapply(log_lst, function(x) x$toc - x$tic) %>% unlist
+timings
+
+```
+
+Now we can generalize the above code for any $n$, $p$ and $q$, which are the things that we want to systematically change.
+
+```{r}
+#| label: timing-function
+
+# define function to run a timing study
+# -> default values are picked so that if we accidentally run the function, it wont take forever
+# -> we can also make it more flexible to be able to do different model selection functions
+sim_times <- function(n_sims = 10, n = 100, p = 10, q = 5, var_select_fun = step_var_mod){
+  
+  tic.clearlog()
+  for(i in 1:n_sims){
+    
+    # generate data
+    data_sim <- make_sim_data(n = n, p = p, q = q)
+    
+    # run and time variable selection
+    # -> ignoring the outputs of run_trial() because just want the timing info
+    tic(paste0("sim",i))
+      run_trial(var_select_fun, data_sim)
+    toc(log = TRUE, quiet = TRUE)
+  }
+  
+  # get information from tictoc
+  # -> then calculate differences and simplify
+  log_lst <- tic.log(format = FALSE)
+  timings <- lapply(log_lst, function(x) x$toc - x$tic) %>% unlist
+
+  return(timings)
+}
+
+# test function to see as when we had it hardcoded for a specific set of parameters
+sim_times(n_sims = 3, n = 50000, p = 10, q = 5, var_select_fun = lasso_var_mod)
+
+# now much easier to change the parameter values
+sim_times(n_sims = 3, n = 500, p = 10, q = 5, var_select_fun = step_var_mod)
+
+```
+
+Now we have a function that can perform a timing study for a particular parameter set. But we want to use it in a way that we can go through a grid of parameter combinations.
+
+`mapply()` iterates through vectors of the same length (which is what each column of a dataframe is; it is looking for (`vector1[i]`, `vector2[i]`) which we will create via `expand.grid()` to give us all possible combinations. 
+
+```{r}
+#| label: full-timing-study
+
+# define possible parameter combinations
+params <- expand.grid(n = c(100, 1000, 5000), p = c(20, 30), q = c(5, 10))
+
+# run timing study
+# -> mapply() -> MoreArgs are constants
+# -> can't use purrr cause vectorizing over more than two parameters
+step_times <- mapply(sim_times, n = params$n, p = params$p, q = params$q,
+                     MoreArgs = list(n_sim = 3, var_select_fun = step_var_mod))
+step_times
+
+```
+
+Now we can use add the results to the parameters. This is where we use summary statistics such as means, and quantiles to evaluate the timing for each parameter combination.
+
+```{r}
+# add timing results to parameter combination information
+params$time_mean <- apply(X = step_times, MARGIN = 2, FUN = mean)
+params
+
+```
+
+### Variable selection study
+
+Now want to look at the number of variables selected rather than the timing. Just have to modify our `sim_times()` function into a `vars_selected()` function to get the variables selected (we can compare these results to the respective $q$'s (the true number of important predictors) that we set).
+
+```{r}
+#| label: var-selection-study
+
+# define function to run a study on number of variables selected
+vars_selected <- function(n_sims = 10, n = 100, p = 10, q = 5, var_select_fun = step_var_mod){
+  
+  # initialize results vector
+  q_hat = rep(NA, n_sims)
+  
+  for(i in 1:n_sims){
+    
+    # generate data
+    data_sim = make_sim_data(n = n, p = p, q = q)
+    
+    # run variable selection and return jus the number of variables selected
+    q_hat[i] = run_trial(var_select_fun, data_sim)$nvars
+  }
+  
+  return(q_hat)
+}
+
+# test function
+
+# define possible parameter combinations
+params <- expand.grid(n = c(100, 1000, 5000), p = c(20, 30), q = c(5, 10))
+
+# run variable selection study
+var_counts <- mapply(vars_selected, n = params$n, p = params$p, q = params$q,
+                     MoreArgs = list(n_sim = 3 , var_select_fun = step_var_mod))
+var_counts
+
+# add number of variable results to parameter combination information
+params$vars_selected <- apply(X = var_counts, MARGIN = 2, FUN = mean)
+params
+
+```
+
+Final thoughts: In practice, it may be a good idea to save the datasets that were used to get the results as well. These could then be put into a list and saved as a RData file, which could be run off of in the future. This would be very helpful auditing your code and making it more reproducable. But if we are just using simulation to kind of get an idea how the models work, the actual simulated data may not be important and we can just keep the results.

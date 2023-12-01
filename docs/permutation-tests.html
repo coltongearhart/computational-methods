@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">3.2.4</span> Comparison of methods</h3>
 <ul>
 <li><p>Is there a preference in terms of parametric vs permutation tests in which is better? Pros and cons</p></li>
-<li><p>ANSWER: Permutation testing i when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.</p></li>
+<li><p>ANSWER: Permutation testing is when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.</p></li>
 </ul></section><section id="permutation-test-example" class="level3" data-number="3.2.5"><h3 data-number="3.2.5" class="anchored" data-anchor-id="permutation-test-example">
 <span class="header-section-number">3.2.5</span> Permutation Test Example:</h3>
 <p>Using data from the student sleep data. The following is directly taken from the help file for the sleep data in Base R:</p>
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># check assuptions </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="permutation-tests_files/figure-html/t-test-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -390,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">extra</span><span class="op">[</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="permutation-tests_files/figure-html/t-test-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -440,7 +440,7 @@ mean of x mean of y
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">perm_diffs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" data-fig-pos="hold" width="672">
 <figure class="quarto-float quarto-float-fig figure"><div>
 <img src="permutation-tests_files/figure-html/perm-test-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" data-fig-pos="hold" width="672">
 </div>
@@ -555,8 +555,8 @@ mean of x mean of y
 </div>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">real_estate</span><span class="op">$</span><span class="va">pool</span><span class="op">)</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no" "no"
-[16] "no" "no" "no" "no" "no"</code></pre>
+<pre><code> [1] "no"  "no"  "no"  "yes" "no"  "no"  "yes" "no"  "no"  "no"  "no"  "no" 
+[13] "no"  "no"  "no"  "no"  "no"  "no"  "no"  "yes"</code></pre>
 </div>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create a function to do both steps, permute first then calculate difference</span></span>
 <span><span class="co"># -&gt; this is different than the first example </span></span>
@@ -589,7 +589,7 @@ mean of x mean of y
 <span><span class="va">real_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">real_estate</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"yes"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">price</span><span class="op">[</span><span class="va">pool</span> <span class="op">==</span> <span class="st">"no"</span><span class="op">]</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pool_diffs</span> <span class="op">&gt;=</span> <span class="va">real_diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0846</code></pre>
+<pre><code>[1] 0.0899</code></pre>
 </div>
 </div>
 <p>Based on this p-value, there is insufficient evidence to suggest that the 90th quantile of house prices with pools is greater than that without pools.</p>
@@ -1091,7 +1091,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb50-88"><a href="#cb50-88" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-89"><a href="#cb50-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Is there a preference in terms of parametric vs permutation tests in which is better? Pros and cons</span>
 <span id="cb50-90"><a href="#cb50-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-91"><a href="#cb50-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ANSWER: Permutation testing i when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.</span>
+<span id="cb50-91"><a href="#cb50-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ANSWER: Permutation testing is when you are able to simulate from the model under the null and you are able to use it as a generative function (generate data from the assumed model), then the permutation test will be a more direct representation of the test than test statistic / parametric methods that usually hinge on assumptions that are usually loosely true. So permutation tests are more pure in what p-values represent, the percentage of samples that would result in a significant difference.</span>
 <span id="cb50-92"><a href="#cb50-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-93"><a href="#cb50-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Permutation Test Example:</span></span>
 <span id="cb50-94"><a href="#cb50-94" aria-hidden="true" tabindex="-1"></a></span>

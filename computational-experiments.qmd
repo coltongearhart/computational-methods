@@ -18,7 +18,7 @@ In the process of running analyses and working with new methods, we often encoun
 
 *Example: In a standard knn regression, we predict the response value for a new point by finding the k-nearest points from the training data, then calculating their average as a prediction for the new point. This is a nice non-parametric model but it requires a lot of distance calculation to find the neighbors. Suppose that a researcher is working on a new approximation to a k-nearest neighbor regression model. Instead of creating neighborhoods based on distance, instead the neighborhoods are defined by binning the features using quantile-based bins. The researcher thinks that this should be faster than knn, but is unsure if the predictions will be as accurate.*
 
-*Example: You have heard of stepwise variable selection for regression. Suppose you also learn the LASSO regression can also be used to run variable selection. Which will lead to smaller models? Which is faster? Which make a model that is better for predictive accuracy?*
+*Example: You have heard of stepwise variable selection for regression. Suppose you also learn the LASSO regression can also be used to run variable selection. Which will lead to smaller models? Which is faster? Which makes a model that is better for predictive accuracy?*
 
 ```{r}
 #| label: packages
@@ -201,12 +201,12 @@ all_reg_sizes <- NA
 for (i in 1:length(all_reg_sets)){
   
   # concatenate path with specific dataset name
-  data_path <- paste0("files/data/", all_reg_sets[i], "_cleaned.Rdata")
+  data_path = paste0("files/data/", all_reg_sets[i], "_cleaned.Rdata")
   
   # load and assign data
   load(data_path)
-  data_list[[i]] <- data
-  all_reg_sizes[i] <- nrow(data)
+  data_list[[i]] = data
+  all_reg_sizes[i] = nrow(data)
   
   # print loaded variables
   print(paste("vars from data", all_reg_sets[i]))
@@ -238,7 +238,7 @@ The variable selection helper functions below perform the same steps as in @sec-
 step_var_mod <- function(df){
   
   # run stepwise procedure from full model
-  step_selected <- step(lm(y ~ . , data = df), trace = FALSE)
+  step_selected = step(lm(y ~ . , data = df), trace = FALSE)
   
   return(step_selected)
 
@@ -252,18 +252,18 @@ step_var_mod(data_list$air_quality)
 lasso_var_mod <- function(df){
   
   # tune shrinkage parameter lambda
-  cv.out <- cv.glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
+  cv.out = cv.glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
                       y = df$y, alpha = 1, type.measure = "deviance")
   
   # run lasso selection on model using tuned lambda
-  lasso_mod <- glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
+  lasso_mod = glmnet(x = as.matrix(x = df[ , -which(names(df) == "y")]),
                       y = df$y, alpha = 1, lambda = cv.out$lambda.1se)
   
-  # save names of non0-shrunk X variables
-  lasso_vars <- names(lasso_mod$beta[,1])[which(lasso_mod$beta[,1] != 0)]
+  # save names of non-shrunk X variables
+  lasso_vars =  names(lasso_mod$beta[,1])[which(lasso_mod$beta[,1] != 0)]
   
   # fit model based on lasso selected variables (plus intercept)
-  lasso_selected <- lm(formula(paste0("y ~ 1 + ", paste(lasso_vars, collapse = " + "))), data = df)
+  lasso_selected = lm(formula(paste0("y ~ 1 + ", paste(lasso_vars, collapse = " + "))), data = df)
   
   return(lasso_selected)
 
@@ -293,14 +293,13 @@ select_var_count <- function(lin_mod){
 # test function on a single dataset
 lasso_var_mod(data_list$air_quality) %>% select_var_count
 
-
 # function for finding 10-fold cross validated RMSE (our accuracy measure)
 select_cv_rmse <- function(lin_mod){
   
   # run 10-fold CV on the model
   # -> by default trainControl() uses bootstrap validation, so need to switch it
   # -> always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison
-  cv_result <- train(formula(lin_mod), 
+  cv_result = train(formula(lin_mod), 
                      data = lin_mod$model,
                      method = "lm",
                      trControl = trainControl(method = "cv", number = 10),
@@ -397,7 +396,7 @@ start_time <- Sys.time()
 results_lasso <- sapply(X = data_list, FUN = function(X) run_trial(lasso_var_mod, X))
 
 # record end time
-start_time <- Sys.time()
+end_time <- Sys.time()
 
 # calculate difference - naive way
 end_time - start_time
