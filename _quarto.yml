@@ -23,7 +23,7 @@ book:
     - part: assignments.qmd
       chapters:
         - hw1.qmd
-        #- hw2.qmd
+        - hw2.qmd
         #- project.qmd
     
 format:

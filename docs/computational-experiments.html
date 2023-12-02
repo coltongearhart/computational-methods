@@ -208,6 +208,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -224,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#organizing-to-support-an-experiment" id="toc-organizing-to-support-an-experiment" class="nav-link" data-scroll-target="#organizing-to-support-an-experiment"><span class="header-section-number">5.4</span> Organizing to support an experiment</a>
   <ul class="collapse">
-<li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">5.4.1</span> Load data</a></li>
+<li><a href="#sec-computational-datasets" id="toc-sec-computational-datasets" class="nav-link" data-scroll-target="#sec-computational-datasets"><span class="header-section-number">5.4.1</span> Load data</a></li>
   <li><a href="#modularize-code" id="toc-modularize-code" class="nav-link" data-scroll-target="#modularize-code"><span class="header-section-number">5.4.2</span> Modularize code</a></li>
   </ul>
 </li>
@@ -424,7 +430,7 @@ Coefficients:
 <span><span class="co"># view tuned lambda</span></span>
 <span><span class="va">cv.out</span><span class="op">$</span><span class="va">lambda.1se</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.04117753</code></pre>
+<pre><code>[1] 0.04959849</code></pre>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># use tuned lambda to pick variables</span></span>
 <span><span class="va">lasso_mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/glmnet.html">glmnet</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
@@ -434,9 +440,9 @@ Coefficients:
 <span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  PT08S1_CO_     NMHC_GT_     C6H6_GT_ PT08S2_NMHC_      NOx_GT_  PT08S3_NOx_ 
-  0.00000000   0.02408635   0.00000000  -0.04278944   0.00000000   0.02913581 
+  0.00000000   0.01625114   0.00000000  -0.03212472   0.00000000   0.01877040 
      NO2_GT_  PT08S4_NO2_   PT08S5_O3_            T           RH           AH 
-  0.64247636   0.00000000   0.00000000   0.00000000   0.00000000   0.00000000 </code></pre>
+  0.63032626   0.00000000   0.00000000   0.00000000   0.00000000   0.00000000 </code></pre>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># find variables whose coefficients were NOT shrunk to zero</span></span>
 <span><span class="va">lasso_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">lasso_mod</span><span class="op">$</span><span class="va">beta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span>
@@ -544,7 +550,7 @@ Coefficients:
 <li><p>If we have a set of possible parameter settings for an algorithm that will act as treatment factors, then we need to have those values organized into a data object that can be accessed when needed.</p></li>
 </ul>
 <p>This is all to say, there is often a lot of preparation of data and functions that is required before we can start gathering results from computational experiments. We want everything to be organized so that we can automate everything.</p>
-<section id="load-data" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="load-data">
+<section id="sec-computational-datasets" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="sec-computational-datasets">
 <span class="header-section-number">5.4.1</span> Load data</h3>
 <p>We are going to figure out which type of model will behave more accurately in terms of a predictive setting. So working with simulated data sets might not have as much real application.</p>
 <p>We are going to work with 9 machine learning datasets from real settings (found in the UCI repository). These are commonly used regression data sets for whenever researchers have new methods and they want to see how the models behave on real data (e.g.&nbsp;check their predictive capabilities).</p>
@@ -729,7 +735,7 @@ Coefficients:
 <span><span class="co"># test function on a single dataset</span></span>
 <span><span class="fu">lasso_var_mod</span><span class="op">(</span><span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">select_cv_rmse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7283729</code></pre>
+<pre><code>[1] 0.728568</code></pre>
 </div>
 </div>
 <p>Lots of work went into setting up how to apply the treatments and gathering results. Now we are just doing everything through functions.</p>
@@ -759,12 +765,12 @@ Coefficients:
 <span><span class="fu">run_trial</span><span class="op">(</span><span class="va">step_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nvars      rmse
-1     9 0.7257508</code></pre>
+1     9 0.7255136</code></pre>
 </div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nvars      rmse
-1     4 0.7287472</code></pre>
+1     4 0.7284826</code></pre>
 </div>
 </div>
 </section><section id="sec-run-experiment" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-run-experiment">
@@ -777,21 +783,21 @@ Coefficients:
 <span><span class="va">results_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_list</span>, FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results_step</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma      air_quality
-nvars 10        7         4         11         8          6         9          
-rmse  0.8867355 0.1065032 0.4861958 0.07009959 0.4911361  0.8827889 0.7258517  
+<pre><code>      wpbc     wankara   laser     treasury  skillcraft puma      air_quality
+nvars 10       7         4         11        8          6         9          
+rmse  0.878858 0.1062627 0.4912304 0.0708492 0.4926381  0.8827926 0.7259079  
       ccpp      casp     
 nvars 4         9        
-rmse  0.2669818 0.8473485</code></pre>
+rmse  0.2670478 0.8479495</code></pre>
 </div>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results_lasso</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      wpbc      wankara   laser     treasury   skillcraft puma      air_quality
-nvars 4         5         4         7          6          1         4          
-rmse  0.8922084 0.1073599 0.4893904 0.07311562 0.4927779  0.8837042 0.7287855  
+<pre><code>      wpbc      wankara   laser    treasury   skillcraft puma      air_quality
+nvars 3         5         4        6          6          1         4          
+rmse  0.9036268 0.1066385 0.486801 0.07414847 0.4944229  0.8833437 0.7286331  
       ccpp      casp     
 nvars 4         9        
-rmse  0.2669092 0.8473198</code></pre>
+rmse  0.2670005 0.8474217</code></pre>
 </div>
 </div>
 <p>In most cases, stepwise selects a bigger model and has similar accuracy to LASSO.</p>
@@ -822,11 +828,11 @@ rmse  0.2669092 0.8473198</code></pre>
 <span><span class="co"># calculate difference - naive way</span></span>
 <span><span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 4.436627 secs</code></pre>
+<pre><code>Time difference of 4.506011 secs</code></pre>
 </div>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">end_time</span> <span class="op">-</span> <span class="va">start_time</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.436627</code></pre>
+<pre><code>[1] 4.506011</code></pre>
 </div>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">end_time_step</span> <span class="op">+</span> <span class="fl">120</span> <span class="op">-</span> <span class="va">start_time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
@@ -834,18 +840,18 @@ rmse  0.2669092 0.8473198</code></pre>
 </div>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">end_time</span> <span class="op">+</span> <span class="fl">120</span> <span class="op">-</span> <span class="va">start_time</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.073944</code></pre>
+<pre><code>[1] 2.0751</code></pre>
 </div>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># have no idea what the units are when convert</span></span>
 <span></span>
 <span><span class="co"># calculate difference - correct way</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="va">end_time</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"sec"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 4.436627 secs</code></pre>
+<pre><code>Time difference of 4.506011 secs</code></pre>
 </div>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="va">end_time</span>, <span class="va">start_time</span>, units <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07394378</code></pre>
+<pre><code>[1] 0.07510018</code></pre>
 </div>
 </div>
 <p>Now we can incorporate timing into our function to run trials.</p>
@@ -873,7 +879,7 @@ rmse  0.2669092 0.8473198</code></pre>
 <span><span class="fu">run_trial</span><span class="op">(</span><span class="va">lasso_var_mod</span>, <span class="va">data_list</span><span class="op">$</span><span class="va">air_quality</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nvars      rmse          time
-1     4 0.7282684 0.182862 secs</code></pre>
+1     4 0.7284068 0.188771 secs</code></pre>
 </div>
 </div>
 <p>Then we can get Monte Carlo intervals for the timing.</p>
@@ -913,8 +919,8 @@ rmse  0.2669092 0.8473198</code></pre>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">air_quality</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  algorithm nvars      rmse           time
-1      step     9 0.7258746 0.6247990 secs
-2     lasso     4 0.7286026 0.1816499 secs</code></pre>
+1      step     9 0.7258026 0.6099961 secs
+2     lasso     4 0.7278774 0.1802239 secs</code></pre>
 </div>
 </div>
 <p>We could get better formatted results by adding an indicator for which dataset was used. Then we would be able to reduce the results list to a single dataframe rather than a list of smaller dataframes.</p>
@@ -1503,7 +1509,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-183"><a href="#cb60-183" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-184"><a href="#cb60-184" aria-hidden="true" tabindex="-1"></a>This is all to say, there is often a lot of preparation of data and functions that is required before we can start gathering results from computational experiments. We want everything to be organized so that we can automate everything.</span>
 <span id="cb60-185"><a href="#cb60-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-186"><a href="#cb60-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data</span></span>
+<span id="cb60-186"><a href="#cb60-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### Load data {#sec-computational-datasets}</span></span>
 <span id="cb60-187"><a href="#cb60-187" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-188"><a href="#cb60-188" aria-hidden="true" tabindex="-1"></a>We are going to figure out which type of model will behave more accurately in terms of a predictive setting. So working with simulated data sets might not have as much real application.</span>
 <span id="cb60-189"><a href="#cb60-189" aria-hidden="true" tabindex="-1"></a></span>
