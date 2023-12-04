@@ -36,7 +36,7 @@ Why choose simulated vs. real datasets for experiments?
 
 How might we choose to simulate data to conduct the experiments for the variable selection above?
 
-## Simulating data for your experiment
+## Simulating data for your experiment {#sec-simulation-generate-data-function}
 
 When we are building our simulation study, we need to decide on how the data is generated, how we make the process reproducible and if we need to store the simulated datasets to allow for future audit.
 
@@ -102,7 +102,7 @@ So, we can now really quickly build any number of datasets that we want with the
 
 ## Running the simulation study
 
-Here are the final helper functions from @sec-computational-experiments.
+Here are the final helper functions from @sec-simulation-helper-functions.
 
 ```{r}
 #| label: previous-helper-functions
@@ -205,7 +205,7 @@ There are certain combinations that we are interested in checking. Stepwise meth
 ```{r}
 #| label: mini-timing-study
 
-# load package
+# load packages
 library(tictoc)
 library(magrittr)
 
@@ -272,19 +272,31 @@ sim_times(n_sims = 3, n = 500, p = 10, q = 5, var_select_fun = step_var_mod)
 
 Now we have a function that can perform a timing study for a particular parameter set. But we want to use it in a way that we can go through a grid of parameter combinations.
 
-`mapply()` iterates through vectors of the same length (which is what each column of a dataframe is; it is looking for (`vector1[i]`, `vector2[i]`) which we will create via `expand.grid()` to give us all possible combinations. 
+`mapply()` and `purrr:pmap()` iterate through vectors of the same length (which is what each column of a dataframe is; it is looking for (`vector1[i]`, `vector2[i]`) which we will create via `expand.grid()` to give us all possible combinations. 
 
 ```{r}
 #| label: full-timing-study
+
+# load packages
+library(purrr)
 
 # define possible parameter combinations
 params <- expand.grid(n = c(100, 1000, 5000), p = c(20, 30), q = c(5, 10))
 
 # run timing study
 # -> mapply() -> MoreArgs are constants
-# -> can't use purrr cause vectorizing over more than two parameters
 step_times <- mapply(sim_times, n = params$n, p = params$p, q = params$q,
                      MoreArgs = list(n_sim = 3, var_select_fun = step_var_mod))
+
+# -> pmap() ->  use with an input list (similar to haw mapply() implements vectorizing over multiple items in parallel)
+step_times <- list(n = params$n, p = params$p, q = params$q) %>% 
+  pmap(\(n, p, q) sim_times(n, p, q, n_sim = 3, var_select_fun = step_var_mod),
+       .progress = TRUE)
+
+# -> pmap() -> use with a dataframe (use column names to reference things)
+step_times <- params %>% 
+  pmap(\(p, n, q) sim_times(n, p, q, n_sim = 3, var_select_fun = step_var_mod),
+       .progress = TRUE)
 step_times
 
 ```
@@ -298,7 +310,7 @@ params
 
 ```
 
-### Variable selection study
+### Variable selection study {#sec-variable-selection-study}
 
 Now want to look at the number of variables selected rather than the timing. Just have to modify our `sim_times()` function into a `vars_selected()` function to get the variables selected (we can compare these results to the respective $q$'s (the true number of important predictors) that we set).
 

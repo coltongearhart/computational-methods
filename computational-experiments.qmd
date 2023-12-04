@@ -222,7 +222,7 @@ str(data_list, max.level = 1)
 
 ```
 
-### Modularize code
+### Modularize code {#sec-simulation-helper-functions}
 
 Rather than having one function that does everything, we want to have modularized code where helper functions perform *singular tasks* (this way they are like action statements).
 

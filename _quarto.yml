@@ -18,7 +18,7 @@ book:
         - bootstrap.qmd
         - computational-experiments.qmd
         - simulation-studies.qmd
-        #- improving-code.qmd
+        - improving-code.qmd
 
     - part: assignments.qmd
       chapters:
