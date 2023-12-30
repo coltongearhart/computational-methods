@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.376">
+<meta name="generator" content="quarto-1.4.517">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Computational Methods in R - 7&nbsp; Improving Code</title>
 <style>
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
@@ -101,11 +101,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-notes.html">Course Notes</a></li><li class="breadcrumb-item"><a href="./improving-code.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Improving Code</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Computational Methods in R</a> 
     </div>
@@ -224,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">7.1.1</span> Helper functions</h3>
 <p>Below are the functions for reference (see <a href="computational-experiments.html#sec-simulation-helper-functions" class="quarto-xref"><span>Section&nbsp;5.4.2</span></a> and <a href="simulation-studies.html#sec-simulation-generate-data-function" class="quarto-xref"><span>Section&nbsp;6.2</span></a>).</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load packages</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glmnet.stanford.edu">glmnet</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span>
@@ -397,15 +397,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mapply() -&gt; run variable selection study</span></span>
 <span><span class="va">var_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="va">vars_selected</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span><span class="op">)</span>, q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>                     MoreArgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n_sim <span class="op">=</span> <span class="fl">3</span> , var_select_fun <span class="op">=</span> <span class="va">step_var_mod</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">var_counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    4    6
-[2,]    7    9
-[3,]    4    7</code></pre>
+<span>                     MoreArgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n_sim <span class="op">=</span> <span class="fl">3</span> , var_select_fun <span class="op">=</span> <span class="va">step_var_mod</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: Please use column names for `x`</code></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define possible parameter combinations</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'var_counts' not found</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define possible parameter combinations</span></span>
 <span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span>, <span class="fl">5000</span><span class="op">)</span>, p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>, q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># lapply() -&gt; run variable selection study</span></span>
@@ -415,58 +415,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>67.531 sec elapsed</code></pre>
+<pre><code>67.783 sec elapsed</code></pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1]  5 10  4
+[1] 4 2 3
 
 [[2]]
-[1] 8 5 5
+[1] 5 6 8
 
 [[3]]
-[1] 8 7 9
+[1] 8 7 7
 
 [[4]]
-[1]  9  8 11
+[1] 9 8 5
 
 [[5]]
-[1] 7 6 7
+[1] 10 11  9
 
 [[6]]
-[1] 11  9  8
+[1] 6 8 9
 
 [[7]]
-[1]  4 10  9
+[1] 4 8 5
 
 [[8]]
-[1] 12 10  8
-
-[[9]]
 [1] 10 11 10
 
+[[9]]
+[1] 11 10 11
+
 [[10]]
-[1] 9 7 6
+[1] 11  7  6
 
 [[11]]
-[1] 15 13 16
+[1] 13 12 16
 
 [[12]]
-[1] 16 14 11</code></pre>
+[1] 13 13 13</code></pre>
 </div>
 </div>
 <p>To investigate how our computer is working, we can pull up activity monitor to check what resources are being used.</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="files/images/activity-monitor-sequential.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="files/images/activity-monitor-sequential.png" class="img-fluid"></p>
 <p>As the code is currently written, the <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> is running the first row of the <code>params</code> through <code>vars_selected()</code>, then it does the second, then the third all in <em>sequential</em> order (a serial pattern). Because it is working this way, the computer can’t do the fifth task (fifth row) at the same time as the first task; it is only using one core (or pair of cores) at a time (the processing cores are only thinking about that one tasks, and doing them in order).</p>
 <p>With parallel processing, we can run tasks at the same time and use more cores at the same time. Now compare the results time and the computer usage when using <code><a href="https://rdrr.io/r/parallel/mclapply.html">parallel::mclapply()</a></code> (use multiple cores when <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>ing).</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># NOT RUN -&gt; note this code for some reason used less cpu than the first time and took forever...</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># NOT RUN -&gt; note this code for some reason used less cpu than the first time and took forever...</span></span>
 <span></span>
 <span><span class="co"># load package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
@@ -485,56 +480,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">7.2.2</span> Running code in parallel - “Tidyverse”</h3>
 <p>Here is the <code>purrr:pmap()</code> implementation of the study above study (this uses the same resources as <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, just cleaner code with the <code>tidyverse</code>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">var_counts</span> <span class="op">&lt;-</span> <span class="va">params</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/pmap.html">pmap</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">p</span>, <span class="va">n</span>, <span class="va">q</span><span class="op">)</span> <span class="fu">vars_selected</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, <span class="va">q</span>, n_sim <span class="op">=</span> <span class="fl">3</span>, var_select_fun <span class="op">=</span> <span class="va">step_var_mod</span><span class="op">)</span>,</span>
 <span>       .progress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>67.748 sec elapsed</code></pre>
+<pre><code>67.712 sec elapsed</code></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] 3 6 2
+[1] 4 3 4
 
 [[2]]
-[1] 7 5 8
+[1]  6 10 10
 
 [[3]]
-[1] 7 7 6
+[1] 7 7 8
 
 [[4]]
-[1] 11  9  9
+[1]  6 11  4
 
 [[5]]
-[1]  9 10  6
+[1] 9 9 9
 
 [[6]]
-[1]  6 12  9
+[1]  6 10  5
 
 [[7]]
-[1] 5 6 4
+[1]  6  6 10
 
 [[8]]
-[1] 11 10 11
+[1] 12  9 12
 
 [[9]]
-[1] 10 11 12
+[1] 13 14 12
 
 [[10]]
-[1]  8 10  6
+[1]  9  9 14
 
 [[11]]
-[1] 14 12 12
+[1] 16 15 14
 
 [[12]]
-[1] 11 14 14</code></pre>
+[1] 13 13 12</code></pre>
 </div>
 </div>
 <p>Now in parallel processing, we have to use the following packages: <code>future</code> (the main engine) and <code>furrr</code> (the bridge between traditional <code><a href="https://purrr.tidyverse.org/reference/map.html">map()</a></code> statements and the <code>future</code> package; <a href="https://furrr.futureverse.org/">documentation</a>).</p>
-<p>The first step is to setup a plan for how the code will be evaluated with <code>future::plan(strategy = multisession, cores = future::availableCores()-4)</code>. Notes:</p>
+<p>The first step is to setup a plan for how the code will be evaluated with <code>future::plan(strategy = multisession, workers = future::availableCores()-4)</code>. Notes:</p>
 <ul>
 <li>
 <code>future</code> is a dependency of <code>furrr</code>, so it gets loaded automatically</li>
@@ -545,11 +540,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Then use the appropriate analog <code><a href="https://furrr.futureverse.org/reference/future_map.html">future_map()</a></code> family of functions as usual.</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load packages</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr">furrr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># setup plan</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span>, cores <span class="op">=</span> <span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html">availableCores</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html">availableCores</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -558,16 +553,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>       .progress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html">toc</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>28.991 sec elapsed</code></pre>
+<pre><code>27.766 sec elapsed</code></pre>
 </div>
 </div>
 <p>Now we can check the activity monitor again (it had spikes up to around 80% usage)! Assuming a similar process on the backend is needed for these functions as well creating some overhead time.</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="files/images/activity-monitor-parallel.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<p><img src="files/images/activity-monitor-parallel.png" class="img-fluid"></p>
 </section><section id="code-profiling" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="code-profiling">
 <span class="header-section-number">7.2.3</span> Code Profiling</h3>
 <p>The parallel processing shown above is the easy way gain performance. The harder way is to <em>profile</em> your code. Code profiling is the process of investigating your code on a function-by-function level and identifying which can be improved in terms of computation time (i.e.&nbsp;find the slow components, the <em>bottlenecks</em>). This can be done in an informal or formal way.</p>
@@ -577,237 +567,219 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>For our particular application, it is more likely somewhere in calculating the advanced model statistics like lasso as opposed to generating data. But, lets investigate.</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># setup temporary file</span></span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># setup temporary file</span></span>
 <span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># run code to be profiled</span></span>
 <span><span class="fu">vars_selected</span><span class="op">(</span>n_sim <span class="op">=</span> <span class="fl">10</span>, n <span class="op">=</span> <span class="fl">1000</span>, p <span class="op">=</span> <span class="fl">15</span>, q <span class="op">=</span> <span class="fl">5</span>, var_select_fun <span class="op">=</span> <span class="va">step_var_mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 7 8 7 7 8 9 6 8 6 8</code></pre>
+<pre><code> [1] 7 8 5 5 8 5 6 7 4 7</code></pre>
 </div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># close profiling</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># close profiling</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># view results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/summaryRprof.html">summaryRprof</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$by.self
-                 self.time self.pct total.time total.pct
-"lm.fit"              1.40    48.61       1.54     53.47
-"load"                0.20     6.94       0.20      6.94
-"nrow"                0.12     4.17       0.12      4.17
-"sum"                 0.10     3.47       0.10      3.47
-"make.names"          0.08     2.78       0.10      3.47
-"grep"                0.08     2.78       0.08      2.78
-"cmp"                 0.04     1.39       0.34     11.81
-".External2"          0.04     1.39       0.14      4.86
-"[.data.frame"        0.04     1.39       0.08      2.78
-"as.vector"           0.04     1.39       0.08      2.78
-"check_exact"         0.04     1.39       0.04      1.39
-"exists"              0.04     1.39       0.04      1.39
-"make.codeBuf"        0.04     1.39       0.04      1.39
-"terms"               0.04     1.39       0.04      1.39
-"drop1.lm"            0.02     0.69       1.46     50.69
-"cmpCallArgs"         0.02     0.69       0.10      3.47
-"FUN"                 0.02     0.69       0.10      3.47
-"getInlineInfo"       0.02     0.69       0.08      2.78
-"lapply"              0.02     0.69       0.08      2.78
-"findCenvVar"         0.02     0.69       0.06      2.08
-"constantFold"        0.02     0.69       0.04      1.39
-"factor.scope"        0.02     0.69       0.04      1.39
-"!"                   0.02     0.69       0.02      0.69
-"%in%"                0.02     0.69       0.02      0.69
-"$"                   0.02     0.69       0.02      0.69
-"$&lt;-"                 0.02     0.69       0.02      0.69
-"accumulate"          0.02     0.69       0.02      0.69
-"all"                 0.02     0.69       0.02      0.69
-"c"                   0.02     0.69       0.02      0.69
-"cb$putlabel"         0.02     0.69       0.02      0.69
-"ddply"               0.02     0.69       0.02      0.69
-"dimnames"            0.02     0.69       0.02      0.69
-"getIterVal"          0.02     0.69       0.02      0.69
-"is.na"               0.02     0.69       0.02      0.69
-"make.unique"         0.02     0.69       0.02      0.69
-"model.frame.lm"      0.02     0.69       0.02      0.69
-"model.response"      0.02     0.69       0.02      0.69
-"pmatch"              0.02     0.69       0.02      0.69
-"proc.time"           0.02     0.69       0.02      0.69
-"sapply"              0.02     0.69       0.02      0.69
-"setdiff"             0.02     0.69       0.02      0.69
-"simpleError"         0.02     0.69       0.02      0.69
-"subset_x"            0.02     0.69       0.02      0.69
+                      self.time self.pct total.time total.pct
+"lm.fit"                   1.62    58.27       1.64     58.99
+"load"                     0.18     6.47       0.18      6.47
+"sum"                      0.14     5.04       0.14      5.04
+"$"                        0.06     2.16       0.06      2.16
+"make.names"               0.06     2.16       0.06      2.16
+"method$fit"               0.04     1.44       0.22      7.91
+"cmpSym"                   0.04     1.44       0.10      3.60
+"lapply"                   0.04     1.44       0.08      2.88
+"findCenvVar"              0.04     1.44       0.06      2.16
+".External2"               0.04     1.44       0.04      1.44
+"doTryCatch"               0.02     0.72       2.78    100.00
+"cmpCallArgs"              0.02     0.72       0.12      4.32
+"as.vector"                0.02     0.72       0.08      2.88
+"cmpBuiltinArgs"           0.02     0.72       0.06      2.16
+"model.frame.default"      0.02     0.72       0.06      2.16
+"nextElem.ixforeach"       0.02     0.72       0.06      2.16
+"[[.data.frame"            0.02     0.72       0.04      1.44
+"%in%"                     0.02     0.72       0.02      0.72
+"$&lt;-"                      0.02     0.72       0.02      0.72
+"as.list.default"          0.02     0.72       0.02      0.72
+"cmpConst"                 0.02     0.72       0.02      0.72
+"cmpIndices"               0.02     0.72       0.02      0.72
+"cor"                      0.02     0.72       0.02      0.72
+"exists"                   0.02     0.72       0.02      0.72
+"getInlineInfo"            0.02     0.72       0.02      0.72
+"paste"                    0.02     0.72       0.02      0.72
+"proc.time"                0.02     0.72       0.02      0.72
+"putconst"                 0.02     0.72       0.02      0.72
+"sample.int"               0.02     0.72       0.02      0.72
+"setdiff"                  0.02     0.72       0.02      0.72
+"sort"                     0.02     0.72       0.02      0.72
+"structure"                0.02     0.72       0.02      0.72
+"sys.frame"                0.02     0.72       0.02      0.72
+"sys.function"             0.02     0.72       0.02      0.72
+"weights.default"          0.02     0.72       0.02      0.72
+"which"                    0.02     0.72       0.02      0.72
 
 $by.total
                           total.time total.pct self.time self.pct
-".main"                         2.88    100.00      0.00     0.00
-"block_exec"                    2.88    100.00      0.00     0.00
-"call_block"                    2.88    100.00      0.00     0.00
-"doTryCatch"                    2.88    100.00      0.00     0.00
-"eng_r"                         2.88    100.00      0.00     0.00
-"eval_with_user_handlers"       2.88    100.00      0.00     0.00
-"eval"                          2.88    100.00      0.00     0.00
-"evaluate_call"                 2.88    100.00      0.00     0.00
-"evaluate::evaluate"            2.88    100.00      0.00     0.00
-"evaluate"                      2.88    100.00      0.00     0.00
-"execute"                       2.88    100.00      0.00     0.00
-"handle_error"                  2.88    100.00      0.00     0.00
-"handle"                        2.88    100.00      0.00     0.00
-"in_dir"                        2.88    100.00      0.00     0.00
-"in_input_dir"                  2.88    100.00      0.00     0.00
-"knitr::knit"                   2.88    100.00      0.00     0.00
-"process_file"                  2.88    100.00      0.00     0.00
-"process_group.block"           2.88    100.00      0.00     0.00
-"process_group"                 2.88    100.00      0.00     0.00
-"rmarkdown::render"             2.88    100.00      0.00     0.00
-"run_trial"                     2.88    100.00      0.00     0.00
-"timing_fn"                     2.88    100.00      0.00     0.00
-"try"                           2.88    100.00      0.00     0.00
-"tryCatch"                      2.88    100.00      0.00     0.00
-"tryCatchList"                  2.88    100.00      0.00     0.00
-"tryCatchOne"                   2.88    100.00      0.00     0.00
-"vars_selected"                 2.88    100.00      0.00     0.00
-"withCallingHandlers"           2.88    100.00      0.00     0.00
-"withVisible"                   2.88    100.00      0.00     0.00
-"selection_alg"                 1.86     64.58      0.00     0.00
-"step"                          1.86     64.58      0.00     0.00
-"lm.fit"                        1.54     53.47      1.40    48.61
-"drop1.lm"                      1.46     50.69      0.02     0.69
-"drop1"                         1.46     50.69      0.00     0.00
-"data.frame"                    1.02     35.42      0.00     0.00
-"select_cv_rmse"                1.02     35.42      0.00     0.00
-"train.default"                 1.02     35.42      0.00     0.00
-"train.formula"                 1.02     35.42      0.00     0.00
-"train"                         1.02     35.42      0.00     0.00
-"nominalTrainWorkflow"          0.74     25.69      0.00     0.00
-"%op%"                          0.72     25.00      0.00     0.00
-"e$fun"                         0.72     25.00      0.00     0.00
-"lm"                            0.44     15.28      0.00     0.00
-"comp"                          0.38     13.19      0.00     0.00
-"cmp"                           0.34     11.81      0.04     1.39
-"cmpCall"                       0.34     11.81      0.00     0.00
-"genCode"                       0.34     11.81      0.00     0.00
-"h"                             0.34     11.81      0.00     0.00
-"tryInline"                     0.34     11.81      0.00     0.00
-"createModel"                   0.28      9.72      0.00     0.00
-"eval.parent"                   0.28      9.72      0.00     0.00
-"load"                          0.20      6.94      0.20     6.94
-"getModelInfo"                  0.20      6.94      0.00     0.00
-"cmpSymbolAssign"               0.16      5.56      0.00     0.00
-"method$fit"                    0.16      5.56      0.00     0.00
-".External2"                    0.14      4.86      0.04     1.39
-"model.frame.default"           0.14      4.86      0.00     0.00
-"stats::model.frame"            0.14      4.86      0.00     0.00
-"nrow"                          0.12      4.17      0.12     4.17
-"sum"                           0.10      3.47      0.10     3.47
-"make.names"                    0.10      3.47      0.08     2.78
-"cmpCallArgs"                   0.10      3.47      0.02     0.69
-"FUN"                           0.10      3.47      0.02     0.69
-"cmpCallSymFun"                 0.10      3.47      0.00     0.00
-"na.omit.data.frame"            0.10      3.47      0.00     0.00
-"na.omit"                       0.10      3.47      0.00     0.00
-"grep"                          0.08      2.78      0.08     2.78
-"[.data.frame"                  0.08      2.78      0.04     1.39
-"as.vector"                     0.08      2.78      0.04     1.39
-"getInlineInfo"                 0.08      2.78      0.02     0.69
-"lapply"                        0.08      2.78      0.02     0.69
-"["                             0.08      2.78      0.00     0.00
-"cb$putconst"                   0.08      2.78      0.00     0.00
-"cmpSym"                        0.08      2.78      0.00     0.00
-"deviance.lm"                   0.08      2.78      0.00     0.00
-"deviance"                      0.08      2.78      0.00     0.00
-"is.ddsym"                      0.08      2.78      0.00     0.00
-"findCenvVar"                   0.06      2.08      0.02     0.69
-"cmpSubsetDispatch"             0.06      2.08      0.00     0.00
-"model.matrix.default"          0.06      2.08      0.00     0.00
-"model.matrix"                  0.06      2.08      0.00     0.00
-"check_exact"                   0.04      1.39      0.04     1.39
-"exists"                        0.04      1.39      0.04     1.39
-"make.codeBuf"                  0.04      1.39      0.04     1.39
-"terms"                         0.04      1.39      0.04     1.39
-"constantFold"                  0.04      1.39      0.02     0.69
-"factor.scope"                  0.04      1.39      0.02     0.69
-"[[.data.frame"                 0.04      1.39      0.00     0.00
-"[["                            0.04      1.39      0.00     0.00
-"%||%"                          0.04      1.39      0.00     0.00
-"addCenvVars"                   0.04      1.39      0.00     0.00
-"as.data.frame.matrix"          0.04      1.39      0.00     0.00
-"as.data.frame"                 0.04      1.39      0.00     0.00
-"cmpPrim2"                      0.04      1.39      0.00     0.00
-"constantFoldCall"              0.04      1.39      0.00     0.00
-"findLocals"                    0.04      1.39      0.00     0.00
-"findLocalsList"                0.04      1.39      0.00     0.00
-"findLocalsList1"               0.04      1.39      0.00     0.00
-"mydeviance"                    0.04      1.39      0.00     0.00
-"nextElem.containeriter"        0.04      1.39      0.00     0.00
-"nextElem.iforeach"             0.04      1.39      0.00     0.00
-"nextElem.ixforeach"            0.04      1.39      0.00     0.00
-"nextElem"                      0.04      1.39      0.00     0.00
-"union"                         0.04      1.39      0.00     0.00
-"!"                             0.02      0.69      0.02     0.69
-"%in%"                          0.02      0.69      0.02     0.69
-"$"                             0.02      0.69      0.02     0.69
-"$&lt;-"                           0.02      0.69      0.02     0.69
-"accumulate"                    0.02      0.69      0.02     0.69
-"all"                           0.02      0.69      0.02     0.69
-"c"                             0.02      0.69      0.02     0.69
-"cb$putlabel"                   0.02      0.69      0.02     0.69
-"ddply"                         0.02      0.69      0.02     0.69
-"dimnames"                      0.02      0.69      0.02     0.69
-"getIterVal"                    0.02      0.69      0.02     0.69
-"is.na"                         0.02      0.69      0.02     0.69
-"make.unique"                   0.02      0.69      0.02     0.69
-"model.frame.lm"                0.02      0.69      0.02     0.69
-"model.response"                0.02      0.69      0.02     0.69
-"pmatch"                        0.02      0.69      0.02     0.69
-"proc.time"                     0.02      0.69      0.02     0.69
-"sapply"                        0.02      0.69      0.02     0.69
-"setdiff"                       0.02      0.69      0.02     0.69
-"simpleError"                   0.02      0.69      0.02     0.69
-"subset_x"                      0.02      0.69      0.02     0.69
-".deparseOpts"                  0.02      0.69      0.00     0.00
-"accumulator"                   0.02      0.69      0.00     0.00
-"cmpComplexAssign"              0.02      0.69      0.00     0.00
-"cmpIndices"                    0.02      0.69      0.00     0.00
-"deparse"                       0.02      0.69      0.00     0.00
-"findLocVar"                    0.02      0.69      0.00     0.00
-"fixFormulaObject"              0.02      0.69      0.00     0.00
-"formula"                       0.02      0.69      0.00     0.00
-"getFoldFun"                    0.02      0.69      0.00     0.00
-"is.data.frame"                 0.02      0.69      0.00     0.00
-"isBaseVar"                     0.02      0.69      0.00     0.00
-"make.argContext"               0.02      0.69      0.00     0.00
-"match.arg"                     0.02      0.69      0.00     0.00
-"merge.data.frame"              0.02      0.69      0.00     0.00
-"merge"                         0.02      0.69      0.00     0.00
-"method$predict"                0.02      0.69      0.00     0.00
-"model.frame"                   0.02      0.69      0.00     0.00
-"model.matrix.lm"               0.02      0.69      0.00     0.00
-"model.offset"                  0.02      0.69      0.00     0.00
-"NextMethod"                    0.02      0.69      0.00     0.00
-"order"                         0.02      0.69      0.00     0.00
-"paste"                         0.02      0.69      0.00     0.00
-"predictionFunction"            0.02      0.69      0.00     0.00
-"rownames"                      0.02      0.69      0.00     0.00
-"sort.list"                     0.02      0.69      0.00     0.00
-"structure"                     0.02      0.69      0.00     0.00
-"terms.formula"                 0.02      0.69      0.00     0.00
-"update.default"                0.02      0.69      0.00     0.00
-"update.formula"                0.02      0.69      0.00     0.00
-"update"                        0.02      0.69      0.00     0.00
-"vapply"                        0.02      0.69      0.00     0.00
+"doTryCatch"                    2.78    100.00      0.02     0.72
+".main"                         2.78    100.00      0.00     0.00
+"block_exec"                    2.78    100.00      0.00     0.00
+"call_block"                    2.78    100.00      0.00     0.00
+"eng_r"                         2.78    100.00      0.00     0.00
+"eval_with_user_handlers"       2.78    100.00      0.00     0.00
+"eval"                          2.78    100.00      0.00     0.00
+"evaluate_call"                 2.78    100.00      0.00     0.00
+"evaluate::evaluate"            2.78    100.00      0.00     0.00
+"evaluate"                      2.78    100.00      0.00     0.00
+"execute"                       2.78    100.00      0.00     0.00
+"handle_error"                  2.78    100.00      0.00     0.00
+"handle"                        2.78    100.00      0.00     0.00
+"in_dir"                        2.78    100.00      0.00     0.00
+"in_input_dir"                  2.78    100.00      0.00     0.00
+"knitr::knit"                   2.78    100.00      0.00     0.00
+"process_file"                  2.78    100.00      0.00     0.00
+"process_group.block"           2.78    100.00      0.00     0.00
+"process_group"                 2.78    100.00      0.00     0.00
+"rmarkdown::render"             2.78    100.00      0.00     0.00
+"run_trial"                     2.78    100.00      0.00     0.00
+"timing_fn"                     2.78    100.00      0.00     0.00
+"try"                           2.78    100.00      0.00     0.00
+"tryCatch"                      2.78    100.00      0.00     0.00
+"tryCatchList"                  2.78    100.00      0.00     0.00
+"tryCatchOne"                   2.78    100.00      0.00     0.00
+"vars_selected"                 2.78    100.00      0.00     0.00
+"withCallingHandlers"           2.78    100.00      0.00     0.00
+"withVisible"                   2.78    100.00      0.00     0.00
+"selection_alg"                 1.80     64.75      0.00     0.00
+"step"                          1.80     64.75      0.00     0.00
+"lm.fit"                        1.64     58.99      1.62    58.27
+"drop1.lm"                      1.64     58.99      0.00     0.00
+"drop1"                         1.64     58.99      0.00     0.00
+"data.frame"                    0.98     35.25      0.00     0.00
+"select_cv_rmse"                0.98     35.25      0.00     0.00
+"train.default"                 0.98     35.25      0.00     0.00
+"train.formula"                 0.98     35.25      0.00     0.00
+"train"                         0.98     35.25      0.00     0.00
+"nominalTrainWorkflow"          0.70     25.18      0.00     0.00
+"%op%"                          0.68     24.46      0.00     0.00
+"e$fun"                         0.68     24.46      0.00     0.00
+"comp"                          0.32     11.51      0.00     0.00
+"lm"                            0.32     11.51      0.00     0.00
+"createModel"                   0.28     10.07      0.00     0.00
+"cmp"                           0.26      9.35      0.00     0.00
+"cmpCall"                       0.26      9.35      0.00     0.00
+"genCode"                       0.26      9.35      0.00     0.00
+"h"                             0.26      9.35      0.00     0.00
+"tryInline"                     0.26      9.35      0.00     0.00
+"method$fit"                    0.22      7.91      0.04     1.44
+"deviance.lm"                   0.20      7.19      0.00     0.00
+"deviance"                      0.20      7.19      0.00     0.00
+"load"                          0.18      6.47      0.18     6.47
+"getModelInfo"                  0.18      6.47      0.00     0.00
+"sum"                           0.14      5.04      0.14     5.04
+"eval.parent"                   0.14      5.04      0.00     0.00
+"cmpCallArgs"                   0.12      4.32      0.02     0.72
+"cb$putconst"                   0.12      4.32      0.00     0.00
+"cmpCallSymFun"                 0.12      4.32      0.00     0.00
+"cmpSym"                        0.10      3.60      0.04     1.44
+"FUN"                           0.10      3.60      0.00     0.00
+"lapply"                        0.08      2.88      0.04     1.44
+"as.vector"                     0.08      2.88      0.02     0.72
+"cmpSymbolAssign"               0.08      2.88      0.00     0.00
+"$"                             0.06      2.16      0.06     2.16
+"make.names"                    0.06      2.16      0.06     2.16
+"findCenvVar"                   0.06      2.16      0.04     1.44
+"cmpBuiltinArgs"                0.06      2.16      0.02     0.72
+"model.frame.default"           0.06      2.16      0.02     0.72
+"nextElem.ixforeach"            0.06      2.16      0.02     0.72
+"addCenvVars"                   0.06      2.16      0.00     0.00
+"cmpComplexAssign"              0.06      2.16      0.00     0.00
+"findLocals"                    0.06      2.16      0.00     0.00
+"findLocalsList"                0.06      2.16      0.00     0.00
+"findLocalsList1"               0.06      2.16      0.00     0.00
+"findVar"                       0.06      2.16      0.00     0.00
+"nextElem"                      0.06      2.16      0.00     0.00
+"union"                         0.06      2.16      0.00     0.00
+"weighted.residuals"            0.06      2.16      0.00     0.00
+".External2"                    0.04      1.44      0.04     1.44
+"[[.data.frame"                 0.04      1.44      0.02     0.72
+"[["                            0.04      1.44      0.00     0.00
+"cmpPrim1"                      0.04      1.44      0.00     0.00
+"cmpSubsetDispatch"             0.04      1.44      0.00     0.00
+"match.arg"                     0.04      1.44      0.00     0.00
+"model.matrix.default"          0.04      1.44      0.00     0.00
+"model.matrix"                  0.04      1.44      0.00     0.00
+"nextElem.iforeach"             0.04      1.44      0.00     0.00
+"residuals.lm"                  0.04      1.44      0.00     0.00
+"residuals"                     0.04      1.44      0.00     0.00
+"stats::model.frame"            0.04      1.44      0.00     0.00
+"%in%"                          0.02      0.72      0.02     0.72
+"$&lt;-"                           0.02      0.72      0.02     0.72
+"as.list.default"               0.02      0.72      0.02     0.72
+"cmpConst"                      0.02      0.72      0.02     0.72
+"cmpIndices"                    0.02      0.72      0.02     0.72
+"cor"                           0.02      0.72      0.02     0.72
+"exists"                        0.02      0.72      0.02     0.72
+"getInlineInfo"                 0.02      0.72      0.02     0.72
+"paste"                         0.02      0.72      0.02     0.72
+"proc.time"                     0.02      0.72      0.02     0.72
+"putconst"                      0.02      0.72      0.02     0.72
+"sample.int"                    0.02      0.72      0.02     0.72
+"setdiff"                       0.02      0.72      0.02     0.72
+"sort"                          0.02      0.72      0.02     0.72
+"structure"                     0.02      0.72      0.02     0.72
+"sys.frame"                     0.02      0.72      0.02     0.72
+"sys.function"                  0.02      0.72      0.02     0.72
+"weights.default"               0.02      0.72      0.02     0.72
+"which"                         0.02      0.72      0.02     0.72
+"accumulate.iforeach"           0.02      0.72      0.00     0.00
+"accumulate.ixforeach"          0.02      0.72      0.00     0.00
+"accumulate"                    0.02      0.72      0.00     0.00
+"accumulator"                   0.02      0.72      0.00     0.00
+"as.data.frame.matrix"          0.02      0.72      0.00     0.00
+"as.data.frame"                 0.02      0.72      0.00     0.00
+"as.list"                       0.02      0.72      0.00     0.00
+"callCombine"                   0.02      0.72      0.00     0.00
+"cb$putcode"                    0.02      0.72      0.00     0.00
+"cmpDispatch"                   0.02      0.72      0.00     0.00
+"cmpForBody"                    0.02      0.72      0.00     0.00
+"cmpPrim2"                      0.02      0.72      0.00     0.00
+"cmpSetterCall"                 0.02      0.72      0.00     0.00
+"ctrl$summaryFunction"          0.02      0.72      0.00     0.00
+"evalSummaryFunction"           0.02      0.72      0.00     0.00
+"formals"                       0.02      0.72      0.00     0.00
+"getSetterInlineHandler"        0.02      0.72      0.00     0.00
+"hasDots"                       0.02      0.72      0.00     0.00
+"make.argContext"               0.02      0.72      0.00     0.00
+"method$predict"                0.02      0.72      0.00     0.00
+"model.frame"                   0.02      0.72      0.00     0.00
+"model.matrix.lm"               0.02      0.72      0.00     0.00
+"nextElem.containeriter"        0.02      0.72      0.00     0.00
+"NextMethod"                    0.02      0.72      0.00     0.00
+"postResample"                  0.02      0.72      0.00     0.00
+"predict.lm"                    0.02      0.72      0.00     0.00
+"predict"                       0.02      0.72      0.00     0.00
+"predictionFunction"            0.02      0.72      0.00     0.00
+"rbind.fill"                    0.02      0.72      0.00     0.00
+"setters[[var]]"                0.02      0.72      0.00     0.00
+"terms"                         0.02      0.72      0.00     0.00
+"trySetterInline"               0.02      0.72      0.00     0.00
+"vapply"                        0.02      0.72      0.00     0.00
+"weights"                       0.02      0.72      0.00     0.00
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 2.88</code></pre>
+[1] 2.78</code></pre>
 </div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># delete temporary file</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># delete temporary file</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we look at the <code>total.pct</code> results, we see that <code><a href="https://rdrr.io/r/stats/lmfit.html">lm.fit()</a></code> took the most time. The problem is, we don’t necessarily know which of our functions called this. So we have to drill down to profile the helper functions as well. So, starting with the beginning:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># setup temporary file</span></span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># setup temporary file</span></span>
 <span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># run code to be profiled</span></span>
@@ -833,12 +805,12 @@ $sample.interval
 $sampling.time
 [1] 0</code></pre>
 </div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># delete temporary file</span></span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># delete temporary file</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Still haven’t found <code><a href="https://rdrr.io/r/stats/lmfit.html">lm.fit()</a></code>. So just keep sequentially adding more functions until you find the culprits.</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># setup temporary file</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># setup temporary file</span></span>
 <span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># run code to be profiled</span></span>
@@ -852,68 +824,66 @@ $sampling.time
 <span><span class="fu"><a href="https://rdrr.io/r/utils/summaryRprof.html">summaryRprof</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$by.self
-               self.time self.pct total.time total.pct
-"lm.fit"            0.16       80       0.16        80
-"[.data.frame"      0.02       10       0.02        10
-"match.arg"         0.02       10       0.02        10
+            self.time self.pct total.time total.pct
+"lm.fit"         0.16    88.89       0.16     88.89
+"structure"      0.02    11.11       0.02     11.11
 
 $by.total
                           total.time total.pct self.time self.pct
-".main"                         0.20       100      0.00        0
-"block_exec"                    0.20       100      0.00        0
-"call_block"                    0.20       100      0.00        0
-"doTryCatch"                    0.20       100      0.00        0
-"eng_r"                         0.20       100      0.00        0
-"eval_with_user_handlers"       0.20       100      0.00        0
-"eval"                          0.20       100      0.00        0
-"evaluate_call"                 0.20       100      0.00        0
-"evaluate::evaluate"            0.20       100      0.00        0
-"evaluate"                      0.20       100      0.00        0
-"execute"                       0.20       100      0.00        0
-"handle_error"                  0.20       100      0.00        0
-"handle"                        0.20       100      0.00        0
-"in_dir"                        0.20       100      0.00        0
-"in_input_dir"                  0.20       100      0.00        0
-"knitr::knit"                   0.20       100      0.00        0
-"process_file"                  0.20       100      0.00        0
-"process_group.block"           0.20       100      0.00        0
-"process_group"                 0.20       100      0.00        0
-"rmarkdown::render"             0.20       100      0.00        0
-"step_var_mod"                  0.20       100      0.00        0
-"step"                          0.20       100      0.00        0
-"timing_fn"                     0.20       100      0.00        0
-"try"                           0.20       100      0.00        0
-"tryCatch"                      0.20       100      0.00        0
-"tryCatchList"                  0.20       100      0.00        0
-"tryCatchOne"                   0.20       100      0.00        0
-"withCallingHandlers"           0.20       100      0.00        0
-"withVisible"                   0.20       100      0.00        0
-"lm.fit"                        0.16        80      0.16       80
-"drop1.lm"                      0.14        70      0.00        0
-"drop1"                         0.14        70      0.00        0
-"eval.parent"                   0.06        30      0.00        0
-"lm"                            0.06        30      0.00        0
-"[.data.frame"                  0.02        10      0.02       10
-"match.arg"                     0.02        10      0.02       10
-".External2"                    0.02        10      0.00        0
-"["                             0.02        10      0.00        0
-"deviance.lm"                   0.02        10      0.00        0
-"deviance"                      0.02        10      0.00        0
-"model.frame.default"           0.02        10      0.00        0
-"na.omit.data.frame"            0.02        10      0.00        0
-"na.omit"                       0.02        10      0.00        0
-"residuals.lm"                  0.02        10      0.00        0
-"residuals"                     0.02        10      0.00        0
-"stats::model.frame"            0.02        10      0.00        0
-"weighted.residuals"            0.02        10      0.00        0
+".main"                         0.18    100.00      0.00     0.00
+"block_exec"                    0.18    100.00      0.00     0.00
+"call_block"                    0.18    100.00      0.00     0.00
+"eng_r"                         0.18    100.00      0.00     0.00
+"evaluate_call"                 0.18    100.00      0.00     0.00
+"evaluate::evaluate"            0.18    100.00      0.00     0.00
+"evaluate"                      0.18    100.00      0.00     0.00
+"execute"                       0.18    100.00      0.00     0.00
+"handle_error"                  0.18    100.00      0.00     0.00
+"in_dir"                        0.18    100.00      0.00     0.00
+"in_input_dir"                  0.18    100.00      0.00     0.00
+"knitr::knit"                   0.18    100.00      0.00     0.00
+"process_file"                  0.18    100.00      0.00     0.00
+"process_group.block"           0.18    100.00      0.00     0.00
+"process_group"                 0.18    100.00      0.00     0.00
+"rmarkdown::render"             0.18    100.00      0.00     0.00
+"withCallingHandlers"           0.18    100.00      0.00     0.00
+"lm.fit"                        0.16     88.89      0.16    88.89
+"doTryCatch"                    0.16     88.89      0.00     0.00
+"eval_with_user_handlers"       0.16     88.89      0.00     0.00
+"eval"                          0.16     88.89      0.00     0.00
+"handle"                        0.16     88.89      0.00     0.00
+"step_var_mod"                  0.16     88.89      0.00     0.00
+"step"                          0.16     88.89      0.00     0.00
+"timing_fn"                     0.16     88.89      0.00     0.00
+"try"                           0.16     88.89      0.00     0.00
+"tryCatch"                      0.16     88.89      0.00     0.00
+"tryCatchList"                  0.16     88.89      0.00     0.00
+"tryCatchOne"                   0.16     88.89      0.00     0.00
+"withVisible"                   0.16     88.89      0.00     0.00
+"drop1.lm"                      0.14     77.78      0.00     0.00
+"drop1"                         0.14     77.78      0.00     0.00
+"structure"                     0.02     11.11      0.02    11.11
+".make_numeric_version"         0.02     11.11      0.00     0.00
+"[.simple.list"                 0.02     11.11      0.00     0.00
+"["                             0.02     11.11      0.00     0.00
+"eval.parent"                   0.02     11.11      0.00     0.00
+"getRversion"                   0.02     11.11      0.00     0.00
+"handle_output"                 0.02     11.11      0.00     0.00
+"lm"                            0.02     11.11      0.00     0.00
+"package_version"               0.02     11.11      0.00     0.00
+"paste"                         0.02     11.11      0.00     0.00
+"plot_snapshot"                 0.02     11.11      0.00     0.00
+"R_system_version"              0.02     11.11      0.00     0.00
+"recordPlot"                    0.02     11.11      0.00     0.00
+"w$get_new"                     0.02     11.11      0.00     0.00
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.2</code></pre>
+[1] 0.18</code></pre>
 </div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># delete temporary file</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># delete temporary file</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Turns out it was in <code>step_var_mod()</code>. So what to do when you find the bottleneck? Have to think about the function that you are using, why you are using it, and what can be used as an alternative.</p>
@@ -1108,15 +1078,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -1125,6 +1125,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1167,6 +1168,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1242,7 +1266,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -1324,382 +1347,382 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./simulation-studies.html" class="pagination-link">
+      <a href="./simulation-studies.html" class="pagination-link  aria-label=" studies="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation Studies</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./assignments.html" class="pagination-link">
+      <a href="./assignments.html" class="pagination-link" aria-label="Assignments">
         <span class="nav-page-text">Assignments</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb27" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Improving Code {#sec-improving-code}</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>In our example code from @sec-simulation-studies we implemented a number of functions to run a simulation study on the comparison of stepwise and lasso variable selection methods. It all ran, but was a bit slow... and was a bit of a mess. Now we will talk about speeding it up and cleaning it up.</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Helper functions </span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>Below are the functions for reference (see @sec-simulation-helper-functions and @sec-simulation-generate-data-function).</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: previous-functions</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tictoc)</span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to simulate response and covariates</span></span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>make_sim_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">20</span>, <span class="at">q =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.1</span>, <span class="at">sd_y =</span> <span class="dv">1</span>, <span class="at">sd_x =</span> <span class="dv">1</span>){</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate covariates</span></span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sd_x))</span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># give column names</span></span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"x"</span>, <span class="dv">1</span><span class="sc">:</span>p)</span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate beta vector (q significant, non-zero parameters and p-q zeros)</span></span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(b, q), <span class="fu">rep</span>(<span class="dv">0</span>, p<span class="sc">-</span>q))</span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate response</span></span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> (X <span class="sc">%*%</span> beta)[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sd_y)</span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save as datafram</span></span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>  data_sim <span class="ot">=</span> <span class="fu">data.frame</span>(y,X)</span>
-<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data_sim)</span>
-<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
-<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
-<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run stepwise procedure from full model</span></span>
-<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
-<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
-<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
-<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tune shrinkage parameter lambda</span></span>
-<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
-<span id="cb27-76"><a href="#cb27-76" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
-<span id="cb27-77"><a href="#cb27-77" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-78"><a href="#cb27-78" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run lasso selection on model using tuned lambda</span></span>
-<span id="cb27-79"><a href="#cb27-79" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
-<span id="cb27-80"><a href="#cb27-80" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
-<span id="cb27-81"><a href="#cb27-81" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-82"><a href="#cb27-82" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save names of non-shrunk X variables</span></span>
-<span id="cb27-83"><a href="#cb27-83" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
-<span id="cb27-84"><a href="#cb27-84" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-85"><a href="#cb27-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">HACK</span><span class="co"> (not elegant solution): lasso had a tendency to select zero variables which breaks the timing study below</span></span>
-<span id="cb27-86"><a href="#cb27-86" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; so if no variables are selected, just take the first variable</span></span>
-<span id="cb27-87"><a href="#cb27-87" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lasso_vars) <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb27-88"><a href="#cb27-88" aria-hidden="true" tabindex="-1"></a>    lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="dv">1</span>]</span>
-<span id="cb27-89"><a href="#cb27-89" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-90"><a href="#cb27-90" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit model based on lasso selected variables (plus intercept)</span></span>
-<span id="cb27-91"><a href="#cb27-91" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
-<span id="cb27-92"><a href="#cb27-92" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-93"><a href="#cb27-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
-<span id="cb27-94"><a href="#cb27-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-95"><a href="#cb27-95" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-96"><a href="#cb27-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-97"><a href="#cb27-97" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
-<span id="cb27-98"><a href="#cb27-98" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs a model and returns an integer</span></span>
-<span id="cb27-99"><a href="#cb27-99" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
-<span id="cb27-100"><a href="#cb27-100" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-101"><a href="#cb27-101" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count the number of variables in the model (excluding intercept)</span></span>
-<span id="cb27-102"><a href="#cb27-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb27-103"><a href="#cb27-103" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-104"><a href="#cb27-104" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-105"><a href="#cb27-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-106"><a href="#cb27-106" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE (our accuracy measure)</span></span>
-<span id="cb27-107"><a href="#cb27-107" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
-<span id="cb27-108"><a href="#cb27-108" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-109"><a href="#cb27-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run 10-fold CV on the model</span></span>
-<span id="cb27-110"><a href="#cb27-110" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; by default trainControl() uses bootstrap validation, so need to switch it</span></span>
-<span id="cb27-111"><a href="#cb27-111" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison</span></span>
-<span id="cb27-112"><a href="#cb27-112" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
-<span id="cb27-113"><a href="#cb27-113" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
-<span id="cb27-114"><a href="#cb27-114" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb27-115"><a href="#cb27-115" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
-<span id="cb27-116"><a href="#cb27-116" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb27-117"><a href="#cb27-117" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-118"><a href="#cb27-118" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return RMSE</span></span>
-<span id="cb27-119"><a href="#cb27-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
-<span id="cb27-120"><a href="#cb27-120" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-121"><a href="#cb27-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-122"><a href="#cb27-122" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run a single trial</span></span>
-<span id="cb27-123"><a href="#cb27-123" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
-<span id="cb27-124"><a href="#cb27-124" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df) {</span>
-<span id="cb27-125"><a href="#cb27-125" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-126"><a href="#cb27-126" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run variable selection model</span></span>
-<span id="cb27-127"><a href="#cb27-127" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)</span></span>
-<span id="cb27-128"><a href="#cb27-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># record start and end time</span></span>
-<span id="cb27-129"><a href="#cb27-129" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb27-130"><a href="#cb27-130" aria-hidden="true" tabindex="-1"></a>    tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df)</span>
-<span id="cb27-131"><a href="#cb27-131" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb27-132"><a href="#cb27-132" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-133"><a href="#cb27-133" aria-hidden="true" tabindex="-1"></a>  <span class="co"># collect measurements for number of variables and predictive accuracy</span></span>
-<span id="cb27-134"><a href="#cb27-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; will be storing results as dataframe, so want to return a mini dataframe here</span></span>
-<span id="cb27-135"><a href="#cb27-135" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; want to name elements when returning more complex data structures</span></span>
-<span id="cb27-136"><a href="#cb27-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">nvars =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
-<span id="cb27-137"><a href="#cb27-137" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod),</span>
-<span id="cb27-138"><a href="#cb27-138" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"sec"</span>)))</span>
-<span id="cb27-139"><a href="#cb27-139" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-140"><a href="#cb27-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-141"><a href="#cb27-141" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run a study on number of variables selected</span></span>
-<span id="cb27-142"><a href="#cb27-142" aria-hidden="true" tabindex="-1"></a>vars_selected <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_sims =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_fun =</span> step_var_mod){</span>
-<span id="cb27-143"><a href="#cb27-143" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-144"><a href="#cb27-144" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize results vector</span></span>
-<span id="cb27-145"><a href="#cb27-145" aria-hidden="true" tabindex="-1"></a>  q_hat <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n_sims)</span>
-<span id="cb27-146"><a href="#cb27-146" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-147"><a href="#cb27-147" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims){</span>
-<span id="cb27-148"><a href="#cb27-148" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-149"><a href="#cb27-149" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate data</span></span>
-<span id="cb27-150"><a href="#cb27-150" aria-hidden="true" tabindex="-1"></a>    data_sim <span class="ot">=</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> n, <span class="at">p =</span> p, <span class="at">q =</span> q)</span>
-<span id="cb27-151"><a href="#cb27-151" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-152"><a href="#cb27-152" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run variable selection and return jus the number of variables selected</span></span>
-<span id="cb27-153"><a href="#cb27-153" aria-hidden="true" tabindex="-1"></a>    q_hat[i] <span class="ot">=</span> <span class="fu">run_trial</span>(var_select_fun, data_sim)<span class="sc">$</span>nvars</span>
-<span id="cb27-154"><a href="#cb27-154" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb27-155"><a href="#cb27-155" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-156"><a href="#cb27-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(q_hat)</span>
-<span id="cb27-157"><a href="#cb27-157" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-158"><a href="#cb27-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-159"><a href="#cb27-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-160"><a href="#cb27-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-161"><a href="#cb27-161" aria-hidden="true" tabindex="-1"></a>Note that in practice, we should reorganize our final quarto doc. WIth all of the helper functions in the same document as our actual computational experiment, they kinda get in the way and make it hard to tell what the actual computational experiment is that we are doing. So, these helper functions should be placed in a separate R script and brought in via <span class="in">`source()`</span>. This way it behaves like loading a library (a group of functions) that has functions are ready to use.</span>
-<span id="cb27-162"><a href="#cb27-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-165"><a href="#cb27-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-166"><a href="#cb27-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-helper-functions</span></span>
-<span id="cb27-167"><a href="#cb27-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb27-168"><a href="#cb27-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-169"><a href="#cb27-169" aria-hidden="true" tabindex="-1"></a><span class="co"># load helper functions</span></span>
-<span id="cb27-170"><a href="#cb27-170" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"helper-functions.R"</span>)</span>
-<span id="cb27-171"><a href="#cb27-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-172"><a href="#cb27-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-173"><a href="#cb27-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-174"><a href="#cb27-174" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simulation study efficacy</span></span>
-<span id="cb27-175"><a href="#cb27-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-176"><a href="#cb27-176" aria-hidden="true" tabindex="-1"></a>Running any simulation study takes time, and perhaps 30 sec is a reasonable amount of time for when we are first starting. But if we want to scale up studies to more parameter combinations, larger datasets, etc., we need ways to speed up the processing time.</span>
-<span id="cb27-177"><a href="#cb27-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-178"><a href="#cb27-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### Running code in parallel - "Base R"</span></span>
-<span id="cb27-179"><a href="#cb27-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-180"><a href="#cb27-180" aria-hidden="true" tabindex="-1"></a>One initial way to increase the efficiency of your code is with parallel processing, which essentially allows your machine to use more resources (cores) to evaluate multiple things at the same time. Using base R <span class="in">`apply()`</span> family of functions, there is a multicore version of <span class="in">`lapply()`</span>, but not for <span class="in">`mapply()`</span>. So here is the previous implementation of the timing study from @sec-variable-selection-study, except with <span class="in">`lapply()`</span>. Note that we will not be worried about formatting the final results, just the time it takes to run the main function.</span>
-<span id="cb27-181"><a href="#cb27-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-184"><a href="#cb27-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-185"><a href="#cb27-185" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mapply-to-lapply</span></span>
-<span id="cb27-186"><a href="#cb27-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-187"><a href="#cb27-187" aria-hidden="true" tabindex="-1"></a><span class="co"># mapply() -&gt; run variable selection study</span></span>
-<span id="cb27-188"><a href="#cb27-188" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> <span class="fu">mapply</span>(vars_selected, <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>), <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>),</span>
-<span id="cb27-189"><a href="#cb27-189" aria-hidden="true" tabindex="-1"></a>                     <span class="at">MoreArgs =</span> <span class="fu">list</span>(<span class="at">n_sim =</span> <span class="dv">3</span> , <span class="at">var_select_fun =</span> step_var_mod))</span>
-<span id="cb27-190"><a href="#cb27-190" aria-hidden="true" tabindex="-1"></a>var_counts</span>
-<span id="cb27-191"><a href="#cb27-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-192"><a href="#cb27-192" aria-hidden="true" tabindex="-1"></a><span class="co"># define possible parameter combinations</span></span>
-<span id="cb27-193"><a href="#cb27-193" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">5000</span>), <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">30</span>), <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>))</span>
-<span id="cb27-194"><a href="#cb27-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-195"><a href="#cb27-195" aria-hidden="true" tabindex="-1"></a><span class="co"># lapply() -&gt; run variable selection study</span></span>
-<span id="cb27-196"><a href="#cb27-196" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
-<span id="cb27-197"><a href="#cb27-197" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(params), <span class="cf">function</span>(i) {</span>
-<span id="cb27-198"><a href="#cb27-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vars_selected</span>(<span class="at">n =</span> params[i ,<span class="st">"n"</span>], <span class="at">p =</span> params[i ,<span class="st">"p"</span>], <span class="at">q =</span> params[i ,<span class="st">"q"</span>], <span class="at">n_sims =</span> <span class="dv">3</span>,  <span class="at">var_select_fun =</span> step_var_mod)</span>
-<span id="cb27-199"><a href="#cb27-199" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb27-200"><a href="#cb27-200" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb27-201"><a href="#cb27-201" aria-hidden="true" tabindex="-1"></a>var_counts</span>
-<span id="cb27-202"><a href="#cb27-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-203"><a href="#cb27-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-204"><a href="#cb27-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-205"><a href="#cb27-205" aria-hidden="true" tabindex="-1"></a>To investigate how our computer is working, we can pull up activity monitor to check what resources are being used.</span>
-<span id="cb27-206"><a href="#cb27-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-207"><a href="#cb27-207" aria-hidden="true" tabindex="-1"></a><span class="al">![](files/images/activity-monitor-sequential.png)</span></span>
-<span id="cb27-208"><a href="#cb27-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-209"><a href="#cb27-209" aria-hidden="true" tabindex="-1"></a>As the code is currently written, the <span class="in">`lapply()`</span> is running the first row of the <span class="in">`params`</span> through <span class="in">`vars_selected()`</span>, then it does the second, then the third all in *sequential* order (a serial pattern). Because it is working this way, the computer can't do the fifth task (fifth row) at the same time as the first task; it is only using one core (or pair of cores) at a time (the processing cores are only thinking about that one tasks, and doing them in order).</span>
-<span id="cb27-210"><a href="#cb27-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-211"><a href="#cb27-211" aria-hidden="true" tabindex="-1"></a>With parallel processing, we can run tasks at the same time and use more cores at the same time. Now compare the results time and the computer usage when using <span class="in">`parallel::mclapply()`</span> (use multiple cores when <span class="in">`lapply()`</span>ing).</span>
-<span id="cb27-212"><a href="#cb27-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-215"><a href="#cb27-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-216"><a href="#cb27-216" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: parallelization-base-r</span></span>
-<span id="cb27-217"><a href="#cb27-217" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb27-218"><a href="#cb27-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-219"><a href="#cb27-219" aria-hidden="true" tabindex="-1"></a><span class="co"># NOT RUN -&gt; note this code for some reason used less cpu than the first time and took forever...</span></span>
-<span id="cb27-220"><a href="#cb27-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-221"><a href="#cb27-221" aria-hidden="true" tabindex="-1"></a><span class="co"># load package</span></span>
-<span id="cb27-222"><a href="#cb27-222" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
-<span id="cb27-223"><a href="#cb27-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-224"><a href="#cb27-224" aria-hidden="true" tabindex="-1"></a><span class="co"># mlapply() -&gt; run variable selection study</span></span>
-<span id="cb27-225"><a href="#cb27-225" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
-<span id="cb27-226"><a href="#cb27-226" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> <span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(params), <span class="cf">function</span>(i) {</span>
-<span id="cb27-227"><a href="#cb27-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vars_selected</span>(<span class="at">n =</span> params[i ,<span class="st">"n"</span>], <span class="at">p =</span> params[i ,<span class="st">"p"</span>], <span class="at">q =</span> params[i ,<span class="st">"q"</span>], <span class="at">n_sims =</span> <span class="dv">3</span>,  <span class="at">var_select_fun =</span> step_var_mod)},</span>
-<span id="cb27-228"><a href="#cb27-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc.cores =</span> <span class="dv">6</span>)</span>
-<span id="cb27-229"><a href="#cb27-229" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb27-230"><a href="#cb27-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-231"><a href="#cb27-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-232"><a href="#cb27-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-233"><a href="#cb27-233" aria-hidden="true" tabindex="-1"></a>On the backend, there is actually a lot going on to run this function. Before even running the <span class="in">`lapply()`</span>, the computer needs to form clusters, figure out which tasks can be distributed to separated cores, which order tasks can be supplied, once a core is done hand it another task and when everything is done recombine results. So there is a considerable amount of overhead in managing this parallel process; things won't be 4 times quicker if using 4 times more cores.</span>
-<span id="cb27-234"><a href="#cb27-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-235"><a href="#cb27-235" aria-hidden="true" tabindex="-1"></a>This is the easiest way to apply parallel processing in R because each step in an <span class="in">`lapply()`</span> (or <span class="in">`apply()`</span> family of functions) is doing a batch of sequential steps, and these functions are more or less an individual steps in a for loop. So with parallel processing, we are running multiple for loops at the same time rather than only one big loop.</span>
-<span id="cb27-236"><a href="#cb27-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-237"><a href="#cb27-237" aria-hidden="true" tabindex="-1"></a>Note that we didn't have to think really hard to take advantage of the computing power (other than using <span class="in">`apply()`</span> rather than <span class="in">`for`</span> loops).</span>
-<span id="cb27-238"><a href="#cb27-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-239"><a href="#cb27-239" aria-hidden="true" tabindex="-1"></a><span class="fu">### Running code in parallel - "Tidyverse"</span></span>
-<span id="cb27-240"><a href="#cb27-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-241"><a href="#cb27-241" aria-hidden="true" tabindex="-1"></a>Here is the <span class="in">`purrr:pmap()`</span> implementation of the study above study (this uses the same resources as <span class="in">`lapply()`</span>, just cleaner code with the <span class="in">`tidyverse`</span>).</span>
-<span id="cb27-242"><a href="#cb27-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-245"><a href="#cb27-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-246"><a href="#cb27-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pmap</span></span>
-<span id="cb27-247"><a href="#cb27-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-248"><a href="#cb27-248" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
-<span id="cb27-249"><a href="#cb27-249" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
-<span id="cb27-250"><a href="#cb27-250" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> params <span class="sc">%&gt;%</span> </span>
-<span id="cb27-251"><a href="#cb27-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmap</span>(\(p, n, q) <span class="fu">vars_selected</span>(n, p, q, <span class="at">n_sim =</span> <span class="dv">3</span>, <span class="at">var_select_fun =</span> step_var_mod),</span>
-<span id="cb27-252"><a href="#cb27-252" aria-hidden="true" tabindex="-1"></a>       <span class="at">.progress =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-253"><a href="#cb27-253" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb27-254"><a href="#cb27-254" aria-hidden="true" tabindex="-1"></a>var_counts</span>
-<span id="cb27-255"><a href="#cb27-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-256"><a href="#cb27-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-257"><a href="#cb27-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-258"><a href="#cb27-258" aria-hidden="true" tabindex="-1"></a>Now in parallel processing, we have to use the following packages: <span class="in">`future`</span> (the main engine) and <span class="in">`furrr`</span> (the bridge between traditional <span class="in">`map()`</span> statements and the <span class="in">`future`</span> package; <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://furrr.futureverse.org/)</span>).</span>
-<span id="cb27-259"><a href="#cb27-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-260"><a href="#cb27-260" aria-hidden="true" tabindex="-1"></a>The first step is to setup a plan for how the code will be evaluated with <span class="in">`future::plan(strategy = multisession, cores = future::availableCores()-4)`</span>. Notes:</span>
-<span id="cb27-261"><a href="#cb27-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-262"><a href="#cb27-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`future`</span> is a dependency of <span class="in">`furrr`</span>, so it gets loaded automatically</span>
-<span id="cb27-263"><a href="#cb27-263" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Must use <span class="in">`strategy = multisession`</span></span>
-<span id="cb27-264"><a href="#cb27-264" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use <span class="in">`future::availableCores()-4`</span> so computer doesn't crash).</span>
-<span id="cb27-265"><a href="#cb27-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This needs to be run before any code using <span class="in">`furrr`</span> functions.</span>
-<span id="cb27-266"><a href="#cb27-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-267"><a href="#cb27-267" aria-hidden="true" tabindex="-1"></a>Then use the appropriate analog <span class="in">`future_map()`</span> family of functions as usual.</span>
-<span id="cb27-268"><a href="#cb27-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-271"><a href="#cb27-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-272"><a href="#cb27-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: parallelization-tidyverse</span></span>
-<span id="cb27-273"><a href="#cb27-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-274"><a href="#cb27-274" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
-<span id="cb27-275"><a href="#cb27-275" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
-<span id="cb27-276"><a href="#cb27-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-277"><a href="#cb27-277" aria-hidden="true" tabindex="-1"></a><span class="co"># setup plan</span></span>
-<span id="cb27-278"><a href="#cb27-278" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">cores =</span> <span class="fu">availableCores</span>()<span class="sc">-</span><span class="dv">4</span>)</span>
-<span id="cb27-279"><a href="#cb27-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-280"><a href="#cb27-280" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
-<span id="cb27-281"><a href="#cb27-281" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
-<span id="cb27-282"><a href="#cb27-282" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> params <span class="sc">%&gt;%</span> </span>
-<span id="cb27-283"><a href="#cb27-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">future_pmap</span>(\(p, n, q) <span class="fu">vars_selected</span>(n, p, q, <span class="at">n_sim =</span> <span class="dv">3</span>, <span class="at">var_select_fun =</span> step_var_mod),</span>
-<span id="cb27-284"><a href="#cb27-284" aria-hidden="true" tabindex="-1"></a>       <span class="at">.progress =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-285"><a href="#cb27-285" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
-<span id="cb27-286"><a href="#cb27-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-287"><a href="#cb27-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-288"><a href="#cb27-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-289"><a href="#cb27-289" aria-hidden="true" tabindex="-1"></a>Now we can check the activity monitor again (it had spikes up to around 80% usage)! Assuming a similar process on the backend is needed for these functions as well creating some overhead time.</span>
-<span id="cb27-290"><a href="#cb27-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-291"><a href="#cb27-291" aria-hidden="true" tabindex="-1"></a><span class="al">![](files/images/activity-monitor-parallel.png)</span></span>
-<span id="cb27-292"><a href="#cb27-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-293"><a href="#cb27-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### Code Profiling</span></span>
-<span id="cb27-294"><a href="#cb27-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-295"><a href="#cb27-295" aria-hidden="true" tabindex="-1"></a>The parallel processing shown above is the easy way gain performance. The harder way is to *profile* your code. Code profiling is the process of investigating your code on a function-by-function level and identifying which can be improved in terms of computation time (i.e. find the slow components, the *bottlenecks*). This can be done in an informal or formal way.</span>
-<span id="cb27-296"><a href="#cb27-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-297"><a href="#cb27-297" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Informal way: Look through the functions that you have and think about which ones are slow. Run each of them individually and see how long they each take once. When doing this, we can ignore the ones that we know are simple, such as just pulling coefficients from a model object, and focus on potential bottleneck functions.</span>
-<span id="cb27-298"><a href="#cb27-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-299"><a href="#cb27-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Formal way: <span class="in">`utils::profR()`</span>. First we need to setup temporary file which is just a spot to write information to when we are collecting the timing information. Notice this will start an R profiling scenario, which collects timing information on every subpart (R command) that is is run and writes that information to the temporary file.</span>
-<span id="cb27-300"><a href="#cb27-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-301"><a href="#cb27-301" aria-hidden="true" tabindex="-1"></a>For our particular application, it is more likely somewhere in calculating the advanced model statistics like lasso as opposed to generating data. But, lets investigate.</span>
-<span id="cb27-302"><a href="#cb27-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-305"><a href="#cb27-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-306"><a href="#cb27-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: profile-code</span></span>
-<span id="cb27-307"><a href="#cb27-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-308"><a href="#cb27-308" aria-hidden="true" tabindex="-1"></a><span class="co"># setup temporary file</span></span>
-<span id="cb27-309"><a href="#cb27-309" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">Rprof</span>(tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>())</span>
-<span id="cb27-310"><a href="#cb27-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-311"><a href="#cb27-311" aria-hidden="true" tabindex="-1"></a><span class="co"># run code to be profiled</span></span>
-<span id="cb27-312"><a href="#cb27-312" aria-hidden="true" tabindex="-1"></a><span class="fu">vars_selected</span>(<span class="at">n_sim =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">1000</span>, <span class="at">p =</span> <span class="dv">15</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_fun =</span> step_var_mod)</span>
-<span id="cb27-313"><a href="#cb27-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-314"><a href="#cb27-314" aria-hidden="true" tabindex="-1"></a><span class="co"># close profiling</span></span>
-<span id="cb27-315"><a href="#cb27-315" aria-hidden="true" tabindex="-1"></a><span class="fu">Rprof</span>()</span>
-<span id="cb27-316"><a href="#cb27-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-317"><a href="#cb27-317" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb27-318"><a href="#cb27-318" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRprof</span>(tmp)</span>
-<span id="cb27-319"><a href="#cb27-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-320"><a href="#cb27-320" aria-hidden="true" tabindex="-1"></a><span class="co"># delete temporary file</span></span>
-<span id="cb27-321"><a href="#cb27-321" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(tmp)</span>
-<span id="cb27-322"><a href="#cb27-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-323"><a href="#cb27-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-324"><a href="#cb27-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-325"><a href="#cb27-325" aria-hidden="true" tabindex="-1"></a>If we look at the <span class="in">`total.pct`</span> results, we see that <span class="in">`lm.fit()`</span> took the most time. The problem is, we don't necessarily know which of our functions called this. So we have to drill down to profile the helper functions as well. So, starting with the beginning:</span>
-<span id="cb27-326"><a href="#cb27-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-329"><a href="#cb27-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-330"><a href="#cb27-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: profile-code2</span></span>
-<span id="cb27-331"><a href="#cb27-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-332"><a href="#cb27-332" aria-hidden="true" tabindex="-1"></a><span class="co"># setup temporary file</span></span>
-<span id="cb27-333"><a href="#cb27-333" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">Rprof</span>(tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>())</span>
-<span id="cb27-334"><a href="#cb27-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-335"><a href="#cb27-335" aria-hidden="true" tabindex="-1"></a><span class="co"># run code to be profiled</span></span>
-<span id="cb27-336"><a href="#cb27-336" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">p =</span> <span class="dv">15</span>, <span class="at">q =</span> <span class="dv">5</span>)</span>
-<span id="cb27-337"><a href="#cb27-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-338"><a href="#cb27-338" aria-hidden="true" tabindex="-1"></a><span class="co"># close profiling</span></span>
-<span id="cb27-339"><a href="#cb27-339" aria-hidden="true" tabindex="-1"></a><span class="fu">Rprof</span>()</span>
-<span id="cb27-340"><a href="#cb27-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-341"><a href="#cb27-341" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb27-342"><a href="#cb27-342" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRprof</span>(tmp)</span>
-<span id="cb27-343"><a href="#cb27-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-344"><a href="#cb27-344" aria-hidden="true" tabindex="-1"></a><span class="co"># delete temporary file</span></span>
-<span id="cb27-345"><a href="#cb27-345" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(tmp)</span>
-<span id="cb27-346"><a href="#cb27-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-347"><a href="#cb27-347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-348"><a href="#cb27-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-349"><a href="#cb27-349" aria-hidden="true" tabindex="-1"></a>Still haven't found <span class="in">`lm.fit()`</span>. So just keep sequentially adding more functions until you find the culprits.</span>
-<span id="cb27-350"><a href="#cb27-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-353"><a href="#cb27-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-354"><a href="#cb27-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: profile-code3</span></span>
-<span id="cb27-355"><a href="#cb27-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-356"><a href="#cb27-356" aria-hidden="true" tabindex="-1"></a><span class="co"># setup temporary file</span></span>
-<span id="cb27-357"><a href="#cb27-357" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">Rprof</span>(tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>())</span>
-<span id="cb27-358"><a href="#cb27-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-359"><a href="#cb27-359" aria-hidden="true" tabindex="-1"></a><span class="co"># run code to be profiled</span></span>
-<span id="cb27-360"><a href="#cb27-360" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">p =</span> <span class="dv">15</span>, <span class="at">q =</span> <span class="dv">5</span>)</span>
-<span id="cb27-361"><a href="#cb27-361" aria-hidden="true" tabindex="-1"></a>mod_ex <span class="ot">&lt;-</span> <span class="fu">step_var_mod</span>(data_ex)</span>
-<span id="cb27-362"><a href="#cb27-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-363"><a href="#cb27-363" aria-hidden="true" tabindex="-1"></a><span class="co"># close profiling</span></span>
-<span id="cb27-364"><a href="#cb27-364" aria-hidden="true" tabindex="-1"></a><span class="fu">Rprof</span>()</span>
-<span id="cb27-365"><a href="#cb27-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-366"><a href="#cb27-366" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
-<span id="cb27-367"><a href="#cb27-367" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRprof</span>(tmp)</span>
-<span id="cb27-368"><a href="#cb27-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-369"><a href="#cb27-369" aria-hidden="true" tabindex="-1"></a><span class="co"># delete temporary file</span></span>
-<span id="cb27-370"><a href="#cb27-370" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(tmp)</span>
-<span id="cb27-371"><a href="#cb27-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-372"><a href="#cb27-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-373"><a href="#cb27-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-374"><a href="#cb27-374" aria-hidden="true" tabindex="-1"></a>Turns out it was in <span class="in">`step_var_mod()`</span>. So what to do when you find the bottleneck? Have to think about the function that you are using, why you are using it, and what can be used as an alternative.</span>
-<span id="cb27-375"><a href="#cb27-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-376"><a href="#cb27-376" aria-hidden="true" tabindex="-1"></a>For this particular application, we are not going to write a function to do this ourselves, so there is nothing we can do. But for other cases, perhaps the function that we have currently implemented is overkill for the simple tasks that we are doing (it is doing a bunch of extra stuff on top of the reason we need it). This is when you can think about coding up just what you need and nothing extra. Or perhaps changing metrics or summary measures and how you are fitting models.</span>
-<span id="cb27-377"><a href="#cb27-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-378"><a href="#cb27-378" aria-hidden="true" tabindex="-1"></a>For example, if <span class="in">`train()`</span> was taking a long time to do cross-validation when calculating the RMSE, we could create a function to find the bootstrapped RMSE (bootstrap 10 samples, fit 10 models and fit the out-of-boot (out-of-sample) RMSE on each model).</span>
-<span id="cb27-379"><a href="#cb27-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-380"><a href="#cb27-380" aria-hidden="true" tabindex="-1"></a>Summary:</span>
-<span id="cb27-381"><a href="#cb27-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-382"><a href="#cb27-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The entire simulation function takes a while, so we sequentially profiled to find the slow parts.</span>
-<span id="cb27-383"><a href="#cb27-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-384"><a href="#cb27-384" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Profiling is a good strategy working with complex settings (simulations, studies) where there is going to be lots of scaling up from say $n = 100$ to $n = 1000$ to $n = 1000000$ observations. It is much better to find out early on where the code can be improved so that don't have to wait forever later.</span>
-<span id="cb27-385"><a href="#cb27-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-386"><a href="#cb27-386" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>Finding the problem is half the problem, the other half is fixing it. When deciding if something is a problem, want to take away the major roadblocks that are low hanging fruit. Don't want to gain 2 min of processing time when it takes 4 hours to profile it (diminishing returns). But a few hours to save a few days of processing time, then it is worth it. Use your time wisely!</span>
+<div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Improving Code {#sec-improving-code}</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-prereqs</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr options</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>In our example code from @sec-simulation-studies we implemented a number of functions to run a simulation study on the comparison of stepwise and lasso variable selection methods. It all ran, but was a bit slow... and was a bit of a mess. Now we will talk about speeding it up and cleaning it up.</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Helper functions </span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>Below are the functions for reference (see @sec-simulation-helper-functions and @sec-simulation-generate-data-function).</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: previous-functions</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tictoc)</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to simulate response and covariates</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>make_sim_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">20</span>, <span class="at">q =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="fl">0.1</span>, <span class="at">sd_y =</span> <span class="dv">1</span>, <span class="at">sd_x =</span> <span class="dv">1</span>){</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate covariates</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sd_x))</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># give column names</span></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"x"</span>, <span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate beta vector (q significant, non-zero parameters and p-q zeros)</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(b, q), <span class="fu">rep</span>(<span class="dv">0</span>, p<span class="sc">-</span>q))</span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate response</span></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> (X <span class="sc">%*%</span> beta)[,<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sd_y)</span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save as datafram</span></span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>  data_sim <span class="ot">=</span> <span class="fu">data.frame</span>(y,X)</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data_sim)</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with stepwise and fitting a regression</span></span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>step_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run stepwise procedure from full model</span></span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>  step_selected <span class="ot">&lt;-</span> <span class="fu">step</span>(<span class="fu">lm</span>(y <span class="sc">~</span> . , <span class="at">data =</span> df), <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(step_selected)</span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a><span class="co"># function for choosing with lasso and fitting regression</span></span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs dataframe and returns selected model</span></span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>lasso_var_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tune shrinkage parameter lambda</span></span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>  cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">type.measure =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run lasso selection on model using tuned lambda</span></span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a>  lasso_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x =</span> <span class="fu">as.matrix</span>(<span class="at">x =</span> df[ , <span class="sc">-</span><span class="fu">which</span>(<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">"y"</span>)]),</span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> df<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> cv.out<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save names of non-shrunk X variables</span></span>
+<span id="cb29-83"><a href="#cb29-83" aria-hidden="true" tabindex="-1"></a>  lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="fu">which</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>] <span class="sc">!=</span> <span class="dv">0</span>)]</span>
+<span id="cb29-84"><a href="#cb29-84" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-85"><a href="#cb29-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">HACK</span><span class="co"> (not elegant solution): lasso had a tendency to select zero variables which breaks the timing study below</span></span>
+<span id="cb29-86"><a href="#cb29-86" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; so if no variables are selected, just take the first variable</span></span>
+<span id="cb29-87"><a href="#cb29-87" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lasso_vars) <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb29-88"><a href="#cb29-88" aria-hidden="true" tabindex="-1"></a>    lasso_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(lasso_mod<span class="sc">$</span>beta[,<span class="dv">1</span>])[<span class="dv">1</span>]</span>
+<span id="cb29-89"><a href="#cb29-89" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-90"><a href="#cb29-90" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit model based on lasso selected variables (plus intercept)</span></span>
+<span id="cb29-91"><a href="#cb29-91" aria-hidden="true" tabindex="-1"></a>  lasso_selected <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste0</span>(<span class="st">"y ~ 1 + "</span>, <span class="fu">paste</span>(lasso_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), <span class="at">data =</span> df)</span>
+<span id="cb29-92"><a href="#cb29-92" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-93"><a href="#cb29-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_selected)</span>
+<span id="cb29-94"><a href="#cb29-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-95"><a href="#cb29-95" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-96"><a href="#cb29-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-97"><a href="#cb29-97" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding number of variables included</span></span>
+<span id="cb29-98"><a href="#cb29-98" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs a model and returns an integer</span></span>
+<span id="cb29-99"><a href="#cb29-99" aria-hidden="true" tabindex="-1"></a>select_var_count <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb29-100"><a href="#cb29-100" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-101"><a href="#cb29-101" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count the number of variables in the model (excluding intercept)</span></span>
+<span id="cb29-102"><a href="#cb29-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">coef</span>(lin_mod))<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb29-103"><a href="#cb29-103" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-104"><a href="#cb29-104" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-105"><a href="#cb29-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-106"><a href="#cb29-106" aria-hidden="true" tabindex="-1"></a><span class="co"># function for finding 10-fold cross validated RMSE (our accuracy measure)</span></span>
+<span id="cb29-107"><a href="#cb29-107" aria-hidden="true" tabindex="-1"></a>select_cv_rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(lin_mod){</span>
+<span id="cb29-108"><a href="#cb29-108" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-109"><a href="#cb29-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run 10-fold CV on the model</span></span>
+<span id="cb29-110"><a href="#cb29-110" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; by default trainControl() uses bootstrap validation, so need to switch it</span></span>
+<span id="cb29-111"><a href="#cb29-111" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; always want to use intercept, else it will try to tune the intercept (decide to include or not include it), the stepwise always gives an intercept so need fair comparison</span></span>
+<span id="cb29-112"><a href="#cb29-112" aria-hidden="true" tabindex="-1"></a>  cv_result <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="fu">formula</span>(lin_mod), </span>
+<span id="cb29-113"><a href="#cb29-113" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> lin_mod<span class="sc">$</span>model,</span>
+<span id="cb29-114"><a href="#cb29-114" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb29-115"><a href="#cb29-115" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb29-116"><a href="#cb29-116" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">intercept =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb29-117"><a href="#cb29-117" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-118"><a href="#cb29-118" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return RMSE</span></span>
+<span id="cb29-119"><a href="#cb29-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cv_result<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span>
+<span id="cb29-120"><a href="#cb29-120" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-121"><a href="#cb29-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-122"><a href="#cb29-122" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run a single trial</span></span>
+<span id="cb29-123"><a href="#cb29-123" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; inputs each subject (df), applies the treatment (selection_alg which is a function), and collects the results</span></span>
+<span id="cb29-124"><a href="#cb29-124" aria-hidden="true" tabindex="-1"></a>run_trial <span class="ot">&lt;-</span> <span class="cf">function</span>(selection_alg, df) {</span>
+<span id="cb29-125"><a href="#cb29-125" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-126"><a href="#cb29-126" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run variable selection model</span></span>
+<span id="cb29-127"><a href="#cb29-127" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; we can use a tmp prefix for the model to represent a temporary object (model) (it is temporary because it is in a temporary environment when the function is called)</span></span>
+<span id="cb29-128"><a href="#cb29-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># record start and end time</span></span>
+<span id="cb29-129"><a href="#cb29-129" aria-hidden="true" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb29-130"><a href="#cb29-130" aria-hidden="true" tabindex="-1"></a>    tmp_mod <span class="ot">=</span> <span class="fu">selection_alg</span>(df)</span>
+<span id="cb29-131"><a href="#cb29-131" aria-hidden="true" tabindex="-1"></a>  end_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb29-132"><a href="#cb29-132" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-133"><a href="#cb29-133" aria-hidden="true" tabindex="-1"></a>  <span class="co"># collect measurements for number of variables and predictive accuracy</span></span>
+<span id="cb29-134"><a href="#cb29-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; will be storing results as dataframe, so want to return a mini dataframe here</span></span>
+<span id="cb29-135"><a href="#cb29-135" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -&gt; want to name elements when returning more complex data structures</span></span>
+<span id="cb29-136"><a href="#cb29-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">nvars =</span> <span class="fu">select_var_count</span>(tmp_mod),</span>
+<span id="cb29-137"><a href="#cb29-137" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rmse =</span> <span class="fu">select_cv_rmse</span>(tmp_mod),</span>
+<span id="cb29-138"><a href="#cb29-138" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> <span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"sec"</span>)))</span>
+<span id="cb29-139"><a href="#cb29-139" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-140"><a href="#cb29-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-141"><a href="#cb29-141" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to run a study on number of variables selected</span></span>
+<span id="cb29-142"><a href="#cb29-142" aria-hidden="true" tabindex="-1"></a>vars_selected <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_sims =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_fun =</span> step_var_mod){</span>
+<span id="cb29-143"><a href="#cb29-143" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-144"><a href="#cb29-144" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initialize results vector</span></span>
+<span id="cb29-145"><a href="#cb29-145" aria-hidden="true" tabindex="-1"></a>  q_hat <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n_sims)</span>
+<span id="cb29-146"><a href="#cb29-146" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-147"><a href="#cb29-147" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims){</span>
+<span id="cb29-148"><a href="#cb29-148" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-149"><a href="#cb29-149" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate data</span></span>
+<span id="cb29-150"><a href="#cb29-150" aria-hidden="true" tabindex="-1"></a>    data_sim <span class="ot">=</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> n, <span class="at">p =</span> p, <span class="at">q =</span> q)</span>
+<span id="cb29-151"><a href="#cb29-151" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-152"><a href="#cb29-152" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run variable selection and return jus the number of variables selected</span></span>
+<span id="cb29-153"><a href="#cb29-153" aria-hidden="true" tabindex="-1"></a>    q_hat[i] <span class="ot">=</span> <span class="fu">run_trial</span>(var_select_fun, data_sim)<span class="sc">$</span>nvars</span>
+<span id="cb29-154"><a href="#cb29-154" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-155"><a href="#cb29-155" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-156"><a href="#cb29-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(q_hat)</span>
+<span id="cb29-157"><a href="#cb29-157" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-158"><a href="#cb29-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-159"><a href="#cb29-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-160"><a href="#cb29-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-161"><a href="#cb29-161" aria-hidden="true" tabindex="-1"></a>Note that in practice, we should reorganize our final quarto doc. WIth all of the helper functions in the same document as our actual computational experiment, they kinda get in the way and make it hard to tell what the actual computational experiment is that we are doing. So, these helper functions should be placed in a separate R script and brought in via <span class="in">`source()`</span>. This way it behaves like loading a library (a group of functions) that has functions are ready to use.</span>
+<span id="cb29-162"><a href="#cb29-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-165"><a href="#cb29-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-166"><a href="#cb29-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-helper-functions</span></span>
+<span id="cb29-167"><a href="#cb29-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb29-168"><a href="#cb29-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-169"><a href="#cb29-169" aria-hidden="true" tabindex="-1"></a><span class="co"># load helper functions</span></span>
+<span id="cb29-170"><a href="#cb29-170" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"helper-functions.R"</span>)</span>
+<span id="cb29-171"><a href="#cb29-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-172"><a href="#cb29-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-173"><a href="#cb29-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-174"><a href="#cb29-174" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simulation study efficacy</span></span>
+<span id="cb29-175"><a href="#cb29-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-176"><a href="#cb29-176" aria-hidden="true" tabindex="-1"></a>Running any simulation study takes time, and perhaps 30 sec is a reasonable amount of time for when we are first starting. But if we want to scale up studies to more parameter combinations, larger datasets, etc., we need ways to speed up the processing time.</span>
+<span id="cb29-177"><a href="#cb29-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-178"><a href="#cb29-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### Running code in parallel - "Base R"</span></span>
+<span id="cb29-179"><a href="#cb29-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-180"><a href="#cb29-180" aria-hidden="true" tabindex="-1"></a>One initial way to increase the efficiency of your code is with parallel processing, which essentially allows your machine to use more resources (cores) to evaluate multiple things at the same time. Using base R <span class="in">`apply()`</span> family of functions, there is a multicore version of <span class="in">`lapply()`</span>, but not for <span class="in">`mapply()`</span>. So here is the previous implementation of the timing study from @sec-variable-selection-study, except with <span class="in">`lapply()`</span>. Note that we will not be worried about formatting the final results, just the time it takes to run the main function.</span>
+<span id="cb29-181"><a href="#cb29-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-184"><a href="#cb29-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-185"><a href="#cb29-185" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mapply-to-lapply</span></span>
+<span id="cb29-186"><a href="#cb29-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-187"><a href="#cb29-187" aria-hidden="true" tabindex="-1"></a><span class="co"># mapply() -&gt; run variable selection study</span></span>
+<span id="cb29-188"><a href="#cb29-188" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> <span class="fu">mapply</span>(vars_selected, <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>), <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb29-189"><a href="#cb29-189" aria-hidden="true" tabindex="-1"></a>                     <span class="at">MoreArgs =</span> <span class="fu">list</span>(<span class="at">n_sim =</span> <span class="dv">3</span> , <span class="at">var_select_fun =</span> step_var_mod))</span>
+<span id="cb29-190"><a href="#cb29-190" aria-hidden="true" tabindex="-1"></a>var_counts</span>
+<span id="cb29-191"><a href="#cb29-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-192"><a href="#cb29-192" aria-hidden="true" tabindex="-1"></a><span class="co"># define possible parameter combinations</span></span>
+<span id="cb29-193"><a href="#cb29-193" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">5000</span>), <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">30</span>), <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>))</span>
+<span id="cb29-194"><a href="#cb29-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-195"><a href="#cb29-195" aria-hidden="true" tabindex="-1"></a><span class="co"># lapply() -&gt; run variable selection study</span></span>
+<span id="cb29-196"><a href="#cb29-196" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb29-197"><a href="#cb29-197" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(params), <span class="cf">function</span>(i) {</span>
+<span id="cb29-198"><a href="#cb29-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vars_selected</span>(<span class="at">n =</span> params[i ,<span class="st">"n"</span>], <span class="at">p =</span> params[i ,<span class="st">"p"</span>], <span class="at">q =</span> params[i ,<span class="st">"q"</span>], <span class="at">n_sims =</span> <span class="dv">3</span>,  <span class="at">var_select_fun =</span> step_var_mod)</span>
+<span id="cb29-199"><a href="#cb29-199" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb29-200"><a href="#cb29-200" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb29-201"><a href="#cb29-201" aria-hidden="true" tabindex="-1"></a>var_counts</span>
+<span id="cb29-202"><a href="#cb29-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-203"><a href="#cb29-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-204"><a href="#cb29-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-205"><a href="#cb29-205" aria-hidden="true" tabindex="-1"></a>To investigate how our computer is working, we can pull up activity monitor to check what resources are being used.</span>
+<span id="cb29-206"><a href="#cb29-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-207"><a href="#cb29-207" aria-hidden="true" tabindex="-1"></a><span class="al">![](files/images/activity-monitor-sequential.png)</span></span>
+<span id="cb29-208"><a href="#cb29-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-209"><a href="#cb29-209" aria-hidden="true" tabindex="-1"></a>As the code is currently written, the <span class="in">`lapply()`</span> is running the first row of the <span class="in">`params`</span> through <span class="in">`vars_selected()`</span>, then it does the second, then the third all in *sequential* order (a serial pattern). Because it is working this way, the computer can't do the fifth task (fifth row) at the same time as the first task; it is only using one core (or pair of cores) at a time (the processing cores are only thinking about that one tasks, and doing them in order).</span>
+<span id="cb29-210"><a href="#cb29-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-211"><a href="#cb29-211" aria-hidden="true" tabindex="-1"></a>With parallel processing, we can run tasks at the same time and use more cores at the same time. Now compare the results time and the computer usage when using <span class="in">`parallel::mclapply()`</span> (use multiple cores when <span class="in">`lapply()`</span>ing).</span>
+<span id="cb29-212"><a href="#cb29-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-215"><a href="#cb29-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-216"><a href="#cb29-216" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: parallelization-base-r</span></span>
+<span id="cb29-217"><a href="#cb29-217" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb29-218"><a href="#cb29-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-219"><a href="#cb29-219" aria-hidden="true" tabindex="-1"></a><span class="co"># NOT RUN -&gt; note this code for some reason used less cpu than the first time and took forever...</span></span>
+<span id="cb29-220"><a href="#cb29-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-221"><a href="#cb29-221" aria-hidden="true" tabindex="-1"></a><span class="co"># load package</span></span>
+<span id="cb29-222"><a href="#cb29-222" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb29-223"><a href="#cb29-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-224"><a href="#cb29-224" aria-hidden="true" tabindex="-1"></a><span class="co"># mlapply() -&gt; run variable selection study</span></span>
+<span id="cb29-225"><a href="#cb29-225" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb29-226"><a href="#cb29-226" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> <span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(params), <span class="cf">function</span>(i) {</span>
+<span id="cb29-227"><a href="#cb29-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vars_selected</span>(<span class="at">n =</span> params[i ,<span class="st">"n"</span>], <span class="at">p =</span> params[i ,<span class="st">"p"</span>], <span class="at">q =</span> params[i ,<span class="st">"q"</span>], <span class="at">n_sims =</span> <span class="dv">3</span>,  <span class="at">var_select_fun =</span> step_var_mod)},</span>
+<span id="cb29-228"><a href="#cb29-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc.cores =</span> <span class="dv">6</span>)</span>
+<span id="cb29-229"><a href="#cb29-229" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb29-230"><a href="#cb29-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-231"><a href="#cb29-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-232"><a href="#cb29-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-233"><a href="#cb29-233" aria-hidden="true" tabindex="-1"></a>On the backend, there is actually a lot going on to run this function. Before even running the <span class="in">`lapply()`</span>, the computer needs to form clusters, figure out which tasks can be distributed to separated cores, which order tasks can be supplied, once a core is done hand it another task and when everything is done recombine results. So there is a considerable amount of overhead in managing this parallel process; things won't be 4 times quicker if using 4 times more cores.</span>
+<span id="cb29-234"><a href="#cb29-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-235"><a href="#cb29-235" aria-hidden="true" tabindex="-1"></a>This is the easiest way to apply parallel processing in R because each step in an <span class="in">`lapply()`</span> (or <span class="in">`apply()`</span> family of functions) is doing a batch of sequential steps, and these functions are more or less an individual steps in a for loop. So with parallel processing, we are running multiple for loops at the same time rather than only one big loop.</span>
+<span id="cb29-236"><a href="#cb29-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-237"><a href="#cb29-237" aria-hidden="true" tabindex="-1"></a>Note that we didn't have to think really hard to take advantage of the computing power (other than using <span class="in">`apply()`</span> rather than <span class="in">`for`</span> loops).</span>
+<span id="cb29-238"><a href="#cb29-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-239"><a href="#cb29-239" aria-hidden="true" tabindex="-1"></a><span class="fu">### Running code in parallel - "Tidyverse"</span></span>
+<span id="cb29-240"><a href="#cb29-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-241"><a href="#cb29-241" aria-hidden="true" tabindex="-1"></a>Here is the <span class="in">`purrr:pmap()`</span> implementation of the study above study (this uses the same resources as <span class="in">`lapply()`</span>, just cleaner code with the <span class="in">`tidyverse`</span>).</span>
+<span id="cb29-242"><a href="#cb29-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-245"><a href="#cb29-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-246"><a href="#cb29-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pmap</span></span>
+<span id="cb29-247"><a href="#cb29-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-248"><a href="#cb29-248" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
+<span id="cb29-249"><a href="#cb29-249" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb29-250"><a href="#cb29-250" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> params <span class="sc">%&gt;%</span> </span>
+<span id="cb29-251"><a href="#cb29-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmap</span>(\(p, n, q) <span class="fu">vars_selected</span>(n, p, q, <span class="at">n_sim =</span> <span class="dv">3</span>, <span class="at">var_select_fun =</span> step_var_mod),</span>
+<span id="cb29-252"><a href="#cb29-252" aria-hidden="true" tabindex="-1"></a>       <span class="at">.progress =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-253"><a href="#cb29-253" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb29-254"><a href="#cb29-254" aria-hidden="true" tabindex="-1"></a>var_counts</span>
+<span id="cb29-255"><a href="#cb29-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-256"><a href="#cb29-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-257"><a href="#cb29-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-258"><a href="#cb29-258" aria-hidden="true" tabindex="-1"></a>Now in parallel processing, we have to use the following packages: <span class="in">`future`</span> (the main engine) and <span class="in">`furrr`</span> (the bridge between traditional <span class="in">`map()`</span> statements and the <span class="in">`future`</span> package; <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://furrr.futureverse.org/)</span>).</span>
+<span id="cb29-259"><a href="#cb29-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-260"><a href="#cb29-260" aria-hidden="true" tabindex="-1"></a>The first step is to setup a plan for how the code will be evaluated with <span class="in">`future::plan(strategy = multisession, workers = future::availableCores()-4)`</span>. Notes:</span>
+<span id="cb29-261"><a href="#cb29-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-262"><a href="#cb29-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`future`</span> is a dependency of <span class="in">`furrr`</span>, so it gets loaded automatically</span>
+<span id="cb29-263"><a href="#cb29-263" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Must use <span class="in">`strategy = multisession`</span></span>
+<span id="cb29-264"><a href="#cb29-264" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use <span class="in">`future::availableCores()-4`</span> so computer doesn't crash).</span>
+<span id="cb29-265"><a href="#cb29-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This needs to be run before any code using <span class="in">`furrr`</span> functions.</span>
+<span id="cb29-266"><a href="#cb29-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-267"><a href="#cb29-267" aria-hidden="true" tabindex="-1"></a>Then use the appropriate analog <span class="in">`future_map()`</span> family of functions as usual.</span>
+<span id="cb29-268"><a href="#cb29-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-271"><a href="#cb29-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-272"><a href="#cb29-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: parallelization-tidyverse</span></span>
+<span id="cb29-273"><a href="#cb29-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-274"><a href="#cb29-274" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb29-275"><a href="#cb29-275" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
+<span id="cb29-276"><a href="#cb29-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-277"><a href="#cb29-277" aria-hidden="true" tabindex="-1"></a><span class="co"># setup plan</span></span>
+<span id="cb29-278"><a href="#cb29-278" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="fu">availableCores</span>()<span class="sc">-</span><span class="dv">4</span>)</span>
+<span id="cb29-279"><a href="#cb29-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-280"><a href="#cb29-280" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; pmap() -&gt; run variable selection study</span></span>
+<span id="cb29-281"><a href="#cb29-281" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb29-282"><a href="#cb29-282" aria-hidden="true" tabindex="-1"></a>var_counts <span class="ot">&lt;-</span> params <span class="sc">%&gt;%</span> </span>
+<span id="cb29-283"><a href="#cb29-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">future_pmap</span>(\(p, n, q) <span class="fu">vars_selected</span>(n, p, q, <span class="at">n_sim =</span> <span class="dv">3</span>, <span class="at">var_select_fun =</span> step_var_mod),</span>
+<span id="cb29-284"><a href="#cb29-284" aria-hidden="true" tabindex="-1"></a>       <span class="at">.progress =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-285"><a href="#cb29-285" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb29-286"><a href="#cb29-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-287"><a href="#cb29-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-288"><a href="#cb29-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-289"><a href="#cb29-289" aria-hidden="true" tabindex="-1"></a>Now we can check the activity monitor again (it had spikes up to around 80% usage)! Assuming a similar process on the backend is needed for these functions as well creating some overhead time.</span>
+<span id="cb29-290"><a href="#cb29-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-291"><a href="#cb29-291" aria-hidden="true" tabindex="-1"></a><span class="al">![](files/images/activity-monitor-parallel.png)</span></span>
+<span id="cb29-292"><a href="#cb29-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-293"><a href="#cb29-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### Code Profiling</span></span>
+<span id="cb29-294"><a href="#cb29-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-295"><a href="#cb29-295" aria-hidden="true" tabindex="-1"></a>The parallel processing shown above is the easy way gain performance. The harder way is to *profile* your code. Code profiling is the process of investigating your code on a function-by-function level and identifying which can be improved in terms of computation time (i.e. find the slow components, the *bottlenecks*). This can be done in an informal or formal way.</span>
+<span id="cb29-296"><a href="#cb29-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-297"><a href="#cb29-297" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Informal way: Look through the functions that you have and think about which ones are slow. Run each of them individually and see how long they each take once. When doing this, we can ignore the ones that we know are simple, such as just pulling coefficients from a model object, and focus on potential bottleneck functions.</span>
+<span id="cb29-298"><a href="#cb29-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-299"><a href="#cb29-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Formal way: <span class="in">`utils::profR()`</span>. First we need to setup temporary file which is just a spot to write information to when we are collecting the timing information. Notice this will start an R profiling scenario, which collects timing information on every subpart (R command) that is is run and writes that information to the temporary file.</span>
+<span id="cb29-300"><a href="#cb29-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-301"><a href="#cb29-301" aria-hidden="true" tabindex="-1"></a>For our particular application, it is more likely somewhere in calculating the advanced model statistics like lasso as opposed to generating data. But, lets investigate.</span>
+<span id="cb29-302"><a href="#cb29-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-305"><a href="#cb29-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-306"><a href="#cb29-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: profile-code</span></span>
+<span id="cb29-307"><a href="#cb29-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-308"><a href="#cb29-308" aria-hidden="true" tabindex="-1"></a><span class="co"># setup temporary file</span></span>
+<span id="cb29-309"><a href="#cb29-309" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">Rprof</span>(tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>())</span>
+<span id="cb29-310"><a href="#cb29-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-311"><a href="#cb29-311" aria-hidden="true" tabindex="-1"></a><span class="co"># run code to be profiled</span></span>
+<span id="cb29-312"><a href="#cb29-312" aria-hidden="true" tabindex="-1"></a><span class="fu">vars_selected</span>(<span class="at">n_sim =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">1000</span>, <span class="at">p =</span> <span class="dv">15</span>, <span class="at">q =</span> <span class="dv">5</span>, <span class="at">var_select_fun =</span> step_var_mod)</span>
+<span id="cb29-313"><a href="#cb29-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-314"><a href="#cb29-314" aria-hidden="true" tabindex="-1"></a><span class="co"># close profiling</span></span>
+<span id="cb29-315"><a href="#cb29-315" aria-hidden="true" tabindex="-1"></a><span class="fu">Rprof</span>()</span>
+<span id="cb29-316"><a href="#cb29-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-317"><a href="#cb29-317" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
+<span id="cb29-318"><a href="#cb29-318" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRprof</span>(tmp)</span>
+<span id="cb29-319"><a href="#cb29-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-320"><a href="#cb29-320" aria-hidden="true" tabindex="-1"></a><span class="co"># delete temporary file</span></span>
+<span id="cb29-321"><a href="#cb29-321" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(tmp)</span>
+<span id="cb29-322"><a href="#cb29-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-323"><a href="#cb29-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-324"><a href="#cb29-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-325"><a href="#cb29-325" aria-hidden="true" tabindex="-1"></a>If we look at the <span class="in">`total.pct`</span> results, we see that <span class="in">`lm.fit()`</span> took the most time. The problem is, we don't necessarily know which of our functions called this. So we have to drill down to profile the helper functions as well. So, starting with the beginning:</span>
+<span id="cb29-326"><a href="#cb29-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-329"><a href="#cb29-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-330"><a href="#cb29-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: profile-code2</span></span>
+<span id="cb29-331"><a href="#cb29-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-332"><a href="#cb29-332" aria-hidden="true" tabindex="-1"></a><span class="co"># setup temporary file</span></span>
+<span id="cb29-333"><a href="#cb29-333" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">Rprof</span>(tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>())</span>
+<span id="cb29-334"><a href="#cb29-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-335"><a href="#cb29-335" aria-hidden="true" tabindex="-1"></a><span class="co"># run code to be profiled</span></span>
+<span id="cb29-336"><a href="#cb29-336" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">p =</span> <span class="dv">15</span>, <span class="at">q =</span> <span class="dv">5</span>)</span>
+<span id="cb29-337"><a href="#cb29-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-338"><a href="#cb29-338" aria-hidden="true" tabindex="-1"></a><span class="co"># close profiling</span></span>
+<span id="cb29-339"><a href="#cb29-339" aria-hidden="true" tabindex="-1"></a><span class="fu">Rprof</span>()</span>
+<span id="cb29-340"><a href="#cb29-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-341"><a href="#cb29-341" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
+<span id="cb29-342"><a href="#cb29-342" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRprof</span>(tmp)</span>
+<span id="cb29-343"><a href="#cb29-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-344"><a href="#cb29-344" aria-hidden="true" tabindex="-1"></a><span class="co"># delete temporary file</span></span>
+<span id="cb29-345"><a href="#cb29-345" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(tmp)</span>
+<span id="cb29-346"><a href="#cb29-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-347"><a href="#cb29-347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-348"><a href="#cb29-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-349"><a href="#cb29-349" aria-hidden="true" tabindex="-1"></a>Still haven't found <span class="in">`lm.fit()`</span>. So just keep sequentially adding more functions until you find the culprits.</span>
+<span id="cb29-350"><a href="#cb29-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-353"><a href="#cb29-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb29-354"><a href="#cb29-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: profile-code3</span></span>
+<span id="cb29-355"><a href="#cb29-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-356"><a href="#cb29-356" aria-hidden="true" tabindex="-1"></a><span class="co"># setup temporary file</span></span>
+<span id="cb29-357"><a href="#cb29-357" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">Rprof</span>(tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>())</span>
+<span id="cb29-358"><a href="#cb29-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-359"><a href="#cb29-359" aria-hidden="true" tabindex="-1"></a><span class="co"># run code to be profiled</span></span>
+<span id="cb29-360"><a href="#cb29-360" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> <span class="fu">make_sim_data</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">p =</span> <span class="dv">15</span>, <span class="at">q =</span> <span class="dv">5</span>)</span>
+<span id="cb29-361"><a href="#cb29-361" aria-hidden="true" tabindex="-1"></a>mod_ex <span class="ot">&lt;-</span> <span class="fu">step_var_mod</span>(data_ex)</span>
+<span id="cb29-362"><a href="#cb29-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-363"><a href="#cb29-363" aria-hidden="true" tabindex="-1"></a><span class="co"># close profiling</span></span>
+<span id="cb29-364"><a href="#cb29-364" aria-hidden="true" tabindex="-1"></a><span class="fu">Rprof</span>()</span>
+<span id="cb29-365"><a href="#cb29-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-366"><a href="#cb29-366" aria-hidden="true" tabindex="-1"></a><span class="co"># view results</span></span>
+<span id="cb29-367"><a href="#cb29-367" aria-hidden="true" tabindex="-1"></a><span class="fu">summaryRprof</span>(tmp)</span>
+<span id="cb29-368"><a href="#cb29-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-369"><a href="#cb29-369" aria-hidden="true" tabindex="-1"></a><span class="co"># delete temporary file</span></span>
+<span id="cb29-370"><a href="#cb29-370" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(tmp)</span>
+<span id="cb29-371"><a href="#cb29-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-372"><a href="#cb29-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-373"><a href="#cb29-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-374"><a href="#cb29-374" aria-hidden="true" tabindex="-1"></a>Turns out it was in <span class="in">`step_var_mod()`</span>. So what to do when you find the bottleneck? Have to think about the function that you are using, why you are using it, and what can be used as an alternative.</span>
+<span id="cb29-375"><a href="#cb29-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-376"><a href="#cb29-376" aria-hidden="true" tabindex="-1"></a>For this particular application, we are not going to write a function to do this ourselves, so there is nothing we can do. But for other cases, perhaps the function that we have currently implemented is overkill for the simple tasks that we are doing (it is doing a bunch of extra stuff on top of the reason we need it). This is when you can think about coding up just what you need and nothing extra. Or perhaps changing metrics or summary measures and how you are fitting models.</span>
+<span id="cb29-377"><a href="#cb29-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-378"><a href="#cb29-378" aria-hidden="true" tabindex="-1"></a>For example, if <span class="in">`train()`</span> was taking a long time to do cross-validation when calculating the RMSE, we could create a function to find the bootstrapped RMSE (bootstrap 10 samples, fit 10 models and fit the out-of-boot (out-of-sample) RMSE on each model).</span>
+<span id="cb29-379"><a href="#cb29-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-380"><a href="#cb29-380" aria-hidden="true" tabindex="-1"></a>Summary:</span>
+<span id="cb29-381"><a href="#cb29-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-382"><a href="#cb29-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The entire simulation function takes a while, so we sequentially profiled to find the slow parts.</span>
+<span id="cb29-383"><a href="#cb29-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-384"><a href="#cb29-384" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Profiling is a good strategy working with complex settings (simulations, studies) where there is going to be lots of scaling up from say $n = 100$ to $n = 1000$ to $n = 1000000$ observations. It is much better to find out early on where the code can be improved so that don't have to wait forever later.</span>
+<span id="cb29-385"><a href="#cb29-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-386"><a href="#cb29-386" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>Finding the problem is half the problem, the other half is fixing it. When deciding if something is a problem, want to take away the major roadblocks that are low hanging fruit. Don't want to gain 2 min of processing time when it takes 4 hours to profile it (diminishing returns). But a few hours to save a few days of processing time, then it is worth it. Use your time wisely!</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

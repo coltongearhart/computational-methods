@@ -245,7 +245,7 @@ var_counts
 
 Now in parallel processing, we have to use the following packages: `future` (the main engine) and `furrr` (the bridge between traditional `map()` statements and the `future` package; [documentation](https://furrr.futureverse.org/)).
 
-The first step is to setup a plan for how the code will be evaluated with `future::plan(strategy = multisession, cores = future::availableCores()-4)`. Notes:
+The first step is to setup a plan for how the code will be evaluated with `future::plan(strategy = multisession, workers = future::availableCores()-4)`. Notes:
 
 - `future` is a dependency of `furrr`, so it gets loaded automatically
 - Must use `strategy = multisession`
@@ -261,7 +261,7 @@ Then use the appropriate analog `future_map()` family of functions as usual.
 library(furrr)
 
 # setup plan
-plan(multisession, cores = availableCores()-4)
+plan(multisession, workers = availableCores()-4)
 
 # -> pmap() -> run variable selection study
 tic()

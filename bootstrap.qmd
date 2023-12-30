@@ -13,13 +13,13 @@ options(scipen = 999)
 
 ```
 
-## The Bootstrap
+## The bootstrap
 
 The statistical procedure known at the bootstrap was born out of Brad Efron's work in 1979. The bootstrap is named after the hyperbolic phrase "pulling yourself up by your bootstraps" -- a physical act that would be impossible -- because the bootstrap seems to work in a somewhat unbelievable manner for accomplishing statistical inference.
 
 We know that most of the inferential statistics that we have seen previously have been based on knowing theoretical properties of sampling distributions, then working to align our construction of confidence intervals or test-statistics with these known distributions (example knowing CLT and using that for confidence intervals). This is why many of our tests focus around the used of means and proportions, because they have well known properties in large sample sizes. But how do we do inference if the behavior of the sampling distribution isn't already known? Bootstrapping is one possible solution.
 
-## Bootstrap Sampling
+## Bootstrap sampling
 
 Normally we would repeatedly sample from the population and compute our summary statistic of interest. This would tell us what values we can expect from repeated random samples and how uncertain we should be in any particular sample we have. Formally, a sampling distribution for a sample statistic is the probability structure for outcomes of the statistic in repeated sampling from the population. If we don't have theoretical properties that tell us how that will behave, our solution is simple... just sample repeatedly from the population to find out the distribution of sample statistics. Wait. That is not very practical, since we used our available resources to collect our one real dataset.
 
