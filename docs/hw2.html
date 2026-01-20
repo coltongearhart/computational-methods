@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.376">
+<meta name="generator" content="quarto-1.5.56">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Computational Methods in R - 8&nbsp; Homework 2</title>
+<title>9&nbsp; Homework 2 – Computational Methods in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
@@ -90,29 +90,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 2</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw2.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 2</span></a></li></ol></nav><div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title"><span id="sec-hw2" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 2</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw2.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></a></li></ol></nav>
+      <div class="quarto-title-block"><div><h1 class="title"><span id="sec-hw2" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                       </div>
   </div>
     
@@ -127,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Computational Methods in R</a> 
     </div>
@@ -149,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./course-notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -190,13 +216,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation Studies</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./improving-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Improving Code</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -204,42 +236,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment"><span class="header-section-number">8.1</span> Assignment</a>
+<a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment"><span class="header-section-number">9.1</span> Assignment</a>
   <ul class="collapse">
-<li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">8.1.1</span> Problem 1</a></li>
-  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">8.1.2</span> Problem 2</a></li>
+<li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">9.1.1</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">9.1.2</span> Problem 2</a></li>
   </ul>
 </li>
-  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">8.2</span> Solution</a></li>
-  <li><a href="#problem-1-1" id="toc-problem-1-1" class="nav-link" data-scroll-target="#problem-1-1"><span class="header-section-number">8.3</span> Problem 1</a></li>
-  <li><a href="#problem-2-1" id="toc-problem-2-1" class="nav-link" data-scroll-target="#problem-2-1"><span class="header-section-number">8.4</span> Problem 2</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">9.2</span> Solution</a></li>
+  <li><a href="#problem-1-1" id="toc-problem-1-1" class="nav-link" data-scroll-target="#problem-1-1"><span class="header-section-number">9.3</span> Problem 1</a></li>
+  <li><a href="#problem-2-1" id="toc-problem-2-1" class="nav-link" data-scroll-target="#problem-2-1"><span class="header-section-number">9.4</span> Problem 2</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="assignment" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="assignment">
-<span class="header-section-number">8.1</span> Assignment</h2>
-<section id="problem-1" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="problem-1">
-<span class="header-section-number">8.1.1</span> Problem 1</h3>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="assignment" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="assignment">
+<span class="header-section-number">9.1</span> Assignment</h2>
+<section id="problem-1" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="problem-1">
+<span class="header-section-number">9.1.1</span> Problem 1</h3>
 <p>Part a: Develop a function that has the following formal arguments:</p>
 <ol type="1">
 <li>a multiple linear regression model object from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>
@@ -249,9 +281,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Your function must return a set of bootstrap confidence intervals for the beta coefficients in that model.</p>
 <p><em>Note</em>: Your function may not call another function to conduct the bootstrapping or interval construction.</p>
-<p>Part b: Use your function on each of the 9 regression datasets used in class in <a href="computational-experiments.html#sec-computational-datasets" class="quarto-xref"><span>Section&nbsp;5.4.1</span></a>.</p>
-</section><section id="problem-2" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="problem-2">
-<span class="header-section-number">8.1.2</span> Problem 2</h3>
+<p>Part b: Use your function on each of the 9 regression datasets used in class in <a href="computational-experiments.html#sec-computational-datasets" class="quarto-xref"><span>Section 5.4.1</span></a>.</p>
+</section><section id="problem-2" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="problem-2">
+<span class="header-section-number">9.1.2</span> Problem 2</h3>
 <p>For this problem you will use the French Fries experiment data from the <code>reshape2</code> package.</p>
 <p>The following mixed-effects model will test for interactions between the oil types (treatment) and number of weeks the oil had been used (time = 1 to 10), while modeling the random variability of replicates between the participants. See the R code below for the model structure and output.</p>
 <div class="cell">
@@ -301,11 +333,11 @@ Fixed Effects:
 <p>Part a: Conduct a permutation test for pairwise differences between the estimated starting scores (time = 1) for the potato flavors for two oil types. Monte-Carlo methods allowed.</p>
 <p><em>Note</em>: You need to be careful to permute the treatment labels WITHIN each experimental block for subject and time for this test.</p>
 <p>Part b: Create permutation-based 95% confidence intervals for the change in flavor before and after for each of the three oils. In other words, create permutation-based confidence intervals for beta2-beta1, beta4-beta3 and beta6-beta5 from the model above. Monte-Carlo methods allowed.</p>
-</section></section><section id="solution" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="solution">
-<span class="header-section-number">8.2</span> Solution</h2>
-</section><section id="problem-1-1" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="problem-1-1">
-<span class="header-section-number">8.3</span> Problem 1</h2>
-<p>First we need to create a function to load all of the pre-cleaned datasets programmatically (see <a href="computational-experiments.html#sec-computational-datasets" class="quarto-xref"><span>Section&nbsp;5.4.1</span></a> for a description of the data pre-processing).</p>
+</section></section><section id="solution" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="solution">
+<span class="header-section-number">9.2</span> Solution</h2>
+</section><section id="problem-1-1" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="problem-1-1">
+<span class="header-section-number">9.3</span> Problem 1</h2>
+<p>First we need to create a function to load all of the pre-cleaned datasets programmatically (see <a href="computational-experiments.html#sec-computational-datasets" class="quarto-xref"><span>Section 5.4.1</span></a> for a description of the data pre-processing).</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function to read in all of the different datasets</span></span>
 <span><span class="co"># -&gt; datasets should be in the path and suffixed with "_clean.Rdata"</span></span>
@@ -407,24 +439,25 @@ Fixed Effects:
 <span><span class="va">ci_bootstrap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">data_test</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">create_bootstrap_ci</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ci_bootstrap</span><span class="op">$</span><span class="va">ci_bootstrap</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       variable  bound_lower bound_upper
-1     Intercept -0.013401584  0.01492445
-2    PT08S1_CO_ -0.087711965  0.03588734
-3      NMHC_GT_  0.076493878  0.09841331
-4      C6H6_GT_ -0.711379476  0.27973171
-5  PT08S2_NMHC_ -0.183247522  0.10460196
-6       NOx_GT_  0.081182822  0.15515161
-7   PT08S3_NOx_  0.003973251  0.08808253
-8       NO2_GT_  0.595713267  0.66949808
-9   PT08S4_NO2_ -0.093426907  0.07628451
-10   PT08S5_O3_ -0.103659033 -0.00190336
-11            T  0.018191178  0.47072049
-12           RH  0.057851423  0.25522385
-13           AH -0.619125440  0.49909113</code></pre>
+<pre><code>       variable  bound_lower  bound_upper
+1     Intercept -0.014452673  0.013320126
+2    PT08S1_CO_ -0.079273372  0.047214734
+3      NMHC_GT_  0.077884817  0.099501393
+4      C6H6_GT_ -0.858895671  0.276156139
+5  PT08S2_NMHC_ -0.205941465  0.111180362
+6       NOx_GT_  0.085236954  0.159936883
+7   PT08S3_NOx_  0.004261995  0.091643876
+8       NO2_GT_  0.594481056  0.667122719
+9   PT08S4_NO2_ -0.092907659  0.053645139
+10   PT08S5_O3_ -0.107171790 -0.004186687
+11            T  0.065258301  0.483725695
+12           RH  0.057693809  0.251733247
+13           AH -0.629215426  0.452157931</code></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">histogram</span><span class="op">(</span><span class="va">ci_bootstrap</span><span class="op">$</span><span class="va">dist_bootstrap</span><span class="op">$</span><span class="va">PT08S1_CO_</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in histogram(ci_bootstrap$dist_bootstrap$PT08S1_CO_): could not find function "histogram"</code></pre>
+<pre><code>Error in `histogram()`:
+! could not find function "histogram"</code></pre>
 </div>
 </div>
 <p>Now we can run all datasets through the above function to get the desired bootstrap confidence intervals.</p>
@@ -538,10 +571,8 @@ Fixed Effects:
 <span><span class="co"># test function</span></span>
 <span><span class="fu">plot_bootstrap_cis</span><span class="op">(</span><span class="va">cis_all</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ci_bootstrap</span>, <span class="va">nms_datasets</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/function-display-results-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/function-display-results-1.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -554,10 +585,8 @@ Fixed Effects:
 <pre><code>$wpbc</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-1.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -566,10 +595,8 @@ Fixed Effects:
 $wankara</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-2.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -578,10 +605,8 @@ $wankara</code></pre>
 $laser</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-3.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-3.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -590,10 +615,8 @@ $laser</code></pre>
 $treasury</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-4.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-4.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -602,10 +625,8 @@ $treasury</code></pre>
 $skillcraft</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-5.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-5.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -614,10 +635,8 @@ $skillcraft</code></pre>
 $puma</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-6.png" id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-6.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -626,10 +645,8 @@ $puma</code></pre>
 $air_quality</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-7.png" id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-7.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -638,10 +655,8 @@ $air_quality</code></pre>
 $ccpp</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-8.png" id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-8.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
@@ -650,22 +665,15 @@ $ccpp</code></pre>
 $casp</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="quarto-figure quarto-figure-center anchored" width="672" data-fig-pos="hold">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="hw2_files/figure-html/display-all-results-9.png" id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="img-fluid figure-img" data-fig-pos="hold" width="672">
-</div>
+<div>
+<figure class="figure"><p><img src="hw2_files/figure-html/display-all-results-9.png" class="img-fluid figure-img" data-fig-pos="hold" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="problem-2-1" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="problem-2-1">
-<span class="header-section-number">8.4</span> Problem 2</h2>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div>
-<img src="files/images/under-construction.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+</section><section id="problem-2-1" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="problem-2-1">
+<span class="header-section-number">9.4</span> Problem 2</h2>
+<p><img src="files/images/under-construction.jpg" class="img-fluid"></p>
 
 
 <!-- -->
@@ -705,18 +713,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -748,7 +745,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -800,6 +819,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -834,7 +871,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -849,15 +890,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -866,7 +920,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -908,6 +970,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -983,7 +1068,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -1065,8 +1149,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./hw1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Homework 1</span></span>
+      <a href="./hw1.html" class="pagination-link" aria-label="Homework 1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1479,7 +1563,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb30-423"><a href="#cb30-423" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transmute</span>(<span class="at">difference =</span> time_1 <span class="sc">-</span> time_10)</span>
 <span id="cb30-424"><a href="#cb30-424" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb30-425"><a href="#cb30-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

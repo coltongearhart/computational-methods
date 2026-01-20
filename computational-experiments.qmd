@@ -401,7 +401,7 @@ end_time <- Sys.time()
 # calculate difference - naive way
 end_time - start_time
 as.numeric(end_time - start_time)
-end_time_step + 120 - start_time
+end_time + 120 - start_time
 as.numeric(end_time + 120 - start_time)
 
 # have no idea what the units are when convert

@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.376">
+<meta name="generator" content="quarto-1.5.56">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Computational Methods in R - 6&nbsp; Homework 1</title>
+<title>8&nbsp; Homework 1 – Computational Methods in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./hw2.html" rel="next">
 <link href="./assignments.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -75,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
@@ -90,6 +91,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -99,20 +101,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw1.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw1.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></a></li></ol></nav><div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title"><span id="sec-hw1" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignments.html">Assignments</a></li><li class="breadcrumb-item"><a href="./hw1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></a></li></ol></nav>
+      <div class="quarto-title-block"><div><h1 class="title"><span id="sec-hw1" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
                       </div>
   </div>
     
@@ -127,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Computational Methods in R</a> 
     </div>
@@ -149,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="./course-notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -184,13 +186,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Computational Experiments</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulation-studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulation Studies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./improving-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Improving Code</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -198,42 +212,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hw1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Homework 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment"><span class="header-section-number">6.1</span> Assignment</a>
+<a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment"><span class="header-section-number">8.1</span> Assignment</a>
   <ul class="collapse">
-<li><a href="#gather-simulated-gamma-data" id="toc-gather-simulated-gamma-data" class="nav-link" data-scroll-target="#gather-simulated-gamma-data"><span class="header-section-number">6.1.1</span> Gather simulated gamma data</a></li>
-  <li><a href="#compute-means-and-confidence-intervals" id="toc-compute-means-and-confidence-intervals" class="nav-link" data-scroll-target="#compute-means-and-confidence-intervals"><span class="header-section-number">6.1.2</span> Compute means and confidence intervals</a></li>
+<li><a href="#gather-simulated-gamma-data" id="toc-gather-simulated-gamma-data" class="nav-link" data-scroll-target="#gather-simulated-gamma-data"><span class="header-section-number">8.1.1</span> Gather simulated gamma data</a></li>
+  <li><a href="#compute-means-and-confidence-intervals" id="toc-compute-means-and-confidence-intervals" class="nav-link" data-scroll-target="#compute-means-and-confidence-intervals"><span class="header-section-number">8.1.2</span> Compute means and confidence intervals</a></li>
   </ul>
 </li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">6.2</span> Practice</a></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">8.2</span> Practice</a></li>
   <li>
-<a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">6.3</span> Solution</a>
+<a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">8.3</span> Solution</a>
   <ul class="collapse">
-<li><a href="#gather-simulated-gamma-data-1" id="toc-gather-simulated-gamma-data-1" class="nav-link" data-scroll-target="#gather-simulated-gamma-data-1"><span class="header-section-number">6.3.1</span> Gather simulated gamma data</a></li>
-  <li><a href="#compute-means-and-confidence-intervals-1" id="toc-compute-means-and-confidence-intervals-1" class="nav-link" data-scroll-target="#compute-means-and-confidence-intervals-1"><span class="header-section-number">6.3.2</span> Compute means and confidence intervals</a></li>
+<li><a href="#gather-simulated-gamma-data-1" id="toc-gather-simulated-gamma-data-1" class="nav-link" data-scroll-target="#gather-simulated-gamma-data-1"><span class="header-section-number">8.3.1</span> Gather simulated gamma data</a></li>
+  <li><a href="#compute-means-and-confidence-intervals-1" id="toc-compute-means-and-confidence-intervals-1" class="nav-link" data-scroll-target="#compute-means-and-confidence-intervals-1"><span class="header-section-number">8.3.2</span> Compute means and confidence intervals</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="assignment" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="assignment">
-<span class="header-section-number">6.1</span> Assignment</h2>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="assignment" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="assignment">
+<span class="header-section-number">8.1</span> Assignment</h2>
 <p>Your task for this week is simple in concept but challenging to code efficiently. You need to simulate samples from gamma distributions using different sample sizes, different shape parameters and different scale parameters. You will then use these simulated values to compute sample means and 95% Confidence Intervals (for the population mean) for each of the samples that you simulated. You <strong><em>must</em></strong> do so by building the set of functions and set of data objects that match the details in the steps below.</p>
-<section id="gather-simulated-gamma-data" class="level3" data-number="6.1.1"><h3 data-number="6.1.1" class="anchored" data-anchor-id="gather-simulated-gamma-data">
-<span class="header-section-number">6.1.1</span> Gather simulated gamma data</h3>
+<section id="gather-simulated-gamma-data" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="gather-simulated-gamma-data">
+<span class="header-section-number">8.1.1</span> Gather simulated gamma data</h3>
 <p>First part:</p>
 <p>Build a function named <code>sim_gam</code> that has formal arguments for sample size (n), the vector of shapes (length M), the vector of scales (length L). Also include an argument that will allow the user to add a random seed number for reproducible simulation, but ignore if not specified. The body of you function must use these arguments to generate a 3-dimensional array of simulated values from a gamma distribution. The size and indexing in each dimension in this array should be (n) by (M) by (L).</p>
 <p>Your array should also have the “dimnames” attribute of the array added for the shape and scale dimensions that contain labels related to the parameter values that those dimensions represent.</p>
@@ -242,8 +262,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>All arrays should include results for <code>shape_vec = c(0.1, 1, 10, 100)</code> and <code>scale_vec = c(0.1, 1, 10, 100)</code></p></li>
 <li><p>Each array will represent a different sample size: <code>n = c(25, 50, 75, 100, 500,1000)</code></p></li>
-</ul></section><section id="compute-means-and-confidence-intervals" class="level3" data-number="6.1.2"><h3 data-number="6.1.2" class="anchored" data-anchor-id="compute-means-and-confidence-intervals">
-<span class="header-section-number">6.1.2</span> Compute means and confidence intervals</h3>
+</ul></section><section id="compute-means-and-confidence-intervals" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="compute-means-and-confidence-intervals">
+<span class="header-section-number">8.1.2</span> Compute means and confidence intervals</h3>
 <p>First part:</p>
 <p>Next build the following two functions that the output array from the gamma data simulator above, as their inputs: 1. A function named <code>gam_means</code> that returns an (M) by (L) matrix of means from the simulated values from each shape and scale parameter pair.</p>
 <ol start="2" type="1">
@@ -257,8 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Second part:</p>
 <p>Apply your <code>gam_means()</code> function to your simulated data in <code>gam_arrays_list</code>. Store the results as list of means matrices</p>
 <p>Also, apply your <code>gam_CIs()</code> function to your simulated data in <code>gam_arrays_list</code>. Store the results an additional list of Confidence Interval arrays.</p>
-</section></section><section id="practice" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="practice">
-<span class="header-section-number">6.2</span> Practice</h2>
+</section></section><section id="practice" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="practice">
+<span class="header-section-number">8.2</span> Practice</h2>
 <p>Here are some demos of working with simple examples to see how APPLY statements and MAP statements work on data types (matrix vs dataframe).</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -275,65 +295,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># -&gt; should be zeros, works for both types</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_mat</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
+<pre><code>[1]  0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">data_df</span>, <span class="va">mean</span><span class="op">)</span> <span class="co"># works because each column in a dataframe is like a list and simplifies result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
+ 0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881 </code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
+ 0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881 </code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OTHER CORRECT WAYS</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data_mat</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data_mat</span><span class="op">[</span>,<span class="va">X</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
+<pre><code>[1]  0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881</code></pre>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">data_df</span>, MARGIN <span class="op">=</span> <span class="fl">2</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
+ 0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881 </code></pre>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">data_df</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data_df</span><span class="op">[</span>,<span class="va">X</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
+<pre><code>[1]  0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881</code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">data_df</span>, <span class="va">mean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$X1
-[1] -0.05400396
+[1] 0.1047962
 
 $X2
-[1] -0.05404391
+[1] 0.03367231
 
 $X3
-[1] 0.1171654
+[1] -0.03449514
 
 $X4
-[1] 0.04152527
+[1] 0.120868
 
 $X5
-[1] 0.03911136</code></pre>
+[1] -0.01972881</code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_vec</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="co"># know returning data type, so should use _dbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         X1          X2          X3          X4          X5 
--0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136 </code></pre>
+ 0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881 </code></pre>
 </div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html">reduce</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span> <span class="co"># reduce cause map() returns a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.05400396 -0.05404391  0.11716543  0.04152527  0.03911136</code></pre>
+<pre><code>[1]  0.10479621  0.03367231 -0.03449514  0.12086801 -0.01972881</code></pre>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># INCORRECT WAYS</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">data_mat</span>, <span class="va">mean</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="co"># this takes each individual value and returns the mean (so the same value)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.47396250 -0.55306786  0.35162823 -0.76858673 -2.28475143 -0.10665379
- [7] -0.71853290 -0.44057683  1.22256012 -1.05750451  0.13752910 -0.04898068
-[13]  0.70449112  0.87378153 -0.84670521 -0.74373214 -1.30336909  1.77780881
-[19] -0.62932110  0.83923256</code></pre>
+<pre><code> [1]  0.34023539 -0.94695677 -0.22891537 -0.50405215 -0.13046028 -0.63673748
+ [7] -1.17835421  0.11920061 -0.52915237  0.28877617 -0.58454659 -0.29853800
+[13] -1.15455146 -0.12869912  0.12960090  0.01650604 -0.31825559 -1.24577271
+[19]  0.63086412 -0.83737546</code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">data_mat</span>, <span class="va">mean</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">==</span> <span class="va">data_mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -342,22 +362,22 @@ $X5
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data_mat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="co"># same thing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] 0.4739625
+[1] 0.3402354
 
 [[2]]
-[1] -0.5530679
+[1] -0.9469568
 
 [[3]]
-[1] 0.3516282
+[1] -0.2289154
 
 [[4]]
-[1] -0.7685867
+[1] -0.5040522
 
 [[5]]
-[1] -2.284751
+[1] -0.1304603
 
 [[6]]
-[1] -0.1066538</code></pre>
+[1] -0.6367375</code></pre>
 </div>
 </div>
 <p>Now investigate structure of data holder.</p>
@@ -408,27 +428,27 @@ $X5
 <span><span class="va">data_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">data_sim</span>, MARGIN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">sd</span><span class="op">)</span></span>
 <span><span class="va">data_means</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          sigma = 0.5  sigma = 5
-mu = 0    -0.06373573   1.397530
-mu = 5     5.07286903   4.643620
-mu = 10   10.08404702   9.772814
-mu = 100 100.18075617 101.300889
-mu = 500 500.11772703 497.297924</code></pre>
+<pre><code>         sigma = 0.5  sigma = 5
+mu = 0    -0.0114093   2.563558
+mu = 5     4.8464659   4.125672
+mu = 10   10.0608443   9.332236
+mu = 100  99.9388123  99.655127
+mu = 500 499.8349502 499.918096</code></pre>
 </div>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_sd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         sigma = 0.5 sigma = 5
-mu = 0     0.4303220  4.238961
-mu = 5     0.4062227  4.895236
-mu = 10    0.7479058  4.296652
-mu = 100   0.5462804  5.341503
-mu = 500   0.4054104  3.440882</code></pre>
+mu = 0     0.4908388  3.584409
+mu = 5     0.3601377  7.813122
+mu = 10    0.4451770  4.728246
+mu = 100   0.4610443  6.505111
+mu = 500   0.3388384  5.142648</code></pre>
 </div>
 </div>
-</section><section id="solution" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="solution">
-<span class="header-section-number">6.3</span> Solution</h2>
-<section id="gather-simulated-gamma-data-1" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="gather-simulated-gamma-data-1">
-<span class="header-section-number">6.3.1</span> Gather simulated gamma data</h3>
+</section><section id="solution" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="solution">
+<span class="header-section-number">8.3</span> Solution</h2>
+<section id="gather-simulated-gamma-data-1" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="gather-simulated-gamma-data-1">
+<span class="header-section-number">8.3.1</span> Gather simulated gamma data</h3>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to create an array [sample size (n) x # of shapes (M) x # of scales (L)] of simulated data from a gamma distribution</span></span>
 <span><span class="co"># -&gt; arguments: n = sample size (integer), M = shape parameters (numeric vector), scale parameters (numeric vector), seed to set (integer)</span></span>
@@ -482,32 +502,32 @@ mu = 500   0.4054104  3.440882</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gam_arrays_list</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 6
- $ n = 25  : num [1:25, 1:4, 1:4] 8.55e-05 6.33e-06 7.80e-08 4.98e-05 1.97e-07 ...
+ $ n = 25  : num [1:25, 1:4, 1:4] 3.54e-09 3.65e-03 1.30e-08 3.67e-08 8.38e-03 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 50  : num [1:50, 1:4, 1:4] 2.52e-02 1.43e-02 1.98e-06 1.78e-08 1.04e-02 ...
+ $ n = 50  : num [1:50, 1:4, 1:4] 9.02e-04 6.39e-14 3.91e-02 5.21e-08 4.75e-02 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 75  : num [1:75, 1:4, 1:4] 1.31e-05 3.77e-13 2.26e-08 4.55e-15 5.52e-04 ...
+ $ n = 75  : num [1:75, 1:4, 1:4] 7.78e-02 1.40e-14 4.46e-02 3.41e-02 3.91e-03 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 100 : num [1:100, 1:4, 1:4] 6.25e-06 1.07e-04 9.08e-17 1.69e-04 2.12e-08 ...
+ $ n = 100 : num [1:100, 1:4, 1:4] 1.20e-17 8.33e-05 2.15e-03 7.02e-02 2.93e-06 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 500 : num [1:500, 1:4, 1:4] 1.22e-03 5.13e-02 1.97e-07 4.20e-02 6.54e-03 ...
+ $ n = 500 : num [1:500, 1:4, 1:4] 3.04e-03 2.90e-02 7.85e-08 1.28e-13 3.95e-02 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 1000: num [1:1000, 1:4, 1:4] 6.21e-02 4.90e-03 8.46e-03 5.20e-07 8.84e-03 ...
+ $ n = 1000: num [1:1000, 1:4, 1:4] 1.67e-06 7.50e-03 3.90e-10 2.01e-11 2.03e-14 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : NULL
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
@@ -516,35 +536,35 @@ mu = 500   0.4054104  3.440882</code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">gam_arrays_list</span><span class="op">$</span><span class="va">`n = 25`</span><span class="op">[</span>, , <span class="fl">1</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      shape = 0.1 shape = 1 shape = 10 shape = 100
- [1,]       0.000     0.014      1.019       9.833
- [2,]       0.000     0.096      1.391       9.837
- [3,]       0.000     0.016      1.123      11.214
- [4,]       0.000     0.121      1.494       9.199
- [5,]       0.000     0.073      1.077      10.242
- [6,]       0.076     0.025      0.998      10.080
- [7,]       0.009     0.225      1.069       8.681
- [8,]       0.010     0.034      0.656       9.161
- [9,]       0.000     0.006      1.308       8.565
-[10,]       0.000     0.011      1.324      10.208
-[11,]       0.008     0.090      0.782       8.785
-[12,]       0.000     0.004      0.963       9.483
-[13,]       0.024     0.166      0.704      10.095
-[14,]       0.000     0.150      1.433       9.328
-[15,]       0.000     0.049      0.944       9.357
-[16,]       0.013     0.148      1.364       9.614
-[17,]       0.000     0.030      0.972      10.391
-[18,]       0.001     0.129      1.051       8.613
-[19,]       0.003     0.008      1.031      10.914
-[20,]       0.000     0.065      0.546       8.885
-[21,]       0.058     0.020      1.099       9.876
-[22,]       0.000     0.076      0.767      11.827
-[23,]       0.037     0.087      1.811       8.764
-[24,]       0.000     0.056      0.683      10.997
-[25,]       0.012     0.037      0.797      10.553</code></pre>
+ [1,]       0.000     0.081      0.727      13.294
+ [2,]       0.004     0.035      0.855       9.113
+ [3,]       0.000     0.057      1.306       8.650
+ [4,]       0.000     0.088      1.318      11.972
+ [5,]       0.008     0.031      0.885      11.228
+ [6,]       0.000     0.040      1.641       9.695
+ [7,]       0.000     0.003      1.100       9.788
+ [8,]       0.000     0.043      0.756      10.543
+ [9,]       0.000     0.100      1.459      13.274
+[10,]       0.000     0.159      0.882       9.634
+[11,]       0.001     0.155      1.166       9.686
+[12,]       0.000     0.023      1.114      11.594
+[13,]       0.000     0.140      1.340       9.546
+[14,]       0.000     0.125      0.264       9.840
+[15,]       0.001     0.067      1.275      11.450
+[16,]       0.012     0.028      0.880      10.966
+[17,]       0.008     0.079      1.906      11.376
+[18,]       0.000     0.089      1.581       9.699
+[19,]       0.000     0.062      0.886       9.112
+[20,]       0.011     0.042      0.930       9.686
+[21,]       0.163     0.073      1.059      10.291
+[22,]       0.000     0.039      1.113      10.861
+[23,]       0.000     0.121      0.893      10.213
+[24,]       0.000     0.147      0.776       9.955
+[25,]       0.001     0.040      0.721      11.749</code></pre>
 </div>
 </div>
-</section><section id="compute-means-and-confidence-intervals-1" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="compute-means-and-confidence-intervals-1">
-<span class="header-section-number">6.3.2</span> Compute means and confidence intervals</h3>
+</section><section id="compute-means-and-confidence-intervals-1" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="compute-means-and-confidence-intervals-1">
+<span class="header-section-number">8.3.2</span> Compute means and confidence intervals</h3>
 <div class="cell">
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define function to calculate the mean of the simulated observations for each combination of shape and scale</span></span>
 <span><span class="co"># -&gt; argument: n x M x L array of simulated values</span></span>
@@ -583,68 +603,68 @@ mu = 500   0.4054104  3.440882</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gam_x_bars</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 6
- $ n = 25  : num [1:4, 1:4] 0.01 0.0695 1.0562 9.7801 0.0475 ...
+ $ n = 25  : num [1:4, 1:4] 0.00834 0.07461 1.07327 10.52859 0.05441 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 50  : num [1:4, 1:4] 0.00405 0.10392 1.02116 9.97883 0.08361 ...
+ $ n = 50  : num [1:4, 1:4] 0.00624 0.11466 0.98129 9.79463 0.03054 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 75  : num [1:4, 1:4] 0.0125 0.0954 1.0022 10.078 0.0859 ...
+ $ n = 75  : num [1:4, 1:4] 0.013 0.0892 1.0405 10.0721 0.1478 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 100 : num [1:4, 1:4] 0.0075 0.1085 1.0555 10.0528 0.1657 ...
+ $ n = 100 : num [1:4, 1:4] 0.00652 0.10467 0.98979 10.10523 0.09338 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 500 : num [1:4, 1:4] 0.0111 0.0954 0.9875 10.0186 0.0797 ...
+ $ n = 500 : num [1:4, 1:4] 0.0101 0.0967 1.0037 10.0226 0.0934 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 1000: num [1:4, 1:4] 0.0112 0.1011 0.9871 9.9557 0.1007 ...
+ $ n = 1000: num [1:4, 1:4] 0.0101 0.102 0.9977 10.0095 0.0942 ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"</code></pre>
 </div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gam_x_bars</span><span class="op">$</span><span class="va">`n = 25`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            scale = 0.1    scale = 1  scale = 10 scale = 100
-shape = 0.1  0.01001787   0.04751898   0.7051746    12.78012
-shape = 1    0.06949849   0.91883925   9.7653604   112.31653
-shape = 10   1.05623999  10.09542504  92.9124727   985.30090
-shape = 100  9.78008855 103.52050976 956.6786584 10364.17523</code></pre>
+<pre><code>            scale = 0.1   scale = 1   scale = 10 scale = 100
+shape = 0.1  0.00834115  0.05440851    0.2519389    14.52982
+shape = 1    0.07460914  0.84069804    8.8948070    89.14903
+shape = 10   1.07326865 10.95881198   95.6063146  1062.63644
+shape = 100 10.52859070 99.88782559 1023.4149086 10208.75033</code></pre>
 </div>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">gam_ci_bounds</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 6
- $ n = 25  : num [1:2, 1:4, 1:4] 0.00199 0.01805 0.04506 0.09394 0.9314 ...
+ $ n = 25  : num [1:2, 1:4, 1:4] -0.00506 0.02174 0.05604 0.09318 0.92748 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 50  : num [1:2, 1:4, 1:4] 0.00185 0.00624 0.07613 0.13171 0.92321 ...
+ $ n = 50  : num [1:2, 1:4, 1:4] 0.0019 0.0106 0.0836 0.1457 0.8881 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 75  : num [1:2, 1:4, 1:4] 0.00044 0.02463 0.07095 0.11984 0.92489 ...
+ $ n = 75  : num [1:2, 1:4, 1:4] 0.00501 0.02099 0.07101 0.10732 0.95975 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 100 : num [1:2, 1:4, 1:4] 0.00282 0.01218 0.08727 0.12968 0.99306 ...
+ $ n = 100 : num [1:2, 1:4, 1:4] 0.00244 0.01061 0.0834 0.12594 0.91946 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 500 : num [1:2, 1:4, 1:4] 0.00847 0.01366 0.08708 0.10373 0.95978 ...
+ $ n = 500 : num [1:2, 1:4, 1:4] 0.00679 0.01343 0.08797 0.10539 0.97478 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
   .. ..$ : chr [1:4] "scale = 0.1" "scale = 1" "scale = 10" "scale = 100"
- $ n = 1000: num [1:2, 1:4, 1:4] 0.00885 0.01353 0.09451 0.10775 0.9669 ...
+ $ n = 1000: num [1:2, 1:4, 1:4] 0.00795 0.01228 0.09552 0.10848 0.97839 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:2] "lower bound" "upper bound"
   .. ..$ : chr [1:4] "shape = 0.1" "shape = 1" "shape = 10" "shape = 100"
@@ -654,27 +674,27 @@ shape = 100  9.78008855 103.52050976 956.6786584 10364.17523</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , scale = 0.1
 
-            shape = 0.1  shape = 1 shape = 10 shape = 100
-lower bound 0.001988243 0.04506035  0.9314015    9.415955
-upper bound 0.018047502 0.09393663  1.1810785   10.144222
+             shape = 0.1  shape = 1 shape = 10 shape = 100
+lower bound -0.005058876 0.05603642  0.9274801    10.02397
+upper bound  0.021741176 0.09318187  1.2190572    11.03321
 
 , , scale = 1
 
             shape = 0.1 shape = 1 shape = 10 shape = 100
-lower bound -0.01023031 0.6460409   8.887475    98.75415
-upper bound  0.10526827 1.1916376  11.303375   108.28687
+lower bound 0.002154148 0.4964967   9.634364     94.9070
+upper bound 0.106662882 1.1848994  12.283260    104.8686
 
 , , scale = 10
 
             shape = 0.1 shape = 1 shape = 10 shape = 100
-lower bound   0.2265346  5.628111   79.98262    922.0426
-upper bound   1.1838147 13.902610  105.84233    991.3147
+lower bound -0.04278873  5.860588   85.17694    978.0624
+upper bound  0.54666657 11.929026  106.03569   1068.7675
 
 , , scale = 100
 
             shape = 0.1 shape = 1 shape = 10 shape = 100
-lower bound   -2.026462  77.09184   883.8548    9939.587
-upper bound   27.586708 147.54122  1086.7470   10788.764</code></pre>
+lower bound  0.02704653  53.91675   947.7306    9815.522
+upper bound 29.03260170 124.38132  1177.5423   10601.978</code></pre>
 </div>
 </div>
 
@@ -716,18 +736,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -759,7 +768,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -811,6 +842,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -845,7 +894,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -860,15 +913,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -877,7 +943,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -919,6 +993,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -994,7 +1091,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -1076,11 +1172,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./assignments.html" class="pagination-link">
+      <a href="./assignments.html" class="pagination-link" aria-label="Assignments">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignments</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./hw2.html" class="pagination-link" aria-label="Homework 2">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Homework 2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb45" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Homework 1 {#sec-hw1}</span></span>
@@ -1347,7 +1446,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb45-278"><a href="#cb45-278" aria-hidden="true" tabindex="-1"></a>gam_ci_bounds<span class="sc">$</span><span class="st">`</span><span class="at">n = 25</span><span class="st">`</span></span>
 <span id="cb45-279"><a href="#cb45-279" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-280"><a href="#cb45-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
